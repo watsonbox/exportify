@@ -1,0 +1,59 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Exportify</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+  <style>
+    .starter-template {
+      padding: 40px 15px;
+      text-align: center;
+    }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="starter-template">
+      <h1>Exportify</h1>
+      <p class="lead">Proof of concept app for exporting Spotify playlists.</p>
+
+      <button id="loginButton" type="button" class="btn btn-default btn-lg">
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span> Login
+      </button>
+    </div>
+  </div><!-- /.container -->
+
+  <script type="text/javascript">
+    $(function() {
+      $('#loginButton').click(function() {
+        window.location = "https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=http:%2F%2Fraw.githubusercontent.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fspotify-export.html&scope=playlist-read-private%20playlist-read-collaborative&response_type=token&state=123";
+      })
+
+      var vars = window.location.hash.substring(1).split('&');
+      var key = {};
+      for (i=0; i<vars.length; i++) {
+        var tmp = vars[i].split('=');
+        key[tmp[0]] = tmp[1];
+      }
+
+      console.log(key['access_token']);
+
+      $.ajax({
+        url: 'https://api.spotify.com/v1/users/watsonbox/playlists',
+        headers: {
+          'Authorization': 'Bearer ' + key['access_token']
+        },
+        success: function(response) {
+          console.log(response);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
