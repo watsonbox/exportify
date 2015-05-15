@@ -29,6 +29,8 @@ var PlaylistTable = React.createClass({
             nextURL: response.next,
             prevURL: response.previous
           });
+
+          $('#playlists').fadeIn();
         }
       }.bind(this)
     });
@@ -39,29 +41,34 @@ var PlaylistTable = React.createClass({
   },
 
   render: function() {
-    return (
-      <div>
-        <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
-        <table className="table table-hover">
-          <thead>
-            <tr>
-              <th style={{width: "30px"}}></th>
-              <th>Name</th>
-              <th>Owner</th>
-              <th>Tracks</th>
-              <th>Public?</th>
-              <th>Collaborative?</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.state.playlists.map(function(playlist, i) {
-              return <PlaylistRow playlist={playlist} key={playlist.id} access_token={this.props.access_token}/>;
-            }.bind(this))}
-          </tbody>
-        </table>
-      </div>
-    );
+    if (this.state.playlists.length > 0) {
+      return (
+        <div id="playlists">
+          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+          <table className="table table-hover">
+            <thead>
+              <tr>
+                <th style={{width: "30px"}}></th>
+                <th>Name</th>
+                <th>Owner</th>
+                <th>Tracks</th>
+                <th>Public?</th>
+                <th>Collaborative?</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.state.playlists.map(function(playlist, i) {
+                return <PlaylistRow playlist={playlist} key={playlist.id} access_token={this.props.access_token}/>;
+              }.bind(this))}
+            </tbody>
+          </table>
+          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+        </div>
+      );
+    } else {
+      return <div className="spinner"></div>
+    }
   }
 });
 
@@ -129,18 +136,24 @@ var PlaylistRow = React.createClass({
 var Paginator = React.createClass({
   nextClick: function(e) {
     e.preventDefault()
-    this.props.loadPlaylists(this.props.nextURL)
+
+    if (this.props.nextURL != null) {
+      this.props.loadPlaylists(this.props.nextURL)
+    }
   },
 
   prevClick: function(e) {
     e.preventDefault()
-    this.props.loadPlaylists(this.props.prevURL)
+
+    if (this.props.prevURL != null) {
+      this.props.loadPlaylists(this.props.prevURL)
+    }
   },
 
   render: function() {
     if (this.props.nextURL != null || this.props.prevURL != null) {
       return (
-        <nav className="text-right">
+        <nav className="paginator text-right">
           <ul className="pagination pagination-sm">
             <li className={this.props.prevURL == null ? 'disabled' : ''}>
               <a href="#" aria-label="Previous" onClick={this.prevClick}>
@@ -170,8 +183,8 @@ $(function() {
   }
 
   if (typeof key['access_token'] === 'undefined') {
-    $('#loginButton').show()
+    $('#loginButton').css('display', 'inline-block')
   } else {
-    React.render(<PlaylistTable url="https://api.spotify.com/v1/users/watsonbox/playlists" access_token={key['access_token']} />, playlists);
+    React.render(<PlaylistTable url="https://api.spotify.com/v1/users/watsonbox/playlists" access_token={key['access_token']} />, playlistsContainer);
   }
 });

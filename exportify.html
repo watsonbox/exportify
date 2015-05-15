@@ -8,9 +8,59 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
   <style>
-    .starter-template {
+    #header {
       padding: 40px 15px;
       text-align: center;
+    }
+
+    #loginButton {
+      display: none;
+      margin-top: 20px;
+    }
+
+    nav.paginator:nth-child(1) {
+      margin-top: -74px;
+    }
+
+    table {
+      float: left;
+    }
+
+    #playlists {
+      display: none;
+    }
+
+    @keyframes spinner {
+      to {transform: rotate(360deg);}
+    }
+
+    @-webkit-keyframes spinner {
+      to {-webkit-transform: rotate(360deg);}
+    }
+
+    .spinner {
+      min-width: 24px;
+      min-height: 24px;
+    }
+
+    .spinner:before {
+      content: 'Loading…';
+      position: absolute;
+      top: 240px;
+      left: 50%;
+      width: 100px;
+      height: 100px;
+      margin-top: -50px;
+      margin-left: -50px;
+    }
+
+    .spinner:not(:required):before {
+      content: '';
+      border-radius: 50%;
+      border: 4px solid rgba(236, 235, 232, 1);
+      border-top-color: rgba(130, 130, 130, 1);
+      animation: spinner 1s linear infinite;
+      -webkit-animation: spinner 1s linear infinite;
     }
   </style>
 
@@ -26,16 +76,16 @@
 
 <body>
   <div class="container">
-    <div class="starter-template">
+    <div id="header">
       <h1><i class="fa fa-spotify" style="color: #84BD00"></i> Exportify</h1>
-      <p class="lead">Proof of concept app for exporting Spotify playlists.</p>
+      <p id="subtitle" class="lead">Export your Spotify playlists.</p>
 
-      <a id="loginButton" type="button" class="btn btn-default btn-lg" style="display: none" href="https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=https:%2F%2Frawgit.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fexportify.html&scope=playlist-read-private%20playlist-read-collaborative&response_type=token">
+      <a id="loginButton" type="button" class="btn btn-default btn-lg" href="https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=https:%2F%2Frawgit.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fexportify.html&scope=playlist-read-private%20playlist-read-collaborative&response_type=token">
         <i class="fa fa-check-circle-o"></i> Get Started
       </a>
     </div>
 
-    <div id="playlists"></div>
+    <div id="playlistsContainer"></div>
   </div><!-- /.container -->
 </body>
 </html>
