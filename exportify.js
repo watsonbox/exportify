@@ -2,6 +2,9 @@
   TODO:
 
   - Handle unauthorized response from API
+  - Pagination for exporting long playlists (extract logic)
+  - Improve on simple CSV generation
+  - Make note about download attribute browser support in README
 */
 
 var PlaylistTable = React.createClass({
@@ -20,8 +23,6 @@ var PlaylistTable = React.createClass({
         'Authorization': 'Bearer ' + this.props.access_token
       },
       success: function(response) {
-        console.log(response);
-
         if (this.isMounted()) {
           this.setState({
             playlists: response.items,
@@ -41,7 +42,7 @@ var PlaylistTable = React.createClass({
     return (
       <div>
         <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
-        <table className="table">
+        <table className="table table-hover">
           <thead>
             <tr>
               <th style={{width: "30px"}}></th>
@@ -50,12 +51,13 @@ var PlaylistTable = React.createClass({
               <th>Tracks</th>
               <th>Public?</th>
               <th>Collaborative?</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             {this.state.playlists.map(function(playlist, i) {
-              return <PlaylistRow playlist={playlist} key={playlist.id}/>;
-            })}
+              return <PlaylistRow playlist={playlist} key={playlist.id} access_token={this.props.access_token}/>;
+            }.bind(this))}
           </tbody>
         </table>
       </div>
@@ -64,6 +66,49 @@ var PlaylistTable = React.createClass({
 });
 
 var PlaylistRow = React.createClass({
+  exportPlaylist: function() {
+    $.ajax({
+      url: this.props.playlist.tracks.href,
+      headers: {
+        'Authorization': 'Bearer ' + this.props.access_token
+      },
+      success: function(response) {
+        var tracks = response.items.map(function(item) {
+          return [
+            item.track.uri,
+            item.track.name,
+            item.track.artists[0].name,
+            item.track.album.name,
+            item.added_by == null ? '' : item.added_by.uri,
+            item.added_at
+          ].map(function(track) { return '"' + track + '"'; })
+        });
+
+        tracks.unshift([
+          "Spotify URI",
+          "Name",
+          "Artist Name",
+          "Album Name",
+          "Added By",
+          "Added At"
+        ]);
+
+        var csvContent = "data:text/csv;charset=utf-8,";
+        tracks.forEach(function(infoArray, index){
+           dataString = infoArray.join(",");
+           csvContent += index < tracks.length ? dataString+ "\n" : dataString;
+        });
+
+        var encodedUri = encodeURI(csvContent);
+        var link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", "playlist.csv");
+
+        link.click();
+      }
+    });
+  },
+
   render: function() {
     playlist = this.props.playlist
 
@@ -75,6 +120,7 @@ var PlaylistRow = React.createClass({
         <td>{playlist.tracks.total}</td>
         <td>{playlist.public ? 'Yes' : 'No'}</td>
         <td>{playlist.collaborative ? 'Yes' : 'No'}</td>
+        <td className="text-right"><button className="btn btn-default btn-xs btn-success" type="submit" onClick={this.exportPlaylist}><span className="glyphicon glyphicon-save"></span> Export</button></td>
       </tr>
     );
   }
