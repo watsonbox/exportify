@@ -17,23 +17,34 @@ var PlaylistTable = React.createClass({
   },
 
   loadPlaylists: function(url) {
+    var userId = '';
+
     $.ajax({
-      url: url,
+      url: "https://api.spotify.com/v1/me",
       headers: {
         'Authorization': 'Bearer ' + this.props.access_token
-      },
-      success: function(response) {
-        if (this.isMounted()) {
-          this.setState({
-            playlists: response.items,
-            nextURL: response.next,
-            prevURL: response.previous
-          });
+      }
+    }).then(function(response) {
+      userId = response.id;
 
-          $('#playlists').fadeIn();
-        }
-      }.bind(this)
-    });
+      return $.ajax({
+        url: typeof url !== 'undefined' ? url : "https://api.spotify.com/v1/users/" + userId + "/playlists",
+        headers: {
+          'Authorization': 'Bearer ' + this.props.access_token
+        },
+      });
+    }.bind(this)).done(function(response) {
+      if (this.isMounted()) {
+        this.setState({
+          playlists: response.items,
+          nextURL: response.next,
+          prevURL: response.previous
+        });
+
+        $('#playlists').fadeIn();
+        $('#subtitle').text((response.offset + 1) + '-' + (response.offset + response.items.length) + ' of ' + response.total + ' playlists for ' + userId)
+      }
+    }.bind(this))
   },
 
   componentDidMount: function() {
@@ -185,6 +196,6 @@ $(function() {
   if (typeof key['access_token'] === 'undefined') {
     $('#loginButton').css('display', 'inline-block')
   } else {
-    React.render(<PlaylistTable url="https://api.spotify.com/v1/users/watsonbox/playlists" access_token={key['access_token']} />, playlistsContainer);
+    React.render(<PlaylistTable access_token={key['access_token']} />, playlistsContainer);
   }
 });
