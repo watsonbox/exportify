@@ -85,46 +85,7 @@ var PlaylistTable = React.createClass({
 
 var PlaylistRow = React.createClass({
   exportPlaylist: function() {
-    $.ajax({
-      url: this.props.playlist.tracks.href,
-      headers: {
-        'Authorization': 'Bearer ' + this.props.access_token
-      },
-      success: function(response) {
-        var tracks = response.items.map(function(item) {
-          return [
-            item.track.uri,
-            item.track.name,
-            item.track.artists[0].name,
-            item.track.album.name,
-            item.added_by == null ? '' : item.added_by.uri,
-            item.added_at
-          ].map(function(track) { return '"' + track + '"'; })
-        });
-
-        tracks.unshift([
-          "Spotify URI",
-          "Name",
-          "Artist Name",
-          "Album Name",
-          "Added By",
-          "Added At"
-        ]);
-
-        var csvContent = "data:text/csv;charset=utf-8,";
-        tracks.forEach(function(infoArray, index){
-           dataString = infoArray.join(",");
-           csvContent += index < tracks.length ? dataString+ "\n" : dataString;
-        });
-
-        var encodedUri = encodeURI(csvContent);
-        var link = document.createElement("a");
-        link.setAttribute("href", encodedUri);
-        link.setAttribute("download", "playlist.csv");
-
-        link.click();
-      }
-    });
+    PlaylistExporter.export(this.props.access_token, this.props.playlist.tracks.href, this.props.playlist.tracks.total);
   },
 
   render: function() {
@@ -184,6 +145,73 @@ var Paginator = React.createClass({
     }
   }
 });
+
+var PlaylistExporter = {
+  export: function(access_token, url, totalTracks) {
+    var requests = [];
+    var limit = 100;
+
+    for (var offset = 0; offset < totalTracks; offset = offset + limit) {
+      requests.push(
+        $.ajax({
+          url: url + '?offset=' + offset + '&limit=' + limit,
+          headers: {
+            'Authorization': 'Bearer ' + access_token
+          }
+        })
+      )
+    }
+
+    $.when.apply($, requests).then(function() {
+      var responses = [];
+
+      // Handle either single or multiple responses
+      if (typeof arguments[0].href == 'undefined') {
+        responses = Array.prototype.slice.call(arguments).map(function(a) { return a[0] });
+      } else {
+        responses = [arguments[0]];
+      }
+
+      var tracks = responses.map(function(response) {
+        return response.items.map(function(item) {
+          return [
+            item.track.uri,
+            item.track.name,
+            item.track.artists[0].name,
+            item.track.album.name,
+            item.added_by == null ? '' : item.added_by.uri,
+            item.added_at
+          ].map(function(track) { return '"' + track + '"'; })
+        });
+      });
+
+      // Flatten the array of pages
+      tracks = $.map(tracks, function(n) { return n })
+
+      tracks.unshift([
+        "Spotify URI",
+        "Name",
+        "Artist Name",
+        "Album Name",
+        "Added By",
+        "Added At"
+      ]);
+
+      var csvContent = "data:text/csv;charset=utf-8,";
+      tracks.forEach(function(infoArray, index){
+         dataString = infoArray.join(",");
+         csvContent += index < tracks.length ? dataString+ "\n" : dataString;
+      });
+
+      var encodedUri = encodeURI(csvContent);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "playlist.csv");
+
+      link.click();
+    });
+  }
+}
 
 $(function() {
   var vars = window.location.hash.substring(1).split('&');
