@@ -5,6 +5,14 @@ window.Helpers = {
       headers: {
         'Authorization': 'Bearer ' + access_token
       }
+    }).fail(function (jqXHR, textStatus) {
+      if (jqXHR.status == 401) {
+        // Return to home page after auth token expiry
+        window.location = window.location.href.split('#')[0]
+      } else {
+        // Otherwise report the error so user can raise an issue
+        alert(jqXHR.responseText);
+      }
     })
   }
 }
