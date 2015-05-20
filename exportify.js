@@ -88,6 +88,14 @@ var PlaylistRow = React.createClass({
     PlaylistExporter.export(this.props.access_token, this.props.playlist.tracks.href, this.props.playlist.tracks.total);
   },
 
+  renderTickCross: function(condition) {
+    if (condition) {
+      return <i className="fa fa-lg fa-check-circle-o"></i>
+    } else {
+      return <i className="fa fa-lg fa-times-circle-o" style={{ color: '#ECEBE8' }}></i>
+    }
+  },
+
   render: function() {
     playlist = this.props.playlist
 
@@ -97,8 +105,8 @@ var PlaylistRow = React.createClass({
         <td><a href={playlist.uri}>{playlist.name}</a></td>
         <td><a href={playlist.owner.uri}>{playlist.owner.id}</a></td>
         <td>{playlist.tracks.total}</td>
-        <td>{playlist.public ? 'Yes' : 'No'}</td>
-        <td>{playlist.collaborative ? 'Yes' : 'No'}</td>
+        <td>{this.renderTickCross(playlist.public)}</td>
+        <td>{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-right"><button className="btn btn-default btn-xs btn-success" type="submit" onClick={this.exportPlaylist}><span className="glyphicon glyphicon-save"></span> Export</button></td>
       </tr>
     );
