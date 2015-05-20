@@ -88,7 +88,7 @@ var PlaylistTable = React.createClass({
 
 var PlaylistRow = React.createClass({
   exportPlaylist: function() {
-    PlaylistExporter.export(this.props.access_token, this.props.playlist.tracks.href, this.props.playlist.tracks.total);
+    PlaylistExporter.export(this.props.access_token, this.props.playlist.tracks.href, this.props.playlist);
   },
 
   renderTickCross: function(condition) {
@@ -158,11 +158,11 @@ var Paginator = React.createClass({
 });
 
 var PlaylistExporter = {
-  export: function(access_token, url, totalTracks) {
+  export: function(access_token, url, playlist) {
     var requests = [];
     var limit = 100;
 
-    for (var offset = 0; offset < totalTracks; offset = offset + limit) {
+    for (var offset = 0; offset < playlist.tracks.total; offset = offset + limit) {
       requests.push(
         window.Helpers.apiCall(url + '?offset=' + offset + '&limit=' + limit, access_token)
       )
@@ -212,7 +212,7 @@ var PlaylistExporter = {
       var encodedUri = encodeURI(csvContent);
       var link = document.createElement("a");
       link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "playlist.csv");
+      link.setAttribute("download", playlist.name.replace(/[^a-z0-9\- ]/gi, '').replace(/[ ]/gi, '_').toLowerCase() + ".csv");
 
       link.click();
     });
