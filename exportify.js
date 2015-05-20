@@ -7,6 +7,17 @@
   - Make note about download attribute browser support in README
 */
 
+window.Helpers = {
+  apiCall: function(url, access_token) {
+    return $.ajax({
+      url: url,
+      headers: {
+        'Authorization': 'Bearer ' + access_token
+      }
+    })
+  }
+}
+
 var PlaylistTable = React.createClass({
   getInitialState: function() {
     return {
@@ -19,20 +30,13 @@ var PlaylistTable = React.createClass({
   loadPlaylists: function(url) {
     var userId = '';
 
-    $.ajax({
-      url: "https://api.spotify.com/v1/me",
-      headers: {
-        'Authorization': 'Bearer ' + this.props.access_token
-      }
-    }).then(function(response) {
+    window.Helpers.apiCall("https://api.spotify.com/v1/me", this.props.access_token).then(function(response) {
       userId = response.id;
 
-      return $.ajax({
-        url: typeof url !== 'undefined' ? url : "https://api.spotify.com/v1/users/" + userId + "/playlists",
-        headers: {
-          'Authorization': 'Bearer ' + this.props.access_token
-        },
-      });
+      return window.Helpers.apiCall(
+        typeof url !== 'undefined' ? url : "https://api.spotify.com/v1/users/" + userId + "/playlists",
+        this.props.access_token
+      )
     }.bind(this)).done(function(response) {
       if (this.isMounted()) {
         this.setState({
@@ -161,12 +165,7 @@ var PlaylistExporter = {
 
     for (var offset = 0; offset < totalTracks; offset = offset + limit) {
       requests.push(
-        $.ajax({
-          url: url + '?offset=' + offset + '&limit=' + limit,
-          headers: {
-            'Authorization': 'Bearer ' + access_token
-          }
-        })
+        window.Helpers.apiCall(url + '?offset=' + offset + '&limit=' + limit, access_token)
       )
     }
 
