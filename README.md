@@ -9,6 +9,11 @@ As many users have noted, there is no way to export/archive playlists from the S
 No data will be saved - the entire application runs in the browser.
 
 
+## Notes
+
+- The CSV export uses the HTML5 download attribute which is not [supported](http://caniuse.com/#feat=download) in all browsers. Where not supported the CSV will be rendered in the browser and must be saved manually.
+
+
 ## Contributing
 
 1. Fork it ( https://github.com/watsonbox/exportify/fork )

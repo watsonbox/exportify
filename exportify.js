@@ -1,12 +1,3 @@
-/*
-  TODO:
-
-  - Handle unauthorized response from API
-  - Pagination for exporting long playlists (extract logic)
-  - Improve on simple CSV generation
-  - Make note about download attribute browser support in README
-*/
-
 window.Helpers = {
   apiCall: function(url, access_token) {
     return $.ajax({
