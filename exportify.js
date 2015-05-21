@@ -183,7 +183,7 @@ var PlaylistExporter = {
           return [
             item.track.uri,
             item.track.name,
-            item.track.artists[0].name,
+            item.track.artists.map(function(artist) { return artist.name }).join(', '),
             item.track.album.name,
             item.added_by == null ? '' : item.added_by.uri,
             item.added_at
