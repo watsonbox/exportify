@@ -185,6 +185,9 @@ var PlaylistExporter = {
             item.track.name,
             item.track.artists.map(function(artist) { return artist.name }).join(', '),
             item.track.album.name,
+            item.track.disc_number,
+            item.track.track_number,
+            item.track.duration_ms,
             item.added_by == null ? '' : item.added_by.uri,
             item.added_at
           ].map(function(track) { return '"' + track + '"'; })
@@ -196,9 +199,12 @@ var PlaylistExporter = {
 
       tracks.unshift([
         "Spotify URI",
-        "Name",
+        "Track Name",
         "Artist Name",
         "Album Name",
+        "Disc Number",
+        "Track Number",
+        "Track Duration (ms)",
         "Added By",
         "Added At"
       ]);
