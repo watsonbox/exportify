@@ -88,7 +88,7 @@ var PlaylistTable = React.createClass({
 
 var PlaylistRow = React.createClass({
   exportPlaylist: function() {
-    PlaylistExporter.export(this.props.access_token, this.props.playlist.tracks.href, this.props.playlist);
+    PlaylistExporter.export(this.props.access_token, this.props.playlist);
   },
 
   renderTickCross: function(condition) {
@@ -158,17 +158,28 @@ var Paginator = React.createClass({
 });
 
 var PlaylistExporter = {
-  export: function(access_token, url, playlist) {
+  export: function(access_token, playlist) {
+    this.csvData(access_token, playlist).then(function(data) {
+      var encodedUri = encodeURI("data:text/csv;charset=utf-8," + data);
+      var link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", this.fileName(playlist));
+
+      link.click();
+    }.bind(this))
+  },
+
+  csvData: function(access_token, playlist) {
     var requests = [];
     var limit = 100;
 
     for (var offset = 0; offset < playlist.tracks.total; offset = offset + limit) {
       requests.push(
-        window.Helpers.apiCall(url + '?offset=' + offset + '&limit=' + limit, access_token)
+        window.Helpers.apiCall(playlist.tracks.href + '?offset=' + offset + '&limit=' + limit, access_token)
       )
     }
 
-    $.when.apply($, requests).then(function() {
+    return $.when.apply($, requests).then(function() {
       var responses = [];
 
       // Handle either single or multiple responses
@@ -209,19 +220,18 @@ var PlaylistExporter = {
         "Added At"
       ]);
 
-      var csvContent = "data:text/csv;charset=utf-8,";
+      csvContent = '';
       tracks.forEach(function(infoArray, index){
-         dataString = infoArray.join(",");
-         csvContent += index < tracks.length ? dataString+ "\n" : dataString;
+        dataString = infoArray.join(",");
+        csvContent += index < tracks.length ? dataString+ "\n" : dataString;
       });
 
-      var encodedUri = encodeURI(csvContent);
-      var link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", playlist.name.replace(/[^a-z0-9\- ]/gi, '').replace(/[ ]/gi, '_').toLowerCase() + ".csv");
-
-      link.click();
+      return csvContent;
     });
+  },
+
+  fileName: function(playlist) {
+    return playlist.name.replace(/[^a-z0-9\- ]/gi, '').replace(/[ ]/gi, '_').toLowerCase() + ".csv";
   }
 }
 
