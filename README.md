@@ -9,6 +9,15 @@ As many users have noted, there is no way to export/archive playlists from the S
 No data will be saved - the entire application runs in the browser.
 
 
+## Usage
+
+Click 'Get Started', grant Exportify read-only access to your playlists, then click the 'Export' button to export a playlist.
+
+### Re-importing Playlists
+
+Once playlists are saved, it's also pretty straightforward to re-import them into Spotify. Open up the CSV file in Excel, for example, select and copy the `spotify:track:xxx` URIs, then simply create a playlist in Spotify and paste them in.
+
+
 ## Export Format
 
 Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) format with the following fields:
