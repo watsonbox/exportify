@@ -9,6 +9,21 @@ As many users have noted, there is no way to export/archive playlists from the S
 No data will be saved - the entire application runs in the browser.
 
 
+## Export Format
+
+Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) format with the following fields:
+
+- Spotify URI
+- Track Name
+- Artist Name
+- Album Name
+- Disc Number
+- Track Number
+- Track Duration (ms)
+- Added By
+- Added At
+
+
 ## Notes
 
 - The CSV export uses the HTML5 download attribute which is not [supported](http://caniuse.com/#feat=download) in all browsers. Where not supported the CSV will be rendered in the browser and must be saved manually.
