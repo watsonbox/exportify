@@ -160,12 +160,8 @@ var Paginator = React.createClass({
 var PlaylistExporter = {
   export: function(access_token, playlist) {
     this.csvData(access_token, playlist).then(function(data) {
-      var encodedUri = encodeURI("data:text/csv;charset=utf-8," + data);
-      var link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", this.fileName(playlist));
-
-      link.click();
+      var blob = new Blob(["\uFEFF" + data], { type: "text/csv;charset=utf-8" });
+      saveAs(blob, this.fileName(playlist));
     }.bind(this))
   },
 
