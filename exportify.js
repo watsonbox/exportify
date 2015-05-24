@@ -70,11 +70,11 @@ var PlaylistTable = React.createClass({
               <tr>
                 <th style={{width: "30px"}}></th>
                 <th>Name</th>
-                <th>Owner</th>
-                <th>Tracks</th>
-                <th>Public?</th>
-                <th>Collaborative?</th>
-                <th className="text-right"><button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}><span className="fa fa-file-archive-o"></span> Export All</button></th>
+                <th style={{width: "150px"}}>Owner</th>
+                <th style={{width: "100px"}}>Tracks</th>
+                <th style={{width: "120px"}}>Public?</th>
+                <th style={{width: "120px"}}>Collaborative?</th>
+                <th style={{width: "100px"}} className="text-right"><button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}><span className="fa fa-file-archive-o"></span> Export All</button></th>
               </tr>
             </thead>
             <tbody>
