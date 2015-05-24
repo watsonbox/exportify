@@ -21,6 +21,7 @@ var PlaylistTable = React.createClass({
   getInitialState: function() {
     return {
       playlists: [],
+      playlistCount: 0,
       nextURL: null,
       prevURL: null
     };
@@ -40,6 +41,7 @@ var PlaylistTable = React.createClass({
       if (this.isMounted()) {
         this.setState({
           playlists: response.items,
+          playlistCount: response.total,
           nextURL: response.next,
           prevURL: response.previous
         });
@@ -48,6 +50,10 @@ var PlaylistTable = React.createClass({
         $('#subtitle').text((response.offset + 1) + '-' + (response.offset + response.items.length) + ' of ' + response.total + ' playlists for ' + userId)
       }
     }.bind(this))
+  },
+
+  exportPlaylists: function() {
+    PlaylistsExporter.export(this.props.access_token, this.state.playlistCount);
   },
 
   componentDidMount: function() {
@@ -68,7 +74,7 @@ var PlaylistTable = React.createClass({
                 <th>Tracks</th>
                 <th>Public?</th>
                 <th>Collaborative?</th>
-                <th></th>
+                <th className="text-right"><button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}><span className="fa fa-file-archive-o"></span> Export All</button></th>
               </tr>
             </thead>
             <tbody>
@@ -157,6 +163,55 @@ var Paginator = React.createClass({
   }
 });
 
+// Handles exporting all playlist data as a zip file
+var PlaylistsExporter = {
+  export: function(access_token, playlistCount) {
+    var playlistFileNames = [];
+
+    window.Helpers.apiCall("https://api.spotify.com/v1/me", access_token).then(function(response) {
+      var requests = [];
+      var limit = 20;
+
+      for (var offset = 0; offset < playlistCount; offset = offset + limit) {
+        var url = "https://api.spotify.com/v1/users/" + response.id + "/playlists";
+        requests.push(
+          window.Helpers.apiCall(url + '?offset=' + offset + '&limit=' + limit, access_token)
+        )
+      }
+
+      $.when.apply($, requests).then(function() {
+        var playlists = [];
+        var playlistExports = [];
+
+        // Handle either single or multiple responses
+        if (typeof arguments[0].href == 'undefined') {
+          $(arguments).each(function(i, response) { $.merge(playlists, response[0].items) })
+        } else {
+          playlists = arguments[0].items
+        }
+
+        $(playlists).each(function(i, playlist) {
+          playlistFileNames.push(PlaylistExporter.fileName(playlist));
+          playlistExports.push(PlaylistExporter.csvData(access_token, playlist));
+        });
+
+        return $.when.apply($, playlistExports);
+      }).then(function() {
+        var zip = new JSZip();
+        var responses = [];
+
+        $(arguments).each(function(i, response) {
+          zip.file(playlistFileNames[i], response)
+        });
+
+        var content = zip.generate({ type: "blob" });
+        saveAs(content, "spotify_playlists.zip");
+      });
+    });
+  }
+}
+
+// Handles exporting a single playlist as a CSV file
 var PlaylistExporter = {
   export: function(access_token, playlist) {
     this.csvData(access_token, playlist).then(function(data) {
