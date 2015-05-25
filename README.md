@@ -40,6 +40,8 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 
 - The CSV export uses the HTML5 download attribute which is not [supported](http://caniuse.com/#feat=download) in all browsers. Where not supported the CSV will be rendered in the browser and must be saved manually.
 
+- According to Spotify [documentation](https://developer.spotify.com/web-api/working-with-playlists/), "Folders are not returned through the Web API at the moment, nor can be created using it".
+
 
 ## Contributing
 
