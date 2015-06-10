@@ -1,4 +1,27 @@
 window.Helpers = {
+  authorize: function() {
+    var client_id = this.getQueryParam('app_client_id');
+
+    // Use Exportify application client_id if none given
+    if (client_id == '') {
+      client_id = "9950ac751e34487dbbe027c4fd7f8e99"
+    }
+
+    window.location = "https://accounts.spotify.com/authorize" +
+      "?client_id=" + client_id +
+      "&redirect_uri=https:%2F%2Frawgit.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fexportify.html" +
+      "&scope=playlist-read-private%20playlist-read-collaborative" +
+      "&response_type=token";
+  },
+
+  // http://stackoverflow.com/a/901144/4167042
+  getQueryParam: function(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+  },
+
   apiCall: function(url, access_token) {
     return $.ajax({
       url: url,

@@ -82,9 +82,9 @@
       <h1><i class="fa fa-spotify" style="color: #84BD00"></i> Exportify</h1>
       <p id="subtitle" class="lead">Export your Spotify playlists.</p>
 
-      <a id="loginButton" type="button" class="btn btn-default btn-lg" href="https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=https:%2F%2Frawgit.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fexportify.html&scope=playlist-read-private%20playlist-read-collaborative&response_type=token">
+      <button id="loginButton" type="submit" class="btn btn-default btn-lg" onclick="window.Helpers.authorize()">
         <i class="fa fa-check-circle-o"></i> Get Started
-      </a>
+      </button>
     </div>
 
     <div id="playlistsContainer"></div>
