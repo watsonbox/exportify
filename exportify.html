@@ -23,6 +23,9 @@
       text-align: center;
     }
 
+    h1 a { color: black; }
+    h1 a:hover { color: black; text-decoration: none; }
+
     nav.paginator:nth-child(1) {
       margin-top: -74px;
     }
@@ -84,7 +87,7 @@
 <body>
   <div class="container">
     <div id="header">
-      <h1><i class="fa fa-spotify" style="color: #84BD00"></i> Exportify</h1>
+      <h1><i class="fa fa-spotify" style="color: #84BD00"></i> <a href="exportify.html">Exportify</a></h1>
       <p id="subtitle" class="lead">Export your Spotify playlists.</p>
 
       <button id="loginButton" type="submit" class="btn btn-default btn-lg" onclick="window.Helpers.authorize()">
