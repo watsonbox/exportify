@@ -32,6 +32,9 @@ window.Helpers = {
       if (jqXHR.status == 401) {
         // Return to home page after auth token expiry
         window.location = window.location.href.split('#')[0]
+      } else if (jqXHR.status == 429) {
+        // API Rate-limiting encountered
+        window.location = window.location.href.split('#')[0] + '?rate_limit_message=true'
       } else {
         // Otherwise report the error so user can raise an issue
         alert(jqXHR.responseText);
@@ -365,7 +368,10 @@ $(function() {
     key[tmp[0]] = tmp[1];
   }
 
-  if (typeof key['access_token'] === 'undefined') {
+  if (window.Helpers.getQueryParam('rate_limit_message') != '') {
+    // Show rate limit message
+    $('#rateLimitMessage').show();
+  } else if (typeof key['access_token'] === 'undefined') {
     $('#loginButton').css('display', 'inline-block')
   } else {
     React.render(<PlaylistTable access_token={key['access_token']} />, playlistsContainer);
