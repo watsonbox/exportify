@@ -17,4 +17,4 @@ before_script:
   - sleep 10
 
 script:
-  - casperjs test exportify_tests.js
+  - casperjs test test/integration
