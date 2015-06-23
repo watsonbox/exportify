@@ -1,7 +1,18 @@
+//casper.options.clientScripts = ['test/support/jquery.mockjax.js'];
+
 var lastRequestedURL;
 casper.on('navigation.requested', function(url, navigationType, navigationLocked, isMainFrame) {
   lastRequestedURL = url;
 });
+
+// casper.options.onResourceReceived = function(C, response) {
+//     this.echo(JSON.stringify(response.headers));
+// };
+
+// casper.options.onResourceRequested = function(C, request) {
+//   this.echo(JSON.stringify(request.url));
+//   this.echo(JSON.stringify(request.headers));
+// };
 
 casper.on('page.initialized', function(page) {
   this.page.injectJs('test/support/casper_helpers.js');
@@ -37,6 +48,56 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
         "response_type=token",
       "Redirected to Spotify authentication page"
     );
+  });
+
+  casper.run(function() {
+    test.done();
+  });
+});
+
+casper.test.begin("Testing loading and displaying playlists", 10, function(test) {
+  casper.viewport(1000, 1000);
+
+  casper.start('http://localhost:8080/exportify.html#access_token=TOKEN', function() {
+    this.evaluate(function() {
+      $.mockjax({
+        url: "https://api.spotify.com/v1/me",
+        contentType: 'text/json',
+        proxy: 'test/assets/mocks/watsonbox.json'
+      });
+
+      $.mockjax({
+        url: "https://api.spotify.com/v1/users/watsonbox/starred",
+        contentType: 'text/json',
+        proxy: 'test/assets/mocks/watsonbox_starred.json'
+      });
+
+      $.mockjax({
+        url: "https://api.spotify.com/v1/users/watsonbox/playlists",
+        contentType: 'text/json',
+        proxy: 'test/assets/mocks/watsonbox_playlists.json'
+      });
+    });
+  });
+
+  casper.waitUntilVisible('#playlists', function() {
+    // Starred
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(2)', 'Starred');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(3)', 'watsonbox');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(4)', '7');
+    test.assertExists('#playlists table tbody tr:nth-child(1) td:nth-child(5) i.fa-check-circle-o');
+    test.assertExists('#playlists table tbody tr:nth-child(1) td:nth-child(6) i.fa-times-circle-o');
+
+    // Ghostpoet
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(2)', 'Ghostpoet – Peanut Butter Blues and Melancholy Jam');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(3)', 'watsonbox');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(4)', '10');
+    test.assertExists('#playlists table tbody tr:nth-child(2) td:nth-child(5) i.fa-times-circle-o');
+    test.assertExists('#playlists table tbody tr:nth-child(2) td:nth-child(6) i.fa-times-circle-o');
+  });
+
+  casper.wait(1000, function() {
+    this.captureSelector('exportify.png', 'body');
   });
 
   casper.run(function() {

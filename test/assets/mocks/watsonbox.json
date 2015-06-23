@@ -1,0 +1,15 @@
+{
+  "display_name" : null,
+  "external_urls" : {
+    "spotify" : "https://open.spotify.com/user/watsonbox"
+  },
+  "followers" : {
+    "href" : null,
+    "total" : 4
+  },
+  "href" : "https://api.spotify.com/v1/users/watsonbox",
+  "id" : "watsonbox",
+  "images" : [ ],
+  "type" : "user",
+  "uri" : "spotify:user:watsonbox"
+}
