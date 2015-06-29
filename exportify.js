@@ -311,6 +311,9 @@ var PlaylistExporter = {
       //console.debug(arguments);
       console.debug(arguments[0]);
       //console.debug(arguments[0].href);
+      if (arguments[1] === 'success') {
+        arguments = arguments[0];
+      }
       if (typeof arguments[0].href == 'undefined') {
         responses = Array.prototype.slice.call(arguments).map(function(a) { return a[0] });
       } else {
