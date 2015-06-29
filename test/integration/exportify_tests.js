@@ -43,7 +43,7 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
       lastRequestedURL,
       "https://accounts.spotify.com/authorize?" +
         "client_id=9950ac751e34487dbbe027c4fd7f8e99&" +
-        "redirect_uri=https:%2F%2Frawgit.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fexportify.html&" +
+        "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
         "scope=playlist-read-private playlist-read-collaborative&" +
         "response_type=token",
       "Redirected to Spotify authentication page"
