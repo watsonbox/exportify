@@ -9,7 +9,7 @@ window.Helpers = {
 
     window.location = "https://accounts.spotify.com/authorize" +
       "?client_id=" + client_id +
-      "&redirect_uri=https:%2F%2Frawgit.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fexportify.html" +
+      "&redirect_uri=" + encodeURI(document.location.href) + 
       "&scope=playlist-read-private%20playlist-read-collaborative" +
       "&response_type=token";
   },
