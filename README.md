@@ -23,7 +23,7 @@ Click 'Export All' to save a zip file containing a CSV file for each playlist in
 Once playlists are saved, it's also pretty straightforward to re-import them into Spotify. Open up the CSV file in Excel, for example, select and copy the `spotify:track:xxx` URIs, then simply create a playlist in Spotify and paste them in.
 
 
-## Export Format
+### Export Format
 
 Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) format with the following fields:
 
@@ -36,6 +36,17 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 - Track Duration (ms)
 - Added By
 - Added At
+
+
+## Development
+
+Developers wishing to make changes to Exportify should use a local web server. For example, using Python (in the Exportify repo dir):
+
+```bash
+python -m SimpleHTTPServer
+```
+
+Then open [http://localhost:8000/exportify.html](http://localhost:8000/exportify.html).
 
 
 ## Notes
