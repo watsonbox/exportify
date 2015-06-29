@@ -309,9 +309,13 @@ var PlaylistExporter = {
 
       // Handle either single or multiple responses
       //console.debug(arguments);
-      console.debug(arguments[0]);
-      console.debug(typeof arguments[0].href);
+      //console.debug(arguments[0]);
+      //console.debug(typeof arguments[0].href);
       //console.debug(arguments[0].href);
+      if (typeof arguments[0]== 'undefined') {
+        console.debug(arguments);
+        arguments = [arguments];
+      }
       if (typeof arguments[0].href == 'undefined') {
         responses = Array.prototype.slice.call(arguments).map(function(a) { return a[0] });
       } else {
