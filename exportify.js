@@ -9,7 +9,7 @@ window.Helpers = {
 
     window.location = "https://accounts.spotify.com/authorize" +
       "?client_id=" + client_id +
-      "&redirect_uri=https:%2F%2Frawgit.com%2Fwatsonbox%2Fexportify%2Fmaster%2Fexportify.html" +
+      "&redirect_uri=" + encodeURIComponent(document.location.href) + 
       "&scope=playlist-read-private%20playlist-read-collaborative" +
       "&response_type=token";
   },
@@ -307,8 +307,11 @@ var PlaylistExporter = {
     return $.when.apply($, requests).then(function() {
       var responses = [];
 
+      // No song ? Then no songs ..
+      if (typeof arguments[0] == 'undefined') {
+        responses = [];
       // Handle either single or multiple responses
-      if (typeof arguments[0].href == 'undefined') {
+      } else if (typeof arguments[0].href == 'undefined') {
         responses = Array.prototype.slice.call(arguments).map(function(a) { return a[0] });
       } else {
         responses = [arguments[0]];
