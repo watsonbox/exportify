@@ -307,14 +307,11 @@ var PlaylistExporter = {
     return $.when.apply($, requests).then(function() {
       var responses = [];
 
+      // No song ? Then no songs ..
+      if (typeof arguments[0] == 'undefined') {
+        responses = [];
       // Handle either single or multiple responses
-      //console.debug(arguments);
-      //console.debug(arguments[0]);
-      //console.debug(typeof arguments[0].href);
-      //console.debug(arguments[0].href);
-      if (typeof arguments[0] == 'undefined')
-        return '';
-      if (typeof arguments[0].href == 'undefined') {
+      } else if (typeof arguments[0].href == 'undefined') {
         responses = Array.prototype.slice.call(arguments).map(function(a) { return a[0] });
       } else {
         responses = [arguments[0]];
