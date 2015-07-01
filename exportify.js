@@ -319,16 +319,16 @@ var PlaylistExporter = {
       var tracks = responses.map(function(response) {
         return response.items.map(function(item) {
           return [
-            item.track.uri,
             item.track.name,
+            item.track.artists.map(function(artist) { return artist.name }).join(', '),
             item.track.artists.map(function(artist) { return artist.name }).join(', '),
             item.track.album.name,
             item.track.disc_number,
             item.track.track_number,
             item.track.duration_ms,
-            item.added_by == null ? '' : item.added_by.uri,
+            item.added_at,
             item.added_at
-          ].map(function(track) { return '"' + track + '"'; })
+          ].map(function(track) { return '' + track + ''; })
         });
       });
 
@@ -336,20 +336,20 @@ var PlaylistExporter = {
       tracks = $.map(tracks, function(n) { return n })
 
       tracks.unshift([
-        "Spotify URI",
-        "Track Name",
-        "Artist Name",
-        "Album Name",
+        "Name",
+        "Artist",
+        "Composer",
+        "Album",
         "Disc Number",
         "Track Number",
-        "Track Duration (ms)",
-        "Added By",
-        "Added At"
+        "Time",
+        "Date Modified",
+        "Date Added"
       ]);
 
       csvContent = '';
       tracks.forEach(function(infoArray, index){
-        dataString = infoArray.join(",");
+        dataString = infoArray.join("	");
         csvContent += index < tracks.length ? dataString+ "\n" : dataString;
       });
 
@@ -358,7 +358,7 @@ var PlaylistExporter = {
   },
 
   fileName: function(playlist) {
-    return playlist.name.replace(/[^a-z0-9\- ]/gi, '').replace(/[ ]/gi, '_').toLowerCase() + ".csv";
+    return playlist.name.replace(/[^a-z0-9\- ]/gi, '').replace(/[ ]/gi, '_').toLowerCase() + ".txt";
   }
 }
 
