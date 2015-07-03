@@ -9,7 +9,7 @@ window.Helpers = {
 
     window.location = "https://accounts.spotify.com/authorize" +
       "?client_id=" + client_id +
-      "&redirect_uri=" + encodeURIComponent(document.location.href) +
+      "&redirect_uri=" + encodeURIComponent([location.protocol, '//', location.host, location.pathname].join('')) +
       "&scope=playlist-read-private%20playlist-read-collaborative" +
       "&response_type=token";
   },

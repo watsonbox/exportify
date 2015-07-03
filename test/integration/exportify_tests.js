@@ -55,6 +55,31 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
   });
 });
 
+casper.test.begin("Testing initial authentication redirect with different client id", 2, function(test) {
+  casper.start('http://localhost:8080/exportify.html?app_client_id=123456');
+
+  casper.waitUntilVisible('#loginButton', function() {
+    test.assertTitle("Exportify", "Exportify main page is loaded");
+    this.click('#loginButton');
+  })
+
+  casper.then(function() {
+    test.assertEquals(
+      lastRequestedURL,
+      "https://accounts.spotify.com/authorize?" +
+        "client_id=123456&" +
+        "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
+        "scope=playlist-read-private playlist-read-collaborative&" +
+        "response_type=token",
+      "Redirected to Spotify authentication page"
+    );
+  });
+
+  casper.run(function() {
+    test.done();
+  });
+});
+
 casper.test.begin("Testing loading and displaying playlists", 10, function(test) {
   casper.viewport(1000, 1000);
 
