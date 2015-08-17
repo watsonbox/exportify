@@ -70,6 +70,38 @@
       animation: spinner 1s linear infinite;
       -webkit-animation: spinner 1s linear infinite;
     }
+
+    .ribbon {
+      background-color: #84BD00;
+      overflow: hidden;
+      white-space: nowrap;
+      /* top left corner */
+      position: absolute;
+      left: -50px;
+      top: 40px;
+      /* 45 deg ccw rotation */
+      -webkit-transform: rotate(-45deg);
+         -moz-transform: rotate(-45deg);
+          -ms-transform: rotate(-45deg);
+           -o-transform: rotate(-45deg);
+              transform: rotate(-45deg);
+      /* shadow */
+      -webkit-box-shadow: 0 0 10px #888;
+         -moz-box-shadow: 0 0 10px #888;
+              box-shadow: 0 0 10px #888;
+    }
+    .ribbon a {
+      border: 1px solid #ded;
+      color: #fff;
+      display: block;
+      font: bold 81.25% 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 1px 0;
+      padding: 10px 50px;
+      text-align: center;
+      text-decoration: none;
+      /* shadow */
+      text-shadow: 0 0 5px #444;
+    }
   </style>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -86,6 +118,7 @@
 </head>
 
 <body>
+  <div class="ribbon"><a href="https://github.com/watsonbox/exportify">Fork me on Github</a></div>
   <div class="container">
     <div id="header">
       <h1><i class="fa fa-spotify" style="color: #84BD00"></i> <a href="exportify.html">Exportify</a></h1>
