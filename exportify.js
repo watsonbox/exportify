@@ -328,7 +328,7 @@ var PlaylistExporter = {
             item.track.duration_ms,
             item.added_by == null ? '' : item.added_by.uri,
             item.added_at
-          ].map(function(track) { return '"' + track + '"'; })
+          ].map(function(track) { return '"' + String(track).replace(/"/g, '""') + '"'; })
         });
       });
 
