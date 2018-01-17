@@ -40,11 +40,18 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 
 ## Development
 
-Developers wishing to make changes to Exportify should use a local web server. For example, using Python (in the Exportify repo dir):
+Developers wishing to make changes to Exportify should use a local web server. For example, using Python 2.7 (in the Exportify repo dir):
 
 ```bash
 python -m SimpleHTTPServer
 ```
+
+For Python 3 (in the Exportify repo dir):
+
+```bash
+python -m http.server 8000
+```
+
 
 Then open [http://localhost:8000/exportify.html](http://localhost:8000/exportify.html).
 
