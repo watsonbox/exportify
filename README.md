@@ -27,9 +27,11 @@ Once playlists are saved, it's also pretty straightforward to re-import them int
 
 Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) format with the following fields:
 
-- Spotify URI
+- Track URI
 - Track Name
+- Artist URI
 - Artist Name
+- Album URI
 - Album Name
 - Disc Number
 - Track Number

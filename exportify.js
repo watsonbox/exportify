@@ -362,7 +362,9 @@ var PlaylistExporter = {
           return [
             item.track.uri,
             item.track.name,
-            item.track.artists.map(function (artist) { return String(artist.name).replace(/,/g, "\\,"); }).join(', '),
+            item.track.artists.map(function(artist) { return artist.uri }).join(', '),
+            item.track.artists.map(function(artist) { return String(artist.name).replace(/,/g, "\\,") }).join(', '),
+            item.track.album.uri,
             item.track.album.name,
             item.track.disc_number,
             item.track.track_number,
@@ -377,9 +379,11 @@ var PlaylistExporter = {
       tracks = $.map(tracks, function(n) { return n })
 
       tracks.unshift([
-        "Spotify URI",
+        "Track URI",
         "Track Name",
+        "Artist URI",
         "Artist Name",
+        "Album URI",
         "Album Name",
         "Disc Number",
         "Track Number",
