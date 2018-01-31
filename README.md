@@ -81,3 +81,7 @@ If you want to test changes in a development version, you should fire up a local
 ## Contributing
 
 All contributions are welcome! If you wish to contribute, please create an issue first so that your feature, problem or question can be discussed.
+
+## License
+
+This project is licensed under the terms of the [MIT License](https://opensource.org/licenses/MIT).
