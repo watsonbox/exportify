@@ -70,6 +70,14 @@ If you want to test changes in a development version, you should fire up a local
 
  1. If you want to work on a local development version, you may want to change the “Client ID” directly in the code
 
+## References
+
+ * [Spotify Web API](https://developer.spotify.com/web-api/)
+   * [Saved tracks](https://developer.spotify.com/web-api/get-users-saved-tracks/)
+   * [List of playlists](https://developer.spotify.com/web-api/get-list-users-playlists/)
+   * [Playlist details](https://developer.spotify.com/web-api/get-playlist/)
+   * [Permissions](https://developer.spotify.com/web-api/using-scopes/)
+
 ## Contributing
 
  1. [Fork the project](https://github.com/delight-im/exportify/fork)
