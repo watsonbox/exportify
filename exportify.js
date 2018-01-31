@@ -1,6 +1,6 @@
 window.Helpers = {
   authorize: function() {
-    var client_id = this.getQueryParam('app_client_id');
+    var client_id = this.getQueryParam('client_id');
 
     // Use Exportify application client_id if none given
     if (client_id == '') {
