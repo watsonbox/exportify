@@ -4,19 +4,19 @@ Export your Spotify playlists and library using the Web API by clicking on the l
 
 [https://rawgit.com/delight-im/exportify/master/exportify.html](https://rawgit.com/delight-im/exportify/master/exportify.html)
 
-As many users have noted, there is no way to export/archive playlists from the Spotify client for safekeeping. This application provides a simple interface for doing that using the Spotify Web API.
+As many users have noticed with Spotify, there is no way to export or archive one’s playlists or library from the official clients for safekeeping. This application provides a simple interface for doing that using the Spotify Web API.
 
-No data will be saved – the entire application runs in the browser.
+No data will be saved on any third-party server – the entire application runs in your browser.
 
 ## Usage
 
-Click “Get Started”, grant Exportify read-only access to your playlists, then click the “Export” button to export a playlist.
+Click “Get Started”, grant Exportify *read-only* access to your playlists and library, then click the “Export” button to start the export.
 
-Click “Export All” to save a zip file containing a CSV file for each playlist in your account. This may take a while when many playlists exist and/or they are large.
+Click “Export All” to save a ZIP file containing one CSV file for each playlist in your account. This may take a while when many (large) playlists exist.
 
-### Re-importing Playlists
+### Re-importing playlists
 
-Once playlists are saved, it’s also pretty straightforward to re-import them into Spotify. Open up the CSV file in Excel, for example, select and copy the `spotify:track:xxx` URIs, then simply create a playlist in Spotify and paste them in.
+Once playlists are saved, it’s also pretty straightforward to re-import them into Spotify. Open up an exported CSV file in Excel or LibreOffice Calc, for example, then select and copy the `spotify:track:xxx` URIs. Finally, create a playlist in Spotify and paste in the URIs.
 
 ### Export Format
 
