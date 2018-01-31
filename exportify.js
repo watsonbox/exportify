@@ -1,11 +1,6 @@
 window.Helpers = {
   authorize: function() {
-    var client_id = this.getQueryParam('client_id');
-
-    // Use Exportify application client_id if none given
-    if (client_id == '') {
-      client_id = "9950ac751e34487dbbe027c4fd7f8e99"
-    }
+    var client_id = this.getQueryParam('client_id') || "efe1f60ee4484ea796b5c441214961df";
 
     window.location = "https://accounts.spotify.com/authorize" +
       "?client_id=" + client_id +
