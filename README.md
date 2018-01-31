@@ -1,6 +1,6 @@
 <a href="https://rawgit.com/delight-im/exportify/master/exportify.html"><img src="screenshot.png"/></a>
 
-Export your Spotify playlists using the Web API by clicking on the link below:
+Export your Spotify playlists and library using the Web API by clicking on the link below:
 
 [https://rawgit.com/delight-im/exportify/master/exportify.html](https://rawgit.com/delight-im/exportify/master/exportify.html)
 
