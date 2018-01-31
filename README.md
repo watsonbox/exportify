@@ -80,8 +80,4 @@ If you want to test changes in a development version, you should fire up a local
 
 ## Contributing
 
- 1. [Fork the project](https://github.com/delight-im/exportify/fork)
- 1. Create your feature branch (`git checkout -b my-new-feature`)
- 1. Commit your changes (`git commit -am 'Add some feature'`)
- 1. Push to the branch (`git push origin my-new-feature`)
- 1. Create a new Pull Request
+All contributions are welcome! If you wish to contribute, please create an issue first so that your feature, problem or question can be discussed.
