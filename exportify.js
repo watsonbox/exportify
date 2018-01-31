@@ -330,7 +330,7 @@ var PlaylistExporter = {
           return [
             item.track.uri,
             item.track.name,
-            item.track.artists.map(function(artist) { return artist.name }).join(', '),
+            item.track.artists.map(function (artist) { return String(artist.name).replace(/,/g, "\\,"); }).join(', '),
             item.track.album.name,
             item.track.disc_number,
             item.track.track_number,
