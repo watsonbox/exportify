@@ -10,9 +10,9 @@ No data will be saved on any third-party server – the entire application runs 
 
 ## Usage
 
-Click “Get Started”, grant Exportify *read-only* access to your playlists and library, then click the “Export” button to start the export.
+Click “Get started”, grant Exportify *read-only* access to your playlists and library, then click the “Export” button to start the export.
 
-Click “Export All” to save a ZIP file containing one CSV file for each playlist in your account. This may take a while when many (large) playlists exist.
+Click “Export all” to save a ZIP file containing one CSV file for each playlist in your account. This may take a while when many (large) playlists exist.
 
 ### Re-importing playlists
 
