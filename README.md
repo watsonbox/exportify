@@ -32,6 +32,10 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
  * Added By
  * Added At
 
+## Rate limiting or throttling
+
+If you hit Spotify’s rate limits for their Web API, you may want to [register your own “Client ID”](#registering-your-own-application-for-the-spotify-web-api), which allows for more API calls independent of other users.
+
 ## Development
 
 If you want to test changes in a development version, you should fire up a local web server, e.g. using Apache, nginx, Python or PHP, and navigate your browser to `exportify.html` on `localhost`. Additionally, you may want to [register your own “Client ID”](#registering-your-own-application-for-the-spotify-web-api) for the Spotify Web API.
