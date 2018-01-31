@@ -319,7 +319,7 @@ var PlaylistExporter = {
   },
 
   fileName: function(playlist) {
-    return playlist.name.replace(/[^a-z0-9\- ]/gi, '').replace(/[ ]/gi, '_').toLowerCase() + ".csv";
+    return playlist.name.replace(/[\x00-\x1F\x7F/\\<>:;"|=,.?*[\] ]+/g, "_").toLowerCase() + ".csv";
   }
 }
 
