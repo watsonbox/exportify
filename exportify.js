@@ -337,7 +337,7 @@ var PlaylistExporter = {
             item.track.duration_ms,
             item.added_by == null ? '' : item.added_by.uri,
             item.added_at
-          ].map(function(track) { return '"' + track + '"'; })
+          ];
         });
       });
 
@@ -357,8 +357,8 @@ var PlaylistExporter = {
       ]);
 
       csvContent = '';
-      tracks.forEach(function(infoArray, index){
-        dataString = infoArray.join(",");
+      tracks.forEach(function (row, index){
+        dataString = row.map(function (cell) { return '"' + String(cell).replace(/"/g, '""') + '"'; }).join(",");
         csvContent += index < tracks.length ? dataString+ "\n" : dataString;
       });
 
