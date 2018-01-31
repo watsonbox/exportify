@@ -70,12 +70,6 @@ If you want to test changes in a development version, you should fire up a local
 
  1. If you want to work on a local development version, you may want to change the “Client ID” directly in the code
 
-## Notes
-
- * The CSV export uses the HTML5 download attribute which is not [supported](http://caniuse.com/#feat=download) in all browsers. Where not supported the CSV will be rendered in the browser and must be saved manually.
- * According to Spotify [documentation](https://developer.spotify.com/web-api/working-with-playlists/), "Folders are not returned through the Web API at the moment, nor can be created using it".
- * It has been [pointed out](https://github.com/watsonbox/exportify/issues/6) that due to the large number of requests required to export all playlists, rate limiting errors may sometimes be encountered. Features will soon be added to make handling these more robust, but in the meantime these issues can be overcome by [creating your own Spotify application](https://github.com/watsonbox/exportify/issues/6#issuecomment-110793132).
-
 ## Contributing
 
  1. [Fork the project](https://github.com/delight-im/exportify/fork)
