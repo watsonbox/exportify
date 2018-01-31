@@ -34,13 +34,7 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 
 ## Development
 
-Developers wishing to make changes to Exportify should use a local web server. For example, using Python (in the Exportify repo dir):
-
-```bash
-$ python -m SimpleHTTPServer
-```
-
-Then open [http://localhost:8000/exportify.html](http://localhost:8000/exportify.html).
+If you want to test changes in a development version, you should fire up a local web server, e.g. using Apache, nginx, Python or PHP, and navigate your browser to `exportify.html` on `localhost`. Additionally, you may want to [register your own “Client ID”](#registering-your-own-application-for-the-spotify-web-api).
 
 ## Registering your own application for the Spotify Web API
 
