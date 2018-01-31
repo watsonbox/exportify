@@ -42,6 +42,36 @@ $ python -m SimpleHTTPServer
 
 Then open [http://localhost:8000/exportify.html](http://localhost:8000/exportify.html).
 
+## Registering your own application for the Spotify Web API
+
+ 1. Go to [Spotify’s developer site](https://developer.spotify.com/my-applications)
+ 1. Choose to create a new app
+ 1. Enter an arbitrary title and description for your new app
+ 1. Locate the “Client ID” for your new app and write it down
+ 1. “Edit” your app
+ 1. As “Redirect URIs”, add
+
+    ```
+    https://rawgit.com/delight-im/exportify/master/exportify.html
+    ```
+
+    and, if you want to work on a local development version, your local URL, e.g.:
+
+    ```
+    http://localhost/exportify/exportify.html
+    ```
+
+ 1. Save the new settings
+ 1. Navigate your browser to
+
+    ```
+    https://rawgit.com/delight-im/exportify/master/exportify.html?client_id=<YOUR_CLIENT_ID>
+    ```
+
+    to start using your own “Client ID” for the Spotify Web API
+
+ 1. If you want to work on a local development version, you may want to change the “Client ID” directly in the code
+
 ## Notes
 
  * The CSV export uses the HTML5 download attribute which is not [supported](http://caniuse.com/#feat=download) in all browsers. Where not supported the CSV will be rendered in the browser and must be saved manually.
