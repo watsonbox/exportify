@@ -34,7 +34,7 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 
 ## Development
 
-If you want to test changes in a development version, you should fire up a local web server, e.g. using Apache, nginx, Python or PHP, and navigate your browser to `exportify.html` on `localhost`. Additionally, you may want to [register your own “Client ID”](#registering-your-own-application-for-the-spotify-web-api).
+If you want to test changes in a development version, you should fire up a local web server, e.g. using Apache, nginx, Python or PHP, and navigate your browser to `exportify.html` on `localhost`. Additionally, you may want to [register your own “Client ID”](#registering-your-own-application-for-the-spotify-web-api) for the Spotify Web API.
 
 ## Registering your own application for the Spotify Web API
 
