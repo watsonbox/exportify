@@ -298,8 +298,8 @@ var PlaylistsExporter = {
 var PlaylistExporter = {
   export: function(access_token, playlist) {
     this.csvData(access_token, playlist).then(function(data) {
-      var blob = new Blob(["\uFEFF" + data], { type: "text/csv;charset=utf-8" });
-      saveAs(blob, this.fileName(playlist));
+      var blob = new Blob([ data ], { type: "text/csv;charset=utf-8" });
+      saveAs(blob, this.fileName(playlist), true);
     }.bind(this))
   },
 
