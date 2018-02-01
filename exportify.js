@@ -5,7 +5,7 @@ window.Helpers = {
     window.location = "https://accounts.spotify.com/authorize" +
       "?client_id=" + client_id +
       "&redirect_uri=" + encodeURIComponent([location.protocol, '//', location.host, location.pathname].join('')) +
-      "&scope=playlist-read-private%20playlist-read-collaborative" +
+      "&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read" +
       "&response_type=token";
   },
 
@@ -82,6 +82,26 @@ var PlaylistTable = React.createClass({
         playlists = $.merge([arguments[0][0]], arguments[1][0].items);
       }
 
+      // Show library of saved tracks if viewing first page
+      if (firstPage) {
+        playlists.unshift({
+          "id": "saved",
+          "name": "Saved",
+          "public": false,
+          "collaborative": false,
+          "owner": {
+            "id": userId,
+            "uri": "spotify:user:" + userId
+          },
+          "tracks": {
+            "href": "https://api.spotify.com/v1/me/tracks",
+            "limit": 50,
+            "total": 2500 // TODO: get rid of hard-coded library size
+          },
+          "uri": "spotify:user:" + userId + ":saved"
+        });
+      }
+
       if (this.isMounted()) {
         this.setState({
           playlists: playlists,
@@ -150,7 +170,7 @@ var PlaylistRow = React.createClass({
   },
 
   renderIcon: function(playlist) {
-    if (playlist.name == 'Starred') {
+    if (playlist.name == 'Starred' || playlist.name == 'Saved') {
       return <i className="glyphicon glyphicon-star" style={{ color: 'gold' }}></i>;
     } else {
       return <i className="fa fa-music"></i>;
@@ -259,6 +279,17 @@ var PlaylistsExporter = {
           playlists = arguments[0].items
         }
 
+        // Add library of saved tracks
+        playlists.unshift({
+          "id": "saved",
+          "name": "Saved",
+          "tracks": {
+            "href": "https://api.spotify.com/v1/me/tracks",
+            "limit": 50,
+            "total": 2500 // TODO: get rid of hard-coded library size
+          },
+        });
+
         $(playlists).each(function(i, playlist) {
           playlistFileNames.push(PlaylistExporter.fileName(playlist));
           playlistExports.push(PlaylistExporter.csvData(access_token, playlist));
@@ -291,7 +322,7 @@ var PlaylistExporter = {
 
   csvData: function(access_token, playlist) {
     var requests = [];
-    var limit = 100;
+    var limit = playlist.tracks.limit || 100;
 
     for (var offset = 0; offset < playlist.tracks.total; offset = offset + limit) {
       requests.push(
