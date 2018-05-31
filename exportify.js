@@ -111,6 +111,9 @@ var PlaylistTable = React.createClass({
 
   render: function() {
     if (this.state.playlists.length > 0) {
+      if(this.state.playlists[0].uri == null){
+        this.state.playlists.shift();
+      }
       return (
         <div id="playlists">
           <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
@@ -162,10 +165,10 @@ var PlaylistRow = React.createClass({
     }
   },
 
-  render: function() {
+  render: function() { 
     playlist = this.props.playlist
 
-    return (
+    return ( 
       <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
