@@ -267,7 +267,7 @@ var PlaylistsExporter = {
         }
 
         $(playlists).each(function(i, playlist) {
-          if (playlist.tracks !== nulled) {
+          if (playlist.tracks !== null) {
             playlistFileNames.push(PlaylistExporter.fileName(playlist));
             playlistExports.push(PlaylistExporter.csvData(access_token, playlist));
           }
