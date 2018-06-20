@@ -128,7 +128,9 @@ var PlaylistTable = React.createClass({
             </thead>
             <tbody>
               {this.state.playlists.map(function(playlist, i) {
-                return <PlaylistRow playlist={playlist} key={playlist.id} access_token={this.props.access_token}/>;
+                if (playlist.tracks !== null) {
+                  return <PlaylistRow playlist={playlist} key={playlist.id} access_token={this.props.access_token}/>;
+                }
               }.bind(this))}
             </tbody>
           </table>
