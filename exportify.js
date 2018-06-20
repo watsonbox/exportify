@@ -169,7 +169,7 @@ var PlaylistRow = React.createClass({
       <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
-        <td><a href={playlist.owner.uri}>{playlist.owner.id}</a></td>
+        <td><a href={playlist.owner ? playlist.owner.uri : ''}>{playlist.owner ? playlist.owner.id : 'None'}</a></td>
         <td>{playlist.tracks.total}</td>
         <td>{this.renderTickCross(playlist.public)}</td>
         <td>{this.renderTickCross(playlist.collaborative)}</td>
