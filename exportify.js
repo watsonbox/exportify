@@ -1,6 +1,6 @@
 window.Helpers = {
   authorize: function() {
-    var client_id = this.getQueryParam('client_id') || "efe1f60ee4484ea796b5c441214961df";
+    var client_id = this.getQueryParam('client_id') || "9950ac751e34487dbbe027c4fd7f8e99";
 
     window.location = "https://accounts.spotify.com/authorize" +
       "?client_id=" + client_id +
@@ -179,7 +179,16 @@ var PlaylistRow = React.createClass({
 
   render: function() {
     playlist = this.props.playlist
-
+    if(playlist.uri==null) return (
+      <tr key={this.props.key}>
+        <td>{this.renderIcon(playlist)}</td>
+        <td>{playlist.name}</td>
+        <td colSpan="2">This playlist is not supported</td>
+        <td>{this.renderTickCross(playlist.public)}</td>
+        <td>{this.renderTickCross(playlist.collaborative)}</td>
+        <td>&nbsp;</td>
+      </tr>
+    );
     return (
       <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
