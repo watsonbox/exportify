@@ -2,7 +2,7 @@
 
 Export your Spotify playlists and library using the Web API by clicking on the link below:
 
-[https://rawgit.com/delight-im/exportify/master/exportify.html](https://rawgit.com/delight-im/exportify/master/exportify.html)
+[https://rawgit.com/aaahh/exportify/master/exportify.html](https://rawgit.com/aaahh/exportify/master/exportify.html)
 
 As many users have noticed with Spotify, there is no way to export or archive one’s playlists or library from the official clients for safekeeping. This application provides a simple interface for doing that using the Spotify Web API.
 
