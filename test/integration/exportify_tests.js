@@ -44,7 +44,7 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
       "https://accounts.spotify.com/authorize?" +
         "client_id=9950ac751e34487dbbe027c4fd7f8e99&" +
         "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
-        "scope=playlist-read-private playlist-read-collaborative&" +
+        "scope=playlist-read-private%20playlist-read-collaborative&" +
         "response_type=token",
       "Redirected to Spotify authentication page"
     );
@@ -69,7 +69,7 @@ casper.test.begin("Testing initial authentication redirect with different client
       "https://accounts.spotify.com/authorize?" +
         "client_id=123456&" +
         "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
-        "scope=playlist-read-private playlist-read-collaborative&" +
+        "scope=playlist-read-private%20playlist-read-collaborative&" +
         "response_type=token",
       "Redirected to Spotify authentication page"
     );
