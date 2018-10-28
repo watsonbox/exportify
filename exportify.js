@@ -54,21 +54,21 @@ var PlaylistTable = React.createClass({
   },
 
   loadPlaylists: function(url) {
-    var userId = '';
+    var userName = '';
     var firstPage = typeof url === 'undefined' || url.indexOf('offset=0') > -1;
 
     window.Helpers.apiCall("https://api.spotify.com/v1/me", this.props.access_token).then(function(response) {
-      userId = response.id;
+      userName = response.display_name;
 
       // Show starred playlist if viewing first page
       if (firstPage) {
         return $.when.apply($, [
           window.Helpers.apiCall(
-            "https://api.spotify.com/v1/users/" + userId + "/starred",
+            "https://api.spotify.com/v1/users/" + userName + "/starred",
             this.props.access_token
           ),
           window.Helpers.apiCall(
-            "https://api.spotify.com/v1/users/" + userId + "/playlists",
+            "https://api.spotify.com/v1/users/" + userName + "/playlists",
             this.props.access_token
           )
         ])
@@ -96,7 +96,7 @@ var PlaylistTable = React.createClass({
         });
 
         $('#playlists').fadeIn();
-        $('#subtitle').text((response.offset + 1) + '-' + (response.offset + response.items.length) + ' of ' + response.total + ' playlists for ' + userId)
+        $('#subtitle').text((response.offset + 1) + '-' + (response.offset + response.items.length) + ' of ' + response.total + ' playlists for ' + userName)
       }
     }.bind(this))
   },
