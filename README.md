@@ -57,6 +57,8 @@ Then open [http://localhost:8000/exportify.html](http://localhost:8000/exportify
 
 - It has been [pointed out](https://github.com/watsonbox/exportify/issues/6) that due to the large number of requests required to export all playlists, rate limiting errors may sometimes be encountered. Features will soon be added to make handling these more robust, but in the meantime these issues can be overcome by [creating your own Spotify application](https://github.com/watsonbox/exportify/issues/6#issuecomment-110793132).
 
+- The favourites/stared playlist cannot be converter to CSV using this.
+
 
 ## Contributing
 
