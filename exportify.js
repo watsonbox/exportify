@@ -119,7 +119,8 @@ var PlaylistTable = React.createClass({
               <tr>
                 <th style={{width: "30px"}}></th>
                 <th>Name</th>
-                <th style={{width: "150px"}}>Owner</th>
+                <th style={{width: "150px"}}>Owner Name</th>
+                <th style={{width: "150px"}}>Owner Id</th>
                 <th style={{width: "100px"}}>Tracks</th>
                 <th style={{width: "120px"}}>Public?</th>
                 <th style={{width: "120px"}}>Collaborative?</th>
@@ -168,7 +169,7 @@ var PlaylistRow = React.createClass({
       <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
         <td>{playlist.name}</td>
-        <td colSpan="2">This playlist is not supported</td>
+        <td colSpan="3">This playlist is not supported</td>
         <td>{this.renderTickCross(playlist.public)}</td>
         <td>{this.renderTickCross(playlist.collaborative)}</td>
         <td>&nbsp;</td>
@@ -178,6 +179,7 @@ var PlaylistRow = React.createClass({
       <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
+        <td><a href={playlist.owner.uri}>{playlist.owner.display_name}</a></td>
         <td><a href={playlist.owner.uri}>{playlist.owner.id}</a></td>
         <td>{playlist.tracks.total}</td>
         <td>{this.renderTickCross(playlist.public)}</td>
