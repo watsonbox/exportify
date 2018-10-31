@@ -13,8 +13,9 @@
   "images" : [ ],
   "name" : "Starred",
   "owner" : {
+    "display_name" : "watsonbox",
     "external_urls" : {
-      "spotify" : "http://open.spotify.com/user/watsonbox"
+      "spotify" : "https://open.spotify.com/user/watsonbox"
     },
     "href" : "https://api.spotify.com/v1/users/watsonbox",
     "id" : "watsonbox",

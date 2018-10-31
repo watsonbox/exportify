@@ -2,72 +2,78 @@
   "href" : "https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20",
   "items" : [ {
     "collaborative" : false,
+    "description" : "",
     "external_urls" : {
-      "spotify" : "http://open.spotify.com/user/watsonbox/playlist/50q6gd0ffwHRfCAqLwmwR9"
+      "spotify" : "https://open.spotify.com/playlist/4XOGDpHMrVoH33uJEwHWU5"
     },
-    "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/50q6gd0ffwHRfCAqLwmwR9",
-    "id" : "50q6gd0ffwHRfCAqLwmwR9",
+    "href" : "https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5",
+    "id" : "4XOGDpHMrVoH33uJEwHWU5",
     "images" : [ {
       "height" : 640,
-      "url" : "https://i.scdn.co/image/871bf2181376a679ed82f3ed3126212e5cf2ceba",
+      "url" : "https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80",
       "width" : 640
     } ],
     "name" : "Ghostpoet – Peanut Butter Blues and Melancholy Jam",
     "owner" : {
+      "display_name" : "watsonbox",
       "external_urls" : {
-        "spotify" : "http://open.spotify.com/user/watsonbox"
+        "spotify" : "https://open.spotify.com/user/watsonbox"
       },
       "href" : "https://api.spotify.com/v1/users/watsonbox",
       "id" : "watsonbox",
       "type" : "user",
       "uri" : "spotify:user:watsonbox"
     },
+    "primary_color" : null,
     "public" : false,
-    "snapshot_id" : "z7b7g9bUY9kUwi6tWKDJ7M3c4NTNts0dfoTVe/Qp8b0FQbkTH17cSPzpD59T8zwP",
+    "snapshot_id" : "MixjMzFkNjFhYzJkMDkzNmE3OGQ1N2YyYmQ0NTkxYTk5NjBhZmZkYzZi",
     "tracks" : {
-      "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/50q6gd0ffwHRfCAqLwmwR9/tracks",
+      "href" : "https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks",
       "total" : 10
     },
     "type" : "playlist",
-    "uri" : "spotify:user:watsonbox:playlist:50q6gd0ffwHRfCAqLwmwR9"
+    "uri" : "spotify:playlist:4XOGDpHMrVoH33uJEwHWU5"
   }, {
     "collaborative" : false,
+    "description" : "",
     "external_urls" : {
-      "spotify" : "http://open.spotify.com/user/watsonbox/playlist/7oqO7oaMCmxZPAEBSVRWlV"
+      "spotify" : "https://open.spotify.com/playlist/7oqO7oaMCmxZPAEBSVRWlV"
     },
-    "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/7oqO7oaMCmxZPAEBSVRWlV",
+    "href" : "https://api.spotify.com/v1/playlists/7oqO7oaMCmxZPAEBSVRWlV",
     "id" : "7oqO7oaMCmxZPAEBSVRWlV",
     "images" : [ {
       "height" : 640,
-      "url" : "https://mosaic.scdn.co/640/b3589e668f106a1cbcced3b6a002207f90a42fedabe3c44074a41c62759b68df37f9ef206269a7e48c502afae65ecd13d8bf0fae05b501d4daf5c2bc4b176187a4e3900a1501abe61030076a2eca18c3",
+      "url" : "https://mosaic.scdn.co/640/ab67616d0000b273b31bd144093d6e0ad94318a8ab67616d0000b273c784264da17e3438c37c2e01ab67616d0000b273cc9d2a7205a66a3a015fe6ddab67616d0000b273f66cbf16f2aabae95218d7f6",
       "width" : 640
     }, {
       "height" : 300,
-      "url" : "https://mosaic.scdn.co/300/b3589e668f106a1cbcced3b6a002207f90a42fedabe3c44074a41c62759b68df37f9ef206269a7e48c502afae65ecd13d8bf0fae05b501d4daf5c2bc4b176187a4e3900a1501abe61030076a2eca18c3",
+      "url" : "https://mosaic.scdn.co/300/ab67616d0000b273b31bd144093d6e0ad94318a8ab67616d0000b273c784264da17e3438c37c2e01ab67616d0000b273cc9d2a7205a66a3a015fe6ddab67616d0000b273f66cbf16f2aabae95218d7f6",
       "width" : 300
     }, {
       "height" : 60,
-      "url" : "https://mosaic.scdn.co/60/b3589e668f106a1cbcced3b6a002207f90a42fedabe3c44074a41c62759b68df37f9ef206269a7e48c502afae65ecd13d8bf0fae05b501d4daf5c2bc4b176187a4e3900a1501abe61030076a2eca18c3",
+      "url" : "https://mosaic.scdn.co/60/ab67616d0000b273b31bd144093d6e0ad94318a8ab67616d0000b273c784264da17e3438c37c2e01ab67616d0000b273cc9d2a7205a66a3a015fe6ddab67616d0000b273f66cbf16f2aabae95218d7f6",
       "width" : 60
     } ],
     "name" : "Lazy Afternoon Phranakorn Nornlen",
     "owner" : {
+      "display_name" : "watsonbox",
       "external_urls" : {
-        "spotify" : "http://open.spotify.com/user/watsonbox"
+        "spotify" : "https://open.spotify.com/user/watsonbox"
       },
       "href" : "https://api.spotify.com/v1/users/watsonbox",
       "id" : "watsonbox",
       "type" : "user",
       "uri" : "spotify:user:watsonbox"
     },
+    "primary_color" : null,
     "public" : false,
-    "snapshot_id" : "7z7GyJGA6FzB86zVPHtVf6sLYX5Z8LvRnib0swlHuPIqhYg1z46KYUXqhxvVdFK7",
+    "snapshot_id" : "MTYsZGM3NzZmMDY4NjZmZmE1ZmY0YzM3NTY5NTQ1NDkxMzJkNWQyY2NiNA==",
     "tracks" : {
-      "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/7oqO7oaMCmxZPAEBSVRWlV/tracks",
+      "href" : "https://api.spotify.com/v1/playlists/7oqO7oaMCmxZPAEBSVRWlV/tracks",
       "total" : 12
     },
     "type" : "playlist",
-    "uri" : "spotify:user:watsonbox:playlist:7oqO7oaMCmxZPAEBSVRWlV"
+    "uri" : "spotify:playlist:7oqO7oaMCmxZPAEBSVRWlV"
   } ],
   "limit" : 20,
   "offset" : 0,
