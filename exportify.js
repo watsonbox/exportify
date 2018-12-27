@@ -274,6 +274,10 @@ var PlaylistsExporter = {
         }
 
         $(playlists).each(function(i, playlist) {
+
+          if(playlist.tracks == undefined)
+              return;
+
           playlistFileNames.push(PlaylistExporter.fileName(playlist));
           playlistExports.push(PlaylistExporter.csvData(access_token, playlist));
         });
