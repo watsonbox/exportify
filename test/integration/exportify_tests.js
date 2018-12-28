@@ -41,11 +41,12 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
   casper.then(function() {
     test.assertEquals(
       lastRequestedURL,
-      "https://accounts.spotify.com/authorize?" +
-        "client_id=9950ac751e34487dbbe027c4fd7f8e99&" +
-        "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
-        "scope=playlist-read-private%20playlist-read-collaborative&" +
-        "response_type=token",
+      "https://accounts.spotify.com/login?continue=" +
+        "https%3A%2F%2Faccounts.spotify.com%2Fauthorize%3F" +
+        "client_id%3D9950ac751e34487dbbe027c4fd7f8e99%26" +
+        "redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fexportify.html%26" +
+        "scope%3Dplaylist-read-private%2520playlist-read-collaborative%26" +
+        "response_type%3Dtoken",
       "Redirected to Spotify authentication page"
     );
   });
@@ -66,11 +67,12 @@ casper.test.begin("Testing initial authentication redirect with different client
   casper.then(function() {
     test.assertEquals(
       lastRequestedURL,
-      "https://accounts.spotify.com/authorize?" +
-        "client_id=123456&" +
-        "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
-        "scope=playlist-read-private%20playlist-read-collaborative&" +
-        "response_type=token",
+      "https://accounts.spotify.com/login?continue=" +
+        "https%3A%2F%2Faccounts.spotify.com%2Fauthorize%3F" +
+        "client_id%3D123456%26" +
+        "redirect_uri%3Dhttp%253A%252F%252Flocalhost%253A8080%252Fexportify.html%26" +
+        "scope%3Dplaylist-read-private%2520playlist-read-collaborative%26" +
+        "response_type%3Dtoken",
       "Redirected to Spotify authentication page"
     );
   });
