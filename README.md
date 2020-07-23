@@ -1,22 +1,24 @@
-[![Build Status](http://img.shields.io/travis/watsonbox/exportify.svg?style=flat)](https://travis-ci.org/watsonbox/exportify)
+[![Build Status](http://img.shields.io/travis/htaunay/exportify.svg?style=flat)](https://travis-ci.org/htaunay/exportify)
 
-<a href="https://rawgit.com/watsonbox/exportify/master/exportify.html"><img src="screenshot.png"/></a>
+<a href="https://rawgit.com/htaunay/exportify/master/exportify.html"><img src="screenshot.png"/></a>
 
 Export your Spotify playlists using the Web API by clicking on the link below:
 
-[https://rawgit.com/watsonbox/exportify/master/exportify.html](https://rawgit.com/watsonbox/exportify/master/exportify.html)
+[Open demo](https://rawcdn.githack.com/htaunay/exportify/4c8f8fa65a9e8632313d5065901ef56d6aa68409/exportify.html)
 
 As many users have noted, there is no way to export/archive playlists from the Spotify client for safekeeping. This application provides a simple interface for doing that using the Spotify Web API.
 
 No data will be saved - the entire application runs in the browser.
 
-
 ## Usage
 
 Click 'Get Started', grant Exportify read-only access to your playlists, then click the 'Export' button to export a playlist.
 
-Click 'Export All' to save a zip file containing a CSV file for each playlist in your account. This may take a while when many playlists exist and/or they are large.
+Click 'Export Page' to save a zip file containing a CSV file for each playlist in the current page.
 
+#### Why isn't there a button to export all playlists?
+
+See [this commit](https://github.com/htaunay/exportify/commit/f8d7150abc46b2e8954b1c03e09535df0f93a79e).
 
 ### Re-importing Playlists
 
@@ -48,6 +50,8 @@ python -m SimpleHTTPServer
 
 Then open [http://localhost:8000/exportify.html](http://localhost:8000/exportify.html).
 
+If you decide to work with your own Spotify developer app, you will also need to update
+your Spotify developer app to set `http://localhost:8000/exportify.html` as a Redirect URI. 
 
 ## Notes
 
