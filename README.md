@@ -59,9 +59,6 @@ your Spotify developer app to set `http://localhost:8000/exportify.html` as a Re
 
 - According to Spotify [documentation](https://developer.spotify.com/web-api/working-with-playlists/), "Folders are not returned through the Web API at the moment, nor can be created using it".
 
-- It has been [pointed out](https://github.com/watsonbox/exportify/issues/6) that due to the large number of requests required to export all playlists, rate limiting errors may sometimes be encountered. Features will soon be added to make handling these more robust, but in the meantime these issues can be overcome by [creating your own Spotify application](https://github.com/watsonbox/exportify/issues/6#issuecomment-110793132).
-
-
 ## Contributing
 
 1. Fork it ( https://github.com/htaunay/exportify/fork )
