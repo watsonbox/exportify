@@ -40,7 +40,7 @@ window.Helpers = {
         alert(jqXHR.responseText);
       }
     })
-  }
+  },
 }
 
 var PlaylistTable = React.createClass({
@@ -49,7 +49,7 @@ var PlaylistTable = React.createClass({
       playlists: [],
       playlistCount: 0,
       nextURL: null,
-      prevURL: null
+      prevURL: null,
     };
   },
 
@@ -68,7 +68,7 @@ var PlaylistTable = React.createClass({
             this.props.access_token
           ),
           window.Helpers.apiCall(
-            "https://api.spotify.com/v1/users/" + userId + "/playlists",
+            "https://api.spotify.com/v1/users/" + userId + "/playlists?limit=50",
             this.props.access_token
           )
         ])
@@ -91,6 +91,7 @@ var PlaylistTable = React.createClass({
         this.setState({
           playlists: playlists,
           playlistCount: response.total,
+          playlistOffset: response.offset,
           nextURL: response.next,
           prevURL: response.previous
         });
@@ -102,7 +103,7 @@ var PlaylistTable = React.createClass({
   },
 
   exportPlaylists: function() {
-    PlaylistsExporter.export(this.props.access_token, this.state.playlistCount);
+    PlaylistsExporter.export(this.props.access_token, this.state.playlistOffset);
   },
 
   componentDidMount: function() {
@@ -123,7 +124,7 @@ var PlaylistTable = React.createClass({
                 <th style={{width: "100px"}}>Tracks</th>
                 <th style={{width: "120px"}}>Public?</th>
                 <th style={{width: "120px"}}>Collaborative?</th>
-                <th style={{width: "100px"}} className="text-right"><button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}><span className="fa fa-file-archive-o"></span> Export All</button></th>
+                <th style={{width: "100px"}} className="text-right"><button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}><span className="fa fa-file-archive-o"></span> Export Page</button></th>
               </tr>
             </thead>
             <tbody>
@@ -231,11 +232,11 @@ var Paginator = React.createClass({
 
 // Handles exporting all playlist data as a zip file
 var PlaylistsExporter = {
-  export: function(access_token, playlistCount) {
+  export: function(access_token, offset) {
     var playlistFileNames = [];
 
     window.Helpers.apiCall("https://api.spotify.com/v1/me", access_token).then(function(response) {
-      var limit = 20;
+      var limit = 50;
       var userId = response.id;
 
       // Initialize requests with starred playlist
@@ -246,13 +247,11 @@ var PlaylistsExporter = {
         )
       ];
 
-      // Add other playlists
-      for (var offset = 0; offset < playlistCount; offset = offset + limit) {
-        var url = "https://api.spotify.com/v1/users/" + userId + "/playlists";
-        requests.push(
-          window.Helpers.apiCall(url + '?offset=' + offset + '&limit=' + limit, access_token)
-        )
-      }
+      // Add playlists in current page
+      var url = "https://api.spotify.com/v1/users/" + userId + "/playlists";
+      requests.push(
+        window.Helpers.apiCall(url + '?offset=' + offset + '&limit=' + limit, access_token)
+      )
 
       $.when.apply($, requests).then(function() {
         var playlists = [];
