@@ -2,29 +2,29 @@
   "collaborative" : false,
   "description" : null,
   "external_urls" : {
-    "spotify" : "http://open.spotify.com/user/watsonbox/starred"
+    "spotify" : "http://open.spotify.com/user/htaunay/starred"
   },
   "followers" : {
     "href" : null,
     "total" : 0
   },
-  "href" : "https://api.spotify.com/v1/users/watsonbox/starred",
+  "href" : "https://api.spotify.com/v1/users/htaunay/starred",
   "id" : null,
   "images" : [ ],
   "name" : "Starred",
   "owner" : {
     "external_urls" : {
-      "spotify" : "http://open.spotify.com/user/watsonbox"
+      "spotify" : "http://open.spotify.com/user/htaunay"
     },
-    "href" : "https://api.spotify.com/v1/users/watsonbox",
-    "id" : "watsonbox",
+    "href" : "https://api.spotify.com/v1/users/htaunay",
+    "id" : "htaunay",
     "type" : "user",
-    "uri" : "spotify:user:watsonbox"
+    "uri" : "spotify:user:htaunay"
   },
   "public" : true,
   "snapshot_id" : "XpLwWAwsN8ZeNdsRypGHCo2Kmc5MHvw8LnEEBZauu2Z0u4DtzCumIHbrtx2c7xS4",
   "tracks" : {
-    "href" : "https://api.spotify.com/v1/users/watsonbox/starred/tracks?offset=0&limit=100",
+    "href" : "https://api.spotify.com/v1/users/htaunay/starred/tracks?offset=0&limit=100",
     "items" : [ {
       "added_at" : "2010-05-02T10:53:53Z",
       "added_by" : null,
@@ -410,12 +410,12 @@
       "added_at" : "2015-03-29T19:07:50Z",
       "added_by" : {
         "external_urls" : {
-          "spotify" : "http://open.spotify.com/user/watsonbox"
+          "spotify" : "http://open.spotify.com/user/htaunay"
         },
-        "href" : "https://api.spotify.com/v1/users/watsonbox",
-        "id" : "watsonbox",
+        "href" : "https://api.spotify.com/v1/users/htaunay",
+        "id" : "htaunay",
         "type" : "user",
-        "uri" : "spotify:user:watsonbox"
+        "uri" : "spotify:user:htaunay"
       },
       "is_local" : false,
       "track" : {
@@ -481,5 +481,5 @@
     "total" : 7
   },
   "type" : "playlist",
-  "uri" : "spotify:user:watsonbox:starred"
+  "uri" : "spotify:user:htaunay:starred"
 }

@@ -1,11 +1,11 @@
 {
-  "href" : "https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20",
+  "href" : "https://api.spotify.com/v1/users/htaunay/playlists?offset=0&limit=20",
   "items" : [ {
     "collaborative" : false,
     "external_urls" : {
-      "spotify" : "http://open.spotify.com/user/watsonbox/playlist/50q6gd0ffwHRfCAqLwmwR9"
+      "spotify" : "http://open.spotify.com/user/htaunay/playlist/50q6gd0ffwHRfCAqLwmwR9"
     },
-    "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/50q6gd0ffwHRfCAqLwmwR9",
+    "href" : "https://api.spotify.com/v1/users/htaunay/playlists/50q6gd0ffwHRfCAqLwmwR9",
     "id" : "50q6gd0ffwHRfCAqLwmwR9",
     "images" : [ {
       "height" : 640,
@@ -15,27 +15,27 @@
     "name" : "Ghostpoet – Peanut Butter Blues and Melancholy Jam",
     "owner" : {
       "external_urls" : {
-        "spotify" : "http://open.spotify.com/user/watsonbox"
+        "spotify" : "http://open.spotify.com/user/htaunay"
       },
-      "href" : "https://api.spotify.com/v1/users/watsonbox",
-      "id" : "watsonbox",
+      "href" : "https://api.spotify.com/v1/users/htaunay",
+      "id" : "htaunay",
       "type" : "user",
-      "uri" : "spotify:user:watsonbox"
+      "uri" : "spotify:user:htaunay"
     },
     "public" : false,
     "snapshot_id" : "z7b7g9bUY9kUwi6tWKDJ7M3c4NTNts0dfoTVe/Qp8b0FQbkTH17cSPzpD59T8zwP",
     "tracks" : {
-      "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/50q6gd0ffwHRfCAqLwmwR9/tracks",
+      "href" : "https://api.spotify.com/v1/users/htaunay/playlists/50q6gd0ffwHRfCAqLwmwR9/tracks",
       "total" : 10
     },
     "type" : "playlist",
-    "uri" : "spotify:user:watsonbox:playlist:50q6gd0ffwHRfCAqLwmwR9"
+    "uri" : "spotify:user:htaunay:playlist:50q6gd0ffwHRfCAqLwmwR9"
   }, {
     "collaborative" : false,
     "external_urls" : {
-      "spotify" : "http://open.spotify.com/user/watsonbox/playlist/7oqO7oaMCmxZPAEBSVRWlV"
+      "spotify" : "http://open.spotify.com/user/htaunay/playlist/7oqO7oaMCmxZPAEBSVRWlV"
     },
-    "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/7oqO7oaMCmxZPAEBSVRWlV",
+    "href" : "https://api.spotify.com/v1/users/htaunay/playlists/7oqO7oaMCmxZPAEBSVRWlV",
     "id" : "7oqO7oaMCmxZPAEBSVRWlV",
     "images" : [ {
       "height" : 640,
@@ -53,21 +53,21 @@
     "name" : "Lazy Afternoon Phranakorn Nornlen",
     "owner" : {
       "external_urls" : {
-        "spotify" : "http://open.spotify.com/user/watsonbox"
+        "spotify" : "http://open.spotify.com/user/htaunay"
       },
-      "href" : "https://api.spotify.com/v1/users/watsonbox",
-      "id" : "watsonbox",
+      "href" : "https://api.spotify.com/v1/users/htaunay",
+      "id" : "htaunay",
       "type" : "user",
-      "uri" : "spotify:user:watsonbox"
+      "uri" : "spotify:user:htaunay"
     },
     "public" : false,
     "snapshot_id" : "7z7GyJGA6FzB86zVPHtVf6sLYX5Z8LvRnib0swlHuPIqhYg1z46KYUXqhxvVdFK7",
     "tracks" : {
-      "href" : "https://api.spotify.com/v1/users/watsonbox/playlists/7oqO7oaMCmxZPAEBSVRWlV/tracks",
+      "href" : "https://api.spotify.com/v1/users/htaunay/playlists/7oqO7oaMCmxZPAEBSVRWlV/tracks",
       "total" : 12
     },
     "type" : "playlist",
-    "uri" : "spotify:user:watsonbox:playlist:7oqO7oaMCmxZPAEBSVRWlV"
+    "uri" : "spotify:user:htaunay:playlist:7oqO7oaMCmxZPAEBSVRWlV"
   } ],
   "limit" : 20,
   "offset" : 0,

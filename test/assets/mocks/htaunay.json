@@ -1,0 +1,15 @@
+{
+  "display_name" : null,
+  "external_urls" : {
+    "spotify" : "https://open.spotify.com/user/htaunay"
+  },
+  "followers" : {
+    "href" : null,
+    "total" : 4
+  },
+  "href" : "https://api.spotify.com/v1/users/htaunay",
+  "id" : "htaunay",
+  "images" : [ ],
+  "type" : "user",
+  "uri" : "spotify:user:htaunay"
+}

@@ -1,8 +1,5 @@
-os: osx
-
 before_install:
-  - brew tap homebrew/cask
-  - brew cask install phantomjs
+  - npm install -g phantomjs
   - git clone git://github.com/n1k0/casperjs.git casperjs
   - export PATH=`pwd`/casperjs/bin/:$PATH
 
