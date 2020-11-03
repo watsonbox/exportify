@@ -1,23 +1,22 @@
-os: osx
+language: python
+python:
+- 3.6
 
-before_install:
-  - brew cask install phantomjs
-  - git clone git://github.com/n1k0/casperjs.git casperjs
-  - export PATH=`pwd`/casperjs/bin/:$PATH
-
-before_script:
-  - phantomjs --version
-  - casperjs --version
-  - python -m SimpleHTTPServer 8080 &
-  - sleep 10
+install:
+- pip install notebook
 
 script:
-  - casperjs test test/integration
+- echo "Be excellent to each other!"
+- python -m nbconvert --to html taste_analysis.ipynb
 
+# Aight, this is definitively how you do these encrypted keys: `sudo apt install ruby ruby-dev libz-dev`,
+# `gem install travis`, make sure you're in a folder with a .travis.yml, `travis encrypt thekey123456abcde`, and put
+# the result under the thing it's supposed to represent. No VARIABLE=key, no worrying about capitalization or other
+# command line flags, no putting the raw key in here lest github sniff it out and delete your token.
 deploy:
   provider: pages
+  github_token:
+    secure: "qhlPRkjNVw+KihpRoC/UBTaFOhtJD+FyY8V5eLozUxZEYkj/WkfJXyodSrUonDZpi3ycozpv0lUIbdOdW5SV13ewzf4PlOKXRCkjwS25P4dUiY1J8dbTfaeOuFWR4LozABt/TFenxPhocKPBmDTIN9i+R5EHdYfjMoAqs8uPZMgaf6Rzxah/Bwtl5+syEQI1ploFNKdP08Yc8MBsnZP2CJqNFpPwv4HfwncBjOHLldaKYFewG5j28L+E1qjOg0WVrwIe6weql9isg0jObEvmupFmxoh4vdJOVG/V+hsU29z0s0I+ZwmmVKskzT0NY1NvrM82xAr35fLUFF6Df6YtA9/KBIB5QHtDt6aZ2Tec6rhwzB5y3QwLF3RH5P3A+8cKLf2Z061FdMKQQ3JIUe3OMkXFtPGxJY42RJoqxfltL1gjYhGXQR9uhAh7BCafbx1NOXGbAOlcU/w82Ant+rJDofQXAMTUtmeZeVoG2lkztKwOwNY7TYBXhmlX+g8UNLG3f063ekJ+2Qfmls082masnjUycpYLdVX/syW/8iPhWT+HbwLpgBks7Fb8CAvXQHa4p9bnw80IjAtDwIH56EYHGp+BaRu6mwSAlPpdOPEyzZKisRf90uLo1XYO+VSPp2/JcHIo7aaXTkxG8s3HJ2gWKS4IRg5oHa/z2uRt6ZxDRH4="
   skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
   on:
     branch: master
