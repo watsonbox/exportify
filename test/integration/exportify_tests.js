@@ -99,12 +99,6 @@ casper.test.begin("Testing loading and displaying playlists", 10, function(test)
       });
 
       $.mockjax({
-        url: "https://api.spotify.com/v1/users/watsonbox/starred",
-        contentType: 'text/json',
-        proxy: 'test/assets/mocks/watsonbox_starred.json'
-      });
-
-      $.mockjax({
         url: "https://api.spotify.com/v1/users/watsonbox/playlists",
         contentType: 'text/json',
         proxy: 'test/assets/mocks/watsonbox_playlists.json'
@@ -113,17 +107,17 @@ casper.test.begin("Testing loading and displaying playlists", 10, function(test)
   });
 
   casper.waitUntilVisible('#playlists', function() {
-    // Starred
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(2)', 'Starred');
+    // Ghostpoet
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(2)', 'Ghostpoet – Peanut Butter Blues and Melancholy Jam');
     test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(3)', 'watsonbox');
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(4)', '7');
-    test.assertExists('#playlists table tbody tr:nth-child(1) td:nth-child(5) i.fa-check-circle-o');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(4)', '10');
+    test.assertExists('#playlists table tbody tr:nth-child(1) td:nth-child(5) i.fa-times-circle-o');
     test.assertExists('#playlists table tbody tr:nth-child(1) td:nth-child(6) i.fa-times-circle-o');
 
-    // Ghostpoet
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(2)', 'Ghostpoet – Peanut Butter Blues and Melancholy Jam');
+    // Lazy Afternoon
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(2)', 'Lazy Afternoon Phranakorn Nornlen');
     test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(3)', 'watsonbox');
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(4)', '10');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(4)', '12');
     test.assertExists('#playlists table tbody tr:nth-child(2) td:nth-child(5) i.fa-times-circle-o');
     test.assertExists('#playlists table tbody tr:nth-child(2) td:nth-child(6) i.fa-times-circle-o');
   });
