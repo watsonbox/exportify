@@ -1,4 +1,4 @@
-[![Build Status](http://img.shields.io/travis/watsonbox/exportify.svg?style=flat)](https://travis-ci.org/watsonbox/exportify)
+[![Build Status](https://api.travis-ci.org/watsonbox/exportify.svg?branch=master)](https://travis-ci.org/watsonbox/exportify)
 
 <a href="https://rawgit.com/watsonbox/exportify/master/exportify.html"><img src="screenshot.png"/></a>
 
