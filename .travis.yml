@@ -2,8 +2,8 @@ os: osx
 
 before_install:
   - brew cask install phantomjs
-  - git clone git://github.com/n1k0/casperjs.git casperjs
-  - export PATH=`pwd`/casperjs/bin/:$PATH
+  - git clone git://github.com/n1k0/casperjs.git /tmp/casperjs
+  - export PATH=/tmp/casperjs/bin/:$PATH
 
 before_script:
   - phantomjs --version
