@@ -60,11 +60,11 @@ var PlaylistTable = React.createClass({
     window.Helpers.apiCall("https://api.spotify.com/v1/me", this.props.access_token).then(function(response) {
       userId = response.id;
 
-      // Show starred playlist if viewing first page
+      // Show liked tracks playlist if viewing first page
       if (firstPage) {
         return $.when.apply($, [
           window.Helpers.apiCall(
-            "https://api.spotify.com/v1/users/" + userId + "/starred",
+            "https://api.spotify.com/v1/users/" + userId + "/tracks",
             this.props.access_token
           ),
           window.Helpers.apiCall(
@@ -84,24 +84,25 @@ var PlaylistTable = React.createClass({
         playlists = arguments[0].items;
       } else {
         response = arguments[1][0];
-        playlists = $.merge([arguments[0][0]], arguments[1][0].items);
+        playlists = arguments[1][0].items;
       }
 
       // Show library of saved tracks if viewing first page
       if (firstPage) {
         playlists.unshift({
-          "id": "saved",
-          "name": "Saved",
+          "id": "liked",
+          "name": "Liked",
           "public": false,
           "collaborative": false,
           "owner": {
             "id": userId,
+            "display_name": userId,
             "uri": "spotify:user:" + userId
           },
           "tracks": {
             "href": "https://api.spotify.com/v1/me/tracks",
-            "limit": 50,
-            "total": 2500 // TODO: get rid of hard-coded library size
+            "limit": arguments[0][0].limit,
+            "total": arguments[0][0].total
           },
           "uri": "spotify:user:" + userId + ":saved"
         });
@@ -175,8 +176,8 @@ var PlaylistRow = React.createClass({
   },
 
   renderIcon: function(playlist) {
-    if (playlist.name == 'Starred' || playlist.name == 'Saved') {
-      return <i className="glyphicon glyphicon-star" style={{ color: 'gold' }}></i>;
+    if (playlist.name == 'Liked') {
+      return <i className="glyphicon glyphicon-heart" style={{ color: 'red' }}></i>;
     } else {
       return <i className="fa fa-music"></i>;
     }

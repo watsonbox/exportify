@@ -44,7 +44,7 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
       "https://accounts.spotify.com/login?continue=" +
         encodeURIComponent(
           "https://accounts.spotify.com/authorize?" +
-          "scope=playlist-read-private+playlist-read-collaborative&" +
+          "scope=playlist-read-private+playlist-read-collaborative+user-library-read&" +
           "response_type=token&" +
           "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
           "client_id=9950ac751e34487dbbe027c4fd7f8e99"
@@ -73,7 +73,7 @@ casper.test.begin("Testing initial authentication redirect with different client
       "https://accounts.spotify.com/login?continue=" +
         encodeURIComponent(
           "https://accounts.spotify.com/authorize?" +
-          "scope=playlist-read-private+playlist-read-collaborative&" +
+          "scope=playlist-read-private+playlist-read-collaborative+user-library-read&" +
           "response_type=token&" +
           "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
           "client_id=123456"
@@ -87,15 +87,23 @@ casper.test.begin("Testing initial authentication redirect with different client
   });
 });
 
-casper.test.begin("Testing loading and displaying playlists", 10, function(test) {
+casper.test.begin("Testing loading and displaying playlists", 15, function(test) {
   casper.viewport(1000, 1000);
 
   casper.start('http://localhost:8080/exportify.html#access_token=TOKEN', function() {
     this.evaluate(function() {
+      $.mockjaxSettings.throwUnmocked = true;
+
       $.mockjax({
         url: "https://api.spotify.com/v1/me",
         contentType: 'text/json',
         proxy: 'test/assets/mocks/watsonbox.json'
+      });
+
+      $.mockjax({
+        url: "https://api.spotify.com/v1/users/watsonbox/tracks",
+        contentType: 'text/json',
+        proxy: 'test/assets/mocks/watsonbox_tracks.json'
       });
 
       $.mockjax({
@@ -107,19 +115,26 @@ casper.test.begin("Testing loading and displaying playlists", 10, function(test)
   });
 
   casper.waitUntilVisible('#playlists', function() {
-    // Ghostpoet
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(2)', 'Ghostpoet – Peanut Butter Blues and Melancholy Jam');
+    // Liked tracks
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(2)', 'Liked');
     test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(3)', 'watsonbox');
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(4)', '10');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(1) td:nth-child(4)', '1');
     test.assertExists('#playlists table tbody tr:nth-child(1) td:nth-child(5) i.fa-times-circle-o');
     test.assertExists('#playlists table tbody tr:nth-child(1) td:nth-child(6) i.fa-times-circle-o');
 
-    // Lazy Afternoon
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(2)', 'Lazy Afternoon Phranakorn Nornlen');
+    // Ghostpoet
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(2)', 'Ghostpoet – Peanut Butter Blues and Melancholy Jam');
     test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(3)', 'watsonbox');
-    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(4)', '12');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(2) td:nth-child(4)', '10');
     test.assertExists('#playlists table tbody tr:nth-child(2) td:nth-child(5) i.fa-times-circle-o');
     test.assertExists('#playlists table tbody tr:nth-child(2) td:nth-child(6) i.fa-times-circle-o');
+
+    // Lazy Afternoon
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(3) td:nth-child(2)', 'Lazy Afternoon Phranakorn Nornlen');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(3) td:nth-child(3)', 'watsonbox');
+    test.assertSelectorHasText('#playlists table tbody tr:nth-child(3) td:nth-child(4)', '12');
+    test.assertExists('#playlists table tbody tr:nth-child(3) td:nth-child(5) i.fa-times-circle-o');
+    test.assertExists('#playlists table tbody tr:nth-child(3) td:nth-child(6) i.fa-times-circle-o');
   });
 
   casper.wait(1000, function() {
