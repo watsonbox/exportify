@@ -31,7 +31,7 @@ casper.on("page.error", function(msg, trace) {
 });
 
 casper.test.begin("Testing initial authentication redirect", 2, function(test) {
-  casper.start('http://localhost:8080/exportify.html');
+  casper.start('http://localhost:8080/');
 
   casper.waitUntilVisible('#loginButton', function() {
     test.assertTitle("Exportify", "Exportify main page is loaded");
@@ -46,7 +46,7 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
           "https://accounts.spotify.com/authorize?" +
           "scope=playlist-read-private+playlist-read-collaborative+user-library-read&" +
           "response_type=token&" +
-          "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
+          "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&" +
           "client_id=9950ac751e34487dbbe027c4fd7f8e99"
         ),
       "https://accounts.spotify.com/login?" +
@@ -60,7 +60,7 @@ casper.test.begin("Testing initial authentication redirect", 2, function(test) {
 });
 
 casper.test.begin("Testing initial authentication redirect with different client id", 2, function(test) {
-  casper.start('http://localhost:8080/exportify.html?app_client_id=123456');
+  casper.start('http://localhost:8080/?app_client_id=123456');
 
   casper.waitUntilVisible('#loginButton', function() {
     test.assertTitle("Exportify", "Exportify main page is loaded");
@@ -75,7 +75,7 @@ casper.test.begin("Testing initial authentication redirect with different client
           "https://accounts.spotify.com/authorize?" +
           "scope=playlist-read-private+playlist-read-collaborative+user-library-read&" +
           "response_type=token&" +
-          "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2Fexportify.html&" +
+          "redirect_uri=http%3A%2F%2Flocalhost%3A8080%2F&" +
           "client_id=123456"
         ),
       "Redirected to Spotify authentication page"
@@ -90,7 +90,7 @@ casper.test.begin("Testing initial authentication redirect with different client
 casper.test.begin("Testing loading and displaying playlists", 15, function(test) {
   casper.viewport(1000, 1000);
 
-  casper.start('http://localhost:8080/exportify.html#access_token=TOKEN', function() {
+  casper.start('http://localhost:8080/#access_token=TOKEN', function() {
     this.evaluate(function() {
       $.mockjaxSettings.throwUnmocked = true;
 

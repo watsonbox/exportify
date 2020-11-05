@@ -1,6 +1,6 @@
 [![Build Status](https://api.travis-ci.org/watsonbox/exportify.svg?branch=master)](https://travis-ci.org/watsonbox/exportify)
 
-<a href="https://rawgit.com/watsonbox/exportify/master/exportify.html"><img src="screenshot.png"/></a>
+<a href="https://watsonbox.github.io/exportify/"><img src="screenshot.png"/></a>
 
 Export your Spotify playlists using the Web API by clicking on the link below:
 
@@ -55,7 +55,7 @@ python -m http.server 8000
 ```
 
 
-Then open [http://localhost:8000/exportify.html](http://localhost:8000/exportify.html).
+Then open [http://localhost:8000/](http://localhost:8000/).
 
 
 ## Notes
