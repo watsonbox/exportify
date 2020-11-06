@@ -258,16 +258,9 @@ var PlaylistsExporter = {
     window.Helpers.apiCall("https://api.spotify.com/v1/me", access_token).then(function(response) {
       var limit = 20;
       var userId = response.id;
+      var requests = [];
 
-      // Initialize requests with starred playlist
-      var requests = [
-        window.Helpers.apiCall(
-          "https://api.spotify.com/v1/users/" + userId + "/starred",
-          access_token
-        )
-      ];
-
-      // Add other playlists
+      // Add playlists
       for (var offset = 0; offset < playlistCount; offset = offset + limit) {
         var url = "https://api.spotify.com/v1/users/" + userId + "/playlists";
         requests.push(
