@@ -11,6 +11,8 @@ class PlaylistTable extends React.Component {
   state = {
     playlists: [],
     playlistCount: 0,
+    likedSongsLimit: 0,
+    likedSongsCount: 0,
     nextURL: null,
     prevURL: null
   }
@@ -68,6 +70,12 @@ class PlaylistTable extends React.Component {
           },
           "uri": "spotify:user:" + userId + ":saved"
         });
+
+        // FIXME: Handle unmounting
+        this.setState({
+          likedSongsLimit: arguments[0][0].limit,
+          likedSongsCount: arguments[0][0].total
+        })
       }
 
       // FIXME: Handle unmounting
@@ -85,7 +93,7 @@ class PlaylistTable extends React.Component {
   }
 
   exportPlaylists() {
-    PlaylistsExporter.export(this.props.access_token, this.state.playlistCount);
+    PlaylistsExporter.export(this.props.access_token, this.state.playlistCount, this.state.likedSongsLimit, this.state.likedSongsCount);
   }
 
   componentDidMount() {
@@ -123,7 +131,7 @@ class PlaylistTable extends React.Component {
         </div>
       );
     } else {
-      return <div className="spinner"></div>
+      return <div className="spinner" data-testid="playlistTableSpinner"></div>
     }
   }
 }

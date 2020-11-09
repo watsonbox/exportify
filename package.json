@@ -51,5 +51,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "msw": "^0.21.3",
+    "react-test-renderer": "^17.0.1"
   }
 }

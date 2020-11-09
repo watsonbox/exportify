@@ -1,13 +1,13 @@
 import $ from "jquery" // TODO: Remove jQuery dependency
 import { saveAs } from "file-saver"
-import { JSZip } from "jszip"
+import JSZip from "jszip"
 
 import PlaylistExporter from "./PlaylistExporter"
 import { apiCall } from "helpers"
 
 // Handles exporting all playlist data as a zip file
 let PlaylistsExporter = {
-  export: function(access_token, playlistCount) {
+  export: function(access_token, playlistCount, likedSongsLimit, likedSongsCount) {
     var playlistFileNames = [];
 
     apiCall("https://api.spotify.com/v1/me", access_token).then(function(response) {
@@ -44,12 +44,12 @@ let PlaylistsExporter = {
 
         // Add library of saved tracks
         playlists.unshift({
-          "id": "saved",
-          "name": "Saved",
+          "id": "liked",
+          "name": "Liked",
           "tracks": {
             "href": "https://api.spotify.com/v1/me/tracks",
-            "limit": 50,
-            "total": 2500 // TODO: get rid of hard-coded library size
+            "limit": likedSongsLimit,
+            "total": likedSongsCount
           },
         });
 
@@ -66,8 +66,9 @@ let PlaylistsExporter = {
           zip.file(playlistFileNames[i], response)
         });
 
-        var content = zip.generate({ type: "blob" });
-        saveAs(content, "spotify_playlists.zip");
+        zip.generateAsync({ type: "blob" }).then(function(content) {
+          saveAs(content, "spotify_playlists.zip");
+        })
       });
     });
   }

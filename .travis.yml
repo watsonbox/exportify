@@ -1,23 +1,9 @@
-os: osx
-
-before_install:
-  - brew cask install phantomjs
-  - git clone git://github.com/n1k0/casperjs.git /tmp/casperjs
-  - export PATH=/tmp/casperjs/bin/:$PATH
-
-before_script:
-  - phantomjs --version
-  - casperjs --version
-  - python -m SimpleHTTPServer 8080 &
-  - sleep 10
-
+language: node_js
+node_js:
+  - "stable"
+cache:
+  directories:
+  - node_modules
 script:
-  - casperjs test test/integration
-
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  keep_history: true
-  on:
-    branch: master
+  - yarn build
+  - yarn test
