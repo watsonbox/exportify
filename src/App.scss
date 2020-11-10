@@ -1,16 +1,15 @@
-#header {
+.App-header {
   padding: 40px 15px;
   text-align: center;
 }
 
-#loginButton {
-  display: none;
-  margin-top: 20px;
+#rateLimitMessage {
+  text-align: center;
 }
 
-#rateLimitMessage {
-  display: none;
-  text-align: center;
+#loginButton {
+  display: block;
+  margin: 0 auto;
 }
 
 h1 a { color: black; }

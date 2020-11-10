@@ -1,0 +1,62 @@
+{
+  "name": "exportify",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://watsonbox.github.io/exportify",
+  "dependencies": {
+    "@bugsnag/js": "^7.5.1",
+    "@bugsnag/plugin-react": "^7.3.5",
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-brands-svg-icons": "^5.15.1",
+    "@fortawesome/free-regular-svg-icons": "^5.15.1",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/jest": "^26.0.15",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.53",
+    "@types/react-bootstrap": "^0.32.24",
+    "@types/react-dom": "^16.9.8",
+    "bootstrap": "3.3.7",
+    "file-saver": "^2.0.2",
+    "jquery": "2.1.4",
+    "jszip": "^3.5.0",
+    "node-sass": "4.14.1",
+    "react": "^17.0.1",
+    "react-bootstrap": "0.33.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.0",
+    "typescript": "^4.0.3",
+    "web-vitals": "^0.2.4"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "msw": "^0.21.3",
+    "react-test-renderer": "^17.0.1"
+  }
+}
