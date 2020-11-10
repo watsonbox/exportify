@@ -74,3 +74,12 @@ Then open [http://localhost:8000/](http://localhost:8000/).
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+
+## Error Monitoring
+
+Error monitoring provided by Bugsnag.
+
+<a href="http://www.bugsnag.com">
+  <img src="bugsnag.png" width="200" />
+</a>

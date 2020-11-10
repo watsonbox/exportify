@@ -1,12 +1,26 @@
 import React from "react"
+import Bugsnag from '@bugsnag/js'
+import BugsnagPluginReact from '@bugsnag/plugin-react'
 import ReactDOM from "react-dom"
 import "./index.scss"
 import App from "./App"
 import reportWebVitals from "./reportWebVitals"
 
+Bugsnag.start({
+  apiKey: 'a65916528275f084a1754a59797a36b3',
+  plugins: [new BugsnagPluginReact()],
+  onError: function (event) {
+    event.request.url = "[REDACTED]" // Don't send access tokens
+  }
+})
+
+const ErrorBoundary = Bugsnag.getPlugin('react')!.createErrorBoundary(React)
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ErrorBoundary>
+      <App />
+    </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );
