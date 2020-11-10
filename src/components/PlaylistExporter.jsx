@@ -18,7 +18,7 @@ var PlaylistExporter = {
 
     for (var offset = 0; offset < playlist.tracks.total; offset = offset + limit) {
       requests.push(
-        apiCall(playlist.tracks.href.split('?')[0] + '?offset=' + offset + '&limit=' + limit, access_token)
+        apiCall(`${playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}`, access_token)
       )
     }
 

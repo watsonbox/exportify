@@ -19,7 +19,7 @@ let PlaylistsExporter = {
       for (var offset = 0; offset < playlistCount; offset = offset + limit) {
         var url = "https://api.spotify.com/v1/users/" + userId + "/playlists";
         requests.push(
-          apiCall(url + '?offset=' + offset + '&limit=' + limit, access_token)
+          apiCall(`${url}?offset=${offset}&limit=${limit}`, access_token)
         )
       }
 
