@@ -17,11 +17,11 @@ class PlaylistTable extends React.Component {
     prevURL: null
   }
 
-  loadPlaylists(url) {
+  loadPlaylists = (url) => {
     var userId = '';
     var firstPage = typeof url === 'undefined' || url.indexOf('offset=0') > -1;
 
-    apiCall("https://api.spotify.com/v1/me", this.props.access_token).then(function(response) {
+    apiCall("https://api.spotify.com/v1/me", this.props.access_token).then((response) => {
       userId = response.id;
 
       // Show liked tracks playlist if viewing first page
@@ -39,16 +39,16 @@ class PlaylistTable extends React.Component {
       } else {
         return apiCall(url, this.props.access_token);
       }
-    }.bind(this)).done(function() {
+    }).done((...args) => {
       var response;
       var playlists = [];
 
-      if (arguments[1] === 'success') {
-        response = arguments[0];
-        playlists = arguments[0].items;
+      if (args[1] === 'success') {
+        response = args[0];
+        playlists = args[0].items;
       } else {
-        response = arguments[1][0];
-        playlists = arguments[1][0].items;
+        response = args[1][0];
+        playlists = args[1][0].items;
       }
 
       // Show library of saved tracks if viewing first page
@@ -65,16 +65,16 @@ class PlaylistTable extends React.Component {
           },
           "tracks": {
             "href": "https://api.spotify.com/v1/me/tracks",
-            "limit": arguments[0][0].limit,
-            "total": arguments[0][0].total
+            "limit": args[0][0].limit,
+            "total": args[0][0].total
           },
           "uri": "spotify:user:" + userId + ":saved"
         });
 
         // FIXME: Handle unmounting
         this.setState({
-          likedSongsLimit: arguments[0][0].limit,
-          likedSongsCount: arguments[0][0].total
+          likedSongsLimit: args[0][0].limit,
+          likedSongsCount: args[0][0].total
         })
       }
 
@@ -89,10 +89,10 @@ class PlaylistTable extends React.Component {
       $('#playlists').fadeIn();
       $('#subtitle').text((response.offset + 1) + '-' + (response.offset + response.items.length) + ' of ' + response.total + ' playlists for ' + userId)
 
-    }.bind(this))
+    })
   }
 
-  exportPlaylists() {
+  exportPlaylists = () => {
     PlaylistsExporter.export(this.props.access_token, this.state.playlistCount, this.state.likedSongsLimit, this.state.likedSongsCount);
   }
 
@@ -104,7 +104,7 @@ class PlaylistTable extends React.Component {
     if (this.state.playlists.length > 0) {
       return (
         <div id="playlists">
-          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists.bind(this)}/>
+          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -115,19 +115,19 @@ class PlaylistTable extends React.Component {
                 <th style={{width: "120px"}}>Public?</th>
                 <th style={{width: "120px"}}>Collaborative?</th>
                 <th style={{width: "100px"}} className="text-right">
-                  <button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists.bind(this)}>
+                  <button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}>
                     <span className="fa fa-file-archive"></span><FontAwesomeIcon icon={['far', 'file-archive']}/> Export All
                   </button>
                 </th>
               </tr>
             </thead>
             <tbody>
-              {this.state.playlists.map(function(playlist, i) {
+              {this.state.playlists.map((playlist, i) => {
                 return <PlaylistRow playlist={playlist} key={playlist.id} access_token={this.props.access_token}/>
-              }.bind(this))}
+              })}
             </tbody>
           </table>
-          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists.bind(this)}/>
+          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
         </div>
       );
     } else {

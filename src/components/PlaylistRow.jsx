@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PlaylistExporter from "./PlaylistExporter"
 
 class PlaylistRow extends React.Component {
-  exportPlaylist() {
+  exportPlaylist = () => {
     PlaylistExporter.export(this.props.access_token, this.props.playlist);
   }
 
@@ -46,7 +46,7 @@ class PlaylistRow extends React.Component {
         <td>{playlist.tracks.total}</td>
         <td>{this.renderTickCross(playlist.public)}</td>
         <td>{this.renderTickCross(playlist.collaborative)}</td>
-        <td className="text-right"><button className="btn btn-default btn-xs btn-success" type="submit" onClick={this.exportPlaylist.bind(this)}><span className="glyphicon glyphicon-save"></span> Export</button></td>
+        <td className="text-right"><button className="btn btn-default btn-xs btn-success" type="submit" onClick={this.exportPlaylist}><span className="glyphicon glyphicon-save"></span> Export</button></td>
       </tr>
     );
   }
