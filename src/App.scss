@@ -15,16 +15,34 @@
 h1 a { color: black; }
 h1 a:hover { color: black; text-decoration: none; }
 
-nav.paginator:nth-child(1) {
-  margin-top: -74px;
-}
-
 table {
   float: left;
 }
 
 #playlists {
   display: none;
+}
+
+#playlistsHeader {
+  display: flex;
+  flex-direction: row-reverse;
+
+  .progress {
+    flex-grow: 1;
+    margin: 20px 20px 20px 0;
+    height: 30px;
+
+    .progress-bar {
+      white-space: nowrap;
+      padding: 4px 10px;
+      text-align: left;
+
+      // Transitioning when resetting looks weird
+      &[aria-valuenow="1"] {
+        transition: none;
+      }
+    }
+  }
 }
 
 @keyframes spinner {

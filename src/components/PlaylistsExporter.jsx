@@ -1,3 +1,5 @@
+import React from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { saveAs } from "file-saver"
 import JSZip from "jszip"
 
@@ -5,9 +7,8 @@ import PlaylistExporter from "./PlaylistExporter"
 import { apiCall } from "helpers"
 
 // Handles exporting all playlist data as a zip file
-let PlaylistsExporter = {
-  export: async function(accessToken, playlistCount, likedSongsLimit, likedSongsCount) {
-
+class PlaylistsExporter extends React.Component {
+  async export(accessToken, playlistCount, likedSongsLimit, likedSongsCount) {
     var playlistFileNames = []
     var playlistCsvExports = []
 
@@ -24,6 +25,7 @@ let PlaylistsExporter = {
 
       let playlistPromises = requests.map((request, index) => {
         return apiCall(request, accessToken).then((response) => {
+          this.props.onLoadedPlaylistsCountChanged((index + 1) * limit)
           return response
         })
       })
@@ -45,6 +47,7 @@ let PlaylistsExporter = {
         return PlaylistExporter.csvData(accessToken, playlist).then((csvData) => {
           playlistFileNames.push(PlaylistExporter.fileName(playlist))
           playlistCsvExports.push(csvData)
+          this.props.onExportedPlaylistsCountChanged(index + 1)
         })
       })
 
@@ -60,6 +63,16 @@ let PlaylistsExporter = {
         saveAs(content, "spotify_playlists.zip");
       })
     })
+  }
+
+  exportPlaylists = () => {
+    this.export(this.props.accessToken, this.props.playlistCount, this.props.likedSongs.limit, this.props.likedSongs.count)
+  }
+
+  render() {
+    return <button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}>
+      <span className="fa fa-file-archive"></span><FontAwesomeIcon icon={['far', 'file-archive']}/> Export All
+    </button>
   }
 }
 

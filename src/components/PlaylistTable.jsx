@@ -1,6 +1,6 @@
 import React from "react"
 import $ from "jquery" // TODO: Remove jQuery dependency
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { ProgressBar } from "react-bootstrap"
 
 import PlaylistRow from "./PlaylistRow"
 import Paginator from "./Paginator"
@@ -11,10 +11,17 @@ class PlaylistTable extends React.Component {
   state = {
     playlists: [],
     playlistCount: 0,
-    likedSongsLimit: 0,
-    likedSongsCount: 0,
+    likedSongs: {
+      limit: 0,
+      count: 0
+    },
     nextURL: null,
-    prevURL: null
+    prevURL: null,
+    progressBar: {
+      show: false,
+      label: "",
+      value: 0
+    }
   }
 
   loadPlaylists = (url) => {
@@ -64,8 +71,10 @@ class PlaylistTable extends React.Component {
 
         // FIXME: Handle unmounting
         this.setState({
-          likedSongsLimit: likedTracksResponse.limit,
-          likedSongsCount: likedTracksResponse.total
+          likedSongs: {
+            limit: likedTracksResponse.limit,
+            count: likedTracksResponse.total
+          }
         })
       }
 
@@ -82,8 +91,24 @@ class PlaylistTable extends React.Component {
     })
   }
 
-  exportPlaylists = () => {
-    PlaylistsExporter.export(this.props.accessToken, this.state.playlistCount, this.state.likedSongsLimit, this.state.likedSongsCount);
+  handleLoadedPlaylistsCountChanged = (count) => {
+    this.setState({
+      progressBar: {
+        show: true,
+        label: "Loading playlists...",
+        value: count
+      }
+    })
+  }
+
+  handleExportedPlaylistsCountChanged = (count) => {
+    this.setState({
+      progressBar: {
+        show: true,
+        label: count >= this.state.playlistCount ? "Done!" : "Exporting tracks...",
+        value: count
+      }
+    })
   }
 
   componentDidMount() {
@@ -91,10 +116,15 @@ class PlaylistTable extends React.Component {
   }
 
   render() {
-    if (this.state.playlists.length > 0) {
+    const progressBar = <ProgressBar striped active={this.state.progressBar.value < this.state.playlistCount} now={this.state.progressBar.value} max={this.state.playlistCount} label={this.state.progressBar.label} />
+
+    if (this.state.playlistCount > 0) {
       return (
         <div id="playlists">
-          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+          <div id="playlistsHeader">
+            <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+            {this.state.progressBar.show && progressBar}
+          </div>
           <table className="table table-hover">
             <thead>
               <tr>
@@ -105,9 +135,13 @@ class PlaylistTable extends React.Component {
                 <th style={{width: "120px"}}>Public?</th>
                 <th style={{width: "120px"}}>Collaborative?</th>
                 <th style={{width: "100px"}} className="text-right">
-                  <button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}>
-                    <span className="fa fa-file-archive"></span><FontAwesomeIcon icon={['far', 'file-archive']}/> Export All
-                  </button>
+                  <PlaylistsExporter
+                    accessToken={this.props.accessToken}
+                    onLoadedPlaylistsCountChanged={this.handleLoadedPlaylistsCountChanged}
+                    onExportedPlaylistsCountChanged={this.handleExportedPlaylistsCountChanged}
+                    playlistCount={this.state.playlistCount}
+                    likedSongs={this.state.likedSongs}
+                  />
                 </th>
               </tr>
             </thead>
