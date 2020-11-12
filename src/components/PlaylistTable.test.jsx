@@ -8,7 +8,7 @@ import JSZip from "jszip"
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlers } from '../mocks/handlers_success'
+import { handlers, nullTrackHandlers } from "../mocks/handlers"
 
 const server = setupServer(...handlers)
 
@@ -22,6 +22,7 @@ beforeAll(() => {
 
 afterEach(() => {
   jest.restoreAllMocks()
+  server.resetHandlers()
 })
 
 // Use a snapshot test to ensure exact component rendering
@@ -36,35 +37,70 @@ test("playlist loading", async () => {
   expect(component.toJSON()).toMatchSnapshot();
 })
 
-test("single playlist exporting", async () => {
-  const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-  saveAsMock.mockImplementation(jest.fn())
+describe("single playlist exporting", () => {
+  test("standard case exports successfully", async () => {
+    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(jest.fn())
 
-  render(<PlaylistTable />);
+    render(<PlaylistTable />);
 
-  await waitFor(() => {
-    expect(screen.getByText(/Export All/)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(screen.getByText(/Export All/)).toBeInTheDocument()
+    })
+
+    const linkElement = screen.getAllByText("Export")[0]
+
+    expect(linkElement).toBeInTheDocument()
+
+    fireEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+      expect(saveAsMock).toHaveBeenCalledWith(
+        {
+          content: [
+            '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Disc Number","Track Number","Track Duration (ms)","Added By","Added At"\n' +
+            '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","1","3","198093","","2020-07-19T09:24:39Z"\n'
+          ],
+          options: { type: 'text/csv;charset=utf-8' }
+        },
+        'liked.csv',
+        true
+      )
+    })
   })
 
-  const linkElement = screen.getAllByText("Export")[0]
+  test("playlist with null track skips null track", async () => {
+    server.use(...nullTrackHandlers)
 
-  expect(linkElement).toBeInTheDocument()
+    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(jest.fn())
 
-  fireEvent.click(linkElement)
+    render(<PlaylistTable />);
 
-  await waitFor(() => {
-    expect(saveAsMock).toHaveBeenCalledTimes(1)
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Disc Number","Track Number","Track Duration (ms)","Added By","Added At"\n' +
-          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","1","3","198093","","2020-07-19T09:24:39Z"\n'
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'liked.csv',
-      true
-    )
+    await waitFor(() => {
+      expect(screen.getByText(/Export All/)).toBeInTheDocument()
+    })
+
+    const linkElement = screen.getAllByText("Export")[1]
+
+    expect(linkElement).toBeInTheDocument()
+
+    fireEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+      expect(saveAsMock).toHaveBeenCalledWith(
+        {
+          content: [
+            '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Disc Number","Track Number","Track Duration (ms)","Added By","Added At"\n'
+          ],
+          options: { type: 'text/csv;charset=utf-8' }
+        },
+        'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
+        true
+      )
+    })
   })
 })
 

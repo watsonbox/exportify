@@ -427,3 +427,33 @@ export const handlers = [
     ))
   })
 ]
+
+export const nullTrackHandlers = [
+  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+    return res(ctx.json(
+      {
+        "href" : "https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=100",
+        "items" : [
+          {
+            "added_at" : "2020-11-08T22:12:50Z",
+            "added_by" : {
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/user/"
+              },
+              "href" : "https://api.spotify.com/v1/users/",
+              "id" : "",
+              "type" : "user",
+              "uri" : "spotify:user:"
+            },
+            "is_local" : false,
+            "primary_color" : null,
+            "track" : null,
+            "video_thumbnail" : {
+              "url" : null
+            }
+          }
+        ]
+      }
+    ))
+  })
+]
