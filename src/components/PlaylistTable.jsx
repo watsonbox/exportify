@@ -21,35 +21,26 @@ class PlaylistTable extends React.Component {
     var userId = '';
     var firstPage = typeof url === 'undefined' || url.indexOf('offset=0') > -1;
 
-    apiCall("https://api.spotify.com/v1/me", this.props.access_token).then((response) => {
+    apiCall("https://api.spotify.com/v1/me", this.props.accessToken).then((response) => {
       userId = response.id;
 
       // Show liked tracks playlist if viewing first page
       if (firstPage) {
-        return $.when.apply($, [
-          apiCall(
-            "https://api.spotify.com/v1/users/" + userId + "/tracks",
-            this.props.access_token
-          ),
+        return Promise.all([
           apiCall(
             "https://api.spotify.com/v1/users/" + userId + "/playlists",
-            this.props.access_token
+            this.props.accessToken
+          ),
+          apiCall(
+            "https://api.spotify.com/v1/users/" + userId + "/tracks",
+            this.props.accessToken
           )
         ])
       } else {
-        return apiCall(url, this.props.access_token);
+        return Promise.all([apiCall(url, this.props.accessToken)])
       }
-    }).done((...args) => {
-      var response;
-      var playlists = [];
-
-      if (args[1] === 'success') {
-        response = args[0];
-        playlists = args[0].items;
-      } else {
-        response = args[1][0];
-        playlists = args[1][0].items;
-      }
+    }).then(([playlistsResponse, likedTracksResponse]) => {
+      let playlists = playlistsResponse.items;
 
       // Show library of saved tracks if viewing first page
       if (firstPage) {
@@ -65,35 +56,34 @@ class PlaylistTable extends React.Component {
           },
           "tracks": {
             "href": "https://api.spotify.com/v1/me/tracks",
-            "limit": args[0][0].limit,
-            "total": args[0][0].total
+            "limit": likedTracksResponse.limit,
+            "total": likedTracksResponse.total
           },
           "uri": "spotify:user:" + userId + ":saved"
         });
 
         // FIXME: Handle unmounting
         this.setState({
-          likedSongsLimit: args[0][0].limit,
-          likedSongsCount: args[0][0].total
+          likedSongsLimit: likedTracksResponse.limit,
+          likedSongsCount: likedTracksResponse.total
         })
       }
 
       // FIXME: Handle unmounting
       this.setState({
         playlists: playlists,
-        playlistCount: response.total,
-        nextURL: response.next,
-        prevURL: response.previous
+        playlistCount: playlistsResponse.total,
+        nextURL: playlistsResponse.next,
+        prevURL: playlistsResponse.previous
       });
 
       $('#playlists').fadeIn();
-      $('#subtitle').text((response.offset + 1) + '-' + (response.offset + response.items.length) + ' of ' + response.total + ' playlists for ' + userId)
-
+      $('#subtitle').text((playlistsResponse.offset + 1) + '-' + (playlistsResponse.offset + playlistsResponse.items.length) + ' of ' + playlistsResponse.total + ' playlists for ' + userId)
     })
   }
 
   exportPlaylists = () => {
-    PlaylistsExporter.export(this.props.access_token, this.state.playlistCount, this.state.likedSongsLimit, this.state.likedSongsCount);
+    PlaylistsExporter.export(this.props.accessToken, this.state.playlistCount, this.state.likedSongsLimit, this.state.likedSongsCount);
   }
 
   componentDidMount() {
@@ -123,7 +113,7 @@ class PlaylistTable extends React.Component {
             </thead>
             <tbody>
               {this.state.playlists.map((playlist, i) => {
-                return <PlaylistRow playlist={playlist} key={playlist.id} access_token={this.props.access_token}/>
+                return <PlaylistRow playlist={playlist} key={playlist.id} accessToken={this.props.accessToken}/>
               })}
             </tbody>
           </table>

@@ -19,7 +19,7 @@ function App() {
       <p style={{ marginTop: "50px" }}>It should still be possible to export individual playlists, particularly when using your own Spotify application.</p>
     </div>
   } else if (key.has('access_token')) {
-    view = <PlaylistTable access_token={key.get('access_token')} />
+    view = <PlaylistTable accessToken={key.get('access_token')} />
   } else {
     view = <Login />
   }

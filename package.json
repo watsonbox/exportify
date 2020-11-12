@@ -20,6 +20,7 @@
     "@types/react-bootstrap": "^0.32.24",
     "@types/react-dom": "^16.9.8",
     "bootstrap": "3.3.7",
+    "bottleneck": "^2.19.5",
     "file-saver": "^2.0.2",
     "jquery": "2.1.4",
     "jszip": "^3.5.0",
