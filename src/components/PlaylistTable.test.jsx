@@ -27,7 +27,7 @@ afterEach(() => {
 
 // Use a snapshot test to ensure exact component rendering
 test("playlist loading", async () => {
-  const component = renderer.create(<PlaylistTable />)
+  const component = renderer.create(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
   const instance = component.getInstance()
 
   await waitFor(() => {
@@ -42,7 +42,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
 
     await waitFor(() => {
       expect(screen.getByText(/Export All/)).toBeInTheDocument()
@@ -76,7 +76,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
 
     await waitFor(() => {
       expect(screen.getByText(/Export All/)).toBeInTheDocument()
@@ -112,7 +112,7 @@ test("exporting of all playlist", async () => {
   const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
   jsZipGenerateAsync.mockResolvedValue("zip_content")
 
-  render(<PlaylistTable />);
+  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
 
   await waitFor(() => {
     expect(screen.getByText(/Export All/)).toBeInTheDocument()

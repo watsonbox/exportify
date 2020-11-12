@@ -34,7 +34,7 @@ describe("authentication request", () => {
 
 describe("authentication return", () => {
   beforeAll(() => {
-    window.location = { hash: "#access_token=TEST_TOKEN" }
+    window.location = { hash: "#access_token=TEST_ACCESS_TOKEN" }
   })
 
   test("renders playlist component on return from Spotify with auth token", () => {
