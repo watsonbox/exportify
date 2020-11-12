@@ -36,7 +36,7 @@ var PlaylistExporter = {
 
       var tracks = responses.map(function(response) {
         return response.items.map(function(item) {
-          return [
+          return item.track && [
             item.track.uri,
             item.track.name,
             item.track.artists.map(function(artist) { return artist.uri }).join(', '),
@@ -49,7 +49,7 @@ var PlaylistExporter = {
             item.added_by == null ? '' : item.added_by.uri,
             item.added_at
           ];
-        });
+        }).filter(e => e);
       });
 
       // Flatten the array of pages
