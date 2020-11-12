@@ -3,6 +3,7 @@ import "./icons"
 
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import "url-search-params-polyfill"
 
 import Login from 'components/Login'
 import PlaylistTable from "components/PlaylistTable"
