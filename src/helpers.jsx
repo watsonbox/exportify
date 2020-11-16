@@ -30,12 +30,12 @@ const limiter = new Bottleneck({
 })
 
 limiter.on("failed", async (error, jobInfo) => {
-  if (error.status === 401) {
+  if (error.response.status === 401) {
     // Return to home page after auth token expiry
     window.location.href = window.location.href.split('#')[0]
-  } else if (error.status === 429 && jobInfo.retryCount === 0) {
+  } else if (error.response.status === 429 && jobInfo.retryCount === 0) {
     // Retry according to the indication from the server with a small buffer
-    return ((error.getResponseHeader("Retry-After") || 1) * 1000) + 1000
+    return ((error.response.headers["retry-after"] || 1) * 1000) + 1000
   } else {
     // TODO: Improve
     alert(error.responseText)
