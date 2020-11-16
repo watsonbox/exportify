@@ -1,5 +1,4 @@
 import React from "react"
-import $ from "jquery" // TODO: Remove jQuery dependency
 import { ProgressBar } from "react-bootstrap"
 
 import PlaylistRow from "./PlaylistRow"
@@ -29,7 +28,7 @@ class PlaylistTable extends React.Component {
     var firstPage = typeof url === 'undefined' || url.indexOf('offset=0') > -1;
 
     apiCall("https://api.spotify.com/v1/me", this.props.accessToken).then((response) => {
-      userId = response.id;
+      userId = response.data.id;
 
       // Show liked tracks playlist if viewing first page
       if (firstPage) {
@@ -47,10 +46,13 @@ class PlaylistTable extends React.Component {
         return Promise.all([apiCall(url, this.props.accessToken)])
       }
     }).then(([playlistsResponse, likedTracksResponse]) => {
-      let playlists = playlistsResponse.items;
+      const playlistsData = playlistsResponse.data
+      const playlists = playlistsData.items
 
       // Show library of saved tracks if viewing first page
       if (firstPage) {
+        const likedTracksData = likedTracksResponse.data
+
         playlists.unshift({
           "id": "liked",
           "name": "Liked",
@@ -63,8 +65,8 @@ class PlaylistTable extends React.Component {
           },
           "tracks": {
             "href": "https://api.spotify.com/v1/me/tracks",
-            "limit": likedTracksResponse.limit,
-            "total": likedTracksResponse.total
+            "limit": likedTracksData.limit,
+            "total": likedTracksData.total
           },
           "uri": "spotify:user:" + userId + ":saved"
         });
@@ -72,8 +74,8 @@ class PlaylistTable extends React.Component {
         // FIXME: Handle unmounting
         this.setState({
           likedSongs: {
-            limit: likedTracksResponse.limit,
-            count: likedTracksResponse.total
+            limit: likedTracksData.limit,
+            count: likedTracksData.total
           }
         })
       }
@@ -81,13 +83,14 @@ class PlaylistTable extends React.Component {
       // FIXME: Handle unmounting
       this.setState({
         playlists: playlists,
-        playlistCount: playlistsResponse.total,
-        nextURL: playlistsResponse.next,
-        prevURL: playlistsResponse.previous
+        playlistCount: playlistsData.total,
+        nextURL: playlistsData.next,
+        prevURL: playlistsData.previous
       });
 
-      $('#playlists').fadeIn();
-      $('#subtitle').text((playlistsResponse.offset + 1) + '-' + (playlistsResponse.offset + playlistsResponse.items.length) + ' of ' + playlistsResponse.total + ' playlists for ' + userId)
+      if (document.getElementById("subtitle") !== null) {
+        document.getElementById("subtitle").textContent = `${playlistsData.offset + 1}-${playlistsData.offset + playlistsData.items.length} of ${playlistsData.total} playlists for ${userId}`
+      }
     })
   }
 

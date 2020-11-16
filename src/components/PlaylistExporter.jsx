@@ -25,7 +25,7 @@ var PlaylistExporter = {
     })
 
     let tracks = (await Promise.all(promises)).flatMap(response => {
-      return response.items.map(item => {
+      return response.data.items.map(item => {
         return item.track && [
           item.track.uri,
           item.track.name,

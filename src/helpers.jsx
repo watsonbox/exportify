@@ -1,4 +1,4 @@
-import $ from "jquery" // TODO: Remove jQuery dependency
+import axios from "axios"
 import Bottleneck from "bottleneck"
 
 export function authorize() {
@@ -43,10 +43,5 @@ limiter.on("failed", async (error, jobInfo) => {
 })
 
 export const apiCall = limiter.wrap(function(url, accessToken) {
-  return $.ajax({
-    url: url,
-    headers: {
-      'Authorization': 'Bearer ' + accessToken
-    }
-  })
+  return axios.get(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
 })

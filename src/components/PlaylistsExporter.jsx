@@ -14,7 +14,7 @@ class PlaylistsExporter extends React.Component {
 
     apiCall("https://api.spotify.com/v1/me", accessToken).then(async (response) => {
       var limit = 20;
-      var userId = response.id;
+      var userId = response.data.id;
       var requests = [];
 
       // Add playlists
@@ -30,7 +30,7 @@ class PlaylistsExporter extends React.Component {
         })
       })
 
-      let playlists = (await Promise.all(playlistPromises)).flatMap(response => response.items)
+      let playlists = (await Promise.all(playlistPromises)).flatMap(response => response.data.items)
 
       // Add library of saved tracks
       playlists.unshift({
