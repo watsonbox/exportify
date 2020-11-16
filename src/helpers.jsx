@@ -37,8 +37,7 @@ limiter.on("failed", async (error, jobInfo) => {
     // Retry according to the indication from the server with a small buffer
     return ((error.response.headers["retry-after"] || 1) * 1000) + 1000
   } else {
-    // TODO: Improve
-    alert(error.responseText)
+    throw error
   }
 })
 
