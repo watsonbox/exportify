@@ -2,6 +2,10 @@ import { rest } from 'msw'
 
 export const handlers = [
   rest.get('https://api.spotify.com/v1/me', (req, res, ctx) => {
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
     return res(ctx.json(
       {
         "display_name" : "watsonbox",
@@ -22,6 +26,10 @@ export const handlers = [
   }),
 
   rest.get('https://api.spotify.com/v1/users/watsonbox/tracks', (req, res, ctx) => {
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
     return res(ctx.json(
       {
         "href" : "https://api.spotify.com/v1/me/tracks?offset=0&limit=20",
@@ -108,6 +116,10 @@ export const handlers = [
 
   // FIXME: Duplication of data
   rest.get('https://api.spotify.com/v1/me/tracks', (req, res, ctx) => {
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
     return res(ctx.json(
       {
         "href" : "https://api.spotify.com/v1/me/tracks?offset=0&limit=20",
@@ -193,6 +205,10 @@ export const handlers = [
   }),
 
   rest.get('https://api.spotify.com/v1/users/watsonbox/playlists', (req, res, ctx) => {
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
     return res(ctx.json(
       {
         "href" : "https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20",
@@ -240,6 +256,10 @@ export const handlers = [
   }),
 
   rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
     return res(ctx.json(
       {
         "href" : "https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=100",
@@ -430,6 +450,10 @@ export const handlers = [
 
 export const nullTrackHandlers = [
   rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
     return res(ctx.json(
       {
         "href" : "https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=100",

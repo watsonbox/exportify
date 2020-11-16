@@ -4,44 +4,48 @@ exports[`playlist loading 1`] = `
 <div
   id="playlists"
 >
-  <nav
-    className="paginator text-right"
+  <div
+    id="playlistsHeader"
   >
-    <ul
-      className="pagination pagination-sm"
+    <nav
+      className="paginator text-right"
     >
-      <li
-        className="disabled"
+      <ul
+        className="pagination pagination-sm"
       >
-        <a
-          aria-label="Previous"
-          href="#"
-          onClick={[Function]}
+        <li
+          className="disabled"
         >
-          <span
-            aria-hidden="true"
+          <a
+            aria-label="Previous"
+            href="#"
+            onClick={[Function]}
           >
-            «
-          </span>
-        </a>
-      </li>
-      <li
-        className=""
-      >
-        <a
-          aria-label="Next"
-          href="#"
-          onClick={[Function]}
+            <span
+              aria-hidden="true"
+            >
+              «
+            </span>
+          </a>
+        </li>
+        <li
+          className=""
         >
-          <span
-            aria-hidden="true"
+          <a
+            aria-label="Next"
+            href="#"
+            onClick={[Function]}
           >
-            »
-          </span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+            <span
+              aria-hidden="true"
+            >
+              »
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
   <table
     className="table table-hover"
   >
