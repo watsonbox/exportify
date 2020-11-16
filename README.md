@@ -44,7 +44,7 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-In the project directory, you can run:
+In the project directory, first run `yarn install` to set up dependencies, then you can run:
 
 **`yarn start`**
 
