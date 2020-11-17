@@ -27,6 +27,7 @@ export function getQueryParam(name) {
 
 
 const REQUEST_RETRY_BUFFER = 1000
+const MAX_RATE_LIMIT_RETRIES = 2 // 3 attempts in total
 const limiter = new Bottleneck({
   maxConcurrent: 1,
   minTime: 0
@@ -36,7 +37,7 @@ limiter.on("failed", async (error, jobInfo) => {
   if (error.response.status === 401) {
     // Return to home page after auth token expiry
     window.location.href = window.location.href.split('#')[0]
-  } else if (error.response.status === 429 && jobInfo.retryCount === 0) {
+  } else if (error.response.status === 429 && jobInfo.retryCount <= MAX_RATE_LIMIT_RETRIES) {
     // Retry according to the indication from the server with a small buffer
     return ((error.response.headers["retry-after"] || 1) * 1000) + REQUEST_RETRY_BUFFER
   } else if (jobInfo.retryCount === 0) {
