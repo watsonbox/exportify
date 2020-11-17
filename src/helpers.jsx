@@ -1,3 +1,4 @@
+import Bugsnag from "@bugsnag/js"
 import axios from "axios"
 import Bottleneck from "bottleneck"
 
@@ -24,6 +25,8 @@ export function getQueryParam(name) {
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+
+const REQUEST_RETRY_BUFFER = 1000
 const limiter = new Bottleneck({
   maxConcurrent: 1,
   minTime: 0
@@ -35,7 +38,18 @@ limiter.on("failed", async (error, jobInfo) => {
     window.location.href = window.location.href.split('#')[0]
   } else if (error.response.status === 429 && jobInfo.retryCount === 0) {
     // Retry according to the indication from the server with a small buffer
-    return ((error.response.headers["retry-after"] || 1) * 1000) + 1000
+    return ((error.response.headers["retry-after"] || 1) * 1000) + REQUEST_RETRY_BUFFER
+  } else if (jobInfo.retryCount === 0) {
+    // Log and retry any other failure once (e.g. 503/504 which sometimes occur)
+    Bugsnag.notify(
+      error,
+      (event) => {
+        event.addMetadata("response", error.response)
+        event.addMetadata("request", error.config)
+      }
+    )
+
+    return REQUEST_RETRY_BUFFER
   } else {
     throw error
   }

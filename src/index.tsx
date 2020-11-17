@@ -9,6 +9,7 @@ import reportWebVitals from "./reportWebVitals"
 Bugsnag.start({
   apiKey: 'a65916528275f084a1754a59797a36b3',
   plugins: [new BugsnagPluginReact()],
+  redactedKeys: ['Authorization'],
   enabledReleaseStages: [ 'production', 'staging' ],
   onError: function (event) {
     event.request.url = "[REDACTED]" // Don't send access tokens
