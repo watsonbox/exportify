@@ -4,7 +4,7 @@ import { saveAs } from "file-saver"
 import JSZip from "jszip"
 
 import PlaylistExporter from "./PlaylistExporter"
-import { apiCall } from "helpers"
+import { apiCall, apiCallErrorHandler } from "helpers"
 
 // Handles exporting all playlist data as a zip file
 class PlaylistsExporter extends React.Component {
@@ -62,7 +62,7 @@ class PlaylistsExporter extends React.Component {
       zip.generateAsync({ type: "blob" }).then(function(content) {
         saveAs(content, "spotify_playlists.zip");
       })
-    })
+    }).catch(apiCallErrorHandler)
   }
 
   exportPlaylists = () => {

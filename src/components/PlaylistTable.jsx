@@ -4,7 +4,7 @@ import { ProgressBar } from "react-bootstrap"
 import PlaylistRow from "./PlaylistRow"
 import Paginator from "./Paginator"
 import PlaylistsExporter from "./PlaylistsExporter"
-import { apiCall } from "helpers"
+import { apiCall, apiCallErrorHandler } from "helpers"
 
 class PlaylistTable extends React.Component {
   state = {
@@ -91,7 +91,7 @@ class PlaylistTable extends React.Component {
       if (document.getElementById("subtitle") !== null) {
         document.getElementById("subtitle").textContent = `${playlistsData.offset + 1}-${playlistsData.offset + playlistsData.items.length} of ${playlistsData.total} playlists for ${userId}`
       }
-    })
+    }).catch(apiCallErrorHandler)
   }
 
   handleLoadedPlaylistsCountChanged = (count) => {

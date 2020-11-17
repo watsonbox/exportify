@@ -20,6 +20,16 @@ beforeAll(() => {
   global.Blob = function (content, options) { return  ({content, options}) }
 })
 
+const { location } = window
+
+beforeAll(() => {
+  delete window.location
+})
+
+afterAll(() => {
+  window.location = location
+})
+
 afterEach(() => {
   jest.restoreAllMocks()
   server.resetHandlers()
@@ -35,6 +45,16 @@ test("playlist loading", async () => {
   })
 
   expect(component.toJSON()).toMatchSnapshot();
+})
+
+test("redirecting when access token is invalid", async () => {
+  window.location = { href: "http://www.example.com/exportify#access_token=INVALID_ACCESS_TOKEN" }
+
+  render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" />)
+
+  await waitFor(() => {
+    expect(window.location.href).toBe("http://www.example.com/exportify")
+  })
 })
 
 describe("single playlist exporting", () => {

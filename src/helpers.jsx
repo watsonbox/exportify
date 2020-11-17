@@ -34,13 +34,10 @@ const limiter = new Bottleneck({
 })
 
 limiter.on("failed", async (error, jobInfo) => {
-  if (error.response.status === 401) {
-    // Return to home page after auth token expiry
-    window.location.href = window.location.href.split('#')[0]
-  } else if (error.response.status === 429 && jobInfo.retryCount <= MAX_RATE_LIMIT_RETRIES) {
+  if (error.response.status === 429 && jobInfo.retryCount < MAX_RATE_LIMIT_RETRIES) {
     // Retry according to the indication from the server with a small buffer
     return ((error.response.headers["retry-after"] || 1) * 1000) + REQUEST_RETRY_BUFFER
-  } else if (jobInfo.retryCount === 0) {
+  } else if (error.response.status !== 401 && error.response.status !== 429 && jobInfo.retryCount === 0) {
     // Log and retry any other failure once (e.g. 503/504 which sometimes occur)
     Bugsnag.notify(
       error,
@@ -51,11 +48,21 @@ limiter.on("failed", async (error, jobInfo) => {
     )
 
     return REQUEST_RETRY_BUFFER
-  } else {
-    throw error
   }
 })
 
 export const apiCall = limiter.wrap(function(url, accessToken) {
   return axios.get(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
 })
+
+export function apiCallErrorHandler(error) {
+  if (error.isAxiosError) {
+    if (error.response.status === 401) {
+      // Return to home page after auth token expiry
+      window.location.href = window.location.href.split('#')[0]
+      return
+    }
+  }
+
+  throw error
+}

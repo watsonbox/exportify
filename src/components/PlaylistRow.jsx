@@ -1,11 +1,12 @@
 import React from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+import { apiCallErrorHandler } from "helpers"
 import PlaylistExporter from "./PlaylistExporter"
 
 class PlaylistRow extends React.Component {
   exportPlaylist = () => {
-    PlaylistExporter.export(this.props.accessToken, this.props.playlist);
+    PlaylistExporter.export(this.props.accessToken, this.props.playlist).catch(apiCallErrorHandler)
   }
 
   renderTickCross(condition) {
