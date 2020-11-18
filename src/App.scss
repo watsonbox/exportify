@@ -15,10 +15,6 @@
 h1 a { color: black; }
 h1 a:hover { color: black; text-decoration: none; }
 
-table {
-  float: left;
-}
-
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -30,15 +26,29 @@ table {
 
 #playlists {
   animation: fadeIn 1s;
+
+  table {
+    thead {
+      th {
+        border-top-width: 0;
+      }
+    }
+
+    &.table-sm {
+      td, th {
+        padding: 8px;
+      }
+    }
+  }
 }
 
 #playlistsHeader {
   display: flex;
   flex-direction: row-reverse;
+  gap: 20px;
 
   .progress {
     flex-grow: 1;
-    margin: 20px 20px 20px 0;
     height: 30px;
 
     .progress-bar {
@@ -52,6 +62,12 @@ table {
       }
     }
   }
+}
+
+#playlistsFooter {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 20px;
 }
 
 @keyframes spinner {

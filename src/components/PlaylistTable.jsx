@@ -119,7 +119,7 @@ class PlaylistTable extends React.Component {
   }
 
   render() {
-    const progressBar = <ProgressBar striped active={this.state.progressBar.value < this.state.playlistCount} now={this.state.progressBar.value} max={this.state.playlistCount} label={this.state.progressBar.label} />
+    const progressBar = <ProgressBar striped variant="primary" animated={this.state.progressBar.value < this.state.playlistCount} now={this.state.progressBar.value} max={this.state.playlistCount} label={this.state.progressBar.label} />
 
     if (this.state.playlistCount > 0) {
       return (
@@ -128,7 +128,7 @@ class PlaylistTable extends React.Component {
             <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
             {this.state.progressBar.show && progressBar}
           </div>
-          <table className="table table-hover">
+          <table className="table table-hover table-sm">
             <thead>
               <tr>
                 <th style={{width: "30px"}}></th>
@@ -154,7 +154,9 @@ class PlaylistTable extends React.Component {
               })}
             </tbody>
           </table>
-          <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+          <div id="playlistsFooter">
+            <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+          </div>
         </div>
       );
     } else {

@@ -22,15 +22,15 @@ class Paginator extends React.Component {
       return (
         <nav className="paginator text-right">
           <ul className="pagination pagination-sm">
-            <li className={this.props.prevURL == null ? 'disabled' : ''}>
+            <li className={this.props.prevURL == null ? 'page-item disabled' : 'page-item'}>
               { /* eslint-disable-next-line  */ }
-              <a href="#" aria-label="Previous" onClick={this.prevClick}>
+              <a className="page-link" href="#" aria-label="Previous" onClick={this.prevClick}>
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
-            <li className={this.props.nextURL == null ? 'disabled' : ''}>
+            <li className={this.props.nextURL == null ? 'page-item disabled' : 'page-item'}>
               { /* eslint-disable-next-line  */ }
-              <a href="#" aria-label="Next" onClick={this.nextClick}>
+              <a className="page-link" href="#" aria-label="Next" onClick={this.nextClick}>
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>

@@ -1,4 +1,5 @@
 import React from "react"
+import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { apiCallErrorHandler } from "helpers"
@@ -47,7 +48,11 @@ class PlaylistRow extends React.Component {
         <td>{playlist.tracks.total}</td>
         <td>{this.renderTickCross(playlist.public)}</td>
         <td>{this.renderTickCross(playlist.collaborative)}</td>
-        <td className="text-right"><button className="btn btn-default btn-xs btn-success" type="submit" onClick={this.exportPlaylist}><span className="glyphicon glyphicon-save"></span> Export</button></td>
+        <td className="text-right">
+          <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} className="text-nowrap">
+            <FontAwesomeIcon icon={['fas', 'download']} size="sm" /> Export
+          </Button>
+        </td>
       </tr>
     );
   }
