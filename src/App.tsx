@@ -32,7 +32,7 @@ function App() {
           <FontAwesomeIcon icon={['fab', 'spotify']} color="#84BD00" size="sm" /> <a href={process.env.PUBLIC_URL}>Exportify</a>
         </h1>
 
-        <p id="subtitle" className="lead">
+        <p id="subtitle" className="lead text-secondary">
           Export your Spotify playlists.
         </p>
       </header>

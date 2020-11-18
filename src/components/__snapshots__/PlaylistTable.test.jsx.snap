@@ -14,10 +14,11 @@ exports[`playlist loading 1`] = `
         className="pagination pagination-sm"
       >
         <li
-          className="disabled"
+          className="page-item disabled"
         >
           <a
             aria-label="Previous"
+            className="page-link"
             href="#"
             onClick={[Function]}
           >
@@ -29,10 +30,11 @@ exports[`playlist loading 1`] = `
           </a>
         </li>
         <li
-          className=""
+          className="page-item"
         >
           <a
             aria-label="Next"
+            className="page-link"
             href="#"
             onClick={[Function]}
           >
@@ -47,7 +49,7 @@ exports[`playlist loading 1`] = `
     </nav>
   </div>
   <table
-    className="table table-hover"
+    className="table table-hover table-sm"
   >
     <thead>
       <tr>
@@ -106,13 +108,11 @@ exports[`playlist loading 1`] = `
           }
         >
           <button
-            className="btn btn-default btn-xs"
+            className="text-nowrap btn btn-outline-secondary btn-xs"
+            disabled={false}
             onClick={[Function]}
             type="submit"
           >
-            <span
-              className="fa fa-file-archive"
-            />
             <svg
               aria-hidden="true"
               className="svg-inline--fa fa-file-archive fa-w-12 "
@@ -227,13 +227,28 @@ exports[`playlist loading 1`] = `
           className="text-right"
         >
           <button
-            className="btn btn-default btn-xs btn-success"
+            className="text-nowrap btn btn-primary btn-xs"
+            disabled={false}
             onClick={[Function]}
             type="submit"
           >
-            <span
-              className="glyphicon glyphicon-save"
-            />
+            <svg
+              aria-hidden="true"
+              className="svg-inline--fa fa-download fa-w-16 fa-sm "
+              data-icon="download"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              style={Object {}}
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                fill="currentColor"
+                style={Object {}}
+              />
+            </svg>
              Export
           </button>
         </td>
@@ -325,56 +340,77 @@ exports[`playlist loading 1`] = `
           className="text-right"
         >
           <button
-            className="btn btn-default btn-xs btn-success"
+            className="text-nowrap btn btn-primary btn-xs"
+            disabled={false}
             onClick={[Function]}
             type="submit"
           >
-            <span
-              className="glyphicon glyphicon-save"
-            />
+            <svg
+              aria-hidden="true"
+              className="svg-inline--fa fa-download fa-w-16 fa-sm "
+              data-icon="download"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              style={Object {}}
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M216 0h80c13.3 0 24 10.7 24 24v168h87.7c17.8 0 26.7 21.5 14.1 34.1L269.7 378.3c-7.5 7.5-19.8 7.5-27.3 0L90.1 226.1c-12.6-12.6-3.7-34.1 14.1-34.1H192V24c0-13.3 10.7-24 24-24zm296 376v112c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V376c0-13.3 10.7-24 24-24h146.7l49 49c20.1 20.1 52.5 20.1 72.6 0l49-49H488c13.3 0 24 10.7 24 24zm-124 88c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20zm64 0c0-11-9-20-20-20s-20 9-20 20 9 20 20 20 20-9 20-20z"
+                fill="currentColor"
+                style={Object {}}
+              />
+            </svg>
              Export
           </button>
         </td>
       </tr>
     </tbody>
   </table>
-  <nav
-    className="paginator text-right"
+  <div
+    id="playlistsFooter"
   >
-    <ul
-      className="pagination pagination-sm"
+    <nav
+      className="paginator text-right"
     >
-      <li
-        className="disabled"
+      <ul
+        className="pagination pagination-sm"
       >
-        <a
-          aria-label="Previous"
-          href="#"
-          onClick={[Function]}
+        <li
+          className="page-item disabled"
         >
-          <span
-            aria-hidden="true"
+          <a
+            aria-label="Previous"
+            className="page-link"
+            href="#"
+            onClick={[Function]}
           >
-            «
-          </span>
-        </a>
-      </li>
-      <li
-        className=""
-      >
-        <a
-          aria-label="Next"
-          href="#"
-          onClick={[Function]}
+            <span
+              aria-hidden="true"
+            >
+              «
+            </span>
+          </a>
+        </li>
+        <li
+          className="page-item"
         >
-          <span
-            aria-hidden="true"
+          <a
+            aria-label="Next"
+            className="page-link"
+            href="#"
+            onClick={[Function]}
           >
-            »
-          </span>
-        </a>
-      </li>
-    </ul>
-  </nav>
+            <span
+              aria-hidden="true"
+            >
+              »
+            </span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
 </div>
 `;

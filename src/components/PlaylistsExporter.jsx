@@ -1,4 +1,5 @@
 import React from "react"
+import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { saveAs } from "file-saver"
 import JSZip from "jszip"
@@ -70,9 +71,9 @@ class PlaylistsExporter extends React.Component {
   }
 
   render() {
-    return <button className="btn btn-default btn-xs" type="submit" onClick={this.exportPlaylists}>
-      <span className="fa fa-file-archive"></span><FontAwesomeIcon icon={['far', 'file-archive']}/> Export All
-    </button>
+    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap">
+      <FontAwesomeIcon icon={['far', 'file-archive']}/> Export All
+    </Button>
   }
 }
 

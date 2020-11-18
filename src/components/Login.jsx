@@ -6,7 +6,7 @@ import { authorize } from "helpers"
 class Login extends React.Component {
   render() {
     return (
-      <Button id="loginButton" type="submit" bsSize="large" onClick={authorize}>
+      <Button id="loginButton" type="submit" variant="outline-secondary" size="lg" onClick={authorize}>
         <FontAwesomeIcon icon={['far', 'check-circle']} size="sm" /> Get Started
       </Button>
     )
