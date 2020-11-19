@@ -8,7 +8,7 @@ import JSZip from "jszip"
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlers, nullTrackHandlers } from "../mocks/handlers"
+import { handlerCalled, handlers, nullTrackHandlers } from "../mocks/handlers"
 
 const server = setupServer(...handlers)
 
@@ -75,6 +75,14 @@ describe("single playlist exporting", () => {
     fireEvent.click(linkElement)
 
     await waitFor(() => {
+      expect(handlerCalled).toHaveBeenCalledTimes(4)
+      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
+        [ 'https://api.spotify.com/v1/me' ],
+        [ 'https://api.spotify.com/v1/users/watsonbox/playlists' ],
+        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ]
+      ])
+
       expect(saveAsMock).toHaveBeenCalledTimes(1)
       expect(saveAsMock).toHaveBeenCalledWith(
         {
@@ -124,7 +132,7 @@ describe("single playlist exporting", () => {
   })
 })
 
-test("exporting of all playlist", async () => {
+test("exporting of all playlists", async () => {
   const saveAsMock = jest.spyOn(FileSaver, "saveAs")
   saveAsMock.mockImplementation(jest.fn())
 

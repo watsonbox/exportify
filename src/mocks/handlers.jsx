@@ -1,7 +1,11 @@
 import { rest } from 'msw'
 
+export const handlerCalled = jest.fn()
+
 export const handlers = [
   rest.get('https://api.spotify.com/v1/me', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
     }
@@ -26,6 +30,8 @@ export const handlers = [
   }),
 
   rest.get('https://api.spotify.com/v1/users/watsonbox/tracks', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
     }
@@ -116,6 +122,8 @@ export const handlers = [
 
   // FIXME: Duplication of data
   rest.get('https://api.spotify.com/v1/me/tracks', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
     }
@@ -205,6 +213,8 @@ export const handlers = [
   }),
 
   rest.get('https://api.spotify.com/v1/users/watsonbox/playlists', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
     }
@@ -255,7 +265,9 @@ export const handlers = [
     ))
   }),
 
-  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
     }
@@ -450,6 +462,8 @@ export const handlers = [
 
 export const nullTrackHandlers = [
   rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
     }

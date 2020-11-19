@@ -7,7 +7,7 @@ import PlaylistExporter from "./PlaylistExporter"
 
 class PlaylistRow extends React.Component {
   exportPlaylist = () => {
-    PlaylistExporter.export(this.props.accessToken, this.props.playlist).catch(apiCallErrorHandler)
+    (new PlaylistExporter(this.props.accessToken, this.props.playlist)).export().catch(apiCallErrorHandler)
   }
 
   renderTickCross(condition) {

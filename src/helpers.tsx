@@ -18,7 +18,7 @@ export function authorize() {
 }
 
 // http://stackoverflow.com/a/901144/4167042
-export function getQueryParam(name) {
+export function getQueryParam(name: string) {
   name = name.replace(/[[]/, "\\[").replace(/[\]]/, "\\]");
   var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
       results = regex.exec(window.location.search);
@@ -51,11 +51,11 @@ limiter.on("failed", async (error, jobInfo) => {
   }
 })
 
-export const apiCall = limiter.wrap(function(url, accessToken) {
+export const apiCall = limiter.wrap(function(url: string, accessToken: string) {
   return axios.get(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
 })
 
-export function apiCallErrorHandler(error) {
+export function apiCallErrorHandler(error: any) {
   if (error.isAxiosError) {
     if (error.response.status === 401) {
       // Return to home page after auth token expiry

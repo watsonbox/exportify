@@ -44,15 +44,17 @@ class PlaylistsExporter extends React.Component {
         },
       })
 
-      let trackPromises = playlists.map((playlist, index) => {
-        return PlaylistExporter.csvData(accessToken, playlist).then((csvData) => {
-          playlistFileNames.push(PlaylistExporter.fileName(playlist))
-          playlistCsvExports.push(csvData)
-          this.props.onExportedPlaylistsCountChanged(index + 1)
-        })
-      })
+      let index = 0
 
-      await Promise.all(trackPromises)
+      for (const playlist of playlists) {
+        let exporter = new PlaylistExporter(accessToken, playlist)
+        let csvData = await exporter.csvData()
+
+        playlistFileNames.push(exporter.fileName(playlist))
+        playlistCsvExports.push(csvData)
+
+        this.props.onExportedPlaylistsCountChanged(index += 1)
+      }
 
       var zip = new JSZip()
 
