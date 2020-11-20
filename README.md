@@ -33,12 +33,33 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 - Artist Name
 - Album URI
 - Album Name
+- Album Release Date
 - Disc Number
 - Track Number
 - Track Duration (ms)
+- Explicit?
+- Popularity
 - Added By
 - Added At
 
+Additionally, by clicking on the cog and selecting "Include artists data", the following fields will be added:
+
+- Artist Genres
+
+And by selecting "Include audio features data":
+
+- Danceability
+- Energy
+- Key
+- Loudness
+- Mode
+- Speechiness
+- Acousticness
+- Instrumentalness
+- Liveness
+- Valence
+- Tempo
+- Time Signature
 
 ## Development
 

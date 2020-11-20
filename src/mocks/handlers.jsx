@@ -457,6 +457,81 @@ export const handlers = [
         "total" : 2
       }
     ))
+  }),
+
+  rest.get('https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    return res(ctx.json(
+      {
+        "artists" : [ {
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+          },
+          "followers" : {
+            "href" : null,
+            "total" : 2541
+          },
+          "genres" : [ "nottingham indie" ],
+          "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+          "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+          "images" : [ {
+            "height" : 640,
+            "url" : "https://i.scdn.co/image/ab67616d0000b273244214fb6bf581d5c7595c6d",
+            "width" : 640
+          }, {
+            "height" : 300,
+            "url" : "https://i.scdn.co/image/ab67616d00001e02244214fb6bf581d5c7595c6d",
+            "width" : 300
+          }, {
+            "height" : 64,
+            "url" : "https://i.scdn.co/image/ab67616d00004851244214fb6bf581d5c7595c6d",
+            "width" : 64
+          } ],
+          "name" : "Six by Seven",
+          "popularity" : 17,
+          "type" : "artist",
+          "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+        } ]
+      }
+    ))
+  }),
+
+  rest.get('https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    return res(ctx.json(
+      {
+        "audio_features" : [ {
+          "danceability" : 0.416,
+          "energy" : 0.971,
+          "key" : 0,
+          "loudness" : -5.550,
+          "mode" : 1,
+          "speechiness" : 0.0575,
+          "acousticness" : 0.00104,
+          "instrumentalness" : 0.0391,
+          "liveness" : 0.440,
+          "valence" : 0.190,
+          "tempo" : 131.988,
+          "type" : "audio_features",
+          "id" : "1GrLfs4TEvAZ86HVzXHchS",
+          "uri" : "spotify:track:1GrLfs4TEvAZ86HVzXHchS",
+          "track_href" : "https://api.spotify.com/v1/tracks/1GrLfs4TEvAZ86HVzXHchS",
+          "analysis_url" : "https://api.spotify.com/v1/audio-analysis/1GrLfs4TEvAZ86HVzXHchS",
+          "duration_ms" : 198093,
+          "time_signature" : 4
+        } ]
+      }
+    ))
   })
 ]
 

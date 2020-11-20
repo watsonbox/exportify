@@ -56,7 +56,7 @@ h1 a:hover { color: black; text-decoration: none; }
       text-align: left;
 
       // Transitioning when resetting looks weird
-      &[aria-valuenow="1"] {
+      &[aria-valuenow="0"] {
         transition: none;
       }
     }
