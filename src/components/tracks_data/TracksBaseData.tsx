@@ -17,9 +17,12 @@ class TracksBaseData extends TracksData {
       "Artist Name",
       "Album URI",
       "Album Name",
+      "Album Release Date",
       "Disc Number",
       "Track Number",
       "Track Duration (ms)",
+      "Explicit",
+      "Popularity",
       "Added By",
       "Added At"
     ]
@@ -44,9 +47,12 @@ class TracksBaseData extends TracksData {
           item.track.artists.map((a: any) => { return String(a.name).replace(/,/g, "\\,") }).join(', '),
           item.track.album.uri,
           item.track.album.name,
+          item.track.album.release_date,
           item.track.disc_number,
           item.track.track_number,
           item.track.duration_ms,
+          item.track.explicit,
+          item.track.popularity,
           item.added_by == null ? '' : item.added_by.uri,
           item.added_at
         ]

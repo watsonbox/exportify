@@ -28,6 +28,14 @@ class PlaylistTable extends React.Component {
     }
   }
 
+  constructor(props) {
+    super(props)
+
+    if (props.config) {
+      this.state.config = props.config
+    }
+  }
+
   loadPlaylists = (url) => {
     var userId = '';
     var firstPage = typeof url === 'undefined' || url.indexOf('offset=0') > -1;
@@ -154,13 +162,19 @@ class PlaylistTable extends React.Component {
                     onExportedPlaylistsCountChanged={this.handleExportedPlaylistsCountChanged}
                     playlistCount={this.state.playlistCount}
                     likedSongs={this.state.likedSongs}
+                    config={this.state.config}
                   />
                 </th>
               </tr>
             </thead>
             <tbody>
               {this.state.playlists.map((playlist, i) => {
-                return <PlaylistRow playlist={playlist} key={playlist.id} accessToken={this.props.accessToken}/>
+                return <PlaylistRow
+                  playlist={playlist}
+                  key={playlist.id}
+                  accessToken={this.props.accessToken}
+                  config={this.state.config}
+                />
               })}
             </tbody>
           </table>

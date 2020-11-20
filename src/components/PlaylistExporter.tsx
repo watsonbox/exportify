@@ -2,6 +2,8 @@ import { saveAs } from "file-saver"
 
 import TracksData from "components/tracks_data/TracksData"
 import TracksBaseData from "components/tracks_data/TracksBaseData"
+import TracksArtistsData from "components/tracks_data/TracksArtistsData"
+import TracksAudioFeaturesData from "components/tracks_data/TracksAudioFeaturesData"
 
 class TracksCsvFile {
   playlist: any
@@ -49,10 +51,12 @@ class TracksCsvFile {
 class PlaylistExporter {
   accessToken: string
   playlist: any
+  config: any
 
-  constructor(accessToken: string, playlist: any) {
+  constructor(accessToken: string, playlist: any, config: any) {
     this.accessToken = accessToken
     this.playlist = playlist
+    this.config = config
   }
 
   async export() {
@@ -67,6 +71,17 @@ class PlaylistExporter {
     const tracksBaseData = new TracksBaseData(this.accessToken, this.playlist)
 
     await tracksCsvFile.addData(tracksBaseData)
+    const tracks = await tracksBaseData.tracks()
+
+    if (this.config.includeArtistsData) {
+      const tracksArtistsData = new TracksArtistsData(this.accessToken, tracks)
+      await tracksCsvFile.addData(tracksArtistsData)
+    }
+
+    if (this.config.includeAudioFeaturesData) {
+      const tracksAudioFeaturesData = new TracksAudioFeaturesData(this.accessToken, tracks)
+      await tracksCsvFile.addData(tracksAudioFeaturesData)
+    }
 
     tracksBaseData.tracks()
 

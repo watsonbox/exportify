@@ -9,7 +9,7 @@ import { apiCall, apiCallErrorHandler } from "helpers"
 
 // Handles exporting all playlist data as a zip file
 class PlaylistsExporter extends React.Component {
-  async export(accessToken, playlistCount, likedSongsLimit, likedSongsCount) {
+  async export(accessToken, playlistCount, likedSongsLimit, likedSongsCount, config) {
     var playlistFileNames = []
     var playlistCsvExports = []
 
@@ -47,7 +47,7 @@ class PlaylistsExporter extends React.Component {
       let index = 0
 
       for (const playlist of playlists) {
-        let exporter = new PlaylistExporter(accessToken, playlist)
+        let exporter = new PlaylistExporter(accessToken, playlist, config)
         let csvData = await exporter.csvData()
 
         playlistFileNames.push(exporter.fileName(playlist))
@@ -69,7 +69,13 @@ class PlaylistsExporter extends React.Component {
   }
 
   exportPlaylists = () => {
-    this.export(this.props.accessToken, this.props.playlistCount, this.props.likedSongs.limit, this.props.likedSongs.count)
+    this.export(
+      this.props.accessToken,
+      this.props.playlistCount,
+      this.props.likedSongs.limit,
+      this.props.likedSongs.count,
+      this.props.config
+    )
   }
 
   render() {
