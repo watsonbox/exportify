@@ -57,7 +57,7 @@ export const apiCall = limiter.wrap(function(url: string, accessToken: string) {
 
 export function apiCallErrorHandler(error: any) {
   if (error.isAxiosError) {
-    if (error.response.status === 401) {
+    if (error.request.status === 401) {
       // Return to home page after auth token expiry
       window.location.href = window.location.href.split('#')[0]
       return
