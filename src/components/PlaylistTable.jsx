@@ -1,6 +1,7 @@
 import React from "react"
 import { ProgressBar } from "react-bootstrap"
 
+import ConfigDropdown from "./ConfigDropdown"
 import PlaylistRow from "./PlaylistRow"
 import Paginator from "./Paginator"
 import PlaylistsExporter from "./PlaylistsExporter"
@@ -20,6 +21,10 @@ class PlaylistTable extends React.Component {
       show: false,
       label: "",
       value: 0
+    },
+    config: {
+      includeArtistsData: false,
+      includeAudioFeaturesData: false
     }
   }
 
@@ -114,6 +119,10 @@ class PlaylistTable extends React.Component {
     })
   }
 
+  handleConfigChanged = (config) => {
+    this.setState({ config: config })
+  }
+
   componentDidMount() {
     this.loadPlaylists(this.props.url);
   }
@@ -126,6 +135,7 @@ class PlaylistTable extends React.Component {
         <div id="playlists">
           <div id="playlistsHeader">
             <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+            <ConfigDropdown onConfigChanged={this.handleConfigChanged} />
             {this.state.progressBar.show && progressBar}
           </div>
           <table className="table table-hover table-sm">

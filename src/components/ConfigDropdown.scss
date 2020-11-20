@@ -1,0 +1,38 @@
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-menu {
+  box-shadow: 1px 1px 4px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-item {
+  &:active, &:hover {
+    color: black;
+    background: none;
+  }
+
+  label {
+    display: block;
+    cursor: pointer;
+  }
+}
+
+.dropdown {
+  button {
+    padding: 0;
+    margin: 0 20px;
+    height: 31px;
+    color: #dee2e6;
+
+    &:hover {
+      color: silver;
+    }
+  }
+
+  &.show {
+    button {
+      color: #5cb85c;
+    }
+  }
+}
