@@ -117,12 +117,22 @@ class PlaylistTable extends React.Component {
     })
   }
 
-  handleExportedPlaylistsCountChanged = (count) => {
+  handlePlaylistsExportDone = () => {
     this.setState({
       progressBar: {
         show: true,
-        label: count >= this.state.playlistCount ? "Done!" : "Exporting tracks...",
-        value: count
+        label: "Done!",
+        value: this.state.playlistCount
+      }
+    })
+  }
+
+  handlePlaylistExportStarted = (playlistName, doneCount) => {
+    this.setState({
+      progressBar: {
+        show: true,
+        label: `Exporting ${playlistName}...`,
+        value: doneCount
       }
     })
   }
@@ -159,7 +169,8 @@ class PlaylistTable extends React.Component {
                   <PlaylistsExporter
                     accessToken={this.props.accessToken}
                     onLoadedPlaylistsCountChanged={this.handleLoadedPlaylistsCountChanged}
-                    onExportedPlaylistsCountChanged={this.handleExportedPlaylistsCountChanged}
+                    onPlaylistExportDone={this.handlePlaylistsExportDone}
+                    onPlaylistExportStarted={this.handlePlaylistExportStarted}
                     playlistCount={this.state.playlistCount}
                     likedSongs={this.state.likedSongs}
                     config={this.state.config}

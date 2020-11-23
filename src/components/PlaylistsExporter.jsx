@@ -44,17 +44,21 @@ class PlaylistsExporter extends React.Component {
         },
       })
 
-      let index = 0
+      let doneCount = 0
 
       for (const playlist of playlists) {
+        this.props.onPlaylistExportStarted(playlist.name, doneCount)
+
         let exporter = new PlaylistExporter(accessToken, playlist, config)
         let csvData = await exporter.csvData()
 
         playlistFileNames.push(exporter.fileName(playlist))
         playlistCsvExports.push(csvData)
 
-        this.props.onExportedPlaylistsCountChanged(index += 1)
+        doneCount++
       }
+
+      this.props.onPlaylistExportDone()
 
       var zip = new JSZip()
 
