@@ -8,6 +8,10 @@ import PlaylistsExporter from "./PlaylistsExporter"
 import { apiCall, apiCallErrorHandler } from "helpers"
 
 class PlaylistTable extends React.Component {
+  PAGE_SIZE = 20
+
+  userId = null
+
   state = {
     playlists: [],
     playlistCount: 0,
@@ -15,8 +19,7 @@ class PlaylistTable extends React.Component {
       limit: 0,
       count: 0
     },
-    nextURL: null,
-    prevURL: null,
+    currentPage: 1,
     progressBar: {
       show: false,
       label: "",
@@ -36,75 +39,57 @@ class PlaylistTable extends React.Component {
     }
   }
 
-  loadPlaylists = (url) => {
-    var userId = '';
-    var firstPage = typeof url === 'undefined' || url.indexOf('offset=0') > -1;
+  loadPlaylists = async () => {
+    const playlistsUrl = `https://api.spotify.com/v1/users/${this.userId}/playlists?offset=${this.PAGE_SIZE * (this.state.currentPage-1)}&limit=${this.PAGE_SIZE}`
+    const playlistsResponse = await apiCall(playlistsUrl, this.props.accessToken)
+    const playlistsData = playlistsResponse.data
+    const playlists = playlistsData.items
 
-    apiCall("https://api.spotify.com/v1/me", this.props.accessToken).then((response) => {
-      userId = response.data.id;
+    // Show library of saved tracks if viewing first page
+    if (this.state.currentPage === 1) {
+      const likedTracksUrl = `https://api.spotify.com/v1/users/${this.userId}/tracks`
+      const likedTracksResponse = await apiCall(likedTracksUrl, this.props.accessToken)
+      const likedTracksData = likedTracksResponse.data
 
-      // Show liked tracks playlist if viewing first page
-      if (firstPage) {
-        return Promise.all([
-          apiCall(
-            "https://api.spotify.com/v1/users/" + userId + "/playlists",
-            this.props.accessToken
-          ),
-          apiCall(
-            "https://api.spotify.com/v1/users/" + userId + "/tracks",
-            this.props.accessToken
-          )
-        ])
-      } else {
-        return Promise.all([apiCall(url, this.props.accessToken)])
-      }
-    }).then(([playlistsResponse, likedTracksResponse]) => {
-      const playlistsData = playlistsResponse.data
-      const playlists = playlistsData.items
-
-      // Show library of saved tracks if viewing first page
-      if (firstPage) {
-        const likedTracksData = likedTracksResponse.data
-
-        playlists.unshift({
-          "id": "liked",
-          "name": "Liked",
-          "public": false,
-          "collaborative": false,
-          "owner": {
-            "id": userId,
-            "display_name": userId,
-            "uri": "spotify:user:" + userId
-          },
-          "tracks": {
-            "href": "https://api.spotify.com/v1/me/tracks",
-            "limit": likedTracksData.limit,
-            "total": likedTracksData.total
-          },
-          "uri": "spotify:user:" + userId + ":saved"
-        });
-
-        // FIXME: Handle unmounting
-        this.setState({
-          likedSongs: {
-            limit: likedTracksData.limit,
-            count: likedTracksData.total
-          }
-        })
-      }
+      playlists.unshift({
+        "id": "liked",
+        "name": "Liked",
+        "public": false,
+        "collaborative": false,
+        "owner": {
+          "id": this.userId,
+          "display_name": this.userId,
+          "uri": "spotify:user:" + this.userId
+        },
+        "tracks": {
+          "href": "https://api.spotify.com/v1/me/tracks",
+          "limit": likedTracksData.limit,
+          "total": likedTracksData.total
+        },
+        "uri": "spotify:user:" + this.userId + ":saved"
+      });
 
       // FIXME: Handle unmounting
       this.setState({
-        playlists: playlists,
-        playlistCount: playlistsData.total,
-        nextURL: playlistsData.next,
-        prevURL: playlistsData.previous
-      });
+        likedSongs: {
+          limit: likedTracksData.limit,
+          count: likedTracksData.total
+        }
+      })
+    }
 
-      if (document.getElementById("subtitle") !== null) {
-        document.getElementById("subtitle").textContent = `${playlistsData.offset + 1}-${playlistsData.offset + playlistsData.items.length} of ${playlistsData.total} playlists for ${userId}`
-      }
-    }).catch(apiCallErrorHandler)
+    // FIXME: Handle unmounting
+    this.setState({
+      playlists: playlists,
+      playlistCount: playlistsData.total
+    })
+
+    if (document.getElementById("subtitle") !== null) {
+      const min = ((this.state.currentPage - 1) * this.PAGE_SIZE) + 1
+      const max = min + this.PAGE_SIZE - 1
+
+      document.getElementById("subtitle").textContent = `${min}-${max} of ${this.state.playlistCount} playlists for ${this.userId}`
+    }
   }
 
   handleLoadedPlaylistsCountChanged = (count) => {
@@ -141,8 +126,19 @@ class PlaylistTable extends React.Component {
     this.setState({ config: config })
   }
 
-  componentDidMount() {
-    this.loadPlaylists(this.props.url);
+  handlePageChanged = (page) => {
+    this.setState({ currentPage: page }, this.loadPlaylists)
+  }
+
+  async componentDidMount() {
+    try {
+      this.userId = await apiCall("https://api.spotify.com/v1/me", this.props.accessToken)
+        .then(response => response.data.id)
+
+      await this.loadPlaylists()
+    } catch(error) {
+      apiCallErrorHandler(error)
+    }
   }
 
   render() {
@@ -152,7 +148,7 @@ class PlaylistTable extends React.Component {
       return (
         <div id="playlists">
           <div id="playlistsHeader">
-            <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+            <Paginator currentPage={this.state.currentPage} pageLimit={this.PAGE_SIZE} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged}/>
             <ConfigDropdown onConfigChanged={this.handleConfigChanged} />
             {this.state.progressBar.show && progressBar}
           </div>
@@ -190,7 +186,7 @@ class PlaylistTable extends React.Component {
             </tbody>
           </table>
           <div id="playlistsFooter">
-            <Paginator nextURL={this.state.nextURL} prevURL={this.state.prevURL} loadPlaylists={this.loadPlaylists}/>
+            <Paginator currentPage={this.state.currentPage} pageLimit={this.PAGE_SIZE} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged}/>
           </div>
         </div>
       );
