@@ -64,7 +64,7 @@ class PlaylistsExporter extends React.Component {
   }
 
   render() {
-    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap">
+    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap" disabled={this.props.disabled}>
       <FontAwesomeIcon icon={['far', 'file-archive']}/> Export All
     </Button>
   }

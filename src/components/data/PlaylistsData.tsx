@@ -3,6 +3,7 @@ import { apiCall } from "helpers"
 // Handles cached loading of all or subsets of playlist data
 class PlaylistsData {
   PLAYLIST_LIMIT = 50
+  SEARCH_LIMIT = 20
 
   userId: string
   private accessToken: string
@@ -35,6 +36,16 @@ class PlaylistsData {
     await this.loadAll()
 
     return this.data
+  }
+
+  async search(query: string) {
+    await this.loadAll()
+
+    // Case-insensitive search in playlist name
+    // TODO: Add lazy evaluation for performance?
+    return this.data
+      .filter(p => p.name.toLowerCase().includes(query.toLowerCase()))
+      .slice(0, this.SEARCH_LIMIT)
   }
 
   async loadAll() {
