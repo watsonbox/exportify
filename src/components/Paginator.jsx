@@ -1,12 +1,6 @@
 import React from "react"
 
 class Paginator extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.totalPages = Math.ceil(this.props.totalRecords / this.props.pageLimit)
-  }
-
   nextClick = (e) => {
     e.preventDefault()
 
@@ -19,6 +13,10 @@ class Paginator extends React.Component {
     this.props.onPageChanged(this.props.currentPage - 1)
   }
 
+  totalPages = () => {
+    return Math.ceil(this.props.totalRecords / this.props.pageLimit)
+  }
+
   render() {
     return (
       <nav className="paginator text-right">
@@ -29,7 +27,7 @@ class Paginator extends React.Component {
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-          <li className={this.props.currentPage >= this.totalPages ? 'page-item disabled' : 'page-item'}>
+          <li className={this.props.currentPage >= this.totalPages() ? 'page-item disabled' : 'page-item'}>
             { /* eslint-disable-next-line  */ }
             <a className="page-link" href="#" aria-label="Next" onClick={this.nextClick}>
               <span aria-hidden="true">&raquo;</span>
