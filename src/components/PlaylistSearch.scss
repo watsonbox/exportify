@@ -1,0 +1,29 @@
+#playlistsHeader {
+  form.search {
+    input {
+      width: 64px;
+      transition: width 250ms ease-in-out;
+      border-color: #dee2e6;
+
+      &:focus {
+        width: 200px;
+      }
+    }
+
+    &.queryPresent {
+      input {
+        width: 200px;
+      }
+    }
+
+    .input-group-append .input-group-text {
+      color: #dee2e6;
+      border-color: #dee2e6;
+      padding-left: 0;
+    }
+
+    .closeIcon, .searchIcon {
+      cursor: pointer;
+    }
+  }
+}

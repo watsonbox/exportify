@@ -1,5 +1,6 @@
 import React from "react"
 import { render, screen, waitFor, fireEvent } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import renderer from "react-test-renderer"
 import { setupServer } from "msw/node"
 import FileSaver from "file-saver"
@@ -207,6 +208,48 @@ describe("single playlist exporting", () => {
         'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
         true
       )
+    })
+  })
+})
+
+describe("searching playlists", () => {
+  test("simple successful search", async () => {
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
+
+    await waitFor(() => {
+      expect(screen.getByRole('searchbox')).toBeInTheDocument()
+    })
+
+    userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
+
+    await waitFor(() => {
+      // Liked tracks is gone but Ghostpoet still matches
+      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    })
+
+    userEvent.type(screen.getByRole('searchbox'), '{esc}')
+
+    await waitFor(() => {
+      // Both liked tracks and Ghostpoet are present
+      expect(screen.queryByText("Liked")).toBeInTheDocument()
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    })
+  })
+
+  test("search with no results", async () => {
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
+
+    await waitFor(() => {
+      expect(screen.getByRole('searchbox')).toBeInTheDocument()
+    })
+
+    userEvent.type(screen.getByRole('searchbox'), 'test{enter}')
+
+    await waitFor(() => {
+      // Both liked tracks and Ghostpoet are missing
+      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
     })
   })
 })
