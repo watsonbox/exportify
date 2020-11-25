@@ -12,6 +12,10 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
   private includeArtistsDataCheck = React.createRef<HTMLInputElement>()
   private includeAudioFeaturesDataCheck = React.createRef<HTMLInputElement>()
 
+  state = {
+    spin: false
+  }
+
   handleCheckClick = (event: React.MouseEvent) => {
     event.stopPropagation()
 
@@ -23,11 +27,15 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
     }
   }
 
+  spin(spin: boolean) {
+    this.setState({ spin: spin })
+  }
+
   render() {
     return (
       <Dropdown>
         <Dropdown.Toggle variant="link">
-          <FontAwesomeIcon icon={['fas', 'cog']} size="lg" />
+          <FontAwesomeIcon icon={['fas', 'cog']} size="lg" spin={this.state.spin} />
         </Dropdown.Toggle>
         <Dropdown.Menu align="right">
           <Dropdown.Item onClickCapture={this.handleCheckClick} as="div">

@@ -5,81 +5,62 @@ import { saveAs } from "file-saver"
 import JSZip from "jszip"
 
 import PlaylistExporter from "./PlaylistExporter"
-import { apiCall, apiCallErrorHandler } from "helpers"
+import { apiCallErrorHandler } from "helpers"
 
 // Handles exporting all playlist data as a zip file
 class PlaylistsExporter extends React.Component {
-  async export(accessToken, playlistCount, likedSongsLimit, likedSongsCount, config) {
-    var playlistFileNames = []
-    var playlistCsvExports = []
+  async export(accessToken, playlistsData, likedSongsLimit, likedSongsCount, config) {
+    let playlistFileNames = []
+    let playlistCsvExports = []
 
-    apiCall("https://api.spotify.com/v1/me", accessToken).then(async (response) => {
-      var limit = 20;
-      var userId = response.data.id;
-      var requests = [];
+    const playlists = await playlistsData.all(this.props.onLoadedPlaylistCountChanged)
 
-      // Add playlists
-      for (var offset = 0; offset < playlistCount; offset = offset + limit) {
-        var url = "https://api.spotify.com/v1/users/" + userId + "/playlists";
-        requests.push(`${url}?offset=${offset}&limit=${limit}`)
-      }
+    // Add library of saved tracks
+    playlists.unshift({
+      "id": "liked",
+      "name": "Liked",
+      "tracks": {
+        "href": "https://api.spotify.com/v1/me/tracks",
+        "limit": likedSongsLimit,
+        "total": likedSongsCount
+      },
+    })
 
-      let playlistPromises = requests.map((request, index) => {
-        return apiCall(request, accessToken).then((response) => {
-          this.props.onLoadedPlaylistsCountChanged((index + 1) * limit)
-          return response
-        })
-      })
+    let doneCount = 0
 
-      let playlists = (await Promise.all(playlistPromises)).flatMap(response => response.data.items)
+    for (const playlist of playlists) {
+      this.props.onPlaylistExportStarted(playlist.name, doneCount)
 
-      // Add library of saved tracks
-      playlists.unshift({
-        "id": "liked",
-        "name": "Liked",
-        "tracks": {
-          "href": "https://api.spotify.com/v1/me/tracks",
-          "limit": likedSongsLimit,
-          "total": likedSongsCount
-        },
-      })
+      let exporter = new PlaylistExporter(accessToken, playlist, config)
+      let csvData = await exporter.csvData()
 
-      let doneCount = 0
+      playlistFileNames.push(exporter.fileName(playlist))
+      playlistCsvExports.push(csvData)
 
-      for (const playlist of playlists) {
-        this.props.onPlaylistExportStarted(playlist.name, doneCount)
+      doneCount++
+    }
 
-        let exporter = new PlaylistExporter(accessToken, playlist, config)
-        let csvData = await exporter.csvData()
+    this.props.onPlaylistsExportDone()
 
-        playlistFileNames.push(exporter.fileName(playlist))
-        playlistCsvExports.push(csvData)
+    var zip = new JSZip()
 
-        doneCount++
-      }
+    playlistCsvExports.forEach(function(csv, i) {
+      zip.file(playlistFileNames[i], csv)
+    })
 
-      this.props.onPlaylistExportDone()
-
-      var zip = new JSZip()
-
-      playlistCsvExports.forEach(function(csv, i) {
-        zip.file(playlistFileNames[i], csv)
-      })
-
-      zip.generateAsync({ type: "blob" }).then(function(content) {
-        saveAs(content, "spotify_playlists.zip");
-      })
-    }).catch(apiCallErrorHandler)
+    zip.generateAsync({ type: "blob" }).then(function(content) {
+      saveAs(content, "spotify_playlists.zip");
+    })
   }
 
   exportPlaylists = () => {
     this.export(
       this.props.accessToken,
-      this.props.playlistCount,
+      this.props.playlistsData,
       this.props.likedSongs.limit,
       this.props.likedSongs.count,
       this.props.config
-    )
+    ).catch(apiCallErrorHandler)
   }
 
   render() {

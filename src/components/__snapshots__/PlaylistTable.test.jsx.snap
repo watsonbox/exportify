@@ -30,7 +30,7 @@ exports[`playlist loading 1`] = `
           </a>
         </li>
         <li
-          className="page-item"
+          className="page-item disabled"
         >
           <a
             aria-label="Next"
@@ -425,7 +425,7 @@ exports[`playlist loading 1`] = `
           </a>
         </li>
         <li
-          className="page-item"
+          className="page-item disabled"
         >
           <a
             aria-label="Next"

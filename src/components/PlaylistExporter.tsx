@@ -1,9 +1,9 @@
 import { saveAs } from "file-saver"
 
-import TracksData from "components/tracks_data/TracksData"
-import TracksBaseData from "components/tracks_data/TracksBaseData"
-import TracksArtistsData from "components/tracks_data/TracksArtistsData"
-import TracksAudioFeaturesData from "components/tracks_data/TracksAudioFeaturesData"
+import TracksData from "components/data/TracksData"
+import TracksBaseData from "components/data/TracksBaseData"
+import TracksArtistsData from "components/data/TracksArtistsData"
+import TracksAudioFeaturesData from "components/data/TracksAudioFeaturesData"
 
 class TracksCsvFile {
   playlist: any

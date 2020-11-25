@@ -4,42 +4,38 @@ class Paginator extends React.Component {
   nextClick = (e) => {
     e.preventDefault()
 
-    if (this.props.nextURL != null) {
-      this.props.loadPlaylists(this.props.nextURL)
-    }
+    this.props.onPageChanged(this.props.currentPage + 1)
   }
 
   prevClick = (e) => {
     e.preventDefault()
 
-    if (this.props.prevURL != null) {
-      this.props.loadPlaylists(this.props.prevURL)
-    }
+    this.props.onPageChanged(this.props.currentPage - 1)
+  }
+
+  totalPages = () => {
+    return Math.ceil(this.props.totalRecords / this.props.pageLimit)
   }
 
   render() {
-    if (this.props.nextURL != null || this.props.prevURL != null) {
-      return (
-        <nav className="paginator text-right">
-          <ul className="pagination pagination-sm">
-            <li className={this.props.prevURL == null ? 'page-item disabled' : 'page-item'}>
-              { /* eslint-disable-next-line  */ }
-              <a className="page-link" href="#" aria-label="Previous" onClick={this.prevClick}>
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li className={this.props.nextURL == null ? 'page-item disabled' : 'page-item'}>
-              { /* eslint-disable-next-line  */ }
-              <a className="page-link" href="#" aria-label="Next" onClick={this.nextClick}>
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      )
-    } else {
-      return <div>&nbsp;</div>
-    }
+    return (
+      <nav className="paginator text-right">
+        <ul className="pagination pagination-sm">
+          <li className={this.props.currentPage <= 1 ? 'page-item disabled' : 'page-item'}>
+            { /* eslint-disable-next-line  */ }
+            <a className="page-link" href="#" aria-label="Previous" onClick={this.prevClick}>
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li className={this.props.currentPage >= this.totalPages() ? 'page-item disabled' : 'page-item'}>
+            { /* eslint-disable-next-line  */ }
+            <a className="page-link" href="#" aria-label="Next" onClick={this.nextClick}>
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    )
   }
 }
 
