@@ -2,21 +2,6 @@ import Bugsnag from "@bugsnag/js"
 import axios from "axios"
 import Bottleneck from "bottleneck"
 
-export function authorize() {
-  var client_id = getQueryParam('app_client_id');
-
-  // Use Exportify application client_id if none given
-  if (client_id === '') {
-    client_id = "9950ac751e34487dbbe027c4fd7f8e99"
-  }
-
-  window.location.href = "https://accounts.spotify.com/authorize" +
-    "?client_id=" + client_id +
-    "&redirect_uri=" + encodeURIComponent([window.location.protocol, '//', window.location.host, window.location.pathname].join('')) +
-    "&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read" +
-    "&response_type=token";
-}
-
 // http://stackoverflow.com/a/901144/4167042
 export function getQueryParam(name: string) {
   name = name.replace(/[[]/, "\\[").replace(/[\]]/, "\\]");
@@ -24,7 +9,6 @@ export function getQueryParam(name: string) {
       results = regex.exec(window.location.search);
   return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
-
 
 const REQUEST_RETRY_BUFFER = 1000
 const MAX_RATE_LIMIT_RETRIES = 2 // 3 attempts in total

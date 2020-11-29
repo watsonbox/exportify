@@ -8,6 +8,7 @@ import "url-search-params-polyfill"
 import Login from 'components/Login'
 import PlaylistTable from "components/PlaylistTable"
 import { getQueryParam } from "helpers"
+import Logout from "components/Logout"
 
 function App() {
   let view
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className="App container">
       <header className="App-header">
+        { key.has('access_token') && <Logout /> }
         <h1>
           <FontAwesomeIcon icon={['fab', 'spotify']} color="#84BD00" size="sm" /> <a href={process.env.PUBLIC_URL}>Exportify</a>
         </h1>
