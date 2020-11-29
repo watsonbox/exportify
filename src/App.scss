@@ -1,6 +1,7 @@
 .App-header {
   padding: 40px 15px;
   text-align: center;
+  position: relative;
 }
 
 #rateLimitMessage {
@@ -10,6 +11,18 @@
 #loginButton {
   display: block;
   margin: 0 auto;
+}
+
+#logoutButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  color: #dee2e6;
+
+  &:hover {
+    color: silver;
+  }
 }
 
 h1 a { color: black; }
