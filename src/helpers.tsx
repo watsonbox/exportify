@@ -28,6 +28,7 @@ limiter.on("failed", async (error, jobInfo) => {
       (event) => {
         event.addMetadata("response", error.response)
         event.addMetadata("request", error.config)
+        event.groupingHash = "Retried Request"
       }
     )
 
