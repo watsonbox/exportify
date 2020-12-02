@@ -13,6 +13,10 @@ Bugsnag.start({
   enabledReleaseStages: [ 'production', 'staging' ],
   onError: function (event) {
     event.request.url = "[REDACTED]" // Don't send access tokens
+
+    if (event.originalError.isAxiosError) {
+      event.groupingHash = event.originalError.message
+    }
   }
 })
 
