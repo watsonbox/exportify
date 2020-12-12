@@ -80,20 +80,23 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
         [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ]
       ])
-
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-      expect(saveAsMock).toHaveBeenCalledWith(
-        {
-          content: [
-            '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
-            '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z"\n'
-          ],
-          options: { type: 'text/csv;charset=utf-8' }
-        },
-        'liked.csv',
-        true
-      )
     })
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+    })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z"\n'
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'liked.csv',
+      true
+    )
   })
 
   test("including additional artist data", async () => {
@@ -118,20 +121,23 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
         [ 'https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz' ]
       ])
-
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-      expect(saveAsMock).toHaveBeenCalledWith(
-        {
-          content: [
-            '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Artist Genres"\n' +
-            '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z","nottingham indie"\n'
-          ],
-          options: { type: 'text/csv;charset=utf-8' }
-        },
-        'liked.csv',
-        true
-      )
     })
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+    })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Artist Genres"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z","nottingham indie"\n'
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'liked.csv',
+      true
+    )
   })
 
   test("including additional audio features data", async () => {
@@ -156,20 +162,23 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
         [ 'https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS' ]
       ])
-
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-      expect(saveAsMock).toHaveBeenCalledWith(
-        {
-          content: [
-            '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time Signature"\n' +
-            '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z","0.416","0.971","0","-5.55","1","0.0575","0.00104","0.0391","0.44","0.19","131.988","4"\n'
-          ],
-          options: { type: 'text/csv;charset=utf-8' }
-        },
-        'liked.csv',
-        true
-      )
     })
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+    })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time Signature"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z","0.416","0.971","0","-5.55","1","0.0575","0.00104","0.0391","0.44","0.19","131.988","4"\n'
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'liked.csv',
+      true
+    )
   })
 
   test("playlist with null track skips null track", async () => {
@@ -190,17 +199,18 @@ describe("single playlist exporting", () => {
 
     await waitFor(() => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
-      expect(saveAsMock).toHaveBeenCalledWith(
-        {
-          content: [
-            '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n'
-          ],
-          options: { type: 'text/csv;charset=utf-8' }
-        },
-        'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-        true
-      )
     })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n'
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
+      true
+    )
   })
 })
 
@@ -256,21 +266,24 @@ test("exporting of all playlists", async () => {
 
   await waitFor(() => {
     expect(jsZipFileMock).toHaveBeenCalledTimes(2)
-    expect(jsZipFileMock).toHaveBeenCalledWith(
-      "liked.csv",
-      '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
-      '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z"\n'
-    )
-    expect(jsZipFileMock).toHaveBeenCalledWith(
-      "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv",
-      '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
-      '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","1","1","241346","false","22","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-      '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","1","2","269346","false","36","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
-    )
   })
+
+  expect(jsZipFileMock).toHaveBeenCalledWith(
+    "liked.csv",
+    '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
+    '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z"\n'
+  )
+
+  expect(jsZipFileMock).toHaveBeenCalledWith(
+    "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv",
+    '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
+    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","1","1","241346","false","22","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
+    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","1","2","269346","false","36","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
+  )
 
   await waitFor(() => {
     expect(saveAsMock).toHaveBeenCalledTimes(1)
-    expect(saveAsMock).toHaveBeenCalledWith("zip_content", "spotify_playlists.zip")
   })
+
+  expect(saveAsMock).toHaveBeenCalledWith("zip_content", "spotify_playlists.zip")
 })
