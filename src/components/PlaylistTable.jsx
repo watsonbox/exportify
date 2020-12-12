@@ -82,39 +82,6 @@ class PlaylistTable extends React.Component {
       ((this.state.currentPage - 1) * this.PAGE_SIZE) + this.PAGE_SIZE
     ).catch(apiCallErrorHandler)
 
-    // Show library of saved tracks if viewing first page
-    if (this.state.currentPage === 1) {
-      const likedTracksUrl = `https://api.spotify.com/v1/users/${this.userId}/tracks`
-      const likedTracksResponse = await apiCall(likedTracksUrl, this.props.accessToken)
-      const likedTracksData = likedTracksResponse.data
-
-      playlists.unshift({
-        "id": "liked",
-        "name": "Liked",
-        "public": false,
-        "collaborative": false,
-        "owner": {
-          "id": this.userId,
-          "display_name": this.userId,
-          "uri": "spotify:user:" + this.userId
-        },
-        "tracks": {
-          "href": "https://api.spotify.com/v1/me/tracks",
-          "limit": likedTracksData.limit,
-          "total": likedTracksData.total
-        },
-        "uri": "spotify:user:" + this.userId + ":saved"
-      });
-
-      // FIXME: Handle unmounting
-      this.setState({
-        likedSongs: {
-          limit: likedTracksData.limit,
-          count: likedTracksData.total
-        }
-      })
-    }
-
     // FIXME: Handle unmounting
     this.setState(
       {
@@ -224,7 +191,6 @@ class PlaylistTable extends React.Component {
                     onPlaylistsExportDone={this.handlePlaylistsExportDone}
                     onPlaylistExportStarted={this.handlePlaylistExportStarted}
                     playlistsData={this.playlistsData}
-                    likedSongs={this.state.likedSongs}
                     config={this.state.config}
                     disabled={this.state.searching}
                   />

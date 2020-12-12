@@ -10,6 +10,7 @@ class PlaylistsData {
   private onPlaylistsLoadingStarted?: () => void
   private onPlaylistsLoadingDone?: () => void
   private data: any[]
+  private likedTracksPlaylist: any
   private dataInitialized = false
 
   constructor(accessToken: string, userId: string, onPlaylistsLoadingStarted?: () => void, onPlaylistsLoadingDone?: () => void) {
@@ -18,6 +19,7 @@ class PlaylistsData {
     this.onPlaylistsLoadingStarted = onPlaylistsLoadingStarted
     this.onPlaylistsLoadingDone = onPlaylistsLoadingDone
     this.data = []
+    this.likedTracksPlaylist = null
   }
 
   async total() {
@@ -29,13 +31,22 @@ class PlaylistsData {
   }
 
   async slice(start: number, end: number) {
-    return await this.loadSlice(start, end)
+    await this.loadSlice(start, end)
+    await this.loadLikedTracksPlaylist()
+
+    // It's a little ugly, but we slip in liked tracks with the first slice
+    if (start === 0) {
+      return [this.likedTracksPlaylist, ...this.data.slice(start, end)]
+    } else {
+      return this.data.slice(start, end)
+    }
   }
 
   async all() {
     await this.loadAll()
+    await this.loadLikedTracksPlaylist()
 
-    return this.data
+    return [this.likedTracksPlaylist, ...this.data]
   }
 
   async search(query: string) {
@@ -84,8 +95,34 @@ class PlaylistsData {
     }
 
     this.data.splice(start, playlistsData.items.length, ...playlistsData.items)
+  }
 
-    return playlistsData.items
+  private async loadLikedTracksPlaylist() {
+    if (this.likedTracksPlaylist !== null) {
+      return
+    }
+
+    const likedTracksUrl = `https://api.spotify.com/v1/users/${this.userId}/tracks`
+    const likedTracksResponse = await apiCall(likedTracksUrl, this.accessToken)
+    const likedTracksData = likedTracksResponse.data
+
+    this.likedTracksPlaylist = {
+      "id": "liked",
+      "name": "Liked",
+      "public": false,
+      "collaborative": false,
+      "owner": {
+        "id": this.userId,
+        "display_name": this.userId,
+        "uri": "spotify:user:" + this.userId
+      },
+      "tracks": {
+        "href": "https://api.spotify.com/v1/me/tracks",
+        "limit": likedTracksData.limit,
+        "total": likedTracksData.total
+      },
+      "uri": "spotify:user:" + this.userId + ":saved"
+    }
   }
 }
 

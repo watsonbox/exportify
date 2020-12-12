@@ -9,22 +9,11 @@ import { apiCallErrorHandler } from "helpers"
 
 // Handles exporting all playlist data as a zip file
 class PlaylistsExporter extends React.Component {
-  async export(accessToken, playlistsData, likedSongsLimit, likedSongsCount, config) {
+  async export(accessToken, playlistsData, config) {
     let playlistFileNames = []
     let playlistCsvExports = []
 
     const playlists = await playlistsData.all(this.props.onLoadedPlaylistCountChanged)
-
-    // Add library of saved tracks
-    playlists.unshift({
-      "id": "liked",
-      "name": "Liked",
-      "tracks": {
-        "href": "https://api.spotify.com/v1/me/tracks",
-        "limit": likedSongsLimit,
-        "total": likedSongsCount
-      },
-    })
 
     let doneCount = 0
 
@@ -57,8 +46,6 @@ class PlaylistsExporter extends React.Component {
     this.export(
       this.props.accessToken,
       this.props.playlistsData,
-      this.props.likedSongs.limit,
-      this.props.likedSongs.count,
       this.props.config
     ).catch(apiCallErrorHandler)
   }
