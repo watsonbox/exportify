@@ -65,9 +65,7 @@ describe("single playlist exporting", () => {
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
 
-    await waitFor(() => {
-      expect(screen.getByText(/Export All/)).toBeInTheDocument()
-    })
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
     const linkElement = screen.getAllByText("Export")[0]
 
@@ -104,9 +102,7 @@ describe("single playlist exporting", () => {
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeArtistsData: true }} />);
 
-    await waitFor(() => {
-      expect(screen.getByText(/Export All/)).toBeInTheDocument()
-    })
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
     const linkElement = screen.getAllByText("Export")[0]
 
@@ -144,9 +140,7 @@ describe("single playlist exporting", () => {
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAudioFeaturesData: true }} />);
 
-    await waitFor(() => {
-      expect(screen.getByText(/Export All/)).toBeInTheDocument()
-    })
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
     const linkElement = screen.getAllByText("Export")[0]
 
@@ -186,9 +180,7 @@ describe("single playlist exporting", () => {
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
 
-    await waitFor(() => {
-      expect(screen.getByText(/Export All/)).toBeInTheDocument()
-    })
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
     const linkElement = screen.getAllByText("Export")[1]
 
@@ -216,41 +208,31 @@ describe("searching playlists", () => {
   test("simple successful search", async () => {
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
 
-    await waitFor(() => {
-      expect(screen.getByRole('searchbox')).toBeInTheDocument()
-    })
+    expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
     userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
 
-    await waitFor(() => {
-      // Liked tracks is gone but Ghostpoet still matches
-      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
-      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
-    })
+    // Liked tracks is gone but Ghostpoet still matches
+    expect(await screen.findByText("Liked")).not.toBeInTheDocument()
+    expect(await screen.findByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
 
     userEvent.type(screen.getByRole('searchbox'), '{esc}')
 
-    await waitFor(() => {
-      // Both liked tracks and Ghostpoet are present
-      expect(screen.queryByText("Liked")).toBeInTheDocument()
-      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
-    })
+    // Both liked tracks and Ghostpoet are present
+    expect(await screen.findByText("Liked")).toBeInTheDocument()
+    expect(await screen.findByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
   })
 
   test("search with no results", async () => {
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
 
-    await waitFor(() => {
-      expect(screen.getByRole('searchbox')).toBeInTheDocument()
-    })
+    expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
     userEvent.type(screen.getByRole('searchbox'), 'test{enter}')
 
-    await waitFor(() => {
-      // Both liked tracks and Ghostpoet are missing
-      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
-      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
-    })
+    // Both liked tracks and Ghostpoet are missing
+    expect(await screen.findByText("Liked")).not.toBeInTheDocument()
+    expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
   })
 })
 
@@ -264,9 +246,7 @@ test("exporting of all playlists", async () => {
 
   render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
 
-  await waitFor(() => {
-    expect(screen.getByText(/Export All/)).toBeInTheDocument()
-  })
+  expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
   const linkElement = screen.getByText("Export All")
 
