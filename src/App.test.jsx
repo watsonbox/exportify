@@ -1,5 +1,6 @@
 import React from "react"
-import { render, screen, fireEvent } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
+import userEvent from "@testing-library/user-event"
 import App from "./App"
 
 const { location } = window
@@ -24,7 +25,7 @@ describe("logging in", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    fireEvent.click(linkElement)
+    userEvent.click(linkElement)
 
     expect(window.location.href).toBe(
       "https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=%2F%2F&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read&response_type=token&show_dialog=false"
@@ -57,7 +58,7 @@ describe("logging out", () => {
 
     expect(changeUserElement).toBeInTheDocument()
 
-    fireEvent.click(changeUserElement)
+    userEvent.click(changeUserElement)
 
     expect(window.location.href).toBe("https://www.example.com/?change_user=true")
 
@@ -68,7 +69,7 @@ describe("logging out", () => {
 
     const getStartedElement = screen.getByText(/Get Started/i)
     expect(getStartedElement).toBeInTheDocument()
-    fireEvent.click(getStartedElement)
+    userEvent.click(getStartedElement)
 
     expect(window.location.href).toBe(
       "https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=%2F%2F&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read&response_type=token&show_dialog=true"

@@ -1,5 +1,5 @@
 import React from "react"
-import { render, screen, waitFor, fireEvent } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import renderer from "react-test-renderer"
 import { setupServer } from "msw/node"
@@ -73,7 +73,7 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    fireEvent.click(linkElement)
+    userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
@@ -112,7 +112,7 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    fireEvent.click(linkElement)
+    userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
@@ -152,7 +152,7 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    fireEvent.click(linkElement)
+    userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
@@ -194,7 +194,7 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    fireEvent.click(linkElement)
+    userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
@@ -272,7 +272,7 @@ test("exporting of all playlists", async () => {
 
   expect(linkElement).toBeInTheDocument()
 
-  fireEvent.click(linkElement)
+  userEvent.click(linkElement)
 
   await waitFor(() => {
     expect(jsZipFileMock).toHaveBeenCalledTimes(2)
