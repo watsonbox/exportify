@@ -23,6 +23,8 @@
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
     "bottleneck": "^2.19.5",
+    "eslint-plugin-jest-dom": "^3.6.3",
+    "eslint-plugin-testing-library": "^3.10.1",
     "file-saver": "^2.0.2",
     "jszip": "^3.5.0",
     "node-sass": "4.14.1",
@@ -43,7 +45,9 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:testing-library/react",
+      "plugin:jest-dom/recommended"
     ]
   },
   "browserslist": {
