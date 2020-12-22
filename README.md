@@ -66,6 +66,12 @@ And by selecting "Include audio features data", the following fields will be add
 - Tempo
 - Time Signature
 
+Additionally, by selecting "Include extended album data", the following fields will be added from the [Spotify album object (full)](https://developer.spotify.com/documentation/web-api/reference/object-model/#album-object-full)
+
+- Album Genres
+- Label
+- Copyrights
+
 Note that the more data being exported, the longer the export will take.
 
 ### Playlist Search
@@ -115,9 +121,9 @@ In addition to [Create React App](https://github.com/facebook/create-react-app),
 ## Notes
 
 - According to Spotify's [documentation](https://developer.spotify.com/web-api/working-with-playlists/):
-  
+
   > Folders are not returned through the Web API at the moment, nor can be created using it".
-  
+
   Unfortunately that's just how it is.
 
 - I've [gone to some lengths](https://github.com/watsonbox/exportify/pull/75) to try to eliminate errors resulting from excessively high usage of the Spotify API. Nonetheless, exporting data in bulk is a fairly request-intensive process, so please do try to use this tool responsibly. If you do require more throughput, please consider [creating your own Spotify application](https://github.com/watsonbox/exportify/issues/6#issuecomment-110793132) which you can use with Exportify directly.

@@ -4,6 +4,7 @@ import TracksData from "components/data/TracksData"
 import TracksBaseData from "components/data/TracksBaseData"
 import TracksArtistsData from "components/data/TracksArtistsData"
 import TracksAudioFeaturesData from "components/data/TracksAudioFeaturesData"
+import TracksExtendedAlbumData from "components/data/TracksExtendedAlbumData"
 
 class TracksCsvFile {
   playlist: any
@@ -81,6 +82,11 @@ class PlaylistExporter {
     if (this.config.includeAudioFeaturesData) {
       const tracksAudioFeaturesData = new TracksAudioFeaturesData(this.accessToken, tracks)
       await tracksCsvFile.addData(tracksAudioFeaturesData)
+    }
+
+    if (this.config.includeExtendedAlbumData) {
+      const tracksExtendedAlbumData = new TracksExtendedAlbumData(this.accessToken, tracks)
+      await tracksCsvFile.addData(tracksExtendedAlbumData)
     }
 
     tracksBaseData.tracks()
