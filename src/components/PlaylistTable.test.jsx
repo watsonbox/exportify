@@ -89,8 +89,8 @@ describe("single playlist exporting", () => {
     expect(saveAsMock).toHaveBeenCalledWith(
       {
         content: [
-          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
-          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","false","2","","2020-07-19T09:24:39Z"\n'
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","","2020-07-19T09:24:39Z"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
@@ -130,8 +130,8 @@ describe("single playlist exporting", () => {
     expect(saveAsMock).toHaveBeenCalledWith(
       {
         content: [
-          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Artist Genres"\n' +
-          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","false","2","","2020-07-19T09:24:39Z","nottingham indie"\n'
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At","Artist Genres"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","","2020-07-19T09:24:39Z","nottingham indie"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
@@ -171,8 +171,8 @@ describe("single playlist exporting", () => {
     expect(saveAsMock).toHaveBeenCalledWith(
       {
         content: [
-          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time Signature"\n' +
-          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","false","2","","2020-07-19T09:24:39Z","0.416","0.971","0","-5.55","1","0.0575","0.00104","0.0391","0.44","0.19","131.988","4"\n'
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At","Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time Signature"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","","2020-07-19T09:24:39Z","0.416","0.971","0","-5.55","1","0.0575","0.00104","0.0391","0.44","0.19","131.988","4"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
@@ -212,8 +212,8 @@ describe("single playlist exporting", () => {
     expect(saveAsMock).toHaveBeenCalledWith(
       {
         content: [
-          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Album Genres","Label","Copyrights"\n' +
-          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","false","2","","2020-07-19T09:24:39Z","something, something else","Beggars Banquet","C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd."\n'
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At","Album Genres","Label","Copyrights"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","","2020-07-19T09:24:39Z","something, something else","Beggars Banquet","C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd."\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
@@ -245,7 +245,7 @@ describe("single playlist exporting", () => {
     expect(saveAsMock).toHaveBeenCalledWith(
       {
         content: [
-          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n'
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
@@ -311,15 +311,15 @@ test("exporting of all playlists", async () => {
 
   expect(jsZipFileMock).toHaveBeenCalledWith(
     "liked.csv",
-    '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
-    '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","false","2","","2020-07-19T09:24:39Z"\n'
+    '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At"\n' +
+    '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","","2020-07-19T09:24:39Z"\n'
   )
 
   expect(jsZipFileMock).toHaveBeenCalledWith(
     "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv",
-    '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At"\n' +
-    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","false","22","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","2","269346","false","36","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
+    '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At"\n' +
+    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
+    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","2","269346","https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99","false","36","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
   )
 
   await waitFor(() => {

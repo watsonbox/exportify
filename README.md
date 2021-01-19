@@ -39,6 +39,7 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 - Disc Number
 - Track Number
 - Track Duration (ms)
+- Track Preview URL (mp3)
 - Explicit?
 - Popularity
 - Added By
