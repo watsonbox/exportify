@@ -532,6 +532,443 @@ export const handlers = [
         } ]
       }
     ))
+  }),
+
+  rest.get('https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    return res(ctx.json(
+      {
+        "albums" : [ {
+          "album_type" : "compilation",
+          "artists" : [ {
+            "external_urls" : {
+              "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+            },
+            "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+            "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+            "name" : "Six by Seven",
+            "type" : "artist",
+            "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+          } ],
+          "available_markets" : [ ],
+          "copyrights" : [ {
+            "text" : "2016 Beggars Banquet Records Ltd.",
+            "type" : "C"
+          }, {
+            "text" : "2016 Beggars Banquet Records Ltd.",
+            "type" : "P"
+          } ],
+          "external_ids" : {
+            "upc" : "607618214234"
+          },
+          "external_urls" : {
+            "spotify" : "https://open.spotify.com/album/4iwv7b8gDPKztLkKCbWyhi"
+          },
+          "genres" : [ "something", "something else" ],
+          "href" : "https://api.spotify.com/v1/albums/4iwv7b8gDPKztLkKCbWyhi",
+          "id" : "4iwv7b8gDPKztLkKCbWyhi",
+          "images" : [ {
+            "height" : 640,
+            "url" : "https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea",
+            "width" : 640
+          }, {
+            "height" : 300,
+            "url" : "https://i.scdn.co/image/ab67616d00001e02f485821b346237acbbca07ea",
+            "width" : 300
+          }, {
+            "height" : 64,
+            "url" : "https://i.scdn.co/image/ab67616d00004851f485821b346237acbbca07ea",
+            "width" : 64
+          } ],
+          "label" : "Beggars Banquet",
+          "name" : "Best of Six By Seven",
+          "popularity" : 1,
+          "release_date" : "2017-02-17",
+          "release_date_precision" : "day",
+          "total_tracks" : 14,
+          "tracks" : {
+            "href" : "https://api.spotify.com/v1/albums/4iwv7b8gDPKztLkKCbWyhi/tracks?offset=0&limit=50",
+            "items" : [ {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 236080,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/1uWQvbywyUeR1uGdNlfsaZ"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/1uWQvbywyUeR1uGdNlfsaZ",
+              "id" : "1uWQvbywyUeR1uGdNlfsaZ",
+              "is_local" : false,
+              "name" : "I O U Love (Single Edit)",
+              "preview_url" : null,
+              "track_number" : 1,
+              "type" : "track",
+              "uri" : "spotify:track:1uWQvbywyUeR1uGdNlfsaZ"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 246533,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/4T03tsWWaVxbKikT7UUrFk"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/4T03tsWWaVxbKikT7UUrFk",
+              "id" : "4T03tsWWaVxbKikT7UUrFk",
+              "is_local" : false,
+              "name" : "Candlelight",
+              "preview_url" : null,
+              "track_number" : 2,
+              "type" : "track",
+              "uri" : "spotify:track:4T03tsWWaVxbKikT7UUrFk"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 198093,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/1GrLfs4TEvAZ86HVzXHchS"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/1GrLfs4TEvAZ86HVzXHchS",
+              "id" : "1GrLfs4TEvAZ86HVzXHchS",
+              "is_local" : false,
+              "name" : "Crying",
+              "preview_url" : null,
+              "track_number" : 3,
+              "type" : "track",
+              "uri" : "spotify:track:1GrLfs4TEvAZ86HVzXHchS"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 175666,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/0tBJh9kQ0KGLR443BVe4W1"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/0tBJh9kQ0KGLR443BVe4W1",
+              "id" : "0tBJh9kQ0KGLR443BVe4W1",
+              "is_local" : false,
+              "name" : "For You",
+              "preview_url" : null,
+              "track_number" : 4,
+              "type" : "track",
+              "uri" : "spotify:track:0tBJh9kQ0KGLR443BVe4W1"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 276866,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/1htS4aq15EnMMuQ45rZX3b"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/1htS4aq15EnMMuQ45rZX3b",
+              "id" : "1htS4aq15EnMMuQ45rZX3b",
+              "is_local" : false,
+              "name" : "So Close",
+              "preview_url" : null,
+              "track_number" : 5,
+              "type" : "track",
+              "uri" : "spotify:track:1htS4aq15EnMMuQ45rZX3b"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 224453,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/0MJj7LrlhVbrndKAspZc2H"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/0MJj7LrlhVbrndKAspZc2H",
+              "id" : "0MJj7LrlhVbrndKAspZc2H",
+              "is_local" : false,
+              "name" : "New Year",
+              "preview_url" : null,
+              "track_number" : 6,
+              "type" : "track",
+              "uri" : "spotify:track:0MJj7LrlhVbrndKAspZc2H"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 184040,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/5Mu6rl5QEQ0YEhiVopYwJx"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/5Mu6rl5QEQ0YEhiVopYwJx",
+              "id" : "5Mu6rl5QEQ0YEhiVopYwJx",
+              "is_local" : false,
+              "name" : "Eat Junk Become Junk",
+              "preview_url" : null,
+              "track_number" : 7,
+              "type" : "track",
+              "uri" : "spotify:track:5Mu6rl5QEQ0YEhiVopYwJx"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 289840,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/3ZRm7uHtdFK7arB7M0ncHl"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/3ZRm7uHtdFK7arB7M0ncHl",
+              "id" : "3ZRm7uHtdFK7arB7M0ncHl",
+              "is_local" : false,
+              "name" : "Bochum (Light Up My Life)",
+              "preview_url" : null,
+              "track_number" : 8,
+              "type" : "track",
+              "uri" : "spotify:track:3ZRm7uHtdFK7arB7M0ncHl"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 452120,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/4ee5fN6zpDUMKtCSKeqOiD"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/4ee5fN6zpDUMKtCSKeqOiD",
+              "id" : "4ee5fN6zpDUMKtCSKeqOiD",
+              "is_local" : false,
+              "name" : "Oh! Dear",
+              "preview_url" : null,
+              "track_number" : 9,
+              "type" : "track",
+              "uri" : "spotify:track:4ee5fN6zpDUMKtCSKeqOiD"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 382626,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/6xyBZBa8uITHELycRzF2ry"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/6xyBZBa8uITHELycRzF2ry",
+              "id" : "6xyBZBa8uITHELycRzF2ry",
+              "is_local" : false,
+              "name" : "Always Waiting For ...",
+              "preview_url" : null,
+              "track_number" : 10,
+              "type" : "track",
+              "uri" : "spotify:track:6xyBZBa8uITHELycRzF2ry"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 376480,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/5Vf2ryw6CgbYORNjpMqSaW"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/5Vf2ryw6CgbYORNjpMqSaW",
+              "id" : "5Vf2ryw6CgbYORNjpMqSaW",
+              "is_local" : false,
+              "name" : "Change",
+              "preview_url" : null,
+              "track_number" : 11,
+              "type" : "track",
+              "uri" : "spotify:track:5Vf2ryw6CgbYORNjpMqSaW"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 428893,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/5TpY3R5ceANpoRaISiicPP"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/5TpY3R5ceANpoRaISiicPP",
+              "id" : "5TpY3R5ceANpoRaISiicPP",
+              "is_local" : false,
+              "name" : "Get A Real Tattoo",
+              "preview_url" : null,
+              "track_number" : 12,
+              "type" : "track",
+              "uri" : "spotify:track:5TpY3R5ceANpoRaISiicPP"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 343186,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/3m6Em75ed3zFJY7I3pgJ69"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/3m6Em75ed3zFJY7I3pgJ69",
+              "id" : "3m6Em75ed3zFJY7I3pgJ69",
+              "is_local" : false,
+              "name" : "Another Love Song (Peel Session)",
+              "preview_url" : null,
+              "track_number" : 13,
+              "type" : "track",
+              "uri" : "spotify:track:3m6Em75ed3zFJY7I3pgJ69"
+            }, {
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href" : "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id" : "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name" : "Six by Seven",
+                "type" : "artist",
+                "uri" : "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 1,
+              "duration_ms" : 429360,
+              "explicit" : false,
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/2wEGjrVzVG57e3UjIPdWng"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/2wEGjrVzVG57e3UjIPdWng",
+              "id" : "2wEGjrVzVG57e3UjIPdWng",
+              "is_local" : false,
+              "name" : "European Me (Live Student Radio Session)",
+              "preview_url" : null,
+              "track_number" : 14,
+              "type" : "track",
+              "uri" : "spotify:track:2wEGjrVzVG57e3UjIPdWng"
+            } ],
+            "limit" : 50,
+            "next" : null,
+            "offset" : 0,
+            "previous" : null,
+            "total" : 14
+          },
+          "type" : "album",
+          "uri" : "spotify:album:4iwv7b8gDPKztLkKCbWyhi"
+        } ]
+      }
+    ))
   })
 ]
 

@@ -181,6 +181,47 @@ describe("single playlist exporting", () => {
     )
   })
 
+  test("including additional album data", async () => {
+    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(jest.fn())
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeExtendedAlbumData: true }} />);
+
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
+
+    const linkElement = screen.getAllByText("Export")[0]
+
+    expect(linkElement).toBeInTheDocument()
+
+    userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
+        [ 'https://api.spotify.com/v1/me' ],
+        [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi' ]
+      ])
+    })
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+    })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Disc Number","Track Number","Track Duration (ms)","Explicit","Popularity","Added By","Added At","Album Genres","Label","Copyrights"\n' +
+          '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","2017-02-17","1","3","198093","false","2","","2020-07-19T09:24:39Z","something, something else","Beggars Banquet","C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd."\n'
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'liked.csv',
+      true
+    )
+  })
+
   test("playlist with null track skips null track", async () => {
     server.use(...nullTrackHandlers)
 
