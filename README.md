@@ -35,6 +35,7 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 - Album URI
 - Album Name
 - Album Release Date
+- Album Image URL (typically 640x640px jpeg)
 - Disc Number
 - Track Number
 - Track Duration (ms)
