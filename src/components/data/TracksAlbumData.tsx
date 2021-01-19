@@ -1,7 +1,7 @@
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
 
-class TracksExtendedAlbumData extends TracksData {
+class TracksAlbumData extends TracksData {
   ALBUM_LIMIT = 20
 
   tracks: any[]
@@ -27,7 +27,7 @@ class TracksExtendedAlbumData extends TracksData {
     const albumPromises = requests.map((request) => apiCall(request, this.accessToken))
     const albumResponses = await Promise.all(albumPromises)
 
-    const extendedAlbumDataById = new Map<string, string[]>(
+    const albumDataById = new Map<string, string[]>(
       albumResponses.flatMap((response) => response.data.albums.map((album: any) => {
         return [
           album.id,
@@ -41,9 +41,9 @@ class TracksExtendedAlbumData extends TracksData {
     )
 
     return new Map<string, string[]>(
-      this.tracks.map((track: any) => [track.id, extendedAlbumDataById.get(track.album.id) || ["", "", ""]])
+      this.tracks.map((track: any) => [track.id, albumDataById.get(track.album.id) || ["", "", ""]])
     )
   }
 }
 
-export default TracksExtendedAlbumData
+export default TracksAlbumData

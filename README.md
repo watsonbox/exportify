@@ -66,7 +66,7 @@ And by selecting "Include audio features data", the following fields will be add
 - Tempo
 - Time Signature
 
-Additionally, by selecting "Include extended album data", the following fields will be added from the [Spotify album object (full)](https://developer.spotify.com/documentation/web-api/reference/object-model/#album-object-full)
+Additionally, by selecting "Include album data", the following fields will be added from the [Spotify album object (full)](https://developer.spotify.com/documentation/web-api/reference/object-model/#album-object-full)
 
 - Album Genres
 - Label

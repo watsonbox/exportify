@@ -185,7 +185,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeExtendedAlbumData: true }} />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 

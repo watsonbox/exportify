@@ -11,7 +11,7 @@ type ConfigDropdownProps = {
 class ConfigDropdown extends React.Component<ConfigDropdownProps> {
   private includeArtistsDataCheck = React.createRef<HTMLInputElement>()
   private includeAudioFeaturesDataCheck = React.createRef<HTMLInputElement>()
-  private includeExtendedAlbumDataCheck = React.createRef<HTMLInputElement>()
+  private includeAlbumDataCheck = React.createRef<HTMLInputElement>()
 
   state = {
     spin: false
@@ -24,7 +24,7 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
       this.props.onConfigChanged({
         includeArtistsData: this.includeArtistsDataCheck.current?.checked || false,
         includeAudioFeaturesData: this.includeAudioFeaturesDataCheck.current?.checked || false,
-        includeExtendedAlbumData: this.includeExtendedAlbumDataCheck.current?.checked || false
+        includeAlbumData: this.includeAlbumDataCheck.current?.checked || false
       })
     }
   }
@@ -57,10 +57,10 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
           </Dropdown.Item>
           <Dropdown.Item onClickCapture={this.handleCheckClick} as="div">
             <Form.Check
-              id="config-include-extended-album-data"
+              id="config-include-album-data"
               type="switch"
-              label="Include extended album data"
-              ref={this.includeExtendedAlbumDataCheck}/>
+              label="Include album data"
+              ref={this.includeAlbumDataCheck}/>
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>

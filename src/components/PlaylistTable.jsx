@@ -33,7 +33,7 @@ class PlaylistTable extends React.Component {
     config: {
       includeArtistsData: false,
       includeAudioFeaturesData: false,
-      includeExtendedAlbumData: false
+      includeAlbumData: false
     }
   }
 
