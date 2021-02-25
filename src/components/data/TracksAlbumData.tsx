@@ -16,7 +16,7 @@ class TracksAlbumData extends TracksData {
   }
 
   async data() {
-    const albumIds = Array.from(new Set(this.tracks.map((track: any) => track.album.id)))
+    const albumIds = Array.from(new Set(this.tracks.filter((track: any) => track.album.id).map((track: any) => track.album.id)))
 
     let requests = []
 
