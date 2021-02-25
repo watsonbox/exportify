@@ -39,7 +39,7 @@ class TracksArtistsData extends TracksData {
 
     return new Map<string, string[]>(this.tracks.map((track: any) => {
       return [
-        track.id,
+        track.uri,
         [
           track.artists.map((a: any) => {
             return artistsById.has(a.id) ? artistsById.get(a.id)!.genres.filter((g: string) => g).join(',') : ""

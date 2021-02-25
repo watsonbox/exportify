@@ -41,7 +41,7 @@ class TracksAlbumData extends TracksData {
     )
 
     return new Map<string, string[]>(
-      this.tracks.map((track: any) => [track.id, albumDataById.get(track.album.id) || ["", "", ""]])
+      this.tracks.map((track: any) => [track.uri, albumDataById.get(track.album.id) || ["", "", ""]])
     )
   }
 }

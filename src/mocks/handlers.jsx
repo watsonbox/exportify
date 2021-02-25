@@ -1007,3 +1007,132 @@ export const nullTrackHandlers = [
     ))
   })
 ]
+
+export const localTrackHandlers = [
+  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    return res(ctx.json(
+      {
+        "href" : "https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=100",
+        "items" : [
+          {
+            "added_at" : "2021-02-24T06:12:40Z",
+            "added_by" : {
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/user/u8ins5esg43wtxk4h66o5d1nb"
+              },
+              "href" : "https://api.spotify.com/v1/users/u8ins5esg43wtxk4h66o5d1nb",
+              "id" : "u8ins5esg43wtxk4h66o5d1nb",
+              "type" : "user",
+              "uri" : "spotify:user:u8ins5esg43wtxk4h66o5d1nb"
+            },
+            "is_local" : true,
+            "primary_color" : null,
+            "track" : {
+              "album" : {
+                "album_type" : null,
+                "artists" : [ ],
+                "available_markets" : [ ],
+                "external_urls" : { },
+                "href" : null,
+                "id" : null,
+                "images" : [ ],
+                "name" : "Heart of Stone",
+                "release_date" : null,
+                "release_date_precision" : null,
+                "type" : "album",
+                "uri" : null
+              },
+              "artists" : [ {
+                "external_urls" : { },
+                "href" : null,
+                "id" : null,
+                "name" : "The Waymores",
+                "type" : "artist",
+                "uri" : null
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 0,
+              "duration_ms" : 128000,
+              "explicit" : false,
+              "external_ids" : { },
+              "external_urls" : { },
+              "href" : null,
+              "id" : null,
+              "is_local" : true,
+              "name" : "Heart of Stone",
+              "popularity" : 0,
+              "preview_url" : null,
+              "track_number" : 0,
+              "type" : "track",
+              "uri" : "spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128"
+            },
+            "video_thumbnail" : {
+              "url" : null
+            }
+          }, {
+            "added_at" : "2021-02-24T06:12:40Z",
+            "added_by" : {
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/user/u8ins5esg43wtxk4h66o5d1nb"
+              },
+              "href" : "https://api.spotify.com/v1/users/u8ins5esg43wtxk4h66o5d1nb",
+              "id" : "u8ins5esg43wtxk4h66o5d1nb",
+              "type" : "user",
+              "uri" : "spotify:user:u8ins5esg43wtxk4h66o5d1nb"
+            },
+            "is_local" : true,
+            "primary_color" : null,
+            "track" : {
+              "album" : {
+                "album_type" : null,
+                "artists" : [ ],
+                "available_markets" : [ ],
+                "external_urls" : { },
+                "href" : null,
+                "id" : null,
+                "images" : [ ],
+                "name" : "Heard It Through The Red Wine",
+                "release_date" : null,
+                "release_date_precision" : null,
+                "type" : "album",
+                "uri" : null
+              },
+              "artists" : [ {
+                "external_urls" : { },
+                "href" : null,
+                "id" : null,
+                "name" : "Charlie Marie",
+                "type" : "artist",
+                "uri" : null
+              } ],
+              "available_markets" : [ ],
+              "disc_number" : 0,
+              "duration_ms" : 227000,
+              "explicit" : false,
+              "external_ids" : { },
+              "external_urls" : { },
+              "href" : null,
+              "id" : null,
+              "is_local" : true,
+              "name" : "Heard It Through The Red Wine",
+              "popularity" : 0,
+              "preview_url" : null,
+              "track_number" : 0,
+              "type" : "track",
+              "uri" : "spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227"
+            },
+            "video_thumbnail" : {
+              "url" : null
+            }
+          }
+        ]
+      }
+    ))
+  })
+]

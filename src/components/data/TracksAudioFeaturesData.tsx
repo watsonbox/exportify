@@ -42,7 +42,7 @@ class TracksAudioFeaturesData extends TracksData {
 
     const audioFeaturesData = new Map<string, string[]>(audioFeatures.filter((af: any) => af).map((audioFeatures: any) => {
       return [
-        audioFeatures.id,
+        audioFeatures.uri,
         [
           audioFeatures.danceability,
           audioFeatures.energy,
@@ -61,9 +61,9 @@ class TracksAudioFeaturesData extends TracksData {
     }))
 
     // Add empty fields where we didn't get data - can be the case for example with episodes
-    const audioFeaturesTrackIds = Array.from(audioFeaturesData.keys())
-    trackIds.filter(x => !audioFeaturesTrackIds.includes(x)).forEach((trackId) => {
-      audioFeaturesData.set(trackId, ["","","","","","","","","","","",""])
+    const audioFeaturesTrackUris = Array.from(audioFeaturesData.keys())
+    this.tracks.filter(t => !audioFeaturesTrackUris.includes(t.uri)).forEach((track) => {
+      audioFeaturesData.set(track.uri, ["","","","","","","","","","","",""])
     })
 
     return audioFeaturesData

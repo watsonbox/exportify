@@ -9,7 +9,7 @@ import JSZip from "jszip"
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlerCalled, handlers, nullTrackHandlers } from "../mocks/handlers"
+import { handlerCalled, handlers, nullTrackHandlers, localTrackHandlers } from "../mocks/handlers"
 
 const server = setupServer(...handlers)
 
@@ -246,6 +246,40 @@ describe("single playlist exporting", () => {
       {
         content: [
           '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At"\n'
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
+      true
+    )
+  })
+
+  test("playlist with local tracks includes them", async () => {
+    server.use(...localTrackHandlers)
+
+    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(jest.fn())
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
+
+    const linkElement = screen.getAllByText("Export")[1]
+
+    expect(linkElement).toBeInTheDocument()
+
+    userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+    })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          '"Track URI","Track Name","Artist URI","Artist Name","Album URI","Album Name","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At"\n' +
+          '"spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128","Heart of Stone","","The Waymores","","Heart of Stone","","","0","0","128000","","false","0","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n' +
+          '"spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227","Heard It Through The Red Wine","","Charlie Marie","","Heard It Through The Red Wine","","","0","0","227000","","false","0","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
