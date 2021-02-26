@@ -13,6 +13,9 @@ import { handlerCalled, handlers, nullTrackHandlers, localTrackHandlers } from "
 
 const server = setupServer(...handlers)
 
+// Mock out Bugsnag calls
+jest.mock('@bugsnag/js')
+
 server.listen({
   onUnhandledRequest: 'warn'
 })
