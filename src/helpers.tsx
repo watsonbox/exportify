@@ -46,6 +46,10 @@ export function apiCallErrorHandler(error: any) {
       // Return to home page after auth token expiry
       window.location.href = window.location.href.split('#')[0]
       return
+    } else if (error.request.status >= 500 && error.request.status < 600) {
+      // Show error page when we get a 5XX that fails retries
+      window.location.href = `${window.location.href.split('#')[0]}?spotify_error=true`
+      return
     }
   }
 

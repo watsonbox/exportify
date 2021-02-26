@@ -14,11 +14,11 @@ function App() {
   let view
   let key = new URLSearchParams(window.location.hash.substring(1))
 
-  if (getQueryParam('rate_limit_message') !== '') {
-    view = <div id="rateLimitMessage" className="lead">
+  if (getQueryParam('spotify_error') !== '') {
+    view = <div id="spotifyErrorMessage" className="lead">
       <p><FontAwesomeIcon icon={['fas', 'bolt']} style={{ fontSize: "50px", marginBottom: "20px" }} /></p>
-      <p>Oops, Exportify has encountered a <a target="_blank" rel="noreferrer" href="https://developer.spotify.com/web-api/user-guide/#rate-limiting">rate limiting</a> error while using the Spotify API. This might be because of the number of users currently exporting playlists, or perhaps because you have too many playlists to export all at once. Try <a target="_blank" rel="noreferrer" href="https://github.com/watsonbox/exportify/issues/6#issuecomment-110793132">creating your own</a> Spotify application. If that doesn't work, please add a comment to <a target="_blank" rel="noreferrer" href="https://github.com/watsonbox/exportify/issues/6">this issue</a> where possible resolutions are being discussed.</p>
-      <p style={{ marginTop: "50px" }}>It should still be possible to export individual playlists, particularly when using your own Spotify application.</p>
+      <p>Oops, Exportify has encountered an unexpected error (5XX) while using the Spotify API. This kind of error is due to a problem on Spotify's side, and although it's rare, unfortunately all we can do is retry later.</p>
+      <p style={{ marginTop: "50px" }}>Keep an eye on the <a target="_blank" rel="noreferrer" href="https://status.spotify.dev/">Spotify Web API Status page</a> to see if there are any known problems right now, and then <a rel="noreferrer" href="?">retry</a>.</p>
     </div>
   } else if (key.has('access_token')) {
     view = <PlaylistTable accessToken={key.get('access_token')} />
