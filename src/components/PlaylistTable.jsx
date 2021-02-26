@@ -79,25 +79,29 @@ class PlaylistTable extends React.Component {
       this.playlistSearch.current.clear()
     }
 
-    const playlists = await this.playlistsData.slice(
-      ((this.state.currentPage - 1) * this.PAGE_SIZE),
-      ((this.state.currentPage - 1) * this.PAGE_SIZE) + this.PAGE_SIZE
-    ).catch(apiCallErrorHandler)
+    try {
+      const playlists = await this.playlistsData.slice(
+        ((this.state.currentPage - 1) * this.PAGE_SIZE),
+        ((this.state.currentPage - 1) * this.PAGE_SIZE) + this.PAGE_SIZE
+      )
 
-    // FIXME: Handle unmounting
-    this.setState(
-      {
-        initialized: true,
-        searching: false,
-        playlists: playlists,
-        playlistCount: await this.playlistsData.total()
-      },
-      () => {
-        const min = ((this.state.currentPage - 1) * this.PAGE_SIZE) + 1
-        const max = Math.min(min + this.PAGE_SIZE - 1, this.state.playlistCount)
-        this.setSubtitle(`${min}-${max} of ${this.state.playlistCount} playlists for ${this.userId}`)
-      }
-    )
+      // FIXME: Handle unmounting
+      this.setState(
+        {
+          initialized: true,
+          searching: false,
+          playlists: playlists,
+          playlistCount: await this.playlistsData.total()
+        },
+        () => {
+          const min = ((this.state.currentPage - 1) * this.PAGE_SIZE) + 1
+          const max = Math.min(min + this.PAGE_SIZE - 1, this.state.playlistCount)
+          this.setSubtitle(`${min}-${max} of ${this.state.playlistCount} playlists for ${this.userId}`)
+        }
+      )
+    } catch(error) {
+      apiCallErrorHandler(error)
+    }
   }
 
   handlePlaylistsLoadingStarted = () => {
