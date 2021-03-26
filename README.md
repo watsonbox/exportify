@@ -30,10 +30,12 @@ Track data is exported in [CSV](http://en.wikipedia.org/wiki/Comma-separated_val
 
 - Track URI
 - Track Name
-- Artist URI
-- Artist Name
+- Artist URI(s)
+- Artist Name(s)
 - Album URI
 - Album Name
+- Album Artist URI(s)
+- Album Artist Name(s)
 - Album Release Date
 - Album Image URL (typically 640x640px jpeg)
 - Disc Number
@@ -119,6 +121,7 @@ In addition to [Create React App](https://github.com/facebook/create-react-app),
 * [Font Awesome 5](https://fontawesome.com/) - vector icon set and toolkit
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - light-weight solution for testing React DOM nodes
 * [MSW](https://mswjs.io/) - network-level request mocking (more of my own thoughts [here](https://watsonbox.github.io/posts/2020/11/30/discovering-msw.html))
+
 
 ## Notes
 
