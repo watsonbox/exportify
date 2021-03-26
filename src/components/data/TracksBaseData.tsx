@@ -13,8 +13,8 @@ class TracksBaseData extends TracksData {
     return [
       "Track URI",
       "Track Name",
-      "Artist URI",
-      "Artist Name",
+      "Artist URI(s)",
+      "Artist Name(s)",
       "Album URI",
       "Album Name",
       "Album Release Date",
