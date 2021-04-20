@@ -26,16 +26,14 @@ class TracksBaseData extends TracksData {
       "Track Duration (ms)",
       "Track Preview URL",
       "Explicit",
-      "Popularity",
-      "Added By",
-      "Added At"
+      "Popularity"
     ]
   }
 
-  async tracks() {
+  async trackItems() {
     await this.getPlaylistItems()
 
-    return this.playlistItems.map(i => i.track)
+    return this.playlistItems
   }
 
   async data() {
@@ -60,9 +58,7 @@ class TracksBaseData extends TracksData {
           item.track.duration_ms,
           item.track.preview_url == null ? '' : item.track.preview_url,
           item.track.explicit,
-          item.track.popularity,
-          item.added_by == null ? '' : item.added_by.uri,
-          item.added_at
+          item.track.popularity
         ]
       ]
     }))

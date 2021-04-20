@@ -1136,3 +1136,197 @@ export const localTrackHandlers = [
     ))
   })
 ]
+
+export const duplicateTrackHandlers = [
+  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    return res(ctx.json(
+      {
+        "href" : "https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=100",
+        "items" : [
+          {
+            "added_at" : "2020-11-03T15:19:04Z",
+            "added_by" : {
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/user/watsonbox"
+              },
+              "href" : "https://api.spotify.com/v1/users/watsonbox",
+              "id" : "watsonbox",
+              "type" : "user",
+              "uri" : "spotify:user:watsonbox"
+            },
+            "is_local" : false,
+            "primary_color" : null,
+            "track" : {
+              "album" : {
+                "album_type" : "album",
+                "artists" : [ {
+                  "external_urls" : {
+                    "spotify" : "https://open.spotify.com/artist/69lEbRQRe29JdyLrewNAvD"
+                  },
+                  "href" : "https://api.spotify.com/v1/artists/69lEbRQRe29JdyLrewNAvD",
+                  "id" : "69lEbRQRe29JdyLrewNAvD",
+                  "name" : "Ghostpoet",
+                  "type" : "artist",
+                  "uri" : "spotify:artist:69lEbRQRe29JdyLrewNAvD"
+                } ],
+                "available_markets" : [ "AD", "AE", "AL", "AR", "AT", "AU", "BA", "BE", "BG", "BH", "BO", "BR", "BY", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HR", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MD", "MK", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "RU", "SA", "SE", "SG", "SI", "SK", "SV", "TH", "TN", "TR", "TW", "UA", "UY", "VN", "ZA" ],
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/album/6jiLkuSnhzDvzsHJlweoGh"
+                },
+                "href" : "https://api.spotify.com/v1/albums/6jiLkuSnhzDvzsHJlweoGh",
+                "id" : "6jiLkuSnhzDvzsHJlweoGh",
+                "images" : [ {
+                  "height" : 640,
+                  "url" : "https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80",
+                  "width" : 640
+                }, {
+                  "height" : 300,
+                  "url" : "https://i.scdn.co/image/ab67616d00001e02306e7640be17c5b3468e6e80",
+                  "width" : 300
+                }, {
+                  "height" : 64,
+                  "url" : "https://i.scdn.co/image/ab67616d00004851306e7640be17c5b3468e6e80",
+                  "width" : 64
+                } ],
+                "name" : "Peanut Butter Blues and Melancholy Jam",
+                "release_date" : "2011",
+                "release_date_precision" : "year",
+                "total_tracks" : 10,
+                "type" : "album",
+                "uri" : "spotify:album:6jiLkuSnhzDvzsHJlweoGh"
+              },
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/69lEbRQRe29JdyLrewNAvD"
+                },
+                "href" : "https://api.spotify.com/v1/artists/69lEbRQRe29JdyLrewNAvD",
+                "id" : "69lEbRQRe29JdyLrewNAvD",
+                "name" : "Ghostpoet",
+                "type" : "artist",
+                "uri" : "spotify:artist:69lEbRQRe29JdyLrewNAvD"
+              } ],
+              "available_markets" : [ "AD", "AE", "AL", "AR", "AT", "AU", "BA", "BE", "BG", "BH", "BO", "BR", "BY", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HR", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MD", "MK", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "RU", "SA", "SE", "SG", "SI", "SK", "SV", "TH", "TN", "TR", "TW", "UA", "UY", "VN", "ZA" ],
+              "disc_number" : 1,
+              "duration_ms" : 241346,
+              "episode" : false,
+              "explicit" : false,
+              "external_ids" : {
+                "isrc" : "GBMEF1100339"
+              },
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/7ATyvp3TmYBmGW7YuC8DJ3"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/7ATyvp3TmYBmGW7YuC8DJ3",
+              "id" : "7ATyvp3TmYBmGW7YuC8DJ3",
+              "is_local" : false,
+              "name" : "One Twos / Run Run Run",
+              "popularity" : 22,
+              "preview_url" : "https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99",
+              "track" : true,
+              "track_number" : 1,
+              "type" : "track",
+              "uri" : "spotify:track:7ATyvp3TmYBmGW7YuC8DJ3"
+            },
+            "video_thumbnail" : {
+              "url" : null
+            }
+          },
+          {
+            "added_at" : "2020-11-20T15:19:04Z",
+            "added_by" : {
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/user/watsonbox"
+              },
+              "href" : "https://api.spotify.com/v1/users/watsonbox",
+              "id" : "watsonbox",
+              "type" : "user",
+              "uri" : "spotify:user:watsonbox"
+            },
+            "is_local" : false,
+            "primary_color" : null,
+            "track" : {
+              "album" : {
+                "album_type" : "album",
+                "artists" : [ {
+                  "external_urls" : {
+                    "spotify" : "https://open.spotify.com/artist/69lEbRQRe29JdyLrewNAvD"
+                  },
+                  "href" : "https://api.spotify.com/v1/artists/69lEbRQRe29JdyLrewNAvD",
+                  "id" : "69lEbRQRe29JdyLrewNAvD",
+                  "name" : "Ghostpoet",
+                  "type" : "artist",
+                  "uri" : "spotify:artist:69lEbRQRe29JdyLrewNAvD"
+                } ],
+                "available_markets" : [ "AD", "AE", "AL", "AR", "AT", "AU", "BA", "BE", "BG", "BH", "BO", "BR", "BY", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HR", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MD", "MK", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "RU", "SA", "SE", "SG", "SI", "SK", "SV", "TH", "TN", "TR", "TW", "UA", "UY", "VN", "ZA" ],
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/album/6jiLkuSnhzDvzsHJlweoGh"
+                },
+                "href" : "https://api.spotify.com/v1/albums/6jiLkuSnhzDvzsHJlweoGh",
+                "id" : "6jiLkuSnhzDvzsHJlweoGh",
+                "images" : [ {
+                  "height" : 640,
+                  "url" : "https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80",
+                  "width" : 640
+                }, {
+                  "height" : 300,
+                  "url" : "https://i.scdn.co/image/ab67616d00001e02306e7640be17c5b3468e6e80",
+                  "width" : 300
+                }, {
+                  "height" : 64,
+                  "url" : "https://i.scdn.co/image/ab67616d00004851306e7640be17c5b3468e6e80",
+                  "width" : 64
+                } ],
+                "name" : "Peanut Butter Blues and Melancholy Jam",
+                "release_date" : "2011",
+                "release_date_precision" : "year",
+                "total_tracks" : 10,
+                "type" : "album",
+                "uri" : "spotify:album:6jiLkuSnhzDvzsHJlweoGh"
+              },
+              "artists" : [ {
+                "external_urls" : {
+                  "spotify" : "https://open.spotify.com/artist/69lEbRQRe29JdyLrewNAvD"
+                },
+                "href" : "https://api.spotify.com/v1/artists/69lEbRQRe29JdyLrewNAvD",
+                "id" : "69lEbRQRe29JdyLrewNAvD",
+                "name" : "Ghostpoet",
+                "type" : "artist",
+                "uri" : "spotify:artist:69lEbRQRe29JdyLrewNAvD"
+              } ],
+              "available_markets" : [ "AD", "AE", "AL", "AR", "AT", "AU", "BA", "BE", "BG", "BH", "BO", "BR", "BY", "CA", "CH", "CL", "CO", "CR", "CY", "CZ", "DE", "DK", "DO", "DZ", "EC", "EE", "EG", "ES", "FI", "FR", "GB", "GR", "GT", "HK", "HN", "HR", "HU", "ID", "IE", "IL", "IN", "IS", "IT", "JO", "KW", "KZ", "LB", "LI", "LT", "LU", "LV", "MA", "MC", "MD", "MK", "MT", "MX", "MY", "NI", "NL", "NO", "NZ", "OM", "PA", "PE", "PH", "PL", "PS", "PT", "PY", "QA", "RO", "RU", "SA", "SE", "SG", "SI", "SK", "SV", "TH", "TN", "TR", "TW", "UA", "UY", "VN", "ZA" ],
+              "disc_number" : 1,
+              "duration_ms" : 241346,
+              "episode" : false,
+              "explicit" : false,
+              "external_ids" : {
+                "isrc" : "GBMEF1100339"
+              },
+              "external_urls" : {
+                "spotify" : "https://open.spotify.com/track/7ATyvp3TmYBmGW7YuC8DJ3"
+              },
+              "href" : "https://api.spotify.com/v1/tracks/7ATyvp3TmYBmGW7YuC8DJ3",
+              "id" : "7ATyvp3TmYBmGW7YuC8DJ3",
+              "is_local" : false,
+              "name" : "One Twos / Run Run Run",
+              "popularity" : 22,
+              "preview_url" : "https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99",
+              "track" : true,
+              "track_number" : 1,
+              "type" : "track",
+              "uri" : "spotify:track:7ATyvp3TmYBmGW7YuC8DJ3"
+            },
+            "video_thumbnail" : {
+              "url" : null
+            }
+          }
+        ]
+      }
+    ))
+  })
+]

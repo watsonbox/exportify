@@ -8,25 +8,45 @@ import TracksAlbumData from "components/data/TracksAlbumData"
 
 class TracksCsvFile {
   playlist: any
+  trackItems: any
   columnNames: string[]
   lineData: Map<string, string[]>
 
-  constructor(playlist: any) {
+  lineTrackUris: string[]
+  lineTrackData: string[][]
+
+  constructor(playlist: any, trackItems: any) {
     this.playlist = playlist
-    this.columnNames = []
+    this.trackItems = trackItems
+    this.columnNames = [
+      "Added By",
+      "Added At"
+    ]
+
     this.lineData = new Map()
+    this.lineTrackUris = trackItems.map((i: any) => i.track.uri)
+    this.lineTrackData = trackItems.map((i: any) => [
+      i.added_by == null ? '' : i.added_by.uri,
+      i.added_at
+    ])
   }
 
-  async addData(tracksData: TracksData) {
-    this.columnNames.push(...tracksData.dataLabels())
+  async addData(tracksData: TracksData, before = false) {
+    if (before) {
+      this.columnNames.unshift(...tracksData.dataLabels())
+    } else {
+      this.columnNames.push(...tracksData.dataLabels())
+    }
 
     const data: Map<string, string[]> = await tracksData.data()
 
-    data.forEach((value: string[], key: string) => {
-      if (this.lineData.has(key)) {
-        this.lineData.get(key)!.push(...value)
-      } else {
-        this.lineData.set(key, value)
+    this.lineTrackUris.forEach((uri: string, index: number) => {
+      if (data.has(uri)) {
+        if (before) {
+          this.lineTrackData[index].unshift(...data.get(uri)!)
+        } else {
+          this.lineTrackData[index].push(...data.get(uri)!)
+        }
       }
     })
   }
@@ -36,8 +56,8 @@ class TracksCsvFile {
 
     csvContent += this.columnNames.map(this.sanitize).join() + "\n"
 
-    this.lineData.forEach((lineData, trackId) => {
-      csvContent += lineData.map(this.sanitize).join(",") + "\n"
+    this.lineTrackData.forEach((lineTrackData, trackId) => {
+      csvContent += lineTrackData.map(this.sanitize).join(",") + "\n"
     })
 
     return csvContent
@@ -68,28 +88,25 @@ class PlaylistExporter {
   }
 
   async csvData() {
-    const tracksCsvFile = new TracksCsvFile(this.playlist)
     const tracksBaseData = new TracksBaseData(this.accessToken, this.playlist)
+    const items = await tracksBaseData.trackItems()
+    const tracks = items.map(i => i.track)
+    const tracksCsvFile = new TracksCsvFile(this.playlist, items)
 
-    await tracksCsvFile.addData(tracksBaseData)
-    const tracks = await tracksBaseData.tracks()
+    // Add base data before existing (item) data, for backward compatibility
+    await tracksCsvFile.addData(tracksBaseData, true)
 
     if (this.config.includeArtistsData) {
-      const tracksArtistsData = new TracksArtistsData(this.accessToken, tracks)
-      await tracksCsvFile.addData(tracksArtistsData)
+      await tracksCsvFile.addData(new TracksArtistsData(this.accessToken, tracks))
     }
 
     if (this.config.includeAudioFeaturesData) {
-      const tracksAudioFeaturesData = new TracksAudioFeaturesData(this.accessToken, tracks)
-      await tracksCsvFile.addData(tracksAudioFeaturesData)
+      await tracksCsvFile.addData(new TracksAudioFeaturesData(this.accessToken, tracks))
     }
 
     if (this.config.includeAlbumData) {
-      const tracksAlbumData = new TracksAlbumData(this.accessToken, tracks)
-      await tracksCsvFile.addData(tracksAlbumData)
+      await tracksCsvFile.addData(new TracksAlbumData(this.accessToken, tracks))
     }
-
-    tracksBaseData.tracks()
 
     return tracksCsvFile.content()
   }

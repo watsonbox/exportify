@@ -9,7 +9,7 @@ import JSZip from "jszip"
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlerCalled, handlers, nullTrackHandlers, localTrackHandlers } from "../mocks/handlers"
+import { handlerCalled, handlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers } from "../mocks/handlers"
 
 const server = setupServer(...handlers)
 
@@ -286,6 +286,40 @@ describe("single playlist exporting", () => {
           `${baseTrackHeaders}\n` +
           '"spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128","Heart of Stone","","The Waymores","","Heart of Stone","","","","","0","0","128000","","false","0","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n' +
           '"spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227","Heard It Through The Red Wine","","Charlie Marie","","Heard It Through The Red Wine","","","","","0","0","227000","","false","0","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n'
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
+      true
+    )
+  })
+
+  test("playlist with duplicate tracks includes them", async () => {
+    server.use(...duplicateTrackHandlers)
+
+    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(jest.fn())
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
+
+    const linkElement = screen.getAllByText("Export")[1]
+
+    expect(linkElement).toBeInTheDocument()
+
+    userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+    })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          `${baseTrackHeaders}\n` +
+          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
+          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","spotify:user:watsonbox","2020-11-20T15:19:04Z"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
