@@ -27,7 +27,6 @@
     "eslint-plugin-testing-library": "^3.10.1",
     "file-saver": "^2.0.2",
     "jszip": "^3.5.0",
-    "node-sass": "4.14.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
@@ -64,6 +63,7 @@
   },
   "devDependencies": {
     "msw": "^0.21.3",
-    "react-test-renderer": "^17.0.1"
+    "react-test-renderer": "^17.0.1",
+    "sass": "^1.53.0"
   }
 }
