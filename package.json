@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://watsonbox.github.io/exportify",
   "dependencies": {
-    "@bugsnag/js": "^7.5.1",
+    "@bugsnag/js": "^7.17.0",
     "@bugsnag/plugin-react": "^7.3.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
