@@ -976,6 +976,22 @@ export const handlers = [
   })
 ]
 
+export const nullAlbumHandlers = [
+  rest.get('https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    return res(ctx.json(
+      {
+        "albums" : [ null ]
+      }
+    ))
+  })
+]
+
 export const nullTrackHandlers = [
   rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
     handlerCalled(req.url.toString())

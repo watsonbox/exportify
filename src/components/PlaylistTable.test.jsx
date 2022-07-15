@@ -9,7 +9,7 @@ import JSZip from "jszip"
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlerCalled, handlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers } from "../mocks/handlers"
+import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers } from "../mocks/handlers"
 
 const server = setupServer(...handlers)
 
@@ -220,6 +220,49 @@ describe("single playlist exporting", () => {
         content: [
           `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
           `${baseTrackDataCrying},"something, something else","Beggars Banquet","C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd."\n`
+        ],
+        options: { type: 'text/csv;charset=utf-8' }
+      },
+      'liked.csv',
+      true
+    )
+  })
+
+  test("tracks without album data omit it", async () => {
+    server.use(...nullAlbumHandlers)
+
+    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(jest.fn())
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} />);
+
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
+
+    const linkElement = screen.getAllByText("Export")[0]
+
+    expect(linkElement).toBeInTheDocument()
+
+    userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
+        [ 'https://api.spotify.com/v1/me' ],
+        [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi' ]
+      ])
+    })
+
+    await waitFor(() => {
+      expect(saveAsMock).toHaveBeenCalledTimes(1)
+    })
+
+    expect(saveAsMock).toHaveBeenCalledWith(
+      {
+        content: [
+          `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
+          `${baseTrackDataCrying},"","",""\n`
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },

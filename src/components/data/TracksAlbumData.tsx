@@ -30,11 +30,11 @@ class TracksAlbumData extends TracksData {
     const albumDataById = new Map<string, string[]>(
       albumResponses.flatMap((response) => response.data.albums.map((album: any) => {
         return [
-          album.id,
+          album == null ? "" : album.id,
           [
-            album.genres.join(", "),
-            album.label,
-            album.copyrights.map((c: any) => `${c.type} ${c.text}`).join(", ")
+            album == null ? "" : album.genres.join(", "),
+            album == null ? "" : album.label,
+            album == null ? "" : album.copyrights.map((c: any) => `${c.type} ${c.text}`).join(", ")
           ]
         ]
       }))
