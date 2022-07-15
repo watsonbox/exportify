@@ -337,15 +337,21 @@ describe("searching playlists", () => {
 
     userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
 
-    // Liked tracks is gone but Ghostpoet still matches
-    expect(await screen.findByText("Liked")).not.toBeInTheDocument()
-    expect(await screen.findByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    await waitFor(() => {
+      // Liked tracks is gone but Ghostpoet still matches
+      expect(screen.queryAllByRole('row')).toHaveLength(2)
+      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    })
 
-    userEvent.type(screen.getByRole('searchbox'), '{esc}')
+    userEvent.type(screen.getByRole('searchbox'), '{Escape}')
 
-    // Both liked tracks and Ghostpoet are present
-    expect(await screen.findByText("Liked")).toBeInTheDocument()
-    expect(await screen.findByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    await waitFor(() => {
+      // Both liked tracks and Ghostpoet are present
+      expect(screen.queryAllByRole('row')).toHaveLength(3)
+      expect(screen.queryByText("Liked")).toBeInTheDocument()
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    })
   })
 
   test("search with no results", async () => {
@@ -355,9 +361,12 @@ describe("searching playlists", () => {
 
     userEvent.type(screen.getByRole('searchbox'), 'test{enter}')
 
-    // Both liked tracks and Ghostpoet are missing
-    expect(await screen.findByText("Liked")).not.toBeInTheDocument()
-    expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
+    await waitFor(() => {
+      // Both liked tracks and Ghostpoet are missing
+      expect(screen.queryAllByRole('row')).toHaveLength(1)
+      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
+    })
   })
 })
 

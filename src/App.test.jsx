@@ -18,20 +18,19 @@ beforeAll(() => {
 })
 
 describe("logging in", () => {
-  test("renders get started button and redirects to Spotify with correct scopes", () => {
+  test("renders get started button and redirects to Spotify with correct scopes", async () => {
     render(<App />)
 
     const linkElement = screen.getByText(/Get Started/i)
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     expect(window.location.href).toBe(
       "https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=%2F%2F&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read&response_type=token&show_dialog=false"
     )
   })
-
 
   describe("post-login state", () => {
     beforeAll(() => {
@@ -58,7 +57,7 @@ describe("logging out", () => {
 
     expect(changeUserElement).toBeInTheDocument()
 
-    userEvent.click(changeUserElement)
+    await userEvent.click(changeUserElement)
 
     expect(window.location.href).toBe("https://www.example.com/?change_user=true")
 
@@ -69,7 +68,7 @@ describe("logging out", () => {
 
     const getStartedElement = screen.getByText(/Get Started/i)
     expect(getStartedElement).toBeInTheDocument()
-    userEvent.click(getStartedElement)
+    await userEvent.click(getStartedElement)
 
     expect(window.location.href).toBe(
       "https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=%2F%2F&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read&response_type=token&show_dialog=true"
