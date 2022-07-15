@@ -66,5 +66,8 @@
     "msw": "^0.21.3",
     "react-test-renderer": "^18.2.0",
     "sass": "^1.53.0"
+  },
+  "resolutions": {
+    "autoprefixer": "10.4.5"
   }
 }
