@@ -3,6 +3,10 @@ import { rest } from 'msw'
 export const handlerCalled = jest.fn()
 
 export const handlers = [
+  rest.options('https://api.spotify.com/v1/me', (req, res, ctx) => {
+    return res(ctx.text('body'))
+  }),
+
   rest.get('https://api.spotify.com/v1/me', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
