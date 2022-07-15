@@ -91,7 +91,6 @@ exports[`playlist loading 1`] = `
     </form>
     <div
       className="dropdown"
-      onKeyDown={[Function]}
     >
       <button
         aria-expanded={false}
