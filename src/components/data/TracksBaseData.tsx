@@ -26,7 +26,8 @@ class TracksBaseData extends TracksData {
       "Track Duration (ms)",
       "Track Preview URL",
       "Explicit",
-      "Popularity"
+      "Popularity",
+      "ISRC"
     ]
   }
 
@@ -58,7 +59,8 @@ class TracksBaseData extends TracksData {
           item.track.duration_ms,
           item.track.preview_url == null ? '' : item.track.preview_url,
           item.track.explicit,
-          item.track.popularity
+          item.track.popularity,
+          item.track.external_ids.isrc == null ? '' : item.track.external_ids.isrc
         ]
       ]
     }))

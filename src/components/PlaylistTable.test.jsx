@@ -39,8 +39,8 @@ afterEach(() => {
   server.resetHandlers()
 })
 
-const baseTrackHeaders = '"Track URI","Track Name","Artist URI(s)","Artist Name(s)","Album URI","Album Name","Album Artist URI(s)","Album Artist Name(s)","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","Added By","Added At"'
-const baseTrackDataCrying = '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","","2020-07-19T09:24:39Z"'
+const baseTrackHeaders = '"Track URI","Track Name","Artist URI(s)","Artist Name(s)","Album URI","Album Name","Album Artist URI(s)","Album Artist Name(s)","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","ISRC","Added By","Added At"'
+const baseTrackDataCrying = '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","UK4UP1300002","","2020-07-19T09:24:39Z"'
 
 // Use a snapshot test to ensure exact component rendering
 test("playlist loading", async () => {
@@ -327,8 +327,8 @@ describe("single playlist exporting", () => {
       {
         content: [
           `${baseTrackHeaders}\n` +
-          '"spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128","Heart of Stone","","The Waymores","","Heart of Stone","","","","","0","0","128000","","false","0","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n' +
-          '"spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227","Heard It Through The Red Wine","","Charlie Marie","","Heard It Through The Red Wine","","","","","0","0","227000","","false","0","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n'
+          '"spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128","Heart of Stone","","The Waymores","","Heart of Stone","","","","","0","0","128000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n' +
+          '"spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227","Heard It Through The Red Wine","","Charlie Marie","","Heard It Through The Red Wine","","","","","0","0","227000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
@@ -361,8 +361,8 @@ describe("single playlist exporting", () => {
       {
         content: [
           `${baseTrackHeaders}\n` +
-          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","spotify:user:watsonbox","2020-11-20T15:19:04Z"\n'
+          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
+          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-20T15:19:04Z"\n'
         ],
         options: { type: 'text/csv;charset=utf-8' }
       },
@@ -444,8 +444,8 @@ test("exporting of all playlists", async () => {
   expect(jsZipFileMock).toHaveBeenCalledWith(
     "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv",
     `${baseTrackHeaders}\n` +
-    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","2","269346","https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99","false","36","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
+    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
+    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","2","269346","https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99","false","36","GBMEF1000270","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
   )
 
   await waitFor(() => {
