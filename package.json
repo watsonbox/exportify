@@ -33,7 +33,7 @@
     "react-scripts": "^5.0.1",
     "stream": "^0.0.2",
     "typescript": "^4.9.3",
-    "url-search-params-polyfill": "^8.1.0",
+    "url-search-params-polyfill": "^8.1.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
