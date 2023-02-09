@@ -122,7 +122,7 @@ Searching is _case-insensitive_.
 
 ## Development
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Please carefully the next few sections to get a better understanding of the development environment before beginning any contributions.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Please carefully read the next few sections to get a better understanding of the development environment before beginning any contributions.
 
 ### How to Run
 
@@ -147,7 +147,7 @@ Builds the app for production to the `build` folder.
 
 ### Project Structure
 
-Here is a simplified directory strcture so that you can understand some of the fundamental directories & files:
+Here is a simplified folder structure so that you can understand some of the fundamental directories & files:
 
 ```bash
 src/
@@ -171,15 +171,15 @@ src/
 
 #### Components/
 
-Contains essential components throughout the application
+Contains essential components used throughout the entire application
 
 - `Login.jsx` - Handles the login logic + UI of the application
 - `Logout.tsx` - Handles the logout logic + UI of the application
 - `Paginator.jsx` - Component responsible for the paging system for playlist display on main screen
-- `PlaylistExporter.jsx` - Takes care of the exportation of the "Export All" option
-- `PlaylistRow.tsx` - Primary componenty to show each individual playlist + its respective data (row within main list)
-- `PlaylistSearch.tsx` - Handles the search of playlist  through user's input
-- `PlaylistTable.tsx` - Main component for user's playlist display. Calls upon sub-components for total functionality
+- `PlaylistExporter.jsx` - Takes care of the details of the "Export All" option
+- `PlaylistRow.tsx` - Primary component to show each individual playlist + its respective data (each row within the main list)
+- `PlaylistSearch.tsx` - Handles the search of playlists through user's input
+- `PlaylistTable.tsx` - Main component for user's playlists display. Calls upon sub-components for total functionality
 
 #### Components/data/
 
@@ -191,7 +191,7 @@ Contains essential components throughout the application
 
 #### App.tsx
 
-Principal screen responsible for the entire application's base logic, such as login, playlist dispaly etc.
+Principal screen responsible for the entire application's base logic, such as login, playlist display etc.
 
 #### index.tsx
 
