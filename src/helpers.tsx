@@ -12,6 +12,7 @@ export function getQueryParam(name: string) {
 
 const REQUEST_RETRY_BUFFER = 1000
 const MAX_RATE_LIMIT_RETRIES = 2 // 3 attempts in total
+const MAX_ERROR_RETRIES = 2      // 3 attempts in total
 const limiter = new Bottleneck({
   maxConcurrent: 1,
   minTime: 0
@@ -21,7 +22,7 @@ limiter.on("failed", async (error, jobInfo) => {
   if (error.response.status === 429 && jobInfo.retryCount < MAX_RATE_LIMIT_RETRIES) {
     // Retry according to the indication from the server with a small buffer
     return ((error.response.headers["retry-after"] || 1) * 1000) + REQUEST_RETRY_BUFFER
-  } else if (error.response.status !== 401 && error.response.status !== 429 && jobInfo.retryCount === 0) {
+  } else if (error.response.status !== 401 && error.response.status !== 429 && jobInfo.retryCount < MAX_ERROR_RETRIES) {
     // Log and retry any other failure once (e.g. 503/504 which sometimes occur)
     Bugsnag.notify(
       error,
@@ -32,7 +33,13 @@ limiter.on("failed", async (error, jobInfo) => {
       }
     )
 
-    return REQUEST_RETRY_BUFFER
+    if (error.response.status === 502) {
+      // Try waiting a little longer to reduce problems with large playlists
+      // https://github.com/watsonbox/exportify/issues/142
+      return REQUEST_RETRY_BUFFER * 3
+    } else {
+      return REQUEST_RETRY_BUFFER
+    }
   }
 })
 
