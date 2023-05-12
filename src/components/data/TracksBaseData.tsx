@@ -74,7 +74,7 @@ class TracksBaseData extends TracksData {
     }
 
     var requests = []
-    var limit = this.playlist.tracks.limit || 100
+    var limit = this.playlist.tracks.limit ? 50 : 100
 
     for (var offset = 0; offset < this.playlist.tracks.total; offset = offset + limit) {
       requests.push(`${this.playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}`)
