@@ -84,7 +84,7 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/me' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ]
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ]
       ])
     })
 
@@ -124,7 +124,7 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/me' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
         [ 'https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz' ]
       ])
     })
@@ -165,7 +165,7 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/me' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
         [ 'https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS' ]
       ])
     })
@@ -206,7 +206,7 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/me' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
         [ 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi' ]
       ])
     })
@@ -249,7 +249,7 @@ describe("single playlist exporting", () => {
         [ 'https://api.spotify.com/v1/me' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20' ],
+        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
         [ 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi' ]
       ])
     })

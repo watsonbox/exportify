@@ -42,7 +42,7 @@ export const handlers = [
 
     return res(ctx.json(
       {
-        "href" : "https://api.spotify.com/v1/me/tracks?offset=0&limit=20",
+        "href" : "https://api.spotify.com/v1/me/tracks?offset=0&limit=50",
         "items" : [ {
           "added_at" : "2020-07-19T09:24:39Z",
           "track" : {
@@ -134,7 +134,7 @@ export const handlers = [
 
     return res(ctx.json(
       {
-        "href" : "https://api.spotify.com/v1/me/tracks?offset=0&limit=20",
+        "href" : "https://api.spotify.com/v1/me/tracks?offset=0&limit=50",
         "items" : [ {
           "added_at" : "2020-07-19T09:24:39Z",
           "track" : {
