@@ -147,6 +147,15 @@ Error monitoring provided by Bugsnag.
   <img src="bugsnag.png" width="200" />
 </a>
 
+## Running With Docker
+
+To build and run Exportify with docker, run:
+
+**`docker build . -t exportify`**
+
+**`docker run -p 3000:3000 exportify`**
+
+And then open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 ## Contributing
 
