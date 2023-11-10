@@ -20,9 +20,23 @@ As many users have noted, there is no way to export/archive/backup playlists fro
 
 Click 'Export All' to save a zip file containing a CSV file for each playlist in your account. This may take a while when many playlists exist and/or they are large.
 
-### Re-importing Playlists
+### Importing Playlists: Step-by-Step Guide
 
-Once playlists are saved, it's also pretty straightforward to re-import them into Spotify. Open up the CSV file in Excel, for example, select and copy the `spotify:track:xxx` URIs, then simply create a playlist in Spotify and paste them in. This has only been tested with the desktop app.
+Follow the instructions below or watch [this video](https://youtu.be/3Ncz-IJqmTA)
+
+1. Create a Google/Excel Sheet
+2. Import Playlist Backup (CSV)
+3. Copy Track URIs (`spotify:track:xxx`)
+4. Open Spotify Desktop App
+5. Create an Empty Playlist
+6. Paste Track URIs (`CTRL+V or Command+V`)
+7. VIOLA! Enjoy Your Music
+   
+**Note:** This process has been tested and confirmed to work with the Spotify Desktop app.
+
+<a href="https://youtu.be/3Ncz-IJqmTA">
+<img src="./public//spotify-import.gif"/>
+</a>
 
 ### Export Format
 
