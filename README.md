@@ -1,15 +1,36 @@
+# Exportify 
 [![Build Status](https://api.travis-ci.com/watsonbox/exportify.svg?branch=master)](https://travis-ci.com/watsonbox/exportify)
 
-<a href="https://watsonbox.github.io/exportify/"><img src="screenshot.png"/></a>
+⭐ Star us on GitHub — it motivates us a lot!
 
-Export your Spotify playlists to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) by clicking on the link below:
+[Exportify](https://watsonbox.github.io/exportify/) is a web-application which allows you to export your Spotify playlist to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values).
+
+Try it out now by clicking on the link below:
 
 [https://watsonbox.github.io/exportify/](https://watsonbox.github.io/exportify/)
+
+<br/>
+
+<a href="https://watsonbox.github.io/exportify/"><img src="screenshot.png"/></a>
 
 As many users have noted, there is no way to export/archive/backup playlists from the Spotify client for safekeeping. This application provides a simple interface for doing that using the [Spotify Web API](https://developer.spotify.com/documentation/web-api/).
 
 **No data will be saved - the entire application runs in the browser.**
 
+
+## Table of Contents
+
+- [Usage](#usage)
+  - [Re-importing Playlists](#re-importing-playlists)
+  - [Export Format](#export-format)
+  - [Playlist Search](#playlist-search)
+- [Development](#development)
+  - [Tech Stack](#tech-stack)
+  - [How to Run](#how-to-run)
+  - [Project Structure](#project-structure)
+- [Notes](#notes)
+- [Error Monitoring](#error-monitoring)
+- [Contributing](#contributing)
 
 ## Usage
 
@@ -28,54 +49,63 @@ Once playlists are saved, it's also pretty straightforward to re-import them int
 
 Track data is exported in [UTF-8](https://en.wikipedia.org/wiki/UTF-8) encoded [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) format with the following fields from the [Spotify track object](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/):
 
-- Track URI
-- Track Name
-- Artist URI(s)
-- Artist Name(s)
-- Album URI
-- Album Name
-- Album Artist URI(s)
-- Album Artist Name(s)
-- Album Release Date
-- Album Image URL (typically 640x640px jpeg)
-- Disc Number
-- Track Number
-- Track Duration (ms)
-- Track Preview URL (mp3)
-- Explicit?
-- Popularity
-- ISRC ([International Standard Recording Code](https://isrc.ifpi.org/en/))
-- Added By
-- Added At
+#### Default
+
+- `Track URI`
+- `Track Name`
+- `Artist URI(s)`
+- `Artist Name(s)`
+- `Album URI`
+- `Album Name`
+- `Album Artist URI(s)`
+- `Album Artist Name(s)`
+- `Album Release Date`
+- `Album Image URL (typically 640x640px jpeg)`
+- `Disc Number`
+- `Track Number`
+- `Track Duration (ms)`
+- `Track Preview URL (mp3)`
+- `Explicit?`
+- `Popularity`
+- `ISRC` ([International Standard Recording Code](https://isrc.ifpi.org/en/))
+- `Added By`
+- `Added At`
 
 By clicking on the cog, additional data can be exported.
 
 <a href="https://watsonbox.github.io/exportify/"><img src="https://user-images.githubusercontent.com/17737/100668594-72be1600-335c-11eb-90d6-c9ae873e347d.png"/></a>
 
+
+#### Artists Data
+
 By selecting "Include artists data", the following fields will be added from the [Spotify artist object](https://developer.spotify.com/documentation/web-api/reference/artists/get-several-artists/):
 
-- Artist Genres
+- `Artist Genres`
+
+#### Audio Features
 
 And by selecting "Include audio features data", the following fields will be added from the [Spotify audio features object](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/):
 
-- Danceability
-- Energy
-- Key
-- Loudness
-- Mode
-- Speechiness
-- Acousticness
-- Instrumentalness
-- Liveness
-- Valence
-- Tempo
-- Time Signature
+- `Danceability`
+- `Energy`
+- `Key`
+- `Loudness`
+- `Mode`
+- `Speechiness`
+- `Acousticness`
+- `Instrumentalness`
+- `Liveness`
+- `Valence`
+- `Tempo`
+- `Time Signature`
+
+#### Album Data
 
 Additionally, by selecting "Include album data", the following fields will be added from the [Spotify album object (full)](https://developer.spotify.com/documentation/web-api/reference/object-model/#album-object-full)
 
-- Album Genres
-- Label
-- Copyrights
+- `Album Genres`
+- `Label`
+- `Copyrights`
 
 Note that the more data being exported, the longer the export will take.
 
@@ -92,7 +122,9 @@ Searching is _case-insensitive_.
 
 ## Development
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Please carefully read the next few sections to get a better understanding of the development environment before beginning any contributions.
+
+### How to Run
 
 In the project directory, first run `yarn install` to set up dependencies, then you can run:
 
@@ -113,7 +145,59 @@ See the section about [running tests](https://facebook.github.io/create-react-ap
 
 Builds the app for production to the `build` folder.
 
-### Stack
+### Project Structure
+
+Here is a simplified folder structure so that you can understand some of the fundamental directories & files:
+
+```bash
+src/
+├── components/
+│   ├── Login.jsx
+│   ├── Logout.tsx
+│   ├── Paginator.jsx
+│   ├── PlaylistExporter.jsx
+│   ├── PlaylistRow.tsx
+│   ├── PlaylistSearch.tsx
+│   ├── PlaylistTable.tsx
+│   └── data/
+│       ├── PlaylistsData.tsx
+│       ├── TracksAlbumData.tsx
+│       ├── TracksArtistsData.tsx
+│       ├── TracksAudioFeaturesData.tsx
+│       └── TracksBaseData.tsx
+├── App.tsx
+└── index.tsx
+```
+
+#### Components/
+
+Contains essential components used throughout the entire application
+
+- `Login.jsx` - Handles the login logic + UI of the application
+- `Logout.tsx` - Handles the logout logic + UI of the application
+- `Paginator.jsx` - Component responsible for the paging system for playlist display on main screen
+- `PlaylistExporter.jsx` - Takes care of the details of the "Export All" option
+- `PlaylistRow.tsx` - Primary component to show each individual playlist + its respective data (each row within the main list)
+- `PlaylistSearch.tsx` - Handles the search of playlists through user's input
+- `PlaylistTable.tsx` - Main component for user's playlists display. Calls upon sub-components for total functionality
+
+#### Components/data/
+
+- `PlaylistData.tsx` - Calls Spotify API for retrieval of user's playlist data
+- `TracksAlbumData.tsx` - Additional calls for the extra data filter "Include album data"
+- `TracksArtistsData.tsx` - Additional calls for the extra data filter "Include artists data"
+- `TracksAudioFeaturesData.tsx` - Additional calls for the extra data filter "Include audio features data"
+- `TracksBaseData.tsx` - Manages the default playlist data, and its format
+
+#### App.tsx
+
+Principal screen responsible for the entire application's base logic, such as login, playlist display etc.
+
+#### index.tsx
+
+Application entry point, calls upon App.tsx for main content
+
+### Tech Stack
 
 In addition to [Create React App](https://github.com/facebook/create-react-app), the application is built using the following tools/libraries:
 
