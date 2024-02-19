@@ -463,11 +463,15 @@ export const handlers = [
     ))
   }),
 
-  rest.get('https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/artists', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    if (req.url.searchParams.get('ids') !== "4TXdHyuAOl3rAOFmZ6MeKz") {
+      return res(ctx.status(500), ctx.json({ message: 'Invalid request for this handler' }))
     }
 
     return res(ctx.json(
@@ -505,11 +509,15 @@ export const handlers = [
     ))
   }),
 
-  rest.get('https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/audio-features', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    if (req.url.searchParams.get('ids') !== "1GrLfs4TEvAZ86HVzXHchS") {
+      return res(ctx.status(500), ctx.json({ message: 'Invalid request for this handler' }))
     }
 
     return res(ctx.json(
@@ -538,11 +546,15 @@ export const handlers = [
     ))
   }),
 
-  rest.get('https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/albums', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    if (req.url.searchParams.get('ids') !== "4iwv7b8gDPKztLkKCbWyhi") {
+      return res(ctx.status(500), ctx.json({ message: 'Invalid request for this handler' }))
     }
 
     return res(ctx.json(
@@ -977,11 +989,15 @@ export const handlers = [
 ]
 
 export const nullAlbumHandlers = [
-  rest.get('https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/albums', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
       return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    if (req.url.searchParams.get('ids') !== "4iwv7b8gDPKztLkKCbWyhi") {
+      return res(ctx.status(500), ctx.json({ message: 'Invalid request for this handler' }))
     }
 
     return res(ctx.json(
@@ -993,7 +1009,7 @@ export const nullAlbumHandlers = [
 ]
 
 export const nullTrackHandlers = [
-  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
@@ -1029,7 +1045,7 @@ export const nullTrackHandlers = [
 ]
 
 export const localTrackHandlers = [
-  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
@@ -1158,7 +1174,7 @@ export const localTrackHandlers = [
 ]
 
 export const duplicateTrackHandlers = [
-  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks?offset=0&limit=10', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {

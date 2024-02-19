@@ -14,7 +14,7 @@ afterAll(() => {
 })
 
 beforeAll(() => {
-  window.location = { hash: "" }
+  window.location = { hash: "", href: "https://localhost" }
 })
 
 describe("logging in", () => {
@@ -46,12 +46,10 @@ describe("logging in", () => {
 })
 
 describe("logging out", () => {
-  beforeAll(() => {
-    window.location = { hash: "#access_token=TEST_ACCESS_TOKEN", href: "https://www.example.com/#access_token=TEST_ACCESS_TOKEN" }
-  })
+  test("redirects user to login screen with change_user param", async () => {
+    window.location = { hash: "#access_token=TEST_ACCESS_TOKEN", href: "http://localhost/#access_token=TEST_ACCESS_TOKEN" }
 
-  test("redirects user to login screen which will force a permission request", async () => {
-    const { rerender } = render(<App />)
+    render(<App />)
 
     const changeUserElement = screen.getByTitle("Change user")
 
@@ -59,15 +57,18 @@ describe("logging out", () => {
 
     await userEvent.click(changeUserElement)
 
-    expect(window.location.href).toBe("https://www.example.com/?change_user=true")
+    expect(window.location.href).toBe("http://localhost/?change_user=true")
+  })
 
-    // Simulate page reload. Would be nice to have better tools for mocking this.
-    window.location.hash = ""
-    window.location.search = "?change_user=true"
-    rerender(<App />)
+  test("presence of change_user forces a permission request", async () => {
+    window.location = { hash: "", search: "?change_user=true" }
+
+    render(<App />)
 
     const getStartedElement = screen.getByText(/Get Started/i)
+
     expect(getStartedElement).toBeInTheDocument()
+
     await userEvent.click(getStartedElement)
 
     expect(window.location.href).toBe(
