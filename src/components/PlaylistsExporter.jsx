@@ -18,15 +18,17 @@ class PlaylistsExporter extends React.Component {
     let doneCount = 0
 
     for (const playlist of playlists) {
-      this.props.onPlaylistExportStarted(playlist.name, doneCount)
-
-      let exporter = new PlaylistExporter(accessToken, playlist, config)
-      let csvData = await exporter.csvData()
-
-      playlistFileNames.push(exporter.fileName(playlist))
-      playlistCsvExports.push(csvData)
-
-      doneCount++
+      if(playlist){
+        this.props.onPlaylistExportStarted(playlist.name, doneCount)
+  
+        let exporter = new PlaylistExporter(accessToken, playlist, config)
+        let csvData = await exporter.csvData()
+  
+        playlistFileNames.push(exporter.fileName(playlist))
+        playlistCsvExports.push(csvData)
+  
+        doneCount++
+      }
     }
 
     this.props.onPlaylistsExportDone()
