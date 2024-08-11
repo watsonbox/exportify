@@ -259,7 +259,7 @@ export const handlers = [
           },
           "type" : "playlist",
           "uri" : "spotify:playlist:4XOGDpHMrVoH33uJEwHWU5"
-        } ],
+        }, null], // Ensure that a null playlist doesn't break anything
         "limit" : 20,
         "next" : "https://api.spotify.com/v1/users/watsonbox/playlists?offset=20&limit=20",
         "offset" : 0,

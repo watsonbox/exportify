@@ -4,6 +4,7 @@ import { apiCall } from "helpers"
 class PlaylistsData {
   PLAYLIST_LIMIT = 50
   SEARCH_LIMIT = 20
+  PLACEHOLDER = {}
 
   userId: string
   private accessToken: string
@@ -27,7 +28,7 @@ class PlaylistsData {
       await this.loadSlice()
     }
 
-    return this.data.length
+    return this.data.filter(p => p).length
   }
 
   async slice(start: number, end: number) {
@@ -36,9 +37,9 @@ class PlaylistsData {
 
     // It's a little ugly, but we slip in liked tracks with the first slice
     if (start === 0) {
-      return [this.likedTracksPlaylist, ...this.data.slice(start, end)]
+      return [this.likedTracksPlaylist, ...this.data.slice(start, end).filter(p => p)]
     } else {
-      return this.data.slice(start, end)
+      return this.data.slice(start, end).filter(p => p)
     }
   }
 
@@ -46,7 +47,7 @@ class PlaylistsData {
     await this.loadAll()
     await this.loadLikedTracksPlaylist()
 
-    return [this.likedTracksPlaylist, ...this.data]
+    return [this.likedTracksPlaylist, ...this.data.filter(p => p)]
   }
 
   async search(query: string) {
@@ -55,6 +56,7 @@ class PlaylistsData {
     // Case-insensitive search in playlist name
     // TODO: Add lazy evaluation for performance?
     return this.data
+      .filter(p => p)
       .filter(p => p.name.toLowerCase().includes(query.toLowerCase()))
       .slice(0, this.SEARCH_LIMIT)
   }
@@ -80,7 +82,7 @@ class PlaylistsData {
     if (this.dataInitialized) {
       const loadedData = this.data.slice(start, end)
 
-      if (loadedData.filter(i => !i).length === 0) {
+      if (loadedData.filter(i => i != null && Object.keys(i).length == 0).length === 0) {
         return loadedData
       }
     }
@@ -90,7 +92,7 @@ class PlaylistsData {
     const playlistsData = playlistsResponse.data
 
     if (!this.dataInitialized) {
-      this.data = Array(playlistsData.total).fill(null)
+      this.data = Array(playlistsData.total).fill(this.PLACEHOLDER)
       this.dataInitialized = true
     }
 
