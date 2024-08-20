@@ -34,7 +34,7 @@
     "stream": "^0.0.3",
     "typescript": "^5.5.4",
     "url-search-params-polyfill": "^8.2.5",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^4.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
