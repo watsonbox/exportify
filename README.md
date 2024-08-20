@@ -26,7 +26,7 @@ Once playlists are saved, it's also pretty straightforward to re-import them int
 
 ### Export Format
 
-Track data is exported in [UTF-8](https://en.wikipedia.org/wiki/UTF-8) encoded [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) format with the following fields from the [Spotify track object](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-tracks/):
+Track data is exported in [UTF-8](https://en.wikipedia.org/wiki/UTF-8) encoded [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) format with the following fields from the [Spotify track object](https://developer.spotify.com/documentation/web-api/reference/get-several-tracks):
 
 - Track URI
 - Track Name
@@ -52,11 +52,11 @@ By clicking on the cog, additional data can be exported.
 
 <a href="https://watsonbox.github.io/exportify/"><img src="https://user-images.githubusercontent.com/17737/100668594-72be1600-335c-11eb-90d6-c9ae873e347d.png"/></a>
 
-By selecting "Include artists data", the following fields will be added from the [Spotify artist object](https://developer.spotify.com/documentation/web-api/reference/artists/get-several-artists/):
+By selecting "Include artists data", the following fields will be added from the [Spotify artist object](https://developer.spotify.com/documentation/web-api/reference/get-multiple-artists):
 
 - Artist Genres
 
-And by selecting "Include audio features data", the following fields will be added from the [Spotify audio features object](https://developer.spotify.com/documentation/web-api/reference/tracks/get-several-audio-features/):
+And by selecting "Include audio features data", the following fields will be added from the [Spotify audio features object](https://developer.spotify.com/documentation/web-api/reference/get-several-audio-features):
 
 - Danceability
 - Energy
@@ -71,7 +71,7 @@ And by selecting "Include audio features data", the following fields will be add
 - Tempo
 - Time Signature
 
-Additionally, by selecting "Include album data", the following fields will be added from the [Spotify album object (full)](https://developer.spotify.com/documentation/web-api/reference/object-model/#album-object-full)
+Additionally, by selecting "Include album data", the following fields will be added from the [Spotify album object (full)](https://developer.spotify.com/documentation/web-api/reference/get-an-album)
 
 - Album Genres
 - Label
