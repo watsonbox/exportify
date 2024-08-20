@@ -18,7 +18,7 @@ class PlaylistTable extends React.Component {
 
   state = {
     initialized: false,
-    searching: false,
+    searchQuery: "",
     playlists: [],
     playlistCount: 0,
     likedSongs: {
@@ -56,14 +56,17 @@ class PlaylistTable extends React.Component {
       const playlists = await this.playlistsData.search(query).catch(apiCallErrorHandler)
 
       this.setState({
-        searching: true,
+        searchQuery: query,
         playlists: playlists,
         playlistCount: playlists.length,
-        currentPage: 1
+        currentPage: 1,
+        progressBar: {
+          show: false
+        }
       })
 
-      if (playlists.length === this.playlistsData.SEARCH_LIMIT) {
-        this.setSubtitle(`First ${playlists.length} results with "${query}" in playlist name`)
+      if (query.startsWith("public:") || query.startsWith("collaborative:") || query.startsWith("owner:")) {
+        this.setSubtitle(`${playlists.length} results for advanced query "${query}"`)
       } else {
         this.setSubtitle(`${playlists.length} results with "${query}" in playlist name`)
       }
@@ -89,9 +92,12 @@ class PlaylistTable extends React.Component {
       this.setState(
         {
           initialized: true,
-          searching: false,
+          searchQuery: "",
           playlists: playlists,
-          playlistCount: await this.playlistsData.total()
+          playlistCount: await this.playlistsData.total(),
+          progressBar: {
+            show: false
+          }
         },
         () => {
           const min = ((this.state.currentPage - 1) * this.PAGE_SIZE) + 1
@@ -189,7 +195,7 @@ class PlaylistTable extends React.Component {
       return (
         <div id="playlists">
           <div id="playlistsHeader">
-            <Paginator currentPage={this.state.currentPage} pageLimit={this.PAGE_SIZE} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged}/>
+            <Paginator currentPage={this.state.currentPage} pageLimit={this.state.searchQuery === "" ? this.PAGE_SIZE : this.state.playlistCount} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged} />
             <PlaylistSearch onPlaylistSearch={this.handlePlaylistSearch} onPlaylistSearchCancel={this.handlePlaylistSearchCancel} ref={this.playlistSearch} />
             <ConfigDropdown onConfigChanged={this.handleConfigChanged} ref={this.configDropdown} />
             {this.state.progressBar.show && progressBar}
@@ -209,8 +215,8 @@ class PlaylistTable extends React.Component {
                     onPlaylistsExportDone={this.handlePlaylistsExportDone}
                     onPlaylistExportStarted={this.handlePlaylistExportStarted}
                     playlistsData={this.playlistsData}
+                    searchQuery={this.state.searchQuery}
                     config={this.state.config}
-                    disabled={this.state.searching}
                   />
                 </th>
               </tr>
@@ -227,7 +233,7 @@ class PlaylistTable extends React.Component {
             </tbody>
           </table>
           <div id="playlistsFooter">
-            <Paginator currentPage={this.state.currentPage} pageLimit={this.PAGE_SIZE} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged}/>
+            <Paginator currentPage={this.state.currentPage} pageLimit={this.state.searchQuery === "" ? this.PAGE_SIZE : this.state.playlistCount} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged} />
           </div>
         </div>
       );

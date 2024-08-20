@@ -9,11 +9,13 @@ import { apiCallErrorHandler } from "helpers"
 
 // Handles exporting all playlist data as a zip file
 class PlaylistsExporter extends React.Component {
-  async export(accessToken, playlistsData, config) {
+  async export(accessToken, playlistsData, searchQuery, config) {
     let playlistFileNames = []
     let playlistCsvExports = []
 
-    const playlists = await playlistsData.all(this.props.onLoadedPlaylistCountChanged)
+    const playlists = searchQuery === "" ?
+      await playlistsData.all(this.props.onLoadedPlaylistCountChanged) :
+      await playlistsData.search(searchQuery, this.props.onLoadedPlaylistCountChanged)
 
     let doneCount = 0
 
@@ -46,13 +48,16 @@ class PlaylistsExporter extends React.Component {
     this.export(
       this.props.accessToken,
       this.props.playlistsData,
+      this.props.searchQuery,
       this.props.config
     ).catch(apiCallErrorHandler)
   }
 
   render() {
-    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap" disabled={this.props.disabled}>
-      <FontAwesomeIcon icon={['far', 'file-archive']}/> Export All
+    const text = this.props.searchQuery === "" ? "Export All" : "Export Results"
+
+    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap">
+      <FontAwesomeIcon icon={['far', 'file-archive']} /> {text}
     </Button>
   }
 }

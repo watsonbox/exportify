@@ -514,3 +514,43 @@ test("exporting of all playlists", async () => {
 
   expect(saveAsMock).toHaveBeenCalledWith("zip_content", "spotify_playlists.zip")
 })
+
+test("exporting of search results", async () => {
+  const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+  saveAsMock.mockImplementation(jest.fn())
+
+  const jsZipFileMock = jest.spyOn(JSZip.prototype, 'file')
+  const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
+  jsZipGenerateAsync.mockResolvedValue("zip_content")
+
+  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+
+  expect(await screen.findByRole('searchbox')).toBeInTheDocument()
+
+  userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
+
+  expect(await screen.findByText(/Export Results/)).toBeInTheDocument()
+
+  const linkElement = screen.getByText("Export Results")
+
+  expect(linkElement).toBeInTheDocument()
+
+  userEvent.click(linkElement)
+
+  await waitFor(() => {
+    expect(jsZipFileMock).toHaveBeenCalledTimes(1)
+  })
+
+  expect(jsZipFileMock).toHaveBeenCalledWith(
+    "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv",
+    `${baseTrackHeaders}\n` +
+    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
+    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","2","269346","https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99","false","36","GBMEF1000270","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
+  )
+
+  await waitFor(() => {
+    expect(saveAsMock).toHaveBeenCalledTimes(1)
+  })
+
+  expect(saveAsMock).toHaveBeenCalledWith("zip_content", "spotify_playlists.zip")
+})
