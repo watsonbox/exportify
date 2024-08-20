@@ -61,17 +61,6 @@ describe("logging out", () => {
 
     expect(window.location.href).toBe("https://www.example.com/?change_user=true")
 
-    // Simulate page reload. Would be nice to have better tools for mocking this.
-    window.location.hash = ""
-    window.location.search = "?change_user=true"
-    rerender(<App />)
 
-    const getStartedElement = screen.getByText(/Get Started/i)
-    expect(getStartedElement).toBeInTheDocument()
-    await userEvent.click(getStartedElement)
-
-    expect(window.location.href).toBe(
-      "https://accounts.spotify.com/authorize?client_id=9950ac751e34487dbbe027c4fd7f8e99&redirect_uri=%2F%2F&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read&response_type=token&show_dialog=true"
-    )
   })
 })

@@ -82,7 +82,7 @@ class PlaylistsData {
     if (this.dataInitialized) {
       const loadedData = this.data.slice(start, end)
 
-      if (loadedData.filter(i => i != null && Object.keys(i).length == 0).length === 0) {
+      if (loadedData.filter(i => i != null && Object.keys(i).length === 0).length === 0) {
         return loadedData
       }
     }
