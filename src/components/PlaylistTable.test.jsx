@@ -1,5 +1,5 @@
 import React from "react"
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen, waitFor, act, waitForElementToBeRemoved } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import renderer from "react-test-renderer"
 import { setupServer } from "msw/node"
@@ -80,6 +80,18 @@ describe("single playlist exporting", () => {
     userEvent.click(linkElement)
 
     await waitFor(() => {
+      expect(linkElement).toHaveAttribute("disabled")
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeEnabled
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeDisabled
+    })
+
+    await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
         [ 'https://api.spotify.com/v1/me' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
@@ -118,6 +130,18 @@ describe("single playlist exporting", () => {
     expect(linkElement).toBeInTheDocument()
 
     userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(linkElement).toHaveAttribute("disabled")
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeEnabled
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeDisabled
+    })
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
@@ -161,6 +185,18 @@ describe("single playlist exporting", () => {
     userEvent.click(linkElement)
 
     await waitFor(() => {
+      expect(linkElement).toHaveAttribute("disabled")
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeEnabled
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeDisabled
+    })
+
+    await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
         [ 'https://api.spotify.com/v1/me' ],
         [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
@@ -200,6 +236,18 @@ describe("single playlist exporting", () => {
     expect(linkElement).toBeInTheDocument()
 
     userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(linkElement).toHaveAttribute("disabled")
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeEnabled
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeDisabled
+    })
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
@@ -243,6 +291,18 @@ describe("single playlist exporting", () => {
     expect(linkElement).toBeInTheDocument()
 
     userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(linkElement).toHaveAttribute("disabled")
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeEnabled
+    })
+
+    await waitFor(() => {
+      expect(linkElement).toBeDisabled
+    })
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates

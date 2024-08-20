@@ -6,12 +6,23 @@ import { apiCallErrorHandler } from "helpers"
 import PlaylistExporter from "./PlaylistExporter"
 
 class PlaylistRow extends React.Component {
+  state = {
+    exporting: false
+  }
+
   exportPlaylist = () => {
-    (new PlaylistExporter(
-      this.props.accessToken,
-      this.props.playlist,
-      this.props.config
-    )).export().catch(apiCallErrorHandler)
+    this.setState(
+      { exporting: true },
+      () => {
+        (new PlaylistExporter(
+          this.props.accessToken,
+          this.props.playlist,
+          this.props.config
+        )).export().catch(apiCallErrorHandler).then(() => {
+          this.setState({ exporting: false })
+        })
+      }
+    )
   }
 
   renderTickCross(condition) {
@@ -32,6 +43,7 @@ class PlaylistRow extends React.Component {
 
   render() {
     let playlist = this.props.playlist
+    const icon = ['fas', (this.state.exporting ? 'sync' : 'download')]
 
     if(playlist.uri==null) return (
       <tr key={playlist.name}>
@@ -53,8 +65,8 @@ class PlaylistRow extends React.Component {
         <td>{this.renderTickCross(playlist.public)}</td>
         <td>{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-right">
-          <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} className="text-nowrap">
-            <FontAwesomeIcon icon={['fas', 'download']} size="sm" /> Export
+          <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} disabled={this.state.exporting} className="text-nowrap">
+            <FontAwesomeIcon icon={icon} size="sm" spin={this.state.exporting} /> Export
           </Button>
         </td>
       </tr>
