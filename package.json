@@ -4,37 +4,37 @@
   "private": true,
   "homepage": "https://watsonbox.github.io/exportify",
   "dependencies": {
-    "@bugsnag/js": "^7.18.0",
-    "@bugsnag/plugin-react": "^7.18.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.32",
-    "@fortawesome/free-brands-svg-icons": "^5.15.1",
-    "@fortawesome/free-regular-svg-icons": "^5.15.1",
-    "@fortawesome/free-solid-svg-icons": "^5.15.1",
-    "@fortawesome/react-fontawesome": "^0.1.12",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
-    "@testing-library/user-event": "^14.4.3",
-    "@types/file-saver": "^2.0.5",
-    "@types/jest": "^29.2.3",
-    "@types/node": "^18.11.10",
-    "@types/react": "^18.0.26",
-    "@types/react-bootstrap": "^0.32.32",
-    "@types/react-dom": "^18.0.9",
-    "axios": "^1.2.0",
+    "@bugsnag/js": "^7.25.0",
+    "@bugsnag/plugin-react": "^7.25.0",
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@testing-library/jest-dom": "^6.4.8",
+    "@testing-library/react": "^16.0.0",
+    "@testing-library/user-event": "^14.5.2",
+    "@types/file-saver": "^2.0.7",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^22.4.1",
+    "@types/react": "^18.3.3",
+    "@types/react-bootstrap": "^0.32.37",
+    "@types/react-dom": "^18.3.0",
+    "axios": "^1.7.4",
     "bootstrap": "^4.5.3",
     "bottleneck": "^2.19.5",
-    "eslint-plugin-jest-dom": "^4.0.3",
-    "eslint-plugin-testing-library": "^5.9.1",
+    "eslint-plugin-jest-dom": "^5.4.0",
+    "eslint-plugin-testing-library": "^6.3.0",
     "file-saver": "^2.0.5",
     "jszip": "^3.10.1",
-    "react": "^18.2.0",
+    "react": "^18.3.1",
     "react-bootstrap": "^1.6.1",
-    "react-dom": "^18.2.0",
+    "react-dom": "^18.3.1",
     "react-scripts": "^5.0.1",
-    "stream": "^0.0.2",
-    "typescript": "^4.9.3",
-    "url-search-params-polyfill": "^8.1.1",
-    "web-vitals": "^0.2.4"
+    "stream": "^0.0.3",
+    "typescript": "^5.5.4",
+    "url-search-params-polyfill": "^8.2.5",
+    "web-vitals": "^4.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -46,7 +46,6 @@
     "extends": [
       "react-app",
       "react-app/jest",
-      "plugin:testing-library/react",
       "plugin:jest-dom/recommended"
     ]
   },
@@ -63,12 +62,15 @@
     ]
   },
   "jest": {
-    "transformIgnorePatterns": ["node_modules/(?!axios)/"]
+    "transformIgnorePatterns": [
+      "node_modules/(?!axios)/"
+    ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
     "msw": "^0.49.1",
-    "react-test-renderer": "^18.2.0",
-    "sass": "^1.56.1"
+    "react-test-renderer": "^18.3.1",
+    "sass": "^1.77.8"
   },
   "resolutions": {
     "autoprefixer": "10.4.5"
