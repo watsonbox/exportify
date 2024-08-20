@@ -3,7 +3,6 @@ import { apiCall } from "helpers"
 // Handles cached loading of all or subsets of playlist data
 class PlaylistsData {
   PLAYLIST_LIMIT = 50
-  SEARCH_LIMIT = 20
   PLACEHOLDER = {}
 
   userId: string
@@ -53,12 +52,22 @@ class PlaylistsData {
   async search(query: string) {
     await this.loadAll()
 
-    // Case-insensitive search in playlist name
-    // TODO: Add lazy evaluation for performance?
-    return this.data
-      .filter(p => p)
-      .filter(p => p.name.toLowerCase().includes(query.toLowerCase()))
-      .slice(0, this.SEARCH_LIMIT)
+    let results = this.data.filter(p => p)
+
+    if (query.startsWith("public:")) {
+      return results.filter(p => p.public === query.endsWith(":true"))
+    } else if (query.startsWith("collaborative:")) {
+      return results.filter(p => p.collaborative === query.endsWith(":true"))
+    } else if (query.startsWith("owner:")) {
+      let owner = query.match(/owner:(.*)/)?.at(-1)?.toLowerCase()
+      if (owner === "me") owner = this.userId
+
+      return results.filter(p => p.owner).filter(p => p.owner.display_name.toLowerCase() === owner)
+    } else {
+      // Case-insensitive search in playlist name
+      // TODO: Add lazy evaluation for performance?
+      return results.filter(p => p.name.toLowerCase().includes(query.toLowerCase()))
+    }
   }
 
   async loadAll() {

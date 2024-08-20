@@ -85,9 +85,24 @@ If you're searching for a specific playlist to export, you can use the search fa
 
 <a href="https://watsonbox.github.io/exportify/"><img src="https://user-images.githubusercontent.com/17737/100201109-eb0d7d00-2eff-11eb-993e-7ed955e2361c.gif"/></a>
 
-Please be aware that if you have a very large number of playlists, there may be a small delay before the first search results appear since the Spotify API itself doesn't allow for searching directly, so all playlists are retrieved first.
+- Searching is _case-insensitive_.
+- Search results can be exported as a zip file by clicking "Export Results"
 
-Searching is _case-insensitive_.
+> [!WARNING]
+> Please be aware that if you have a very large number of playlists, there may be a small delay before the first search results appear since the Spotify API itself doesn't allow for searching directly, so all playlists must be retrieved first.
+
+#### Advanced Search Syntax
+
+Certain search queries have special meaning:
+
+| Search query | Meaning |
+|----|----|
+| `public:true` | Only show public playlists |
+| `public:false` | Only show private playlists |
+| `collaborative:true` | Only show collaborative playlists |
+| `collaborative:false` | Don't show collaborative playlists |
+| `owner:me` | Only show playlists I own |
+| `owner:[owner]` | Only show playlists owned by `[owner]` |
 
 
 ## Development
