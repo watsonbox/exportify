@@ -45,6 +45,7 @@ Track data is exported in [UTF-8](https://en.wikipedia.org/wiki/UTF-8) encoded [
 - Explicit?
 - Popularity
 - ISRC ([International Standard Recording Code](https://isrc.ifpi.org/en/))
+- Is Playable - whether the track is playable in the [user's market](https://developer.spotify.com/documentation/web-api/concepts/track-relinking)
 - Added By
 - Added At
 

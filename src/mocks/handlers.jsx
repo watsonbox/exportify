@@ -107,6 +107,7 @@ export const handlers = [
             "href" : "https://api.spotify.com/v1/tracks/1GrLfs4TEvAZ86HVzXHchS",
             "id" : "1GrLfs4TEvAZ86HVzXHchS",
             "is_local" : false,
+            "is_playable": true,
             "name" : "Crying",
             "popularity" : 2,
             "preview_url" : "https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99",
@@ -199,6 +200,7 @@ export const handlers = [
             "href" : "https://api.spotify.com/v1/tracks/1GrLfs4TEvAZ86HVzXHchS",
             "id" : "1GrLfs4TEvAZ86HVzXHchS",
             "is_local" : false,
+            "is_playable": true,
             "name" : "Crying",
             "popularity" : 2,
             "preview_url" : "https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99",
@@ -291,6 +293,7 @@ export const handlers = [
             "uri" : "spotify:user:watsonbox"
           },
           "is_local" : false,
+          "is_playable": true,
           "primary_color" : null,
           "track" : {
             "album" : {
@@ -355,6 +358,7 @@ export const handlers = [
             "href" : "https://api.spotify.com/v1/tracks/7ATyvp3TmYBmGW7YuC8DJ3",
             "id" : "7ATyvp3TmYBmGW7YuC8DJ3",
             "is_local" : false,
+            "is_playable": true,
             "name" : "One Twos / Run Run Run",
             "popularity" : 22,
             "preview_url" : "https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99",
@@ -378,6 +382,7 @@ export const handlers = [
             "uri" : "spotify:user:watsonbox"
           },
           "is_local" : false,
+          "is_playable": true,
           "primary_color" : null,
           "track" : {
             "album" : {
@@ -442,6 +447,7 @@ export const handlers = [
             "href" : "https://api.spotify.com/v1/tracks/0FNanBLvmFEDyD75Whjj52",
             "id" : "0FNanBLvmFEDyD75Whjj52",
             "is_local" : false,
+            "is_playable": true,
             "name" : "Us Against Whatever Ever",
             "popularity" : 36,
             "preview_url" : "https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99",
@@ -630,6 +636,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/1uWQvbywyUeR1uGdNlfsaZ",
               "id" : "1uWQvbywyUeR1uGdNlfsaZ",
               "is_local" : false,
+              "is_playable": true,
               "name" : "I O U Love (Single Edit)",
               "preview_url" : null,
               "track_number" : 1,
@@ -656,6 +663,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/4T03tsWWaVxbKikT7UUrFk",
               "id" : "4T03tsWWaVxbKikT7UUrFk",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Candlelight",
               "preview_url" : null,
               "track_number" : 2,
@@ -682,6 +690,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/1GrLfs4TEvAZ86HVzXHchS",
               "id" : "1GrLfs4TEvAZ86HVzXHchS",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Crying",
               "preview_url" : null,
               "track_number" : 3,
@@ -708,6 +717,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/0tBJh9kQ0KGLR443BVe4W1",
               "id" : "0tBJh9kQ0KGLR443BVe4W1",
               "is_local" : false,
+              "is_playable": true,
               "name" : "For You",
               "preview_url" : null,
               "track_number" : 4,
@@ -734,6 +744,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/1htS4aq15EnMMuQ45rZX3b",
               "id" : "1htS4aq15EnMMuQ45rZX3b",
               "is_local" : false,
+              "is_playable": true,
               "name" : "So Close",
               "preview_url" : null,
               "track_number" : 5,
@@ -760,6 +771,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/0MJj7LrlhVbrndKAspZc2H",
               "id" : "0MJj7LrlhVbrndKAspZc2H",
               "is_local" : false,
+              "is_playable": true,
               "name" : "New Year",
               "preview_url" : null,
               "track_number" : 6,
@@ -786,6 +798,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/5Mu6rl5QEQ0YEhiVopYwJx",
               "id" : "5Mu6rl5QEQ0YEhiVopYwJx",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Eat Junk Become Junk",
               "preview_url" : null,
               "track_number" : 7,
@@ -812,6 +825,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/3ZRm7uHtdFK7arB7M0ncHl",
               "id" : "3ZRm7uHtdFK7arB7M0ncHl",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Bochum (Light Up My Life)",
               "preview_url" : null,
               "track_number" : 8,
@@ -838,6 +852,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/4ee5fN6zpDUMKtCSKeqOiD",
               "id" : "4ee5fN6zpDUMKtCSKeqOiD",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Oh! Dear",
               "preview_url" : null,
               "track_number" : 9,
@@ -864,6 +879,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/6xyBZBa8uITHELycRzF2ry",
               "id" : "6xyBZBa8uITHELycRzF2ry",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Always Waiting For ...",
               "preview_url" : null,
               "track_number" : 10,
@@ -890,6 +906,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/5Vf2ryw6CgbYORNjpMqSaW",
               "id" : "5Vf2ryw6CgbYORNjpMqSaW",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Change",
               "preview_url" : null,
               "track_number" : 11,
@@ -916,6 +933,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/5TpY3R5ceANpoRaISiicPP",
               "id" : "5TpY3R5ceANpoRaISiicPP",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Get A Real Tattoo",
               "preview_url" : null,
               "track_number" : 12,
@@ -942,6 +960,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/3m6Em75ed3zFJY7I3pgJ69",
               "id" : "3m6Em75ed3zFJY7I3pgJ69",
               "is_local" : false,
+              "is_playable": true,
               "name" : "Another Love Song (Peel Session)",
               "preview_url" : null,
               "track_number" : 13,
@@ -968,6 +987,7 @@ export const handlers = [
               "href" : "https://api.spotify.com/v1/tracks/2wEGjrVzVG57e3UjIPdWng",
               "id" : "2wEGjrVzVG57e3UjIPdWng",
               "is_local" : false,
+              "is_playable": true,
               "name" : "European Me (Live Student Radio Session)",
               "preview_url" : null,
               "track_number" : 14,
@@ -1032,6 +1052,7 @@ export const nullTrackHandlers = [
               "uri" : "spotify:user:"
             },
             "is_local" : false,
+            "is_playable": true,
             "primary_color" : null,
             "track" : null,
             "video_thumbnail" : {
@@ -1068,6 +1089,7 @@ export const localTrackHandlers = [
               "uri" : "spotify:user:u8ins5esg43wtxk4h66o5d1nb"
             },
             "is_local" : true,
+            "is_playable": true,
             "primary_color" : null,
             "track" : {
               "album" : {
@@ -1101,6 +1123,7 @@ export const localTrackHandlers = [
               "href" : null,
               "id" : null,
               "is_local" : true,
+              "is_playable": true,
               "name" : "Heart of Stone",
               "popularity" : 0,
               "preview_url" : null,
@@ -1123,6 +1146,7 @@ export const localTrackHandlers = [
               "uri" : "spotify:user:u8ins5esg43wtxk4h66o5d1nb"
             },
             "is_local" : true,
+            "is_playable": true,
             "primary_color" : null,
             "track" : {
               "album" : {
@@ -1156,6 +1180,7 @@ export const localTrackHandlers = [
               "href" : null,
               "id" : null,
               "is_local" : true,
+              "is_playable": true,
               "name" : "Heard It Through The Red Wine",
               "popularity" : 0,
               "preview_url" : null,
@@ -1197,6 +1222,7 @@ export const duplicateTrackHandlers = [
               "uri" : "spotify:user:watsonbox"
             },
             "is_local" : false,
+            "is_playable": true,
             "primary_color" : null,
             "track" : {
               "album" : {
@@ -1261,6 +1287,7 @@ export const duplicateTrackHandlers = [
               "href" : "https://api.spotify.com/v1/tracks/7ATyvp3TmYBmGW7YuC8DJ3",
               "id" : "7ATyvp3TmYBmGW7YuC8DJ3",
               "is_local" : false,
+              "is_playable": true,
               "name" : "One Twos / Run Run Run",
               "popularity" : 22,
               "preview_url" : "https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99",
@@ -1285,6 +1312,7 @@ export const duplicateTrackHandlers = [
               "uri" : "spotify:user:watsonbox"
             },
             "is_local" : false,
+            "is_playable": true,
             "primary_color" : null,
             "track" : {
               "album" : {
@@ -1349,6 +1377,7 @@ export const duplicateTrackHandlers = [
               "href" : "https://api.spotify.com/v1/tracks/7ATyvp3TmYBmGW7YuC8DJ3",
               "id" : "7ATyvp3TmYBmGW7YuC8DJ3",
               "is_local" : false,
+              "is_playable": true,
               "name" : "One Twos / Run Run Run",
               "popularity" : 22,
               "preview_url" : "https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99",
