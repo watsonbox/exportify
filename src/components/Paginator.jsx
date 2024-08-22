@@ -19,7 +19,7 @@ class Paginator extends React.Component {
 
   render() {
     return (
-      <nav className="paginator text-right">
+      <nav className="paginator text-end">
         <ul className="pagination pagination-sm">
           <li className={this.props.currentPage <= 1 ? 'page-item disabled' : 'page-item'}>
             { /* eslint-disable-next-line  */ }

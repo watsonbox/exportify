@@ -21,7 +21,22 @@ server.listen({
 })
 
 beforeAll(() => {
-  global.Blob = function (content, options) { return  ({content, options}) }
+  global.Blob = function (content, options) { return ({ content, options }) }
+
+  // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
+  Object.defineProperty(window, 'matchMedia', {
+    writable: true,
+    value: jest.fn().mockImplementation(query => ({
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: jest.fn(), // Deprecated
+      removeListener: jest.fn(), // Deprecated
+      addEventListener: jest.fn(),
+      removeEventListener: jest.fn(),
+      dispatchEvent: jest.fn(),
+    })),
+  });
 })
 
 const { location } = window
@@ -93,10 +108,10 @@ describe("single playlist exporting", () => {
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        [ 'https://api.spotify.com/v1/me' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ]
+        ['https://api.spotify.com/v1/me'],
+        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
+        ['https://api.spotify.com/v1/users/watsonbox/tracks'],
+        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50']
       ])
     })
 
@@ -145,11 +160,11 @@ describe("single playlist exporting", () => {
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        [ 'https://api.spotify.com/v1/me' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
-        [ 'https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz' ]
+        ['https://api.spotify.com/v1/me'],
+        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
+        ['https://api.spotify.com/v1/users/watsonbox/tracks'],
+        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
+        ['https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz']
       ])
     })
 
@@ -198,11 +213,11 @@ describe("single playlist exporting", () => {
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        [ 'https://api.spotify.com/v1/me' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
-        [ 'https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS' ]
+        ['https://api.spotify.com/v1/me'],
+        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
+        ['https://api.spotify.com/v1/users/watsonbox/tracks'],
+        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
+        ['https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS']
       ])
     })
 
@@ -251,11 +266,11 @@ describe("single playlist exporting", () => {
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        [ 'https://api.spotify.com/v1/me' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
-        [ 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi' ]
+        ['https://api.spotify.com/v1/me'],
+        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
+        ['https://api.spotify.com/v1/users/watsonbox/tracks'],
+        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
+        ['https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi']
       ])
     })
 
@@ -306,11 +321,11 @@ describe("single playlist exporting", () => {
 
     await waitFor(() => {
       expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        [ 'https://api.spotify.com/v1/me' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20' ],
-        [ 'https://api.spotify.com/v1/users/watsonbox/tracks' ],
-        [ 'https://api.spotify.com/v1/me/tracks?offset=0&limit=50' ],
-        [ 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi' ]
+        ['https://api.spotify.com/v1/me'],
+        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
+        ['https://api.spotify.com/v1/users/watsonbox/tracks'],
+        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
+        ['https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi']
       ])
     })
 

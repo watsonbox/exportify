@@ -6,16 +6,41 @@ $btn-transition: none;
 $body-color: #191414;
 $input-btn-focus-box-shadow: none;
 $input-placeholder-color: #dee2e6;
+$link-decoration: none;
+$link-hover-decoration: underline;
+$pagination-focus-box-shadow: none;
+$pagination-focus-bg: none;
 
 @import "~bootstrap/scss/bootstrap";
 
+h1 a {
+  color: var(--bs-dark);
+  text-decoration: none;
+
+  &:hover {
+    color: var(--bs-dark);
+    text-decoration: none;
+  }
+}
+
+@include color-mode(dark) {
+
+  h1 a,
+  h1 a:hover {
+    color: var(--bs-light);
+  }
+}
 
 // Small button styles
-$btn-padding-x-xs:  .35rem !default;
-$btn-padding-y-xs:  .12rem !default;
+$btn-padding-x-xs: .35rem !default;
+$btn-padding-y-xs: .12rem !default;
 $input-btn-line-height-xs: 1.3 !default;
 
+.btn-primary {
+  color: #fff !important;
+}
+
 .btn.btn-xs {
-   // line-height: ensure proper height of button next to small input
-   @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $font-size-sm, $input-btn-line-height-xs, $btn-border-radius-sm);
+  // line-height: ensure proper height of button next to small input
+  @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $font-size-sm, $btn-border-radius-sm);
 }

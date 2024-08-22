@@ -39,7 +39,7 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
         <Dropdown.Toggle variant="link">
           <FontAwesomeIcon icon={['fas', 'cog']} size="lg" spin={this.state.spin} />
         </Dropdown.Toggle>
-        <Dropdown.Menu align="right">
+        <Dropdown.Menu align="end">
           <Dropdown.Item onClickCapture={this.handleCheckClick} as="div">
             <Form.Check
               id="config-include-artists-data"
