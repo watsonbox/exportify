@@ -249,16 +249,12 @@ exports[`playlist loading 1`] = `
         <td>
           <svg
             aria-hidden="true"
-            className="svg-inline--fa fa-circle-xmark fa-sm "
+            className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
             data-icon="circle-xmark"
             data-prefix="far"
             focusable="false"
             role="img"
-            style={
-              Object {
-                "color": "#ECEBE8",
-              }
-            }
+            style={Object {}}
             viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -272,16 +268,12 @@ exports[`playlist loading 1`] = `
         <td>
           <svg
             aria-hidden="true"
-            className="svg-inline--fa fa-circle-xmark fa-sm "
+            className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
             data-icon="circle-xmark"
             data-prefix="far"
             focusable="false"
             role="img"
-            style={
-              Object {
-                "color": "#ECEBE8",
-              }
-            }
+            style={Object {}}
             viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -362,16 +354,12 @@ exports[`playlist loading 1`] = `
         <td>
           <svg
             aria-hidden="true"
-            className="svg-inline--fa fa-circle-xmark fa-sm "
+            className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
             data-icon="circle-xmark"
             data-prefix="far"
             focusable="false"
             role="img"
-            style={
-              Object {
-                "color": "#ECEBE8",
-              }
-            }
+            style={Object {}}
             viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -385,16 +373,12 @@ exports[`playlist loading 1`] = `
         <td>
           <svg
             aria-hidden="true"
-            className="svg-inline--fa fa-circle-xmark fa-sm "
+            className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
             data-icon="circle-xmark"
             data-prefix="far"
             focusable="false"
             role="img"
-            style={
-              Object {
-                "color": "#ECEBE8",
-              }
-            }
+            style={Object {}}
             viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
           >

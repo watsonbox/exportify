@@ -29,7 +29,7 @@ class PlaylistRow extends React.Component {
     if (condition) {
       return <FontAwesomeIcon icon={['far', 'check-circle']} size="sm" />
     } else {
-      return <FontAwesomeIcon icon={['far', 'times-circle']} size="sm" style={{ color: '#ECEBE8' }} />
+      return <FontAwesomeIcon icon={['far', 'times-circle']} size="sm" className="opacity-25" />
     }
   }
 
