@@ -105,7 +105,7 @@ class PlaylistTable extends React.Component {
           this.setSubtitle(`${min}-${max} of ${this.state.playlistCount} playlists for ${this.userId}`)
         }
       )
-    } catch(error) {
+    } catch (error) {
       apiCallErrorHandler(error)
     }
   }
@@ -156,7 +156,7 @@ class PlaylistTable extends React.Component {
         { currentPage: page },
         this.loadCurrentPlaylistPage
       )
-    } catch(error) {
+    } catch (error) {
       apiCallErrorHandler(error)
     }
   }
@@ -183,7 +183,7 @@ class PlaylistTable extends React.Component {
       )
 
       await this.loadCurrentPlaylistPage()
-    } catch(error) {
+    } catch (error) {
       apiCallErrorHandler(error)
     }
   }
@@ -200,42 +200,44 @@ class PlaylistTable extends React.Component {
             <ConfigDropdown onConfigChanged={this.handleConfigChanged} ref={this.configDropdown} />
             {this.state.progressBar.show && progressBar}
           </div>
-          <table className="table table-hover table-sm">
-            <thead>
-              <tr>
-                <th style={{width: "30px"}}></th>
-                <th>Name</th>
-                <th style={{width: "150px"}}>Owner</th>
-                <th style={{width: "100px"}}>Tracks</th>
-                <th style={{width: "120px"}}>Public?</th>
-                <th style={{width: "120px"}}>Collaborative?</th>
-                <th style={{ width: "100px" }} className="text-end">
-                  <PlaylistsExporter
+          <div className="table-responsive-sm">
+            <table className="table table-hover table-sm">
+              <thead>
+                <tr>
+                  <th style={{ width: "30px" }}></th>
+                  <th>Name</th>
+                  <th style={{ width: "150px" }}>Owner</th>
+                  <th style={{ width: "100px" }} className="d-none d-sm-table-cell">Tracks</th>
+                  <th style={{ width: "120px" }} className="d-none d-sm-table-cell">Public?</th>
+                  <th style={{ width: "120px" }} className="d-none d-md-table-cell">Collaborative?</th>
+                  <th style={{ width: "100px" }} className="text-end">
+                    <PlaylistsExporter
+                      accessToken={this.props.accessToken}
+                      onPlaylistsExportDone={this.handlePlaylistsExportDone}
+                      onPlaylistExportStarted={this.handlePlaylistExportStarted}
+                      playlistsData={this.playlistsData}
+                      searchQuery={this.state.searchQuery}
+                      config={this.state.config}
+                    />
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.playlists.map((playlist, i) => {
+                  return <PlaylistRow
+                    playlist={playlist}
+                    key={playlist.id}
                     accessToken={this.props.accessToken}
-                    onPlaylistsExportDone={this.handlePlaylistsExportDone}
-                    onPlaylistExportStarted={this.handlePlaylistExportStarted}
-                    playlistsData={this.playlistsData}
-                    searchQuery={this.state.searchQuery}
                     config={this.state.config}
                   />
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.playlists.map((playlist, i) => {
-                return <PlaylistRow
-                  playlist={playlist}
-                  key={playlist.id}
-                  accessToken={this.props.accessToken}
-                  config={this.state.config}
-                />
-              })}
-            </tbody>
-          </table>
+                })}
+              </tbody>
+            </table>
+          </div>
           <div id="playlistsFooter">
             <Paginator currentPage={this.state.currentPage} pageLimit={this.state.searchQuery === "" ? this.PAGE_SIZE : this.state.playlistCount} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged} />
           </div>
-        </div>
+        </div >
       );
     } else {
       return <div className="spinner" data-testid="playlistTableSpinner"></div>

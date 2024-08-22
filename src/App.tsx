@@ -29,6 +29,7 @@ function App() {
   return (
     <div className="App container">
       <header className="App-header">
+        <div className="d-sm-none d-block mb-4" />
         <TopMenu loggedIn={key.has('access_token')} />
         <h1>
           <FontAwesomeIcon icon={['fab', 'spotify']} color="#84BD00" size="sm" /> <a href={process.env.PUBLIC_URL}>Exportify</a>

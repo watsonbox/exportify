@@ -45,13 +45,13 @@ class PlaylistRow extends React.Component {
     let playlist = this.props.playlist
     const icon = ['fas', (this.state.exporting ? 'sync' : 'download')]
 
-    if(playlist.uri==null) return (
+    if (playlist.uri == null) return (
       <tr key={playlist.name}>
         <td>{this.renderIcon(playlist)}</td>
         <td>{playlist.name}</td>
-        <td colSpan="2">This playlist is not supported</td>
-        <td>{this.renderTickCross(playlist.public)}</td>
-        <td>{this.renderTickCross(playlist.collaborative)}</td>
+        <td className="d-none d-sm-table-cell" colSpan="2">This playlist is not supported</td>
+        <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
+        <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td>&nbsp;</td>
       </tr>
     );
@@ -61,9 +61,9 @@ class PlaylistRow extends React.Component {
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
         <td><a href={playlist.owner.uri}>{playlist.owner.display_name}</a></td>
-        <td>{playlist.tracks.total}</td>
-        <td>{this.renderTickCross(playlist.public)}</td>
-        <td>{this.renderTickCross(playlist.collaborative)}</td>
+        <td className="d-none d-sm-table-cell">{playlist.tracks.total}</td>
+        <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
+        <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-end">
           <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} disabled={this.state.exporting} className="text-nowrap">
             <FontAwesomeIcon icon={icon} size="sm" spin={this.state.exporting} /> Export
