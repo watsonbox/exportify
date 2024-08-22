@@ -8,7 +8,7 @@ exports[`playlist loading 1`] = `
     id="playlistsHeader"
   >
     <nav
-      className="paginator text-right"
+      className="paginator text-end"
     >
       <ul
         className="pagination pagination-sm"
@@ -54,39 +54,35 @@ exports[`playlist loading 1`] = `
         className="input-group"
       >
         <input
-          className="border-right-0 border form-control form-control-sm"
+          className="border-end-0 border form-control form-control-sm"
           onChange={[Function]}
           onKeyDown={[Function]}
           placeholder="Search"
           role="searchbox"
           type="text"
         />
-        <div
-          className="input-group-append"
+        <span
+          className="bg-transparent input-group-text"
         >
-          <span
-            className="bg-transparent input-group-text"
+          <svg
+            aria-hidden="true"
+            className="svg-inline--fa fa-magnifying-glass fa-sm searchIcon"
+            data-icon="magnifying-glass"
+            data-prefix="fas"
+            focusable="false"
+            onClick={[Function]}
+            role="img"
+            style={Object {}}
+            viewBox="0 0 512 512"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-magnifying-glass fa-sm searchIcon"
-              data-icon="magnifying-glass"
-              data-prefix="fas"
-              focusable="false"
-              onClick={[Function]}
-              role="img"
+            <path
+              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              fill="currentColor"
               style={Object {}}
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
-                fill="currentColor"
-                style={Object {}}
-              />
-            </svg>
-          </span>
-        </div>
+            />
+          </svg>
+        </span>
       </div>
     </form>
     <div
@@ -94,9 +90,9 @@ exports[`playlist loading 1`] = `
     >
       <button
         aria-expanded={false}
-        aria-haspopup={true}
         className="dropdown-toggle btn btn-link"
         disabled={false}
+        id="react-aria-:r0:"
         onClick={[Function]}
         type="button"
       >
@@ -172,7 +168,7 @@ exports[`playlist loading 1`] = `
           Collaborative?
         </th>
         <th
-          className="text-right"
+          className="text-end"
           style={
             Object {
               "width": "100px",
@@ -297,7 +293,7 @@ exports[`playlist loading 1`] = `
           </svg>
         </td>
         <td
-          className="text-right"
+          className="text-end"
         >
           <button
             className="text-nowrap btn btn-primary btn-xs"
@@ -410,7 +406,7 @@ exports[`playlist loading 1`] = `
           </svg>
         </td>
         <td
-          className="text-right"
+          className="text-end"
         >
           <button
             className="text-nowrap btn btn-primary btn-xs"
@@ -445,7 +441,7 @@ exports[`playlist loading 1`] = `
     id="playlistsFooter"
   >
     <nav
-      className="paginator text-right"
+      className="paginator text-end"
     >
       <ul
         className="pagination pagination-sm"

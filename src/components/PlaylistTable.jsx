@@ -209,7 +209,7 @@ class PlaylistTable extends React.Component {
                 <th style={{width: "100px"}}>Tracks</th>
                 <th style={{width: "120px"}}>Public?</th>
                 <th style={{width: "120px"}}>Collaborative?</th>
-                <th style={{width: "100px"}} className="text-right">
+                <th style={{ width: "100px" }} className="text-end">
                   <PlaylistsExporter
                     accessToken={this.props.accessToken}
                     onPlaylistsExportDone={this.handlePlaylistsExportDone}

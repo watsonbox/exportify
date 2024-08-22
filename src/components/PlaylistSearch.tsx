@@ -73,12 +73,11 @@ class PlaylistSearch extends React.Component<PlaylistSearchProps> {
     return (
       <Form className={className}>
         <InputGroup>
-          <Form.Control type="text" role="searchbox" placeholder="Search" size="sm" onChange={this.handleChange} onKeyDown={this.handleKeyDown} ref={this.searchField} className="border-right-0 border" />
-          <InputGroup.Append>
-            <InputGroup.Text className="bg-transparent">
-              {icon}
-            </InputGroup.Text>
-          </InputGroup.Append>
+          <Form.Control type="text" role="searchbox" placeholder="Search" size="sm" onChange={this.handleChange} onKeyDown={this.handleKeyDown} ref={this.searchField} className="border-end-0 border" />
+          <InputGroup.Text className="bg-transparent">
+            {icon}
+          </InputGroup.Text>
+
         </InputGroup>
       </Form>
     )

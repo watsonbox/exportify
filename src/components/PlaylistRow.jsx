@@ -64,7 +64,7 @@ class PlaylistRow extends React.Component {
         <td>{playlist.tracks.total}</td>
         <td>{this.renderTickCross(playlist.public)}</td>
         <td>{this.renderTickCross(playlist.collaborative)}</td>
-        <td className="text-right">
+        <td className="text-end">
           <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} disabled={this.state.exporting} className="text-nowrap">
             <FontAwesomeIcon icon={icon} size="sm" spin={this.state.exporting} /> Export
           </Button>
