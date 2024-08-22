@@ -7,11 +7,21 @@ import JSZip from "jszip"
 import PlaylistExporter from "./PlaylistExporter"
 import { apiCallErrorHandler } from "helpers"
 
+type PlaylistsExporterProps = {
+  accessToken: string
+  playlistsData: any
+  searchQuery: string
+  config: any
+  onLoadedPlaylistCountChanged: () => void
+  onPlaylistExportStarted: (playlistName: string, doneCount: number) => void
+  onPlaylistsExportDone: () => void
+}
+
 // Handles exporting all playlist data as a zip file
-class PlaylistsExporter extends React.Component {
-  async export(accessToken, playlistsData, searchQuery, config) {
-    let playlistFileNames = []
-    let playlistCsvExports = []
+class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
+  async export(accessToken: string, playlistsData: any, searchQuery: string, config: any) {
+    let playlistFileNames = new Set<string>()
+    let playlistCsvExports = new Array<string>()
 
     const playlists = searchQuery === "" ?
       await playlistsData.all(this.props.onLoadedPlaylistCountChanged) :
@@ -24,8 +34,13 @@ class PlaylistsExporter extends React.Component {
 
       let exporter = new PlaylistExporter(accessToken, playlist, config)
       let csvData = await exporter.csvData()
+      let fileName = exporter.fileName(false)
 
-      playlistFileNames.push(exporter.fileName(playlist))
+      for (let i = 1; playlistFileNames.has(fileName + exporter.fileExtension()); i++) {
+        fileName = exporter.fileName(false) + ` (${i})`
+      }
+
+      playlistFileNames.add(fileName + exporter.fileExtension())
       playlistCsvExports.push(csvData)
 
       doneCount++
@@ -35,11 +50,11 @@ class PlaylistsExporter extends React.Component {
 
     var zip = new JSZip()
 
-    playlistCsvExports.forEach(function(csv, i) {
-      zip.file(playlistFileNames[i], csv)
+    Array.from(playlistFileNames).forEach(function (fileName, i) {
+      zip.file(fileName, playlistCsvExports[i])
     })
 
-    zip.generateAsync({ type: "blob" }).then(function(content) {
+    zip.generateAsync({ type: "blob" }).then(function (content) {
       saveAs(content, "spotify_playlists.zip");
     })
   }
@@ -56,6 +71,7 @@ class PlaylistsExporter extends React.Component {
   render() {
     const text = this.props.searchQuery === "" ? "Export All" : "Export Results"
 
+    // @ts-ignore
     return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap">
       <FontAwesomeIcon icon={['far', 'file-archive']} /> {text}
     </Button>

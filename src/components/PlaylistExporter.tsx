@@ -83,7 +83,7 @@ class PlaylistExporter {
   async export() {
     return this.csvData().then((data) => {
       var blob = new Blob([ data ], { type: "text/csv;charset=utf-8" })
-      saveAs(blob, this.fileName(), true)
+      saveAs(blob, this.fileName(), { autoBom: false })
     })
   }
 
@@ -111,8 +111,12 @@ class PlaylistExporter {
     return tracksCsvFile.content()
   }
 
-  fileName(): string {
-    return this.playlist.name.replace(/[\x00-\x1F\x7F/\\<>:;"|=,.?*[\] ]+/g, "_").toLowerCase() + ".csv" // eslint-disable-line no-control-regex
+  fileName(withExtension = true): string {
+    return this.playlist.name.replace(/[\x00-\x1F\x7F/\\<>:;"|=,.?*[\] ]+/g, "_").toLowerCase() + (withExtension ? this.fileExtension() : "") // eslint-disable-line no-control-regex
+  }
+
+  fileExtension(): string {
+    return ".csv"
   }
 }
 

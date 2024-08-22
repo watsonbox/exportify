@@ -113,7 +113,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'liked.csv',
-      true
+      { "autoBom": false }
     )
   })
 
@@ -166,7 +166,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'liked.csv',
-      true
+      { "autoBom": false }
     )
   })
 
@@ -219,7 +219,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'liked.csv',
-      true
+      { "autoBom": false }
     )
   })
 
@@ -272,7 +272,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'liked.csv',
-      true
+      { "autoBom": false }
     )
   })
 
@@ -327,7 +327,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'liked.csv',
-      true
+      { "autoBom": false }
     )
   })
 
@@ -359,7 +359,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      true
+      { "autoBom": false }
     )
   })
 
@@ -393,7 +393,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      true
+      { "autoBom": false }
     )
   })
 
@@ -427,7 +427,7 @@ describe("single playlist exporting", () => {
         options: { type: 'text/csv;charset=utf-8' }
       },
       'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      true
+      { "autoBom": false }
     )
   })
 })
