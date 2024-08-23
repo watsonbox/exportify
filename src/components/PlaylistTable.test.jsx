@@ -59,14 +59,11 @@ const baseTrackDataCrying = '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","sp
 
 // Use a snapshot test to ensure exact component rendering
 test("playlist loading", async () => {
-  const component = renderer.create(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
-  const instance = component.getInstance()
+  const { asFragment } = render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
 
-  await waitFor(() => {
-    expect(instance.state.playlistCount).toEqual(1)
-  })
+  expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
-  expect(component.toJSON()).toMatchSnapshot();
+  expect(asFragment()).toMatchSnapshot();
 })
 
 test("redirecting when access token is invalid", async () => {

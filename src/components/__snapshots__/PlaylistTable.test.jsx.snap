@@ -1,488 +1,425 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`playlist loading 1`] = `
-<div
-  id="playlists"
->
+<DocumentFragment>
   <div
-    id="playlistsHeader"
+    id="playlists"
   >
-    <nav
-      className="paginator text-end"
+    <div
+      id="playlistsHeader"
     >
-      <ul
-        className="pagination pagination-sm"
+      <nav
+        class="paginator text-end"
       >
-        <li
-          className="page-item disabled"
+        <ul
+          class="pagination pagination-sm"
         >
-          <a
-            aria-label="Previous"
-            className="page-link"
-            href="#"
-            onClick={[Function]}
+          <li
+            class="page-item disabled"
           >
-            <span
-              aria-hidden="true"
+            <a
+              aria-label="Previous"
+              class="page-link"
+              href="#"
             >
-              «
-            </span>
-          </a>
-        </li>
-        <li
-          className="page-item disabled"
+              <span
+                aria-hidden="true"
+              >
+                «
+              </span>
+            </a>
+          </li>
+          <li
+            class="page-item disabled"
+          >
+            <a
+              aria-label="Next"
+              class="page-link"
+              href="#"
+            >
+              <span
+                aria-hidden="true"
+              >
+                »
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <form
+        class="search"
+      >
+        <div
+          class="input-group"
         >
-          <a
-            aria-label="Next"
-            className="page-link"
-            href="#"
-            onClick={[Function]}
+          <input
+            class="border-end-0 border form-control form-control-sm"
+            placeholder="Search"
+            role="searchbox"
+            type="text"
+          />
+          <span
+            class="bg-transparent input-group-text"
           >
-            <span
+            <svg
               aria-hidden="true"
+              class="svg-inline--fa fa-magnifying-glass fa-sm searchIcon"
+              data-icon="magnifying-glass"
+              data-prefix="fas"
+              focusable="false"
+              role="img"
+              viewBox="0 0 512 512"
+              xmlns="http://www.w3.org/2000/svg"
             >
-              »
-            </span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-    <form
-      className="search"
-    >
+              <path
+                d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+                fill="currentColor"
+              />
+            </svg>
+          </span>
+        </div>
+      </form>
       <div
-        className="input-group"
+        class="dropdown"
       >
-        <input
-          className="border-end-0 border form-control form-control-sm"
-          onChange={[Function]}
-          onKeyDown={[Function]}
-          placeholder="Search"
-          role="searchbox"
-          type="text"
-        />
-        <span
-          className="bg-transparent input-group-text"
+        <button
+          aria-expanded="false"
+          class="dropdown-toggle btn btn-link"
+          id="react-aria-:r0:"
+          type="button"
         >
           <svg
             aria-hidden="true"
-            className="svg-inline--fa fa-magnifying-glass fa-sm searchIcon"
-            data-icon="magnifying-glass"
+            class="svg-inline--fa fa-gear fa-lg "
+            data-icon="gear"
             data-prefix="fas"
             focusable="false"
-            onClick={[Function]}
             role="img"
-            style={Object {}}
             viewBox="0 0 512 512"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"
+              d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"
               fill="currentColor"
-              style={Object {}}
             />
           </svg>
-        </span>
+        </button>
       </div>
-    </form>
-    <div
-      className="dropdown"
-    >
-      <button
-        aria-expanded={false}
-        className="dropdown-toggle btn btn-link"
-        disabled={false}
-        id="react-aria-:r0:"
-        onClick={[Function]}
-        type="button"
-      >
-        <svg
-          aria-hidden="true"
-          className="svg-inline--fa fa-gear fa-lg "
-          data-icon="gear"
-          data-prefix="fas"
-          focusable="false"
-          role="img"
-          style={Object {}}
-          viewBox="0 0 512 512"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.3-15.8 34.3l-4.7 8.1c-6.6 11-14 21.4-22.1 31.2c-5.9 7.2-15.7 9.6-24.5 6.8l-55.7-17.7c-13.4 10.3-28.2 18.9-44 25.4l-12.5 57.1c-2 9.1-9 16.3-18.2 17.8c-13.8 2.3-28 3.5-42.5 3.5s-28.7-1.2-42.5-3.5c-9.2-1.5-16.2-8.7-18.2-17.8l-12.5-57.1c-15.8-6.5-30.6-15.1-44-25.4L83.1 425.9c-8.8 2.8-18.6 .3-24.5-6.8c-8.1-9.8-15.5-20.2-22.1-31.2l-4.7-8.1c-6.1-11-11.4-22.4-15.8-34.3c-3.2-8.7-.5-18.4 6.4-24.6l43.3-39.4C64.6 273.1 64 264.6 64 256s.6-17.1 1.7-25.4L22.4 191.2c-6.9-6.2-9.6-15.9-6.4-24.6c4.4-11.9 9.7-23.3 15.8-34.3l4.7-8.1c6.6-11 14-21.4 22.1-31.2c5.9-7.2 15.7-9.6 24.5-6.8l55.7 17.7c13.4-10.3 28.2-18.9 44-25.4l12.5-57.1c2-9.1 9-16.3 18.2-17.8C227.3 1.2 241.5 0 256 0s28.7 1.2 42.5 3.5c9.2 1.5 16.2 8.7 18.2 17.8l12.5 57.1c15.8 6.5 30.6 15.1 44 25.4l55.7-17.7c8.8-2.8 18.6-.3 24.5 6.8c8.1 9.8 15.5 20.2 22.1 31.2l4.7 8.1c6.1 11 11.4 22.4 15.8 34.3zM256 336a80 80 0 1 0 0-160 80 80 0 1 0 0 160z"
-            fill="currentColor"
-            style={Object {}}
-          />
-        </svg>
-      </button>
     </div>
-  </div>
-  <div
-    className="table-responsive-sm"
-  >
-    <table
-      className="table table-hover table-sm"
+    <div
+      class="table-responsive-sm"
     >
-      <thead>
-        <tr>
-          <th
-            style={
-              Object {
-                "width": "30px",
-              }
-            }
-          />
-          <th>
-            Name
-          </th>
-          <th
-            style={
-              Object {
-                "width": "150px",
-              }
-            }
-          >
-            Owner
-          </th>
-          <th
-            className="d-none d-sm-table-cell"
-            style={
-              Object {
-                "width": "100px",
-              }
-            }
-          >
-            Tracks
-          </th>
-          <th
-            className="d-none d-sm-table-cell"
-            style={
-              Object {
-                "width": "120px",
-              }
-            }
-          >
-            Public?
-          </th>
-          <th
-            className="d-none d-md-table-cell"
-            style={
-              Object {
-                "width": "120px",
-              }
-            }
-          >
-            Collaborative?
-          </th>
-          <th
-            className="text-end"
-            style={
-              Object {
-                "width": "100px",
-              }
-            }
-          >
-            <button
-              className="text-nowrap btn btn-outline-secondary btn-xs"
-              disabled={false}
-              onClick={[Function]}
-              type="submit"
+      <table
+        class="table table-hover table-sm"
+      >
+        <thead>
+          <tr>
+            <th
+              style="width: 30px;"
+            />
+            <th>
+              Name
+            </th>
+            <th
+              style="width: 150px;"
             >
+              Owner
+            </th>
+            <th
+              class="d-none d-sm-table-cell"
+              style="width: 100px;"
+            >
+              Tracks
+            </th>
+            <th
+              class="d-none d-sm-table-cell"
+              style="width: 120px;"
+            >
+              Public?
+            </th>
+            <th
+              class="d-none d-md-table-cell"
+              style="width: 120px;"
+            >
+              Collaborative?
+            </th>
+            <th
+              class="text-end"
+              style="width: 100px;"
+            >
+              <button
+                class="text-nowrap btn btn-outline-secondary btn-xs"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-file-zipper "
+                  data-icon="file-zipper"
+                  data-prefix="far"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 384 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M64 464c-8.8 0-16-7.2-16-16L48 64c0-8.8 7.2-16 16-16l48 0c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l48 0 0 80c0 17.7 14.3 32 32 32l80 0 0 288c0 8.8-7.2 16-16 16L64 464zM64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-293.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0L64 0zm48 112c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm0 64c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm-6.3 71.8L82.1 335.9c-1.4 5.4-2.1 10.9-2.1 16.4c0 35.2 28.8 63.7 64 63.7s64-28.5 64-63.7c0-5.5-.7-11.1-2.1-16.4l-23.5-88.2c-3.7-14-16.4-23.8-30.9-23.8l-14.8 0c-14.5 0-27.2 9.7-30.9 23.8zM128 336l32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
+                    fill="currentColor"
+                  />
+                </svg>
+                 Export All
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
               <svg
                 aria-hidden="true"
-                className="svg-inline--fa fa-file-zipper "
-                data-icon="file-zipper"
+                class="svg-inline--fa fa-heart "
+                data-icon="heart"
                 data-prefix="far"
                 focusable="false"
                 role="img"
-                style={Object {}}
-                viewBox="0 0 384 512"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M64 464c-8.8 0-16-7.2-16-16L48 64c0-8.8 7.2-16 16-16l48 0c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l48 0 0 80c0 17.7 14.3 32 32 32l80 0 0 288c0 8.8-7.2 16-16 16L64 464zM64 0C28.7 0 0 28.7 0 64L0 448c0 35.3 28.7 64 64 64l256 0c35.3 0 64-28.7 64-64l0-293.5c0-17-6.7-33.3-18.7-45.3L274.7 18.7C262.7 6.7 246.5 0 229.5 0L64 0zm48 112c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm0 64c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm-6.3 71.8L82.1 335.9c-1.4 5.4-2.1 10.9-2.1 16.4c0 35.2 28.8 63.7 64 63.7s64-28.5 64-63.7c0-5.5-.7-11.1-2.1-16.4l-23.5-88.2c-3.7-14-16.4-23.8-30.9-23.8l-14.8 0c-14.5 0-27.2 9.7-30.9 23.8zM128 336l32 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-32 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"
-                  fill="currentColor"
-                  style={Object {}}
-                />
-              </svg>
-               
-              Export All
-            </button>
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-heart "
-              data-icon="heart"
-              data-prefix="far"
-              focusable="false"
-              role="img"
-              style={
-                Object {
-                  "color": "red",
-                }
-              }
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8l0-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5l0 3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20-.1-.1s0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5l0 3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2l0-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"
-                fill="currentColor"
-                style={Object {}}
-              />
-            </svg>
-          </td>
-          <td>
-            <a
-              href="spotify:user:watsonbox:saved"
-            >
-              Liked
-            </a>
-          </td>
-          <td>
-            <a
-              href="spotify:user:watsonbox"
-            >
-              watsonbox
-            </a>
-          </td>
-          <td
-            className="d-none d-sm-table-cell"
-          >
-            1
-          </td>
-          <td
-            className="d-none d-sm-table-cell"
-          >
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
-              data-icon="circle-xmark"
-              data-prefix="far"
-              focusable="false"
-              role="img"
-              style={Object {}}
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
-                fill="currentColor"
-                style={Object {}}
-              />
-            </svg>
-          </td>
-          <td
-            className="d-none d-md-table-cell"
-          >
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
-              data-icon="circle-xmark"
-              data-prefix="far"
-              focusable="false"
-              role="img"
-              style={Object {}}
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
-                fill="currentColor"
-                style={Object {}}
-              />
-            </svg>
-          </td>
-          <td
-            className="text-end"
-          >
-            <button
-              className="text-nowrap btn btn-primary btn-xs"
-              disabled={false}
-              onClick={[Function]}
-              type="submit"
-            >
-              <svg
-                aria-hidden="true"
-                className="svg-inline--fa fa-download fa-sm "
-                data-icon="download"
-                data-prefix="fas"
-                focusable="false"
-                role="img"
-                style={Object {}}
+                style="color: red;"
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
+                  d="M225.8 468.2l-2.5-2.3L48.1 303.2C17.4 274.7 0 234.7 0 192.8l0-3.3c0-70.4 50-130.8 119.2-144C158.6 37.9 198.9 47 231 69.6c9 6.4 17.4 13.8 25 22.3c4.2-4.8 8.7-9.2 13.5-13.3c3.7-3.2 7.5-6.2 11.5-9c0 0 0 0 0 0C313.1 47 353.4 37.9 392.8 45.4C462 58.6 512 119.1 512 189.5l0 3.3c0 41.9-17.4 81.9-48.1 110.4L288.7 465.9l-2.5 2.3c-8.2 7.6-19 11.9-30.2 11.9s-22-4.2-30.2-11.9zM239.1 145c-.4-.3-.7-.7-1-1.1l-17.8-20-.1-.1s0 0 0 0c-23.1-25.9-58-37.7-92-31.2C81.6 101.5 48 142.1 48 189.5l0 3.3c0 28.5 11.9 55.8 32.8 75.2L256 430.7 431.2 268c20.9-19.4 32.8-46.7 32.8-75.2l0-3.3c0-47.3-33.6-88-80.1-96.9c-34-6.5-69 5.4-92 31.2c0 0 0 0-.1 .1s0 0-.1 .1l-17.8 20c-.3 .4-.7 .7-1 1.1c-4.5 4.5-10.6 7-16.9 7s-12.4-2.5-16.9-7z"
                   fill="currentColor"
-                  style={Object {}}
                 />
               </svg>
-               Export
-            </button>
-          </td>
-        </tr>
-        <tr>
-          <td>
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-music "
-              data-icon="music"
-              data-prefix="fas"
-              focusable="false"
-              role="img"
-              style={Object {}}
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
+            </td>
+            <td>
+              <a
+                href="spotify:user:watsonbox:saved"
+              >
+                Liked
+              </a>
+            </td>
+            <td>
+              <a
+                href="spotify:user:watsonbox"
+              >
+                watsonbox
+              </a>
+            </td>
+            <td
+              class="d-none d-sm-table-cell"
             >
-              <path
-                d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7l0 72 0 264c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6L448 147 192 223.8 192 432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6L128 200l0-72c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"
-                fill="currentColor"
-                style={Object {}}
-              />
-            </svg>
-          </td>
-          <td>
-            <a
-              href="spotify:playlist:4XOGDpHMrVoH33uJEwHWU5"
-            >
-              Ghostpoet – Peanut Butter Blues and Melancholy Jam
-            </a>
-          </td>
-          <td>
-            <a
-              href="spotify:user:watsonbox"
-            >
-              watsonbox
-            </a>
-          </td>
-          <td
-            className="d-none d-sm-table-cell"
-          >
-            10
-          </td>
-          <td
-            className="d-none d-sm-table-cell"
-          >
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
-              data-icon="circle-xmark"
-              data-prefix="far"
-              focusable="false"
-              role="img"
-              style={Object {}}
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
-                fill="currentColor"
-                style={Object {}}
-              />
-            </svg>
-          </td>
-          <td
-            className="d-none d-md-table-cell"
-          >
-            <svg
-              aria-hidden="true"
-              className="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
-              data-icon="circle-xmark"
-              data-prefix="far"
-              focusable="false"
-              role="img"
-              style={Object {}}
-              viewBox="0 0 512 512"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
-                fill="currentColor"
-                style={Object {}}
-              />
-            </svg>
-          </td>
-          <td
-            className="text-end"
-          >
-            <button
-              className="text-nowrap btn btn-primary btn-xs"
-              disabled={false}
-              onClick={[Function]}
-              type="submit"
+              1
+            </td>
+            <td
+              class="d-none d-sm-table-cell"
             >
               <svg
                 aria-hidden="true"
-                className="svg-inline--fa fa-download fa-sm "
-                data-icon="download"
-                data-prefix="fas"
+                class="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
+                data-icon="circle-xmark"
+                data-prefix="far"
                 focusable="false"
                 role="img"
-                style={Object {}}
                 viewBox="0 0 512 512"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
+                  d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
                   fill="currentColor"
-                  style={Object {}}
                 />
               </svg>
-               Export
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  <div
-    id="playlistsFooter"
-  >
-    <nav
-      className="paginator text-end"
+            </td>
+            <td
+              class="d-none d-md-table-cell"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
+                data-icon="circle-xmark"
+                data-prefix="far"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
+                  fill="currentColor"
+                />
+              </svg>
+            </td>
+            <td
+              class="text-end"
+            >
+              <button
+                class="text-nowrap btn btn-primary btn-xs"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-download fa-sm "
+                  data-icon="download"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
+                    fill="currentColor"
+                  />
+                </svg>
+                 Export
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-music "
+                data-icon="music"
+                data-prefix="fas"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M499.1 6.3c8.1 6 12.9 15.6 12.9 25.7l0 72 0 264c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6L448 147 192 223.8 192 432c0 44.2-43 80-96 80s-96-35.8-96-80s43-80 96-80c11.2 0 22 1.6 32 4.6L128 200l0-72c0-14.1 9.3-26.6 22.8-30.7l320-96c9.7-2.9 20.2-1.1 28.3 5z"
+                  fill="currentColor"
+                />
+              </svg>
+            </td>
+            <td>
+              <a
+                href="spotify:playlist:4XOGDpHMrVoH33uJEwHWU5"
+              >
+                Ghostpoet – Peanut Butter Blues and Melancholy Jam
+              </a>
+            </td>
+            <td>
+              <a
+                href="spotify:user:watsonbox"
+              >
+                watsonbox
+              </a>
+            </td>
+            <td
+              class="d-none d-sm-table-cell"
+            >
+              10
+            </td>
+            <td
+              class="d-none d-sm-table-cell"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
+                data-icon="circle-xmark"
+                data-prefix="far"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
+                  fill="currentColor"
+                />
+              </svg>
+            </td>
+            <td
+              class="d-none d-md-table-cell"
+            >
+              <svg
+                aria-hidden="true"
+                class="svg-inline--fa fa-circle-xmark fa-sm opacity-25"
+                data-icon="circle-xmark"
+                data-prefix="far"
+                focusable="false"
+                role="img"
+                viewBox="0 0 512 512"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c-9.4 9.4-9.4 24.6 0 33.9l47 47-47 47c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l47-47 47 47c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-47-47 47-47c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-47 47-47-47c-9.4-9.4-24.6-9.4-33.9 0z"
+                  fill="currentColor"
+                />
+              </svg>
+            </td>
+            <td
+              class="text-end"
+            >
+              <button
+                class="text-nowrap btn btn-primary btn-xs"
+                type="submit"
+              >
+                <svg
+                  aria-hidden="true"
+                  class="svg-inline--fa fa-download fa-sm "
+                  data-icon="download"
+                  data-prefix="fas"
+                  focusable="false"
+                  role="img"
+                  viewBox="0 0 512 512"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"
+                    fill="currentColor"
+                  />
+                </svg>
+                 Export
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      id="playlistsFooter"
     >
-      <ul
-        className="pagination pagination-sm"
+      <nav
+        class="paginator text-end"
       >
-        <li
-          className="page-item disabled"
+        <ul
+          class="pagination pagination-sm"
         >
-          <a
-            aria-label="Previous"
-            className="page-link"
-            href="#"
-            onClick={[Function]}
+          <li
+            class="page-item disabled"
           >
-            <span
-              aria-hidden="true"
+            <a
+              aria-label="Previous"
+              class="page-link"
+              href="#"
             >
-              «
-            </span>
-          </a>
-        </li>
-        <li
-          className="page-item disabled"
-        >
-          <a
-            aria-label="Next"
-            className="page-link"
-            href="#"
-            onClick={[Function]}
+              <span
+                aria-hidden="true"
+              >
+                «
+              </span>
+            </a>
+          </li>
+          <li
+            class="page-item disabled"
           >
-            <span
-              aria-hidden="true"
+            <a
+              aria-label="Next"
+              class="page-link"
+              href="#"
             >
-              »
-            </span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+              <span
+                aria-hidden="true"
+              >
+                »
+              </span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   </div>
-</div>
+</DocumentFragment>
 `;
