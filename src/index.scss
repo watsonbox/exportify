@@ -29,6 +29,10 @@ h1 a {
   h1 a:hover {
     color: var(--bs-light);
   }
+
+  input::placeholder {
+    opacity: 0.3
+  }
 }
 
 // Small button styles
