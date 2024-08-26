@@ -1,8 +1,9 @@
 import React from "react"
-import { Button, Modal, Table } from "react-bootstrap"
+import { withTranslation, WithTranslation, Trans } from "react-i18next"
+import { Button, Modal, Table, Dropdown, Form } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-type TopMenuProps = {
+interface TopMenuProps extends WithTranslation {
   loggedIn: boolean
 }
 
@@ -22,6 +23,10 @@ class TopMenu extends React.Component<TopMenuProps> {
   handleDarkModeClick = () => {
     this.setStoredTheme(this.getPreferredTheme() === "dark" ? "light" : "dark")
     this.setTheme(this.getPreferredTheme())
+  }
+
+  handleLanguageSwitch = (language: string) => {
+    this.props.i18n.changeLanguage(language)
   }
 
   getStoredTheme = () => localStorage.getItem('theme')
@@ -47,71 +52,102 @@ class TopMenu extends React.Component<TopMenuProps> {
   render() {
     const helpButton = this.props.loggedIn ? (
       <>
-        <Button id="infoButton" type="submit" variant="link" size="lg" onClick={this.handleToggleHelp} title="Help">
-          <FontAwesomeIcon icon={['fas', 'circle-info']} size="lg" />
+        <Button id="infoButton" type="submit" variant="link" size="lg" onClick={this.handleToggleHelp} title={this.props.i18n.t("top_menu.help")}>
+          <FontAwesomeIcon icon={['fas', 'circle-info']} />
         </Button>
         <Modal size="lg" show={this.state.showHelp} onHide={this.handleToggleHelp}>
           <Modal.Header closeButton>
-
-            <Modal.Title>Quick Reference</Modal.Title>
+            <Modal.Title>{this.props.i18n.t("help.title")}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <h5><FontAwesomeIcon icon={['fas', 'search']} size="sm" className="opacity-25 me-2" />Advanced Search Syntax</h5>
+            <h5><FontAwesomeIcon icon={['fas', 'search']} size="sm" className="opacity-25 me-2" />{this.props.i18n.t("help.search_syntax.title")}</h5>
             <Table size="sm" striped bordered>
               <thead>
                 <tr>
-                  <th>Search query</th>
-                  <th>Behavior</th>
+                  <th>{this.props.i18n.t("help.search_syntax.query")}</th>
+                  <th>{this.props.i18n.t("help.search_syntax.behavior")}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
                   <td><code>public:true</code></td>
-                  <td>Only show public playlists</td>
+                  <td>{this.props.i18n.t("help.search_syntax.public_true")}</td>
                 </tr>
                 <tr>
                   <td><code>public:false</code></td>
-                  <td>Only show private playlists</td>
+                  <td>{this.props.i18n.t("help.search_syntax.public_true")}</td>
                 </tr>
                 <tr>
                   <td><code>collaborative:true</code></td>
-                  <td>Only show collaborative playlists</td>
+                  <td>{this.props.i18n.t("help.search_syntax.collaborative_true")}</td>
                 </tr>
                 <tr>
                   <td><code>collaborative:false</code></td>
-                  <td>Don't show collaborative playlists</td>
+                  <td>{this.props.i18n.t("help.search_syntax.collaborative_false")}</td>
                 </tr>
                 <tr>
                   <td><code>owner:me</code></td>
-                  <td>Only show playlists I own</td>
+                  <td>{this.props.i18n.t("help.search_syntax.owner_me")}</td>
                 </tr>
                 <tr>
                   <td><code>owner:[owner]</code></td>
-                  <td>Only show playlists owned by <code>[owner]</code></td>
+                  <td><Trans i18nKey="help.search_syntax.owner_owner" components={{ code: <code /> }} /></td>
                 </tr>
               </tbody>
             </Table>
 
-            <p>For more detail please refer to the <a href="https://github.com/watsonbox/exportify" target="_blank" rel="noreferrer">full project documentation</a>.</p>
+            {/* eslint-disable-next-line*/}
+            <p><Trans i18nKey="help.search_syntax.more_detail" components={{ a: <a /> }} /></p>
           </Modal.Body>
         </Modal>
       </>
     ) : ''
 
-    const logoutButton = this.props.loggedIn ? <Button id="logoutButton" type="submit" variant="link" size="lg" onClick={this.handleLogoutClick} title="Change user">
-      <FontAwesomeIcon icon={['fas', 'sign-out-alt']} size="lg" />
+    const logoutButton = this.props.loggedIn ? <Button id="logoutButton" type="submit" variant="link" size="lg" onClick={this.handleLogoutClick} title={this.props.i18n.t("top_menu.change_user")}>
+      <FontAwesomeIcon icon={['fas', 'sign-out-alt']} />
     </Button> : ''
 
     return (
       <div id="topMenu">
         {helpButton}
-        <Button id="darkModeButton" type="submit" variant="link" size="lg" onClick={this.handleDarkModeClick} title="Toggle dark mode">
-          <FontAwesomeIcon icon={['fas', 'lightbulb']} size="lg" />
+        <Button id="darkModeButton" type="submit" variant="link" size="lg" onClick={this.handleDarkModeClick} title={this.props.i18n.t("top_menu.toggle_dark_mode")}>
+          <FontAwesomeIcon icon={['fas', 'lightbulb']} />
         </Button>
+        <Dropdown id="languageDropdown" title={this.props.i18n.t("top_menu.change_language")}>
+          <Dropdown.Toggle variant="link" id="dropdown-basic">
+            <FontAwesomeIcon icon={['fas', 'globe']} />
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("en")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "en" ? 'me-1 selected' : 'me-1'} /> English</Form.Check>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("de")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "de" ? 'me-1 selected' : 'me-1'} /> Deutsch</Form.Check>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("es")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "es" ? 'me-1 selected' : 'me-1'} /> Español</Form.Check>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("fr")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "fr" ? 'me-1 selected' : 'me-1'} /> Français</Form.Check>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("it")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "it" ? 'me-1 selected' : 'me-1'} /> Italiano</Form.Check>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("nl")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "nl" ? 'me-1 selected' : 'me-1'} /> Nederlands</Form.Check>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("pt")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "pt" ? 'me-1 selected' : 'me-1'} /> Português</Form.Check>
+            </Dropdown.Item>
+            <Dropdown.Item onClick={(event) => this.handleLanguageSwitch("sv")}>
+              <Form.Check type="radio" name="language"><FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === "sv" ? 'me-1 selected' : 'me-1'} /> Svenska</Form.Check>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
         {logoutButton}
       </div>
     )
   }
 }
 
-export default TopMenu
+export default withTranslation()(TopMenu)

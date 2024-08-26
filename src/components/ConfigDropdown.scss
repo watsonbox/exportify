@@ -1,26 +1,4 @@
-.dropdown-toggle::after {
-  display: none;
-}
-
-.dropdown-menu {
-  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.2);
-}
-
-.dropdown-item {
-
-  &:active,
-  &:hover {
-    color: inherit;
-    background: none;
-  }
-
-  label {
-    display: block;
-    cursor: pointer;
-  }
-}
-
-.dropdown {
+.dropdown.configDropdown {
   margin-left: 20px;
 
   button {
@@ -36,6 +14,28 @@
   &.show {
     button {
       color: #5cb85c;
+    }
+  }
+
+  .dropdown-toggle::after {
+    display: none;
+  }
+
+  .dropdown-menu {
+    box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.2);
+  }
+
+  .dropdown-item {
+
+    &:active,
+    &:hover {
+      color: inherit;
+      background: none;
+    }
+
+    label {
+      display: block;
+      cursor: pointer;
     }
   }
 }

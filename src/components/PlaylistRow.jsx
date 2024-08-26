@@ -1,4 +1,5 @@
 import React from "react"
+import { withTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
@@ -49,7 +50,7 @@ class PlaylistRow extends React.Component {
       <tr key={playlist.name}>
         <td>{this.renderIcon(playlist)}</td>
         <td>{playlist.name}</td>
-        <td className="d-none d-sm-table-cell" colSpan="2">This playlist is not supported</td>
+        <td className="d-none d-sm-table-cell" colSpan="2">{this.i18n.t("playlist.not_supported")}</td>
         <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td>&nbsp;</td>
@@ -66,7 +67,7 @@ class PlaylistRow extends React.Component {
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-end">
           <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} disabled={this.state.exporting} className="text-nowrap">
-            <FontAwesomeIcon icon={icon} size="sm" spin={this.state.exporting} /> Export
+            <FontAwesomeIcon icon={icon} size="sm" spin={this.state.exporting} /> {this.props.i18n.t("playlist.export")}
           </Button>
         </td>
       </tr>
@@ -74,4 +75,4 @@ class PlaylistRow extends React.Component {
   }
 }
 
-export default PlaylistRow
+export default withTranslation()(PlaylistRow)

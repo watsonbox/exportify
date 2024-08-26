@@ -136,6 +136,7 @@ In addition to [Create React App](https://github.com/facebook/create-react-app),
 * [React](https://reactjs.org/) - A JavaScript library for building user interfaces
 * [Bootstrap 5](https://getbootstrap.com/) - styling and UI components
 * [Font Awesome 6](https://fontawesome.com/) - vector icon set and toolkit
+* [react-i18next](https://react.i18next.com/) - internationalization framework
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - light-weight solution for testing React DOM nodes
 * [MSW](https://mswjs.io/) - network-level request mocking (more of my own thoughts [here](https://watsonbox.github.io/posts/2020/11/30/discovering-msw.html))
 

@@ -1,10 +1,11 @@
 import './PlaylistSearch.scss'
 
 import React from "react"
+import { withTranslation, WithTranslation } from "react-i18next"
 import { Form, InputGroup } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-type PlaylistSearchProps = {
+interface PlaylistSearchProps extends WithTranslation {
   onPlaylistSearch: (query: string) => void
   onPlaylistSearchCancel: () => Promise<any>
 }
@@ -73,7 +74,7 @@ class PlaylistSearch extends React.Component<PlaylistSearchProps> {
     return (
       <Form className={className}>
         <InputGroup>
-          <Form.Control type="text" role="searchbox" placeholder="Search" size="sm" onChange={this.handleChange} onKeyDown={this.handleKeyDown} ref={this.searchField} className="border-end-0 border" />
+          <Form.Control type="text" role="searchbox" placeholder={this.props.i18n.t("search")} size="sm" onChange={this.handleChange} onKeyDown={this.handleKeyDown} ref={this.searchField} className="border-end-0 border" />
           <InputGroup.Text className="bg-transparent">
             {icon}
           </InputGroup.Text>
@@ -84,4 +85,4 @@ class PlaylistSearch extends React.Component<PlaylistSearchProps> {
   }
 }
 
-export default PlaylistSearch
+export default withTranslation("translations", { withRef: true })(PlaylistSearch)

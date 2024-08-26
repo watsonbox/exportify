@@ -1,4 +1,5 @@
 import React from "react"
+import { withTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { getQueryParam } from "helpers"
@@ -24,10 +25,10 @@ class Login extends React.Component {
   render() {
     return (
       <Button id="loginButton" type="submit" variant="outline-secondary" size="lg" onClick={this.authorize}>
-        <FontAwesomeIcon icon={['far', 'check-circle']} size="sm" /> Get Started
+        <FontAwesomeIcon icon={['far', 'check-circle']} size="sm" /> {this.props.i18n.t("get_started")}
       </Button>
     )
   }
 }
 
-export default Login
+export default withTranslation()(Login)

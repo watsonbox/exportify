@@ -1,0 +1,91 @@
+{
+  "tagline": "Exporteer je Spotify-afspeellijsten.",
+  "get_started": "Beginnen",
+  "subtitle": "{{min}}-{{max}} van {{total}} afspeellijsten voor {{userId}}",
+  "subtitle_search": "{{total}} resultaten met \"{{query}}\" in afspeellijstnaam",
+  "subtitle_search_advanced": "{{total}} resultaten voor geavanceerde zoekopdracht \"{{query}}\"",
+  "search": "Zoeken",
+  "export_all": "Alles exporteren",
+  "exporting_done": "Klaar!",
+  "exporting_playlist": "Exporteer {{playlistName}}...",
+  "export_search_results": "Resultaten exporteren",
+  "top_menu": {
+    "help": "Help",
+    "toggle_dark_mode": "Donkere modus wisselen",
+    "change_language": "Taal wijzigen",
+    "change_user": "Gebruiker wijzigen"
+  },
+  "config": {
+    "include_artists_data": "Inclusief artiestgegevens",
+    "include_audio_features_data": "Inclusief audio-eigenschappen",
+    "include_album_data": "Inclusief albumgegevens"
+  },
+  "help": {
+    "title": "Snelle referentie",
+    "search_syntax": {
+      "title": "Geavanceerde zoeksyntaxis",
+      "query": "Zoekopdracht",
+      "behavior": "Gedrag",
+      "public_true": "Toon alleen openbare afspeellijsten",
+      "public_false": "Toon alleen privé afspeellijsten",
+      "collaborative_true": "Toon alleen collaboratieve afspeellijsten",
+      "collaborative_false": "Geen collaboratieve afspeellijsten tonen",
+      "owner_me": "Toon alleen afspeellijsten die ik bezit",
+      "owner_owner": "Toon alleen afspeellijsten van <code>[owner]</code>",
+      "more_detail": "Voor meer details zie de <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>volledige projectdocumentatie</a>."
+    }
+  },
+  "playlist": {
+    "name": "Naam",
+    "owner": "Eigenaar",
+    "tracks": "Nummers",
+    "public": "Openbaar?",
+    "collaborative": "Collaboratief?",
+    "not_supported": "Deze afspeellijst wordt niet ondersteund",
+    "export": "Exporteren"
+  },
+  "track": {
+    "track_uri": "Nummer URI",
+    "track_name": "Nummmernaam",
+    "artist_uris": "Artiest-URI",
+    "artist_names": "Naam van artiest",
+    "album_uri": "Album-URI",
+    "album_name": "Naam van album",
+    "album_artist_uris": "Artiest-URI van het album",
+    "album_artist_names": "Naam van artiest op het album",
+    "album_release_date": "Releasedatum van het album",
+    "album_image_url": "Album afbeelding-URL",
+    "disc_number": "Schijfnummer",
+    "track_number": "Nummmernummer",
+    "track_duration": "Nummmerduur (ms)",
+    "track_preview_url": "Voorbeeld-URL",
+    "explicit": "Expliciet",
+    "popularity": "Populariteit",
+    "isrc": "ISRC",
+    "is_playable": "Speelbaar",
+    "added_by": "Toegevoegd door",
+    "added_at": "Toegevoegd op",
+    "album": {
+      "album_genres": "Genres van het album",
+      "label": "Label",
+      "copyrights": "Auteursrechten"
+    },
+    "artist": {
+      "artist_genres": "Genres van de artiest"
+    },
+    "audio_features": {
+      "danceability": "Dansbaarheid",
+      "energy": "Energie",
+      "key": "Toonsoort",
+      "loudness": "Luidheid",
+      "mode": "Modus",
+      "speechiness": "Spraakzaamheid",
+      "acousticness": "Akoestiek",
+      "instrumentalness": "Instrumentaliteit",
+      "liveness": "Levendigheid",
+      "valence": "Valentie",
+      "tempo": "Tempo",
+      "time_signature": "Maatstreep"
+    }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "tagline": "Export your Spotify playlists.",
+  "get_started": "Get Started",
+  "subtitle": "{{min}}-{{max}} of {{total}} playlists for {{userId}}",
+  "subtitle_search": "{{total}} results with \"{{query}}\" in playlist name",
+  "subtitle_search_advanced": "{{total}} results for advanced query \"{{query}}\"",
+  "search": "Search",
+  "export_all": "Export All",
+  "exporting_done": "Done!",
+  "exporting_playlist": "Exporting {{playlistName}}...",
+  "export_search_results": "Export Results",
+  "top_menu": {
+    "help": "Help",
+    "toggle_dark_mode": "Toggle dark mode",
+    "change_language": "Change language",
+    "change_user": "Change user"
+  },
+  "config": {
+    "include_artists_data": "Include artists data",
+    "include_audio_features_data": "Include audio features data",
+    "include_album_data": "Include album data"
+  },
+  "help": {
+    "title": "Quick Reference",
+    "search_syntax": {
+      "title": "Advanced Search Syntax",
+      "query": "Query",
+      "behavior": "Behavior",
+      "public_true": "Only show public playlists",
+      "public_false": "Only show private playlists",
+      "collaborative_true": "Only show collaborative playlists",
+      "collaborative_false": "Don't show collaborative playlists",
+      "owner_me": "Only show playlists I own",
+      "owner_owner": "Only show playlists owned by <code>[owner]</code>",
+      "more_detail": "For more detail please refer to the <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>full project documentation</a>."
+    }
+  },
+  "playlist": {
+    "name": "Name",
+    "owner": "Owner",
+    "tracks": "Tracks",
+    "public": "Public?",
+    "collaborative": "Collaborative?",
+    "not_supported": "This playlist is not supported",
+    "export": "Export"
+  },
+  "track": {
+    "track_uri": "Track URI",
+    "track_name": "Track Name",
+    "artist_uris": "Artist URI(s)",
+    "artist_names": "Artist Name(s)",
+    "album_uri": "Album URI",
+    "album_name": "Album Name",
+    "album_artist_uris": "Album Artist URI(s)",
+    "album_artist_names": "Album Artist Name(s)",
+    "album_release_date": "Album Release Date",
+    "album_image_url": "Album Image URL",
+    "disc_number": "Disc Number",
+    "track_number": "Track Number",
+    "track_duration": "Track Duration (ms)",
+    "track_preview_url": "Track Preview URL",
+    "explicit": "Explicit",
+    "popularity": "Popularity",
+    "isrc": "ISRC",
+    "is_playable": "Is Playable",
+    "added_by": "Added By",
+    "added_at": "Added At",
+    "album": {
+      "album_genres": "Album Genres",
+      "label": "Label",
+      "copyrights": "Copyrights"
+    },
+    "artist": {
+      "artist_genres": "Artist Genres"
+    },
+    "audio_features": {
+      "danceability": "Danceability",
+      "energy": "Energy",
+      "key": "Key",
+      "loudness": "Loudness",
+      "mode": "Mode",
+      "speechiness": "Speechiness",
+      "acousticness": "Acousticness",
+      "instrumentalness": "Instrumentalness",
+      "liveness": "Liveness",
+      "valence": "Valence",
+      "tempo": "Tempo",
+      "time_signature": "Time Signature"
+    }
+  }
+}

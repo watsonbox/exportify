@@ -1,7 +1,8 @@
 import './App.scss'
 import "./icons"
 
-import React from 'react'
+import React, { useState } from 'react'
+import { useTranslation, Translation } from "react-i18next"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import "url-search-params-polyfill"
 
@@ -11,8 +12,15 @@ import { getQueryParam } from "helpers"
 import TopMenu from "components/TopMenu"
 
 function App() {
+  useTranslation()
+  const [subtitle, setSubtitle] = useState(<Translation>{(t) => t("tagline")}</Translation>)
+
   let view
   let key = new URLSearchParams(window.location.hash.substring(1))
+
+  const onSetSubtitle = (subtitle: any) => {
+    setSubtitle(subtitle)
+  }
 
   if (getQueryParam('spotify_error') !== '') {
     view = <div id="spotifyErrorMessage" className="lead">
@@ -21,7 +29,7 @@ function App() {
       <p style={{ marginTop: "50px" }}>Keep an eye on the <a target="_blank" rel="noreferrer" href="https://status.spotify.dev/">Spotify Web API Status page</a> to see if there are any known problems right now, and then <a rel="noreferrer" href="?">retry</a>.</p>
     </div>
   } else if (key.has('access_token')) {
-    view = <PlaylistTable accessToken={key.get('access_token')} />
+    view = <PlaylistTable accessToken={key.get('access_token')} onSetSubtitle={onSetSubtitle} />
   } else {
     view = <Login />
   }
@@ -35,9 +43,7 @@ function App() {
           <FontAwesomeIcon icon={['fab', 'spotify']} color="#84BD00" size="sm" /> <a href={process.env.PUBLIC_URL}>Exportify</a>
         </h1>
 
-        <p id="subtitle" className="lead text-secondary">
-          Export your Spotify playlists.
-        </p>
+        <p id="subtitle" className="lead text-secondary">{subtitle}</p>
       </header>
 
       {view}
