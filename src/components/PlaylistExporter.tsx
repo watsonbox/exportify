@@ -1,4 +1,5 @@
 import { saveAs } from "file-saver"
+import i18n from "../i18n/config"
 
 import TracksData from "components/data/TracksData"
 import TracksBaseData from "components/data/TracksBaseData"
@@ -19,8 +20,8 @@ class TracksCsvFile {
     this.playlist = playlist
     this.trackItems = trackItems
     this.columnNames = [
-      "Added By",
-      "Added At"
+      i18n.t("track.added_by"),
+      i18n.t("track.added_at")
     ]
 
     this.lineData = new Map()
@@ -82,7 +83,7 @@ class PlaylistExporter {
 
   async export() {
     return this.csvData().then((data) => {
-      var blob = new Blob([ data ], { type: "text/csv;charset=utf-8" })
+      var blob = new Blob([data], { type: "text/csv;charset=utf-8" })
       saveAs(blob, this.fileName(), { autoBom: false })
     })
   }

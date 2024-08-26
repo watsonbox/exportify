@@ -21,10 +21,22 @@
 
   button {
     color: #dee2e6;
-    padding: 10px;
+    padding: 10px 6px;
 
     &:hover {
       color: silver;
+    }
+  }
+}
+
+#languageDropdown {
+  .dropdown-item svg {
+    &.selected {
+      color: #5cb85c;
+    }
+
+    &:not(.selected) {
+      opacity: 0.1;
     }
   }
 }

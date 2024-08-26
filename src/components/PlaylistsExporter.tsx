@@ -1,4 +1,5 @@
 import React from "react"
+import { withTranslation, WithTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { saveAs } from "file-saver"
@@ -7,7 +8,7 @@ import JSZip from "jszip"
 import PlaylistExporter from "./PlaylistExporter"
 import { apiCallErrorHandler } from "helpers"
 
-type PlaylistsExporterProps = {
+interface PlaylistsExporterProps extends WithTranslation {
   accessToken: string
   playlistsData: any
   searchQuery: string
@@ -69,7 +70,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
   }
 
   render() {
-    const text = this.props.searchQuery === "" ? "Export All" : "Export Results"
+    const text = this.props.searchQuery === "" ? this.props.i18n.t("export_all") : this.props.i18n.t("export_search_results")
 
     // @ts-ignore
     return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap">
@@ -78,4 +79,4 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
   }
 }
 
-export default PlaylistsExporter
+export default withTranslation()(PlaylistsExporter)

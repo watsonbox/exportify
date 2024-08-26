@@ -1,0 +1,91 @@
+{
+  "tagline": "Exportera dina Spotify spellistor.",
+  "get_started": "Kom igång",
+  "subtitle": "{{min}}-{{max}} av {{total}} spellistor för {{userId}}",
+  "subtitle_search": "{{total}} resultat med \"{{query}}\" i spellistans namn",
+  "subtitle_search_advanced": "{{total}} resultat för avancerad sökning \"{{query}}\"",
+  "search": "Sök",
+  "export_all": "Exportera allt",
+  "exporting_done": "Klart!",
+  "exporting_playlist": "Exporterar {{playlistName}}...",
+  "export_search_results": "Exportera resultat",
+  "top_menu": {
+    "help": "Hjälp",
+    "toggle_dark_mode": "Växla mörkt läge",
+    "change_language": "Byt språk",
+    "change_user": "Byt användare"
+  },
+  "config": {
+    "include_artists_data": "Inkludera artistdata",
+    "include_audio_features_data": "Inkludera ljudegenskaper",
+    "include_album_data": "Inkludera albumdata"
+  },
+  "help": {
+    "title": "Snabbguide",
+    "search_syntax": {
+      "title": "Avancerad söksyntax",
+      "query": "Fråga",
+      "behavior": "Beteende",
+      "public_true": "Visa endast offentliga spellistor",
+      "public_false": "Visa endast privata spellistor",
+      "collaborative_true": "Visa endast samarbetslistor",
+      "collaborative_false": "Visa inte samarbetslistor",
+      "owner_me": "Visa endast spellistor som jag äger",
+      "owner_owner": "Visa endast spellistor som ägs av <code>[owner]</code>",
+      "more_detail": "För mer information, se <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>fullständig projekt-dokumentation</a>."
+    }
+  },
+  "playlist": {
+    "name": "Namn",
+    "owner": "Ägare",
+    "tracks": "Låtar",
+    "public": "Offentlig?",
+    "collaborative": "Samarbetsvillig?",
+    "not_supported": "Denna spellista stöds inte",
+    "export": "Exportera"
+  },
+  "track": {
+    "track_uri": "Låtens URI",
+    "track_name": "Låtens namn",
+    "artist_uris": "Artistens URI",
+    "artist_names": "Artistens namn",
+    "album_uri": "Albumets URI",
+    "album_name": "Albumets namn",
+    "album_artist_uris": "Albumartistens URI",
+    "album_artist_names": "Albumartistens namn",
+    "album_release_date": "Albumets releasedatum",
+    "album_image_url": "Albumets bild-URL",
+    "disc_number": "Skivnummer",
+    "track_number": "Låtnummer",
+    "track_duration": "Låtlängd (ms)",
+    "track_preview_url": "Förhandsgranskning URL",
+    "explicit": "Explicit",
+    "popularity": "Popularitet",
+    "isrc": "ISRC",
+    "is_playable": "Är spelbar",
+    "added_by": "Tillagd av",
+    "added_at": "Tillagd vid",
+    "album": {
+      "album_genres": "Albumets genrer",
+      "label": "Skivbolag",
+      "copyrights": "Upphovsrätt"
+    },
+    "artist": {
+      "artist_genres": "Artistens genrer"
+    },
+    "audio_features": {
+      "danceability": "Dansbarhet",
+      "energy": "Energi",
+      "key": "Tonart",
+      "loudness": "Ljudstyrka",
+      "mode": "Läge",
+      "speechiness": "Talighet",
+      "acousticness": "Akustik",
+      "instrumentalness": "Instrumentalhet",
+      "liveness": "Livlighet",
+      "valence": "Valens",
+      "tempo": "Tempo",
+      "time_signature": "Taktart"
+    }
+  }
+}

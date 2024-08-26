@@ -1,4 +1,5 @@
 import React from "react"
+import i18n from "i18n/config.ts"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import App from "./App"
@@ -15,6 +16,30 @@ afterAll(() => {
 
 beforeAll(() => {
   window.location = { hash: "" }
+})
+
+beforeEach(() => {
+  i18n.changeLanguage("en")
+})
+
+describe("i18n", () => {
+  test("language can be changed to French", async () => {
+    render(<App />)
+
+    const linkElement = screen.getByText(/Get Started/i)
+    expect(linkElement).toHaveTextContent("Get Started")
+
+    const changeLanguageButton = screen.getByTitle(/Change language/i).getElementsByTagName("button")[0]
+    await userEvent.click(changeLanguageButton)
+
+    const frenchLanguageElement = screen.getByText(/Français/i)
+    expect(frenchLanguageElement).toBeInTheDocument()
+
+    await userEvent.click(frenchLanguageElement)
+
+    expect(screen.getByText(/Commencer/)).toBeInTheDocument()
+    expect(linkElement).toHaveTextContent("Commencer")
+  })
 })
 
 describe("logging in", () => {

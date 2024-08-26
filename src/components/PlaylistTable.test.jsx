@@ -1,4 +1,5 @@
 import React from "react"
+import i18n from "i18n/config.ts"
 import { render, screen, waitFor, act, waitForElementToBeRemoved } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import renderer from "react-test-renderer"
@@ -15,6 +16,7 @@ const server = setupServer(...handlers)
 
 // Mock out Bugsnag calls
 jest.mock('@bugsnag/js')
+const onSetSubtitle = jest.fn()
 
 server.listen({
   onUnhandledRequest: 'warn'
@@ -59,7 +61,7 @@ const baseTrackDataCrying = '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","sp
 
 // Use a snapshot test to ensure exact component rendering
 test("playlist loading", async () => {
-  const { asFragment } = render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
+  const { asFragment } = render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
 
   expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -69,7 +71,7 @@ test("playlist loading", async () => {
 test("redirecting when access token is invalid", async () => {
   window.location = { href: "http://www.example.com/exportify#access_token=INVALID_ACCESS_TOKEN" }
 
-  render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" />)
+  render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
 
   await waitFor(() => {
     expect(window.location.href).toBe("http://www.example.com/exportify")
@@ -81,7 +83,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -133,7 +135,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeArtistsData: true }} />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeArtistsData: true }} onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -186,7 +188,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAudioFeaturesData: true }} />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAudioFeaturesData: true }} onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -239,7 +241,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -294,7 +296,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -349,7 +351,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -381,7 +383,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -415,7 +417,7 @@ describe("single playlist exporting", () => {
     const saveAsMock = jest.spyOn(FileSaver, "saveAs")
     saveAsMock.mockImplementation(jest.fn())
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
     expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -446,7 +448,7 @@ describe("single playlist exporting", () => {
 
 describe("searching playlists", () => {
   test("simple successful search", async () => {
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
@@ -470,7 +472,7 @@ describe("searching playlists", () => {
   })
 
   test("search with no results", async () => {
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />)
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
@@ -493,7 +495,7 @@ test("exporting of all playlists", async () => {
   const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
   jsZipGenerateAsync.mockResolvedValue("zip_content")
 
-  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
   expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -535,7 +537,7 @@ test("exporting of search results", async () => {
   const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
   jsZipGenerateAsync.mockResolvedValue("zip_content")
 
-  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" />);
+  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
   expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 

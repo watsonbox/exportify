@@ -1,0 +1,91 @@
+{
+  "tagline": "Exportez vos playlists Spotify.",
+  "get_started": "Commencer",
+  "subtitle": "{{min}}-{{max}} de {{total}} playlists pour {{userId}}",
+  "subtitle_search": "{{total}} résultats avec \"{{query}}\" dans le nom de la playlist",
+  "subtitle_search_advanced": "{{total}} résultats pour la requête avancée \"{{query}}\"",
+  "search": "Rechercher",
+  "export_all": "Tout exporter",
+  "exporting_done": "Terminé!",
+  "exporting_playlist": "Exportation de {{playlistName}}...",
+  "export_search_results": "Exporter les résultats",
+  "top_menu": {
+    "help": "Aide",
+    "toggle_dark_mode": "Activer/désactiver le mode sombre",
+    "change_language": "Changer de langue",
+    "change_user": "Changer d'utilisateur"
+  },
+  "config": {
+    "include_artists_data": "Inclure les données des artistes",
+    "include_audio_features_data": "Inclure les caractéristiques audio",
+    "include_album_data": "Inclure les données de l'album"
+  },
+  "help": {
+    "title": "Référence rapide",
+    "search_syntax": {
+      "title": "Syntaxe de recherche avancée",
+      "query": "Requête",
+      "behavior": "Comportement",
+      "public_true": "Afficher uniquement les playlists publiques",
+      "public_false": "Afficher uniquement les playlists privées",
+      "collaborative_true": "Afficher uniquement les playlists collaboratives",
+      "collaborative_false": "Ne pas afficher les playlists collaboratives",
+      "owner_me": "Afficher uniquement mes playlists",
+      "owner_owner": "Afficher uniquement les playlists appartenant à <code>[owner]</code>",
+      "more_detail": "Pour plus de détails, veuillez consulter la <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>documentation complète du projet</a>."
+    }
+  },
+  "playlist": {
+    "name": "Nom",
+    "owner": "Propriétaire",
+    "tracks": "Titres",
+    "public": "Public?",
+    "collaborative": "Collaboratif?",
+    "not_supported": "Cette playlist n'est pas prise en charge",
+    "export": "Exporter"
+  },
+  "track": {
+    "track_uri": "URI du titre",
+    "track_name": "Nom du titre",
+    "artist_uris": "URI(s) de l'artiste",
+    "artist_names": "Nom(s) de l'artiste",
+    "album_uri": "URI de l'album",
+    "album_name": "Nom de l'album",
+    "album_artist_uris": "URI(s) de l'artiste de l'album",
+    "album_artist_names": "Nom(s) de l'artiste de l'album",
+    "album_release_date": "Date de sortie de l'album",
+    "album_image_url": "URL de l'image de l'album",
+    "disc_number": "Numéro de disque",
+    "track_number": "Numéro du titre",
+    "track_duration": "Durée du titre (ms)",
+    "track_preview_url": "URL de prévisualisation du titre",
+    "explicit": "Explicite",
+    "popularity": "Popularité",
+    "isrc": "ISRC",
+    "is_playable": "Est jouable",
+    "added_by": "Ajouté par",
+    "added_at": "Ajouté le",
+    "album": {
+      "album_genres": "Genres de l'album",
+      "label": "Label",
+      "copyrights": "Droits d'auteur"
+    },
+    "artist": {
+      "artist_genres": "Genres de l'artiste"
+    },
+    "audio_features": {
+      "danceability": "Danseabilité",
+      "energy": "Énergie",
+      "key": "Tonalité",
+      "loudness": "Volume sonore",
+      "mode": "Mode",
+      "speechiness": "Parlabilité",
+      "acousticness": "Acoustique",
+      "instrumentalness": "Instrumental",
+      "liveness": "Vivacité",
+      "valence": "Valence",
+      "tempo": "Tempo",
+      "time_signature": "Mesure"
+    }
+  }
+}

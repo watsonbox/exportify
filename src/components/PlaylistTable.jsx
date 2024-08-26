@@ -1,4 +1,5 @@
 import React from "react"
+import { withTranslation, Translation } from "react-i18next"
 import { ProgressBar } from "react-bootstrap"
 
 import Bugsnag from "@bugsnag/js"
@@ -65,11 +66,12 @@ class PlaylistTable extends React.Component {
         }
       })
 
+      let key = "subtitle_search"
       if (query.startsWith("public:") || query.startsWith("collaborative:") || query.startsWith("owner:")) {
-        this.setSubtitle(`${playlists.length} results for advanced query "${query}"`)
-      } else {
-        this.setSubtitle(`${playlists.length} results with "${query}" in playlist name`)
+        key += "_advanced"
       }
+
+      this.props.onSetSubtitle(<Translation>{(t) => t(key, { total: playlists.length, query: query })}</Translation>)
     }
   }
 
@@ -102,7 +104,9 @@ class PlaylistTable extends React.Component {
         () => {
           const min = ((this.state.currentPage - 1) * this.PAGE_SIZE) + 1
           const max = Math.min(min + this.PAGE_SIZE - 1, this.state.playlistCount)
-          this.setSubtitle(`${min}-${max} of ${this.state.playlistCount} playlists for ${this.userId}`)
+          this.props.onSetSubtitle(
+            <Translation>{(t) => t("subtitle", { min: min, max: max, total: this.state.playlistCount, userId: this.userId })}</Translation>
+          )
         }
       )
     } catch (error) {
@@ -126,7 +130,7 @@ class PlaylistTable extends React.Component {
     this.setState({
       progressBar: {
         show: true,
-        label: "Done!",
+        label: this.props.i18n.t("exporting_done"),
         value: this.state.playlistCount
       }
     })
@@ -138,7 +142,7 @@ class PlaylistTable extends React.Component {
     this.setState({
       progressBar: {
         show: true,
-        label: `Exporting ${playlistName}...`,
+        label: this.props.i18n.t("exporting_playlist", { playlistName: playlistName }),
         value: doneCount
       }
     })
@@ -158,12 +162,6 @@ class PlaylistTable extends React.Component {
       )
     } catch (error) {
       apiCallErrorHandler(error)
-    }
-  }
-
-  setSubtitle(subtitle) {
-    if (document.getElementById("subtitle") !== null) {
-      document.getElementById("subtitle").textContent = subtitle
     }
   }
 
@@ -205,11 +203,11 @@ class PlaylistTable extends React.Component {
               <thead>
                 <tr>
                   <th style={{ width: "30px" }}></th>
-                  <th>Name</th>
-                  <th style={{ width: "150px" }}>Owner</th>
-                  <th style={{ width: "100px" }} className="d-none d-sm-table-cell">Tracks</th>
-                  <th style={{ width: "120px" }} className="d-none d-sm-table-cell">Public?</th>
-                  <th style={{ width: "120px" }} className="d-none d-md-table-cell">Collaborative?</th>
+                  <th>{this.props.i18n.t("playlist.name")}</th>
+                  <th style={{ width: "150px" }}>{this.props.i18n.t("playlist.owner")}</th>
+                  <th style={{ width: "100px" }} className="d-none d-sm-table-cell">{this.props.i18n.t("playlist.tracks")}</th>
+                  <th style={{ width: "120px" }} className="d-none d-sm-table-cell">{this.props.i18n.t("playlist.public")}</th>
+                  <th style={{ width: "120px" }} className="d-none d-md-table-cell">{this.props.i18n.t("playlist.collaborative")}</th>
                   <th style={{ width: "100px" }} className="text-end">
                     <PlaylistsExporter
                       accessToken={this.props.accessToken}
@@ -245,4 +243,4 @@ class PlaylistTable extends React.Component {
   }
 }
 
-export default PlaylistTable
+export default withTranslation()(PlaylistTable)

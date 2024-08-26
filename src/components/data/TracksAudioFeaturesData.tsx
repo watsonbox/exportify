@@ -1,3 +1,4 @@
+import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
 
@@ -13,18 +14,18 @@ class TracksAudioFeaturesData extends TracksData {
 
   dataLabels() {
     return [
-      "Danceability",
-      "Energy",
-      "Key",
-      "Loudness",
-      "Mode",
-      "Speechiness",
-      "Acousticness",
-      "Instrumentalness",
-      "Liveness",
-      "Valence",
-      "Tempo",
-      "Time Signature"
+      i18n.t("track.audio_features.danceability"),
+      i18n.t("track.audio_features.energy"),
+      i18n.t("track.audio_features.key"),
+      i18n.t("track.audio_features.loudness"),
+      i18n.t("track.audio_features.mode"),
+      i18n.t("track.audio_features.speechiness"),
+      i18n.t("track.audio_features.acousticness"),
+      i18n.t("track.audio_features.instrumentalness"),
+      i18n.t("track.audio_features.liveness"),
+      i18n.t("track.audio_features.valence"),
+      i18n.t("track.audio_features.tempo"),
+      i18n.t("track.audio_features.time_signature")
     ]
   }
 
@@ -63,7 +64,7 @@ class TracksAudioFeaturesData extends TracksData {
     // Add empty fields where we didn't get data - can be the case for example with episodes
     const audioFeaturesTrackUris = Array.from(audioFeaturesData.keys())
     this.tracks.filter(t => !audioFeaturesTrackUris.includes(t.uri)).forEach((track) => {
-      audioFeaturesData.set(track.uri, ["","","","","","","","","","","",""])
+      audioFeaturesData.set(track.uri, ["", "", "", "", "", "", "", "", "", "", "", ""])
     })
 
     return audioFeaturesData

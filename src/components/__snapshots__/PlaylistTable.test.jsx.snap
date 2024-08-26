@@ -80,7 +80,7 @@ exports[`playlist loading 1`] = `
         </div>
       </form>
       <div
-        class="dropdown"
+        class="configDropdown dropdown"
       >
         <button
           aria-expanded="false"

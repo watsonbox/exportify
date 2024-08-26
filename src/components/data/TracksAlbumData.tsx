@@ -1,3 +1,4 @@
+import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
 
@@ -12,7 +13,11 @@ class TracksAlbumData extends TracksData {
   }
 
   dataLabels() {
-    return ["Album Genres", "Label", "Copyrights"]
+    return [
+      i18n.t("track.album.album_genres"),
+      i18n.t("track.album.label"),
+      i18n.t("track.album.copyrights")
+    ]
   }
 
   async data() {

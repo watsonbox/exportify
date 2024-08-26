@@ -1,10 +1,11 @@
 import './ConfigDropdown.scss'
 
 import React from "react"
+import { withTranslation, WithTranslation } from "react-i18next"
 import { Dropdown, Form } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-type ConfigDropdownProps = {
+interface ConfigDropdownProps extends WithTranslation {
   onConfigChanged: (config: any) => void
 }
 
@@ -35,7 +36,7 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
 
   render() {
     return (
-      <Dropdown>
+      <Dropdown className="configDropdown">
         <Dropdown.Toggle variant="link">
           <FontAwesomeIcon icon={['fas', 'cog']} size="lg" spin={this.state.spin} />
         </Dropdown.Toggle>
@@ -44,7 +45,7 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
             <Form.Check
               id="config-include-artists-data"
               type="switch"
-              label="Include artists data"
+              label={this.props.i18n.t("config.include_artists_data")}
               ref={this.includeArtistsDataCheck}
             />
           </Dropdown.Item>
@@ -52,15 +53,15 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
             <Form.Check
               id="config-include-audio-features-data"
               type="switch"
-              label="Include audio features data"
-              ref={this.includeAudioFeaturesDataCheck}/>
+              label={this.props.i18n.t("config.include_audio_features_data")}
+              ref={this.includeAudioFeaturesDataCheck} />
           </Dropdown.Item>
           <Dropdown.Item onClickCapture={this.handleCheckClick} as="div">
             <Form.Check
               id="config-include-album-data"
               type="switch"
-              label="Include album data"
-              ref={this.includeAlbumDataCheck}/>
+              label={this.props.i18n.t("config.include_album_data")}
+              ref={this.includeAlbumDataCheck} />
           </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
@@ -68,4 +69,4 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
   }
 }
 
-export default ConfigDropdown
+export default withTranslation("translations", { withRef: true })(ConfigDropdown)

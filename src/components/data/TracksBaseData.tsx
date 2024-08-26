@@ -1,3 +1,4 @@
+import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
 
@@ -11,24 +12,24 @@ class TracksBaseData extends TracksData {
 
   dataLabels() {
     return [
-      "Track URI",
-      "Track Name",
-      "Artist URI(s)",
-      "Artist Name(s)",
-      "Album URI",
-      "Album Name",
-      "Album Artist URI(s)",
-      "Album Artist Name(s)",
-      "Album Release Date",
-      "Album Image URL",
-      "Disc Number",
-      "Track Number",
-      "Track Duration (ms)",
-      "Track Preview URL",
-      "Explicit",
-      "Popularity",
-      "ISRC",
-      "Is Playable"
+      i18n.t("track.track_uri"),
+      i18n.t("track.track_name"),
+      i18n.t("track.artist_uris"),
+      i18n.t("track.artist_names"),
+      i18n.t("track.album_uri"),
+      i18n.t("track.album_name"),
+      i18n.t("track.album_artist_uris"),
+      i18n.t("track.album_artist_names"),
+      i18n.t("track.album_release_date"),
+      i18n.t("track.album_image_url"),
+      i18n.t("track.disc_number"),
+      i18n.t("track.track_number"),
+      i18n.t("track.track_duration"),
+      i18n.t("track.track_preview_url"),
+      i18n.t("track.explicit"),
+      i18n.t("track.popularity"),
+      i18n.t("track.isrc"),
+      i18n.t("track.is_playable")
     ]
   }
 

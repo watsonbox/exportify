@@ -1,3 +1,4 @@
+import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
 
@@ -13,7 +14,7 @@ class TracksArtistsData extends TracksData {
 
   dataLabels() {
     return [
-      "Artist Genres"
+      i18n.t("track.artist.artist_genres")
     ]
   }
 

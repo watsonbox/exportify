@@ -44,3 +44,7 @@ $input-btn-line-height-xs: 1.3 !default;
   // line-height: ensure proper height of button next to small input
   @include button-size($btn-padding-y-xs, $btn-padding-x-xs, $font-size-sm, $btn-border-radius-sm);
 }
+
+#languageDropdown {
+  display: inline;
+}
