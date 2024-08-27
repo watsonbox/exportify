@@ -20,6 +20,10 @@ interface PlaylistsExporterProps extends WithTranslation {
 
 // Handles exporting all playlist data as a zip file
 class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
+  state = {
+    exporting: false
+  }
+
   async export(accessToken: string, playlistsData: any, searchQuery: string, config: any) {
     let playlistFileNames = new Set<string>()
     let playlistCsvExports = new Array<string>()
@@ -61,21 +65,28 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
   }
 
   exportPlaylists = () => {
-    this.export(
-      this.props.accessToken,
-      this.props.playlistsData,
-      this.props.searchQuery,
-      this.props.config
-    ).catch(apiCallErrorHandler)
+    this.setState(
+      { exporting: true },
+      () => {
+        this.export(
+          this.props.accessToken,
+          this.props.playlistsData,
+          this.props.searchQuery,
+          this.props.config
+        ).catch(apiCallErrorHandler).then(() => {
+          this.setState({ exporting: false })
+        })
+      }
+    )
   }
 
   render() {
     const text = this.props.searchQuery === "" ? this.props.i18n.t("export_all") : this.props.i18n.t("export_search_results")
 
     // @ts-ignore
-    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap">
+    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap" disabled={this.state.exporting} >
       <FontAwesomeIcon icon={['far', 'file-archive']} /> {text}
-    </Button>
+    </Button >
   }
 }
 
