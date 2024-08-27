@@ -224,7 +224,7 @@ class PlaylistTable extends React.Component {
                 {this.state.playlists.map((playlist, i) => {
                   return <PlaylistRow
                     playlist={playlist}
-                    key={playlist.id}
+                    key={playlist.id || i}
                     accessToken={this.props.accessToken}
                     config={this.state.config}
                   />

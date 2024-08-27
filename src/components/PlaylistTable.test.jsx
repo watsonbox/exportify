@@ -10,7 +10,7 @@ import JSZip from "jszip"
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers } from "../mocks/handlers"
+import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
 
 const server = setupServer(...handlers)
 
@@ -483,6 +483,57 @@ describe("searching playlists", () => {
       expect(screen.queryAllByRole('row')).toHaveLength(1)
       expect(screen.queryByText("Liked")).not.toBeInTheDocument()
       expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
+    })
+  })
+})
+
+describe("missing playlists", () => {
+  test("playlist loading", async () => {
+    server.use(...missingPlaylistsHandlers)
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+
+    expect(await screen.findByText(/This playlist is not supported/)).toBeInTheDocument() // FIXME
+    expect(await screen.queryAllByRole('row')).toHaveLength(4)
+  })
+
+  test("exporting of all playlists", async () => {
+    server.use(...missingPlaylistsHandlers)
+
+    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(jest.fn())
+
+    const jsZipFileMock = jest.spyOn(JSZip.prototype, 'file')
+    const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
+    jsZipGenerateAsync.mockResolvedValue("zip_content")
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
+
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
+
+    const linkElement = screen.getByText("Export All")
+
+    expect(linkElement).toBeInTheDocument()
+
+    userEvent.click(linkElement)
+
+    await waitFor(() => {
+      expect(jsZipFileMock).toHaveBeenCalledTimes(2)
+    })
+  })
+
+  // FIXME: Repeated searches producing extra request
+  test("searching", async () => {
+    server.use(...missingPlaylistsHandlers)
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+
+    expect(await screen.findByRole('searchbox')).toBeInTheDocument()
+
+    userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
+
+    await waitFor(() => {
+      expect(screen.queryAllByRole('row')).toHaveLength(2)
     })
   })
 })

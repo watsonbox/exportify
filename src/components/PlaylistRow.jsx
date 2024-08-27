@@ -47,7 +47,7 @@ class PlaylistRow extends React.Component {
     const icon = ['fas', (this.state.exporting ? 'sync' : 'download')]
 
     if (playlist.uri == null) return (
-      <tr key={playlist.name}>
+      <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
         <td>{playlist.name}</td>
         <td className="d-none d-sm-table-cell" colSpan="2">{this.props.i18n.t("playlist.not_supported")}</td>
@@ -58,7 +58,7 @@ class PlaylistRow extends React.Component {
     );
 
     return (
-      <tr key={playlist.uri}>
+      <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
         <td><a href={playlist.owner.uri}>{playlist.owner.display_name}</a></td>

@@ -46,13 +46,15 @@ class PlaylistsData {
     await this.loadAll()
     await this.loadLikedTracksPlaylist()
 
-    return [this.likedTracksPlaylist, ...this.data.filter(p => p)]
+    // Remove any uninitialized playlists when exporting
+    return [this.likedTracksPlaylist, ...this.data.filter(p => p && Object.keys(p).length > 0)]
   }
 
   async search(query: string) {
     await this.loadAll()
 
-    let results = this.data.filter(p => p)
+    // Remove any uninitialized playlists when exporting
+    let results = this.data.filter(p => p && Object.keys(p).length > 0)
 
     if (query.startsWith("public:")) {
       return results.filter(p => p.public === query.endsWith(":true"))
@@ -96,7 +98,7 @@ class PlaylistsData {
       }
     }
 
-    const playlistsUrl = `https://api.spotify.com/v1/users/${this.userId}/playlists?offset=${start}&limit=${end-start}`
+    const playlistsUrl = `https://api.spotify.com/v1/users/${this.userId}/playlists?offset=${start}&limit=${end - start}`
     const playlistsResponse = await apiCall(playlistsUrl, this.accessToken)
     const playlistsData = playlistsResponse.data
 
