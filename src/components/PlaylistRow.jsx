@@ -50,7 +50,7 @@ class PlaylistRow extends React.Component {
       <tr key={playlist.name}>
         <td>{this.renderIcon(playlist)}</td>
         <td>{playlist.name}</td>
-        <td className="d-none d-sm-table-cell" colSpan="2">{this.i18n.t("playlist.not_supported")}</td>
+        <td className="d-none d-sm-table-cell" colSpan="2">{this.props.i18n.t("playlist.not_supported")}</td>
         <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td>&nbsp;</td>
