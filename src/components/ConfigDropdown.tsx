@@ -69,4 +69,7 @@ class ConfigDropdown extends React.Component<ConfigDropdownProps> {
   }
 }
 
-export default withTranslation("translations", { withRef: true })(ConfigDropdown)
+// https://stackoverflow.com/a/77677875
+export interface ConfigDropdownRef extends ConfigDropdown { }
+export default withTranslation("translations", { withRef: true })(ConfigDropdown) as
+  React.ForwardRefExoticComponent<Omit<ConfigDropdownProps, keyof WithTranslation> & React.RefAttributes<ConfigDropdownRef>>

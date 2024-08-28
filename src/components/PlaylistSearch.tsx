@@ -85,4 +85,7 @@ class PlaylistSearch extends React.Component<PlaylistSearchProps> {
   }
 }
 
-export default withTranslation("translations", { withRef: true })(PlaylistSearch)
+// https://stackoverflow.com/a/77677875
+export interface PlaylistSearchRef extends PlaylistSearch { }
+export default withTranslation("translations", { withRef: true })(PlaylistSearch) as
+  React.ForwardRefExoticComponent<Omit<PlaylistSearchProps, keyof WithTranslation> & React.RefAttributes<PlaylistSearchRef>>

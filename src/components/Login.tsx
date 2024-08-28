@@ -1,10 +1,10 @@
 import React from "react"
-import { withTranslation } from "react-i18next"
+import { withTranslation, WithTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { getQueryParam } from "helpers"
 
-class Login extends React.Component {
+class Login extends React.Component<WithTranslation> {
   authorize() {
     let clientId = getQueryParam("app_client_id")
     let changeUser = getQueryParam("change_user") !== ""

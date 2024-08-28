@@ -1,5 +1,5 @@
 import React from "react"
-import i18n from "i18n/config.ts"
+import i18n from "i18n/config"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import App from "./App"
@@ -7,6 +7,7 @@ import App from "./App"
 const { location } = window
 
 beforeAll(() => {
+  // @ts-ignore
   delete window.location
 })
 
@@ -15,6 +16,7 @@ afterAll(() => {
 })
 
 beforeAll(() => {
+  // @ts-ignore
   window.location = { hash: "" }
 })
 
@@ -59,6 +61,7 @@ describe("logging in", () => {
 
   describe("post-login state", () => {
     beforeAll(() => {
+      // @ts-ignore
       window.location = { hash: "#access_token=TEST_ACCESS_TOKEN" }
     })
 
@@ -72,6 +75,7 @@ describe("logging in", () => {
 
 describe("logging out", () => {
   beforeAll(() => {
+    // @ts-ignore
     window.location = { hash: "#access_token=TEST_ACCESS_TOKEN", href: "https://www.example.com/#access_token=TEST_ACCESS_TOKEN" }
   })
 

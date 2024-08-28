@@ -7,13 +7,13 @@ import JSZip from "jszip"
 
 import PlaylistExporter from "./PlaylistExporter"
 import { apiCallErrorHandler } from "helpers"
+import PlaylistsData from "./data/PlaylistsData"
 
 interface PlaylistsExporterProps extends WithTranslation {
   accessToken: string
-  playlistsData: any
+  playlistsData: PlaylistsData
   searchQuery: string
   config: any
-  onLoadedPlaylistCountChanged: () => void
   onPlaylistExportStarted: (playlistName: string, doneCount: number) => void
   onPlaylistsExportDone: () => void
 }
@@ -24,13 +24,11 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
     exporting: false
   }
 
-  async export(accessToken: string, playlistsData: any, searchQuery: string, config: any) {
+  async export(accessToken: string, playlistsData: PlaylistsData, searchQuery: string, config: any) {
     let playlistFileNames = new Set<string>()
     let playlistCsvExports = new Array<string>()
 
-    const playlists = searchQuery === "" ?
-      await playlistsData.all(this.props.onLoadedPlaylistCountChanged) :
-      await playlistsData.search(searchQuery, this.props.onLoadedPlaylistCountChanged)
+    const playlists = searchQuery === "" ? await playlistsData.all() : await playlistsData.search(searchQuery)
 
     let doneCount = 0
 

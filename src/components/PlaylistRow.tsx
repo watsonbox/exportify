@@ -1,12 +1,19 @@
 import React from "react"
-import { withTranslation } from "react-i18next"
+import { withTranslation, WithTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { apiCallErrorHandler } from "helpers"
 import PlaylistExporter from "./PlaylistExporter"
 
-class PlaylistRow extends React.Component {
+interface PlaylistRowProps extends WithTranslation {
+  accessToken: string,
+  key: string,
+  playlist: any,
+  config: any
+}
+
+class PlaylistRow extends React.Component<PlaylistRowProps> {
   state = {
     exporting: false
   }
@@ -26,7 +33,7 @@ class PlaylistRow extends React.Component {
     )
   }
 
-  renderTickCross(condition) {
+  renderTickCross(condition: boolean) {
     if (condition) {
       return <FontAwesomeIcon icon={['far', 'check-circle']} size="sm" />
     } else {
@@ -34,7 +41,7 @@ class PlaylistRow extends React.Component {
     }
   }
 
-  renderIcon(playlist) {
+  renderIcon(playlist: any) {
     if (playlist.name === 'Liked') {
       return <FontAwesomeIcon icon={['far', 'heart']} style={{ color: 'red' }} />;
     } else {
@@ -50,11 +57,11 @@ class PlaylistRow extends React.Component {
       <tr key={this.props.key}>
         <td>{this.renderIcon(playlist)}</td>
         <td>{playlist.name}</td>
-        <td className="d-none d-sm-table-cell" colSpan="2">{this.props.i18n.t("playlist.not_supported")}</td>
+        <td className="d-none d-sm-table-cell" colSpan={2}>{this.props.i18n.t("playlist.not_supported")}</td>
         <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td>&nbsp;</td>
-      </tr>
+      </tr >
     );
 
     return (
@@ -66,7 +73,9 @@ class PlaylistRow extends React.Component {
         <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-end">
+          {/* @ts-ignore */}
           <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} disabled={this.state.exporting} className="text-nowrap">
+            {/* @ts-ignore */}
             <FontAwesomeIcon icon={icon} size="sm" spin={this.state.exporting} /> {this.props.i18n.t("playlist.export")}
           </Button>
         </td>

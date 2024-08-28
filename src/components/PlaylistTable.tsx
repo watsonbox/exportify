@@ -1,21 +1,29 @@
 import React from "react"
-import { withTranslation, Translation } from "react-i18next"
+import { withTranslation, WithTranslation, Translation } from "react-i18next"
 import { ProgressBar } from "react-bootstrap"
 
 import Bugsnag from "@bugsnag/js"
 import PlaylistsData from "./data/PlaylistsData"
-import ConfigDropdown from "./ConfigDropdown"
-import PlaylistSearch from "./PlaylistSearch"
+import ConfigDropdown, { ConfigDropdownRef } from "./ConfigDropdown"
+import PlaylistSearch, { PlaylistSearchRef } from "./PlaylistSearch"
 import PlaylistRow from "./PlaylistRow"
 import Paginator from "./Paginator"
 import PlaylistsExporter from "./PlaylistsExporter"
 import { apiCall, apiCallErrorHandler } from "helpers"
 
-class PlaylistTable extends React.Component {
+interface PlaylistTableProps extends WithTranslation {
+  accessToken: string,
+  config?: any,
+  onSetSubtitle: (subtitile: React.JSX.Element) => void
+}
+
+class PlaylistTable extends React.Component<PlaylistTableProps> {
   PAGE_SIZE = 20
 
-  userId = null
-  playlistsData = null
+  userId?: string
+  playlistsData?: PlaylistsData
+  configDropdown = React.createRef<ConfigDropdownRef>()
+  playlistSearch = React.createRef<PlaylistSearchRef>()
 
   state = {
     initialized: false,
@@ -39,40 +47,38 @@ class PlaylistTable extends React.Component {
     }
   }
 
-  constructor(props) {
+  constructor(props: PlaylistTableProps) {
     super(props)
-
-    this.configDropdown = React.createRef()
-    this.playlistSearch = React.createRef()
 
     if (props.config) {
       this.state.config = props.config
     }
   }
 
-  handlePlaylistSearch = async (query) => {
+  handlePlaylistSearch = async (query: string) => {
     if (query.length === 0) {
       this.handlePlaylistSearchCancel()
-    } else {
-      const playlists = await this.playlistsData.search(query).catch(apiCallErrorHandler)
-
-      this.setState({
-        searchQuery: query,
-        playlists: playlists,
-        playlistCount: playlists.length,
-        currentPage: 1,
-        progressBar: {
-          show: false
-        }
-      })
-
-      let key = "subtitle_search"
-      if (query.startsWith("public:") || query.startsWith("collaborative:") || query.startsWith("owner:")) {
-        key += "_advanced"
-      }
-
-      this.props.onSetSubtitle(<Translation>{(t) => t(key, { total: playlists.length, query: query })}</Translation>)
+      return
     }
+
+    const playlists = await this.playlistsData!.search(query).catch(apiCallErrorHandler)
+
+    this.setState({
+      searchQuery: query,
+      playlists: playlists,
+      playlistCount: playlists!.length,
+      currentPage: 1,
+      progressBar: {
+        show: false
+      }
+    })
+
+    let key = "subtitle_search"
+    if (query.startsWith("public:") || query.startsWith("collaborative:") || query.startsWith("owner:")) {
+      key += "_advanced"
+    }
+
+    this.props.onSetSubtitle(<Translation>{(t) => t(key, { total: playlists!.length, query: query })}</Translation>)
   }
 
   handlePlaylistSearchCancel = () => {
@@ -85,7 +91,7 @@ class PlaylistTable extends React.Component {
     }
 
     try {
-      const playlists = await this.playlistsData.slice(
+      const playlists = await this.playlistsData!.slice(
         ((this.state.currentPage - 1) * this.PAGE_SIZE),
         ((this.state.currentPage - 1) * this.PAGE_SIZE) + this.PAGE_SIZE
       )
@@ -96,7 +102,7 @@ class PlaylistTable extends React.Component {
           initialized: true,
           searchQuery: "",
           playlists: playlists,
-          playlistCount: await this.playlistsData.total(),
+          playlistCount: await this.playlistsData!.total(),
           progressBar: {
             show: false
           }
@@ -117,11 +123,11 @@ class PlaylistTable extends React.Component {
   handlePlaylistsLoadingStarted = () => {
     Bugsnag.leaveBreadcrumb("Started exporting all playlists")
 
-    this.configDropdown.current.spin(true)
+    this.configDropdown.current!.spin(true)
   }
 
   handlePlaylistsLoadingDone = () => {
-    this.configDropdown.current.spin(false)
+    this.configDropdown.current!.spin(false)
   }
 
   handlePlaylistsExportDone = () => {
@@ -136,7 +142,7 @@ class PlaylistTable extends React.Component {
     })
   }
 
-  handlePlaylistExportStarted = (playlistName, doneCount) => {
+  handlePlaylistExportStarted = (playlistName: string, doneCount: number) => {
     Bugsnag.leaveBreadcrumb(`Started exporting playlist ${playlistName}`)
 
     this.setState({
@@ -148,13 +154,13 @@ class PlaylistTable extends React.Component {
     })
   }
 
-  handleConfigChanged = (config) => {
+  handleConfigChanged = (config: any) => {
     Bugsnag.leaveBreadcrumb(`Config updated to ${JSON.stringify(config)}`)
 
     this.setState({ config: config })
   }
 
-  handlePageChanged = (page) => {
+  handlePageChanged = (page: number) => {
     try {
       this.setState(
         { currentPage: page },
@@ -175,7 +181,7 @@ class PlaylistTable extends React.Component {
       this.userId = user.id
       this.playlistsData = new PlaylistsData(
         this.props.accessToken,
-        this.userId,
+        this.userId!,
         this.handlePlaylistsLoadingStarted,
         this.handlePlaylistsLoadingDone
       )
@@ -213,7 +219,7 @@ class PlaylistTable extends React.Component {
                       accessToken={this.props.accessToken}
                       onPlaylistsExportDone={this.handlePlaylistsExportDone}
                       onPlaylistExportStarted={this.handlePlaylistExportStarted}
-                      playlistsData={this.playlistsData}
+                      playlistsData={this.playlistsData!}
                       searchQuery={this.state.searchQuery}
                       config={this.state.config}
                     />
@@ -221,7 +227,7 @@ class PlaylistTable extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {this.state.playlists.map((playlist, i) => {
+                {this.state.playlists.map((playlist: any, i) => {
                   return <PlaylistRow
                     playlist={playlist}
                     key={playlist.id || i}
