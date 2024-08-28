@@ -58,6 +58,27 @@
     thead {
       th {
         border-top-width: 0;
+
+        &.icon {
+          width: 30px;
+        }
+
+        &.owner {
+          width: 150px;
+        }
+
+        &.tracks {
+          width: 100px;
+        }
+
+        &.public,
+        &.collaborative {
+          width: 120px;
+        }
+
+        &.export {
+          width: 100px;
+        }
       }
     }
 

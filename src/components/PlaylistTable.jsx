@@ -202,13 +202,13 @@ class PlaylistTable extends React.Component {
             <table className="table table-hover table-sm">
               <thead>
                 <tr>
-                  <th style={{ width: "30px" }}></th>
-                  <th>{this.props.i18n.t("playlist.name")}</th>
-                  <th style={{ width: "150px" }}>{this.props.i18n.t("playlist.owner")}</th>
-                  <th style={{ width: "100px" }} className="d-none d-sm-table-cell">{this.props.i18n.t("playlist.tracks")}</th>
-                  <th style={{ width: "120px" }} className="d-none d-sm-table-cell">{this.props.i18n.t("playlist.public")}</th>
-                  <th style={{ width: "120px" }} className="d-none d-md-table-cell">{this.props.i18n.t("playlist.collaborative")}</th>
-                  <th style={{ width: "100px" }} className="text-end">
+                  <th className="icon"></th>
+                  <th className="name">{this.props.i18n.t("playlist.name")}</th>
+                  <th className="owner">{this.props.i18n.t("playlist.owner")}</th>
+                  <th className="tracks d-none d-sm-table-cell">{this.props.i18n.t("playlist.tracks")}</th>
+                  <th className="public d-none d-sm-table-cell">{this.props.i18n.t("playlist.public")}</th>
+                  <th className="collaborative d-none d-md-table-cell">{this.props.i18n.t("playlist.collaborative")}</th>
+                  <th className="export text-end">
                     <PlaylistsExporter
                       accessToken={this.props.accessToken}
                       onPlaylistsExportDone={this.handlePlaylistsExportDone}

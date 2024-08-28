@@ -115,37 +115,35 @@ exports[`playlist loading 1`] = `
         <thead>
           <tr>
             <th
-              style="width: 30px;"
+              class="icon"
             />
-            <th>
+            <th
+              class="name"
+            >
               Name
             </th>
             <th
-              style="width: 150px;"
+              class="owner"
             >
               Owner
             </th>
             <th
-              class="d-none d-sm-table-cell"
-              style="width: 100px;"
+              class="tracks d-none d-sm-table-cell"
             >
               Tracks
             </th>
             <th
-              class="d-none d-sm-table-cell"
-              style="width: 120px;"
+              class="public d-none d-sm-table-cell"
             >
               Public?
             </th>
             <th
-              class="d-none d-md-table-cell"
-              style="width: 120px;"
+              class="collaborative d-none d-md-table-cell"
             >
               Collaborative?
             </th>
             <th
-              class="text-end"
-              style="width: 100px;"
+              class="export text-end"
             >
               <button
                 class="text-nowrap btn btn-outline-secondary btn-xs"
