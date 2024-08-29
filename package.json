@@ -2,7 +2,7 @@
   "name": "exportify",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://watsonbox.github.io/exportify",
+  "homepage": "https://exportify.app",
   "dependencies": {
     "@bugsnag/js": "^7.25.0",
     "@bugsnag/plugin-react": "^7.25.0",
