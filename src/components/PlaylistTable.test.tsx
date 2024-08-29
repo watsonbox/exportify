@@ -1,8 +1,7 @@
 import React from "react"
-import i18n from "i18n/config.ts"
+import "i18n/config.ts"
 import { render, screen, waitFor, act, waitForElementToBeRemoved } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import renderer from "react-test-renderer"
 import { setupServer } from "msw/node"
 import FileSaver from "file-saver"
 import JSZip from "jszip"
@@ -23,6 +22,7 @@ server.listen({
 })
 
 beforeAll(() => {
+  // @ts-ignore
   global.Blob = function (content, options) { return ({ content, options }) }
 
   // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
@@ -44,6 +44,7 @@ beforeAll(() => {
 const { location } = window
 
 beforeAll(() => {
+  // @ts-ignore
   delete window.location
 })
 
@@ -69,6 +70,7 @@ test("playlist loading", async () => {
 })
 
 test("redirecting when access token is invalid", async () => {
+  // @ts-ignore
   window.location = { href: "http://www.example.com/exportify#access_token=INVALID_ACCESS_TOKEN" }
 
   render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)

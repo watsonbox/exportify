@@ -29,7 +29,7 @@ function App() {
       <p style={{ marginTop: "50px" }}>Keep an eye on the <a target="_blank" rel="noreferrer" href="https://status.spotify.dev/">Spotify Web API Status page</a> to see if there are any known problems right now, and then <a rel="noreferrer" href="?">retry</a>.</p>
     </div>
   } else if (key.has('access_token')) {
-    view = <PlaylistTable accessToken={key.get('access_token')} onSetSubtitle={onSetSubtitle} />
+    view = <PlaylistTable accessToken={key.get('access_token')!} onSetSubtitle={onSetSubtitle} />
   } else {
     view = <Login />
   }
