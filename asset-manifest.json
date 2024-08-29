@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/exportify/static/css/main.b8861766.css",
+    "main.js": "/exportify/static/js/main.1896d148.js",
+    "static/js/488.bf4440df.chunk.js": "/exportify/static/js/488.bf4440df.chunk.js",
+    "index.html": "/exportify/index.html",
+    "main.b8861766.css.map": "/exportify/static/css/main.b8861766.css.map",
+    "main.1896d148.js.map": "/exportify/static/js/main.1896d148.js.map",
+    "488.bf4440df.chunk.js.map": "/exportify/static/js/488.bf4440df.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b8861766.css",
+    "static/js/main.1896d148.js"
+  ]
+}
