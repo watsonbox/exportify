@@ -1,19 +1,27 @@
 [![Build Status](https://api.travis-ci.com/watsonbox/exportify.svg?branch=master)](https://travis-ci.com/github/watsonbox/exportify)
 
-<a href="https://watsonbox.github.io/exportify/"><img src="screenshot.png"/></a>
+<a href="https://exportify.app/"><img src="assets/screenshot.png"/></a>
 
-Export your Spotify playlists to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) by clicking on the link below:
-
-[https://watsonbox.github.io/exportify/](https://watsonbox.github.io/exportify/)
+Export your Spotify playlists to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) by clicking on this link: [https://exportify.app/](https://exportify.app/).
 
 As many users have noted, there is no way to export/archive/backup playlists from the Spotify client for safekeeping. This application provides a simple interface for doing that using the [Spotify Web API](https://developer.spotify.com/documentation/web-api/).
 
 **No data will be saved - the entire application runs in the browser.**
 
+## Features
+
+- ⚙️ Optional inclusion of album, artist and audio features data in export files
+- 🔍 Playlist search with [advanced search syntax](#advanced-search-syntax) and results export
+- 🌓 Dark mode
+- 🗺 Available in 8 languages (English, French, Spanish, Italian, German, Portuguese, Swedish, and Dutch)
+- 📱 Mobile friendly
+- ℹ Quick reference help
+- 🚀 [Advanced rate limiting handling](https://github.com/watsonbox/exportify/pull/75) for speedy exports
+- 👩‍💻 Modern [React-based development stack](#stack) + test suite
 
 ## Usage
 
-1. Fire up [the app](https://watsonbox.github.io/exportify/)
+1. Fire up [the app](https://exportify.app/)
 2. Click 'Get Started'
 3. Grant Exportify read-only access to your playlists
 4. Click the 'Export' button to export a playlist
@@ -140,6 +148,11 @@ In addition to [Create React App](https://github.com/facebook/create-react-app),
 * [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) - light-weight solution for testing React DOM nodes
 * [MSW](https://mswjs.io/) - network-level request mocking (more of my own thoughts [here](https://watsonbox.github.io/posts/2020/11/30/discovering-msw.html))
 
+### History
+
+- 2015: Exportify is [born](https://github.com/watsonbox/exportify/commit/b284822e12c3adea8fb83258fdb00ec4690701e1)
+- 2020: [Major release](https://watsonbox.github.io/posts/2020/12/02/exportify-refresh.html) including search, artist and audio features, liked songs export, and a new rate limiting system
+- 2024: [Major release](https://watsonbox.github.io/posts/2024/09/04/exportify-updates.html) including dark mode, internationalization, and search enhancements
 
 ## Notes
 
@@ -161,7 +174,7 @@ In addition to [Create React App](https://github.com/facebook/create-react-app),
 Error monitoring provided by Bugsnag.
 
 <a href="http://www.bugsnag.com">
-  <img src="bugsnag.png" width="200" />
+  <img src="assets/bugsnag.png" width="200" />
 </a>
 
 ## Running With Docker
