@@ -28,8 +28,7 @@ class TracksBaseData extends TracksData {
       i18n.t("track.track_preview_url"),
       i18n.t("track.explicit"),
       i18n.t("track.popularity"),
-      i18n.t("track.isrc"),
-      i18n.t("track.is_playable")
+      i18n.t("track.isrc")
     ]
   }
 
@@ -62,8 +61,7 @@ class TracksBaseData extends TracksData {
           item.track.preview_url == null ? '' : item.track.preview_url,
           item.track.explicit,
           item.track.popularity,
-          item.track.external_ids.isrc == null ? '' : item.track.external_ids.isrc,
-          item.track.is_playable
+          item.track.external_ids.isrc == null ? '' : item.track.external_ids.isrc
         ]
       ]
     }))
@@ -80,7 +78,7 @@ class TracksBaseData extends TracksData {
     var limit = this.playlist.tracks.limit ? 50 : 100
 
     for (var offset = 0; offset < this.playlist.tracks.total; offset = offset + limit) {
-      requests.push(`${this.playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}&market=from_token`)
+      requests.push(`${this.playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}`)
     }
 
     const trackPromises = requests.map(request => { return apiCall(request, this.accessToken) })
