@@ -33,7 +33,7 @@ export const handlers = [
     ))
   }),
 
-  rest.get('https://api.spotify.com/v1/users/watsonbox/tracks', (req, res, ctx) => {
+  rest.get('https://api.spotify.com/v1/me/tracks', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
     if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {

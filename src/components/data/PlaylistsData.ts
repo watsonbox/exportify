@@ -115,7 +115,7 @@ class PlaylistsData {
       return
     }
 
-    const likedTracksUrl = `https://api.spotify.com/v1/users/${this.userId}/tracks`
+    const likedTracksUrl = `https://api.spotify.com/v1/me/tracks`
     const likedTracksResponse = await apiCall(likedTracksUrl, this.accessToken)
     const likedTracksData = likedTracksResponse.data
 
