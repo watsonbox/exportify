@@ -1,0 +1,91 @@
+{
+  "tagline": "صدّر قوائم التشغيل الخاصة بك من Spotify.",
+  "get_started": "ابدأ الآن",
+  "subtitle": "{{min}}-{{max}} من {{total}} قوائم التشغيل لـ {{userId}}",
+  "subtitle_search": "{{total}} نتيجة تحتوي على \"{{query}}\" في اسم القائمة",
+  "subtitle_search_advanced": "{{total}} نتيجة للبحث المتقدم \"{{query}}\"",
+  "search": "بحث",
+  "export_all": "تصدير الكل",
+  "exporting_done": "تم التصدير!",
+  "exporting_playlist": "جاري تصدير {{playlistName}}...",
+  "export_search_results": "تصدير النتائج",
+  "top_menu": {
+    "help": "المساعدة",
+    "toggle_dark_mode": "تبديل الوضع الداكن",
+    "change_language": "تغيير اللغة",
+    "change_user": "تبديل المستخدم"
+  },
+  "config": {
+    "include_artists_data": "تضمين بيانات الفنانين",
+    "include_audio_features_data": "تضمين خصائص الصوت",
+    "include_album_data": "تضمين بيانات الألبومات"
+  },
+  "help": {
+    "title": "المرجع السريع",
+    "search_syntax": {
+      "title": "صيغة البحث المتقدم",
+      "query": "الاستعلام",
+      "behavior": "السلوك",
+      "public_true": "عرض قوائم التشغيل العامة فقط",
+      "public_false": "عرض قوائم التشغيل الخاصة فقط",
+      "collaborative_true": "عرض قوائم التشغيل التعاونية فقط",
+      "collaborative_false": "عدم عرض قوائم التشغيل التعاونية",
+      "owner_me": "عرض قوائم التشغيل الخاصة بي فقط",
+      "owner_owner": "عرض قوائم التشغيل المملوكة بواسطة <code>[owner]</code> فقط",
+      "more_detail": "لمزيد من التفاصيل، يرجى الرجوع إلى <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>الوثائق الكاملة للمشروع</a>."
+    }
+  },
+  "playlist": {
+    "name": "الاسم",
+    "owner": "المالك",
+    "tracks": "الأغاني",
+    "public": "عام؟",
+    "collaborative": "تعاوني؟",
+    "not_supported": "هذه القائمة غير مدعومة",
+    "export": "تصدير"
+  },
+  "track": {
+    "track_uri": "رابط الأغنية (URI)",
+    "track_name": "اسم الأغنية",
+    "artist_uris": "روابط الفنانين (URI)",
+    "artist_names": "أسماء الفنانين",
+    "album_uri": "رابط الألبوم (URI)",
+    "album_name": "اسم الألبوم",
+    "album_artist_uris": "روابط فناني الألبوم (URI)",
+    "album_artist_names": "أسماء فناني الألبوم",
+    "album_release_date": "تاريخ إصدار الألبوم",
+    "album_image_url": "رابط صورة الألبوم",
+    "disc_number": "رقم القرص",
+    "track_number": "رقم الأغنية",
+    "track_duration": "مدة الأغنية (بالمللي ثانية)",
+    "track_preview_url": "رابط معاينة الأغنية",
+    "explicit": "صريح",
+    "popularity": "الشعبية",
+    "isrc": "ISRC",
+    "is_playable": "قابل للتشغيل",
+    "added_by": "أضيف بواسطة",
+    "added_at": "أضيف في",
+    "album": {
+      "album_genres": "أنواع الألبوم",
+      "label": "العلامة التجارية",
+      "copyrights": "حقوق النشر"
+    },
+    "artist": {
+      "artist_genres": "أنواع الفنان"
+    },
+    "audio_features": {
+      "danceability": "قابلية الرقص",
+      "energy": "الطاقة",
+      "key": "المفتاح",
+      "loudness": "مستوى الصوت",
+      "mode": "النمط",
+      "speechiness": "محتوى الكلام",
+      "acousticness": "الطابع الصوتي",
+      "instrumentalness": "الطابع الآلي",
+      "liveness": "الحيوية",
+      "valence": "الإيجابية",
+      "tempo": "الإيقاع",
+      "time_signature": "توقيع الزمن"
+    }
+  }
+}

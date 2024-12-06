@@ -1,0 +1,91 @@
+{
+  "tagline": "Spotifyのプレイリストをエクスポートします。",
+  "get_started": "開始する",
+  "subtitle": "{{min}}-{{max}} / {{total}} プレイリスト （ユーザー: {{userId}}）",
+  "subtitle_search": "プレイリスト名に \"{{query}}\" を含む結果: {{total}} 件",
+  "subtitle_search_advanced": "高度なクエリ \"{{query}}\" の結果: {{total}} 件",
+  "search": "検索",
+  "export_all": "すべてエクスポート",
+  "exporting_done": "完了！",
+  "exporting_playlist": "プレイリスト {{playlistName}} をエクスポート中...",
+  "export_search_results": "検索結果をエクスポート",
+  "top_menu": {
+    "help": "ヘルプ",
+    "toggle_dark_mode": "ダークモード切り替え",
+    "change_language": "言語を変更",
+    "change_user": "ユーザーを変更"
+  },
+  "config": {
+    "include_artists_data": "アーティストデータを含める",
+    "include_audio_features_data": "オーディオ機能データを含める",
+    "include_album_data": "アルバムデータを含める"
+  },
+  "help": {
+    "title": "クイックリファレンス",
+    "search_syntax": {
+      "title": "高度な検索構文",
+      "query": "クエリ",
+      "behavior": "動作",
+      "public_true": "公開プレイリストのみを表示",
+      "public_false": "非公開プレイリストのみを表示",
+      "collaborative_true": "共同作成プレイリストのみを表示",
+      "collaborative_false": "共同作成プレイリストを表示しない",
+      "owner_me": "自分が所有するプレイリストのみを表示",
+      "owner_owner": "<code>[owner]</code> が所有するプレイリストのみを表示",
+      "more_detail": "詳細は<a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>完全なプロジェクトドキュメント</a>をご覧ください。"
+    }
+  },
+  "playlist": {
+    "name": "名前",
+    "owner": "所有者",
+    "tracks": "トラック数",
+    "public": "公開？",
+    "collaborative": "共同作成？",
+    "not_supported": "このプレイリストはサポートされていません",
+    "export": "エクスポート"
+  },
+  "track": {
+    "track_uri": "トラックURI",
+    "track_name": "トラック名",
+    "artist_uris": "アーティストURI",
+    "artist_names": "アーティスト名",
+    "album_uri": "アルバムURI",
+    "album_name": "アルバム名",
+    "album_artist_uris": "アルバムアーティストURI",
+    "album_artist_names": "アルバムアーティスト名",
+    "album_release_date": "アルバム発売日",
+    "album_image_url": "アルバム画像URL",
+    "disc_number": "ディスク番号",
+    "track_number": "トラック番号",
+    "track_duration": "トラックの長さ（ミリ秒）",
+    "track_preview_url": "トラックプレビューURL",
+    "explicit": "明示的な内容",
+    "popularity": "人気度",
+    "isrc": "ISRC",
+    "is_playable": "再生可能",
+    "added_by": "追加者",
+    "added_at": "追加日時",
+    "album": {
+      "album_genres": "アルバムジャンル",
+      "label": "レーベル",
+      "copyrights": "著作権"
+    },
+    "artist": {
+      "artist_genres": "アーティストジャンル"
+    },
+    "audio_features": {
+      "danceability": "ダンサビリティ",
+      "energy": "エネルギー",
+      "key": "キー",
+      "loudness": "ラウドネス",
+      "mode": "モード",
+      "speechiness": "スピーチ性",
+      "acousticness": "アコースティック性",
+      "instrumentalness": "インストゥルメンタル性",
+      "liveness": "ライブ感",
+      "valence": "感情値",
+      "tempo": "テンポ",
+      "time_signature": "拍子"
+    }
+  }
+}
