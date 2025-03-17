@@ -20,7 +20,7 @@
     "@types/react": "^18.3.3",
     "@types/react-bootstrap": "^0.32.37",
     "@types/react-dom": "^18.3.0",
-    "axios": "^1.7.4",
+    "axios": "^1.8.2",
     "bootstrap": "^5.3.3",
     "bottleneck": "^2.19.5",
     "eslint-plugin-jest-dom": "^5.4.0",
