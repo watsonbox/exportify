@@ -40,6 +40,9 @@ i18n
       },
       ja: {
         translations: require('./locales/ja/translation.json')
+      },
+      tr: {
+        translations: require('./locales/tr/translation.json')
       }
     },
     ns: ['translations'],
