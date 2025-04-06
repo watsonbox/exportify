@@ -1,0 +1,91 @@
+{
+  "tagline": "Spotify çalma listelerinizi dışa aktarın.",
+  "get_started": "Başlayın",
+  "subtitle": "{{userId}} için toplam {{total}} oynatma listesinden {{min}}-{{max}} arası gösteriliyor",
+  "subtitle_search": "{{total}} sonuç bulundu, çalma listesi adında \"{{query}}\" içeren listeler:",
+  "subtitle_search_advanced": "{{total}} sonuç, gelişmiş sorgu \"{{query}}\" için",
+  "search": "Ara",
+  "export_all": "Tümünü Dışa Aktar",
+  "exporting_done": "Tamamlandı!",
+  "exporting_playlist": "{{playlistName}} çalma listesi dışa aktarılıyor...",
+  "export_search_results": "Sonuçları Dışa Aktar",
+  "top_menu": {
+    "help": "Yardım",
+    "toggle_dark_mode": "Karanlık mod aç/kapa",
+    "change_language": "Dili Değiştir",
+    "change_user": "Kullanıcıyı Değiştir"
+  },
+  "config": {
+    "include_artists_data": "Sanatçı verilerini dahil et",
+    "include_audio_features_data": "Ses özellikleri verilerini dahil et",
+    "include_album_data": "Albüm verilerini dahil et"
+  },
+  "help": {
+    "title": "Hızlı Referans",
+    "search_syntax": {
+      "title": "Gelişmiş Arama Söz Dizimi",
+      "query": "Sorgu",
+      "behavior": "Davranış",
+      "public_true": "Yalnızca herkese açık çalma listelerini göster",
+      "public_false": "Yalnızca özel çalma listelerini göster",
+      "collaborative_true": "Yalnızca ortak kullanım çalma listelerini göster",
+      "collaborative_false": "Ortak kullanım çalma listelerini gösterme",
+      "owner_me": "Yalnızca benim sahip olduğum çalma listelerini göster",
+      "owner_owner": "<code>[owner]</code> tarafından oluşturulan çalma listelerini göster",
+      "more_detail": "Daha fazla bilgi için lütfen <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>proje dokümantasyonuna</a> bakın."
+    }
+  },
+  "playlist": {
+    "name": "İsim",
+    "owner": "Sahibi",
+    "tracks": "Parçalar",
+    "public": "Herkese Açık?",
+    "collaborative": "Ortak Liste mi?",
+    "not_supported": "Bu çalma listesi desteklenmiyor",
+    "export": "Dışa Aktar"
+  },
+  "track": {
+    "track_uri": "Parça URI",
+    "track_name": "Parça Adı",
+    "artist_uris": "Sanatçı URI",
+    "artist_names": "Sanatçı Adı",
+    "album_uri": "Albüm URI",
+    "album_name": "Albüm Adı",
+    "album_artist_uris": "Albümdeki Sanatçı URI",
+    "album_artist_names": "Albümdeki Sanatçı Adı",
+    "album_release_date": "Albüm Çıkış Tarihi",
+    "album_image_url": "Albüm Resim URL'si",
+    "disc_number": "Disk Numarası",
+    "track_number": "Parça Numarası",
+    "track_duration": "Parça Süresi (ms)",
+    "track_preview_url": "Parça Önizleme URL'si",
+    "explicit": "Açık İçerik",
+    "popularity": "Popülerlik",
+    "isrc": "ISRC",
+    "is_playable": "Çalınabilir mi?",
+    "added_by": "Ekleyen",
+    "added_at": "Eklenme Tarihi",
+    "album": {
+      "album_genres": "Albüm Türleri",
+      "label": "Plak Şirketi",
+      "copyrights": "Telif Hakları"
+    },
+    "artist": {
+      "artist_genres": "Sanatçı Türleri"
+    },
+    "audio_features": {
+      "danceability": "Dans Edilebilirlik",
+      "energy": "Enerji",
+      "key": "Ton",
+      "loudness": "Ses Seviyesi",
+      "mode": "Mod",
+      "speechiness": "Konuşma Oranı",
+      "acousticness": "Akustiklik",
+      "instrumentalness": "Enstrümantalite",
+      "liveness": "Canlılık",
+      "valence": "Duygusallık",
+      "tempo": "Tempo",
+      "time_signature": "Ölçü İşareti"
+    }
+  }
+}
