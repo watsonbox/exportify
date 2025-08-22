@@ -83,7 +83,7 @@ class TopMenu extends React.Component<TopMenuProps> {
                 </tr>
                 <tr>
                   <td><code>public:false</code></td>
-                  <td>{this.props.i18n.t("help.search_syntax.public_true")}</td>
+                  <td>{this.props.i18n.t("help.search_syntax.public_false")}</td>
                 </tr>
                 <tr>
                   <td><code>collaborative:true</code></td>
