@@ -1,14 +1,7 @@
 import Bugsnag from "@bugsnag/js"
 import axios from "axios"
 import Bottleneck from "bottleneck"
-
-// http://stackoverflow.com/a/901144/4167042
-export function getQueryParam(name: string) {
-  name = name.replace(/[[]/, "\\[").replace(/[\]]/, "\\]");
-  var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
-      results = regex.exec(window.location.search);
-  return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
-}
+import { clearAccessToken } from "./auth"
 
 const REQUEST_RETRY_BUFFER = 1000
 const MAX_RATE_LIMIT_RETRIES = 2 // 3 attempts in total
@@ -50,12 +43,13 @@ export const apiCall = limiter.wrap(function(url: string, accessToken: string) {
 export function apiCallErrorHandler(error: any) {
   if (error.isAxiosError) {
     if (error.request.status === 401) {
-      // Return to home page after auth token expiry
-      window.location.href = window.location.href.split('#')[0]
+      // Clear token and return to home page after auth token expiry
+      clearAccessToken()
+      window.location.href = window.location.pathname
       return
     } else if (error.request.status >= 500 && error.request.status < 600) {
       // Show error page when we get a 5XX that fails retries
-      window.location.href = `${window.location.href.split('#')[0]}?spotify_error=true`
+      window.location.href = `${window.location.pathname}?spotify_error=true`
       return
     }
   }

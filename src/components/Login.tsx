@@ -2,24 +2,15 @@ import React from "react"
 import { withTranslation, WithTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { getQueryParam } from "helpers"
+import { initiateSpotifyAuth } from "auth"
 
 class Login extends React.Component<WithTranslation> {
-  authorize() {
-    let clientId = getQueryParam("app_client_id")
-    let changeUser = getQueryParam("change_user") !== ""
+  authorize = async () => {
+    const searchParams = new URLSearchParams(window.location.search)
+    const clientId = searchParams.get("app_client_id") || undefined
+    const changeUser = searchParams.has("change_user")
 
-    // Use Exportify application clientId if none given
-    if (clientId === '') {
-      clientId = "9950ac751e34487dbbe027c4fd7f8e99"
-    }
-
-    window.location.href = "https://accounts.spotify.com/authorize" +
-      "?client_id=" + clientId +
-      "&redirect_uri=" + encodeURIComponent([window.location.protocol, '//', window.location.host, window.location.pathname].join('')) +
-      "&scope=playlist-read-private%20playlist-read-collaborative%20user-library-read" +
-      "&response_type=token" +
-      "&show_dialog=" + changeUser;
+    await initiateSpotifyAuth({ clientId, changeUser })
   }
 
   render() {

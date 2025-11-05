@@ -2,6 +2,7 @@ import React from "react"
 import { withTranslation, WithTranslation, Trans } from "react-i18next"
 import { Button, Modal, Table, Dropdown, Form } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { logout } from "auth"
 
 interface TopMenuProps extends WithTranslation {
   loggedIn: boolean
@@ -17,7 +18,7 @@ class TopMenu extends React.Component<TopMenuProps> {
   }
 
   handleLogoutClick = () => {
-    window.location.href = `${window.location.href.split('#')[0]}?change_user=true`
+    logout(true)
   }
 
   handleDarkModeClick = () => {
