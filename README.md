@@ -122,7 +122,7 @@ In the project directory, first run `yarn install` to set up dependencies, then 
 **`yarn start`**
 
 Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://127.0.0.1:3000](http://127.0.0.1:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
@@ -184,7 +184,7 @@ To build and run Exportify with docker, run:
 
 **`docker run -p 3000:3000 exportify`**
 
-And then open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+And then open [http://127.0.0.1:3000](http://127.0.0.1:3000) to view it in the browser.
 
 ## Contributing
 
