@@ -31,7 +31,7 @@ class SavedAlbumData {
     ]
   }
 
-  private savedAlbumItems: any[] = [];
+  private savedAlbumItems: any[] = []
   async fetchSavedAlbumItems() {
     if (this.savedAlbumItems.length > 0) {
       return this.savedAlbumItems

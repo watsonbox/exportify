@@ -34,11 +34,11 @@ class SavedAlbumRow extends React.Component<SavedAlbumRowProps> {
         }),
         value: albumsFetched,
       },
-    });
+    })
   }
 
   exportAlbums = () => {
-    Bugsnag.leaveBreadcrumb("Started exporting all saved albums");
+    Bugsnag.leaveBreadcrumb("Started exporting all saved albums")
     this.setState(
       {
         exporting: true,
@@ -68,10 +68,10 @@ class SavedAlbumRow extends React.Component<SavedAlbumRowProps> {
                 label: "",
                 value: 0,
               },
-            });
-          });
+            })
+          })
       }
-    );
+    )
   }
 
   // We make one 'dummy' call to the user's saved album API to get the count
@@ -102,7 +102,7 @@ class SavedAlbumRow extends React.Component<SavedAlbumRowProps> {
         max={this.state.savedAlbumCount}
         label={this.state.progressBar.label}
       />
-    );
+    )
 
     if (this.state.initialized) {
       return (
