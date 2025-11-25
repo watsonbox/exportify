@@ -112,7 +112,7 @@ class SavedAlbumRow extends React.Component<SavedAlbumRowProps> {
           </div>
           <div id="saved-album-row">
             <FontAwesomeIcon icon={["fas", "record-vinyl"]} size="lg" />
-            <span>{this.state.savedAlbumCount} saved albums</span>
+            <span>{this.state.savedAlbumCount} saved album(s)</span>
             {/* @ts-ignore */}
             <Button type="submit" variant="primary" size="xs" onClick={this.exportAlbums} disabled={this.state.exporting} className="text-nowrap">
               {/* @ts-ignore */}
