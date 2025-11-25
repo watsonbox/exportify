@@ -8,6 +8,7 @@ import "url-search-params-polyfill"
 
 import Login from 'components/Login'
 import PlaylistTable from "components/PlaylistTable"
+import SavedAlbumRow from "components/SavedAlbumRow"
 import TopMenu from "components/TopMenu"
 import { loadAccessToken, exchangeCodeForToken } from "auth"
 
@@ -50,7 +51,10 @@ function App() {
       <p style={{ marginTop: "50px" }}>Keep an eye on the <a target="_blank" rel="noreferrer" href="https://status.spotify.dev/">Spotify Web API Status page</a> to see if there are any known problems right now, and then <a rel="noreferrer" href="?">retry</a>.</p>
     </div>
   } else if (accessToken) {
-    view = <PlaylistTable accessToken={accessToken!} onSetSubtitle={onSetSubtitle} />
+    view = <>
+      <PlaylistTable accessToken={accessToken!} onSetSubtitle={onSetSubtitle} />
+      <SavedAlbumRow accessToken={accessToken!} />
+    </>
   } else {
     view = <Login />
   }
