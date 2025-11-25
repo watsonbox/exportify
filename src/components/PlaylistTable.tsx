@@ -14,7 +14,7 @@ import { apiCall, apiCallErrorHandler } from "helpers"
 interface PlaylistTableProps extends WithTranslation {
   accessToken: string,
   config?: any,
-  onSetSubtitle: (subtitile: React.JSX.Element) => void
+  onSetSubtitle: (subtitile: React.JSX.Element) => void,
 }
 
 class PlaylistTable extends React.Component<PlaylistTableProps> {

@@ -51,6 +51,10 @@
   }
 }
 
+#saved-albums {
+  animation: fadeIn 1s;
+}
+
 #playlists {
   animation: fadeIn 1s;
 
@@ -140,19 +144,17 @@
 }
 
 .spinner {
-  min-width: 24px;
-  min-height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  margin: 12px;
 }
 
 .spinner:before {
   content: 'Loading…';
-  position: absolute;
-  top: 240px;
-  left: 50%;
   width: 100px;
   height: 100px;
-  margin-top: -50px;
-  margin-left: -50px;
 }
 
 .spinner:not(:required):before {

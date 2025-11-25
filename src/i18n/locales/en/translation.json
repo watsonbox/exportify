@@ -87,5 +87,16 @@
       "tempo": "Tempo",
       "time_signature": "Time Signature"
     }
+  },
+  "album": {
+    "album_uri": "Album URI",
+    "album_name": "Album Name",
+    "album_type": "Album Type",
+    "album_artist_uris": "Album Artist URI(s)",
+    "album_artist_names": "Album Artist Name(s)",
+    "album_release_date": "Album Release Date",
+    "album_release_date_precision": "Release Date Precision",
+    "album_track_count": "Track Count",
+    "saved_at": "Saved At"
   }
 }
