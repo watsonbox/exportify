@@ -17,3 +17,18 @@
     margin-left: auto;
   }
 }
+
+#saved-album-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  h4 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .progress {
+    flex: 1;
+  }
+}

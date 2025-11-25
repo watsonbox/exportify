@@ -7,10 +7,12 @@ class SavedAlbumExporter {
 
   accessToken: string
   savedAlbumCount: number
+  onPageFetched: (albumsFetched: number) => void
 
-  constructor(accessToken: string, savedAlbumCount: number) {
+  constructor(accessToken: string, savedAlbumCount: number, onPageFetched: (albumsFetched: number) => void) {
     this.accessToken = accessToken
     this.savedAlbumCount = savedAlbumCount
+    this.onPageFetched = onPageFetched
   }
 
   async export() {
@@ -21,7 +23,7 @@ class SavedAlbumExporter {
   }
 
   async csvData() {
-    const savedAlbumData = new SavedAlbumData(this.accessToken, this.savedAlbumCount)
+    const savedAlbumData = new SavedAlbumData(this.accessToken, this.savedAlbumCount, this.onPageFetched)
     const items = await savedAlbumData.data()
 
     let csvContent = ""

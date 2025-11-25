@@ -8,6 +8,7 @@
   "export_all": "Export All",
   "exporting_done": "Done!",
   "exporting_playlist": "Exporting {{playlistName}}...",
+  "exporting_saved_albums": "Exporting saved albums... ({{fetched}}/{{total}})",
   "export_search_results": "Export Results",
   "top_menu": {
     "help": "Help",

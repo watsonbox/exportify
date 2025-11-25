@@ -5,14 +5,16 @@ class SavedAlbumData {
   private accessToken: string
 
   /**
-   * we fetch this count on initial load of App.tsx. We need it here to calculate how many 
+   * we fetch this count on initial load of App.tsx. We need it here to calculate how many
    * pages of requests we need to make
    */
   private savedAlbumCount: number
+  private onPageFetched: (albumsFetched: number) => void
 
-  constructor(accessToken: string, savedAlbumCount: number) {
+  constructor(accessToken: string, savedAlbumCount: number, onPageFetched: (albumsFetched: number) => void) {
     this.accessToken = accessToken
     this.savedAlbumCount = savedAlbumCount
+    this.onPageFetched = onPageFetched
   }
 
   dataLabels() {
@@ -41,8 +43,16 @@ class SavedAlbumData {
       requests.push(`https://api.spotify.com/v1/me/albums?limit=${limit}&offset=${offset}`)
     }
 
+    let albumsFetchedSoFar = 0
     const albumPromises = requests.map((request) => {
-      return apiCall(request, this.accessToken)
+      return apiCall(request, this.accessToken).then((response) => {
+        const albumsInPage = response.data.items.filter((i: any) => i.album).length
+        albumsFetchedSoFar += albumsInPage
+        if (this.onPageFetched) {
+          this.onPageFetched(albumsFetchedSoFar)
+        }
+        return response
+      })
     })
     const albumResponses = await Promise.all(albumPromises)
     this.savedAlbumItems = albumResponses.flatMap((response) => {
