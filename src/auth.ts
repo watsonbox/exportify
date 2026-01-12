@@ -50,12 +50,10 @@ function base64urlencode(arrayBuffer: ArrayBuffer): string {
   return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "")
 }
 
-// Prefer an explicit redirect URI if provided (must match Spotify app allowlist)
-const EXPLICIT_REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 
 // Get the redirect URI for the current location
 function getRedirectUri(): string {
-  return EXPLICIT_REDIRECT_URI || `${window.location.origin}${window.location.pathname}`
+ return [window.location.protocol, '//', window.location.host, window.location.pathname].join('')
 }
 
 // Initiate Spotify OAuth authorization flow
