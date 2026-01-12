@@ -1,0 +1,91 @@
+{
+  "tagline": "Εξαγάγετε τις λίστες αναπαραγωγής σας στο Spotify.",
+  "get_started": "Ξεκινήστε",
+  "subtitle": "{{min}}-{{max}} από {{total}} λίστες αναπαραγωγής για {{userId}}",
+  "subtitle_search": "{{total}} αποτελέσματα με \"{{query}}\" στο όνομα της λίστας αναπαραγωγής",
+  "subtitle_search_advanced": "{{total}} αποτελέσματα για προχωρημένο ερώτημα \"{{query}}\"",
+  "search": "Αναζήτηση",
+  "export_all": "Εξαγωγή όλων",
+  "exporting_done": "Ολοκληρώθηκε!",
+  "exporting_playlist": "Γίνεται εξαγωγή {{playlistName}}...",
+  "export_search_results": "Εξαγωγή αποτελεσμάτων",
+  "top_menu": {
+    "help": "Βοήθεια",
+    "toggle_dark_mode": "Εναλλαγή σκοτεινής λειτουργίας",
+    "change_language": "Αλλαγή γλώσσας",
+    "change_user": "Αλλαγή χρήστη"
+  },
+  "config": {
+    "include_artists_data": "Συμπερίληψη δεδομένων καλλιτεχνών",
+    "include_audio_features_data": "Συμπερίληψη δεδομένων ηχητικών χαρακτηριστικών",
+    "include_album_data": "Συμπερίληψη δεδομένων άλμπουμ"
+  },
+  "help": {
+    "title": "Γρήγορη αναφορά",
+    "search_syntax": {
+      "title": "Σύνταξη προχωρημένης αναζήτησης",
+      "query": "Ερώτημα",
+      "behavior": "Συμπεριφορά",
+      "public_true": "Εμφάνιση μόνο δημόσιων λιστών",
+      "public_false": "Εμφάνιση μόνο ιδιωτικών λιστών",
+      "collaborative_true": "Εμφάνιση μόνο συνεργατικών λιστών",
+      "collaborative_false": "Να μην εμφανίζονται συνεργατικές λίστες",
+      "owner_me": "Εμφάνιση μόνο λιστών που μου ανήκουν",
+      "owner_owner": "Εμφάνιση μόνο λιστών που ανήκουν σε <code>[owner]</code>",
+      "more_detail": "Για περισσότερες λεπτομέρειες δείτε την <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>πλήρη τεκμηρίωση του έργου</a>."
+    }
+  },
+  "playlist": {
+    "name": "Όνομα",
+    "owner": "Κάτοχος",
+    "tracks": "Κομμάτια",
+    "public": "Δημόσια;",
+    "collaborative": "Συνεργατική;",
+    "not_supported": "Αυτή η λίστα δεν υποστηρίζεται",
+    "export": "Εξαγωγή"
+  },
+  "track": {
+    "track_uri": "URI κομματιού",
+    "track_name": "Όνομα κομματιού",
+    "artist_uris": "URI καλλιτέχνη/ων",
+    "artist_names": "Όνομα/τα καλλιτέχνη",
+    "album_uri": "URI άλμπουμ",
+    "album_name": "Όνομα άλμπουμ",
+    "album_artist_uris": "URI καλλιτέχνη/ων άλμπουμ",
+    "album_artist_names": "Όνομα/τα καλλιτέχνη άλμπουμ",
+    "album_release_date": "Ημερομηνία κυκλοφορίας άλμπουμ",
+    "album_image_url": "URL εικόνας άλμπουμ",
+    "disc_number": "Αριθμός δίσκου",
+    "track_number": "Αριθμός κομματιού",
+    "track_duration": "Διάρκεια κομματιού (ms)",
+    "track_preview_url": "URL προεπισκόπησης κομματιού",
+    "explicit": "Ακατάλληλο",
+    "popularity": "Δημοτικότητα",
+    "isrc": "ISRC",
+    "is_playable": "Αναπαράγεται",
+    "added_by": "Προστέθηκε από",
+    "added_at": "Προστέθηκε στις",
+    "album": {
+      "album_genres": "Είδη άλμπουμ",
+      "label": "Εταιρεία",
+      "copyrights": "Πνευματικά δικαιώματα"
+    },
+    "artist": {
+      "artist_genres": "Είδη καλλιτέχνη"
+    },
+    "audio_features": {
+      "danceability": "Χορευτικότητα",
+      "energy": "Ενέργεια",
+      "key": "Τονικότητα",
+      "loudness": "Ένταση",
+      "mode": "Τρόπος",
+      "speechiness": "Ομιλητικότητα",
+      "acousticness": "Ακουστικότητα",
+      "instrumentalness": "Οργανοκεντρικότητα",
+      "liveness": "Ζωντάνια",
+      "valence": "Θετικότητα",
+      "tempo": "Ρυθμός",
+      "time_signature": "Μέτρο"
+    }
+  }
+}
