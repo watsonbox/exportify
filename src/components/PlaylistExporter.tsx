@@ -53,16 +53,15 @@ class TracksCsvFile {
   }
 
   content(): string {
-    let csvContent = ''
+    const headers = [i18n.t("playlist.name"), ...this.columnNames].map(this.sanitize).join(",")
 
-    csvContent += this.columnNames.map(this.sanitize).join() + "\n"
+    const rows = this.lineTrackData.map(lineTrackData =>
+      [this.playlist.name, ...lineTrackData].map(this.sanitize).join(",")
+    ).join("\n")
 
-    this.lineTrackData.forEach((lineTrackData, trackId) => {
-      csvContent += lineTrackData.map(this.sanitize).join(",") + "\n"
-    })
-
-    return csvContent
+    return `${headers}\n${rows}\n`
   }
+
 
   sanitize(string: string): string {
     return '"' + String(string).replace(/"/g, '""') + '"'
