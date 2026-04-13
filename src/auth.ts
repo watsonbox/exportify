@@ -50,10 +50,9 @@ function base64urlencode(arrayBuffer: ArrayBuffer): string {
   return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "")
 }
 
-
 // Get the redirect URI for the current location
 function getRedirectUri(): string {
- return [window.location.protocol, '//', window.location.host, window.location.pathname].join('')
+  return [window.location.protocol, '//', window.location.host, window.location.pathname].join('')
 }
 
 // Initiate Spotify OAuth authorization flow
