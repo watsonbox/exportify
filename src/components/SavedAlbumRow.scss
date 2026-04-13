@@ -1,0 +1,34 @@
+@import "../index.scss";
+
+#saved-album-row {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  gap: 12px;
+
+  margin-top: 16px;
+  margin-bottom: 32px;
+
+  &:hover {
+    background-color: $table-hover-bg;
+  }
+
+  button {
+    margin-left: auto;
+  }
+}
+
+#saved-album-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  h4 {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .progress {
+    flex: 1;
+  }
+}

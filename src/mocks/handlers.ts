@@ -546,6 +546,217 @@ export const handlers = [
     ))
   }),
 
+  rest.get('https://api.spotify.com/v1/me/albums', (req, res, ctx) => {
+    handlerCalled(req.url.toString())
+
+    if (req.headers.get("Authorization") !== "Bearer TEST_ACCESS_TOKEN") {
+      return res(ctx.status(401), ctx.json({ message: 'Not authorized' }))
+    }
+
+    // Initial count request
+    if (req.url.searchParams.get('limit') === "1") {
+      return res(ctx.json(
+        {
+          "href": "https://api.spotify.com/v1/me/albums?limit=1",
+          "items": [{
+            "added_at": "2020-07-19T09:24:39Z",
+            "album": {
+              "album_type": "album",
+              "artists": [{
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+                },
+                "href": "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+                "id": "4TXdHyuAOl3rAOFmZ6MeKz",
+                "name": "Six by Seven",
+                "type": "artist",
+                "uri": "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+              }],
+              "href": "https://api.spotify.com/v1/albums/4iwv7b8gDPKztLkKCbWyhi",
+              "id": "4iwv7b8gDPKztLkKCbWyhi",
+              "name": "Best of Six By Seven",
+              "release_date": "2017-02-17",
+              "release_date_precision": "day",
+              "tracks": {
+                "total": 14
+              },
+              "type": "album",
+              "uri": "spotify:album:4iwv7b8gDPKztLkKCbWyhi"
+            }
+          }],
+          "limit": 1,
+          "next": null,
+          "offset": 0,
+          "previous": null,
+          "total": 1
+        }
+      ))
+    }
+
+    // Paginated album fetch
+    return res(ctx.json(
+      {
+        "href": "https://api.spotify.com/v1/me/albums?limit=50&offset=0",
+        "items": [{
+          "added_at": "2020-07-19T09:24:39Z",
+          "album": {
+            "album_type": "album",
+            "artists": [{
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4TXdHyuAOl3rAOFmZ6MeKz"
+              },
+              "href": "https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz",
+              "id": "4TXdHyuAOl3rAOFmZ6MeKz",
+              "name": "Six by Seven",
+              "type": "artist",
+              "uri": "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz"
+            }],
+            "href": "https://api.spotify.com/v1/albums/4iwv7b8gDPKztLkKCbWyhi",
+            "id": "4iwv7b8gDPKztLkKCbWyhi",
+            "name": "Best of Six By Seven",
+            "release_date": "2017-02-17",
+            "release_date_precision": "day",
+            "tracks": {
+              "total": 14
+            },
+            "type": "album",
+            "uri": "spotify:album:4iwv7b8gDPKztLkKCbWyhi"
+          }
+        }, {
+          "added_at": "2025-04-23T14:51:45Z",
+          "album": {
+            "album_type": "album",
+            "artists": [{
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6H9oDpJUDuw3nkogwhd21s"
+              },
+              "href": "https://api.spotify.com/v1/artists/6H9oDpJUDuw3nkogwhd21s",
+              "id": "6H9oDpJUDuw3nkogwhd21s",
+              "name": "Lux Terminus",
+              "type": "artist",
+              "uri": "spotify:artist:6H9oDpJUDuw3nkogwhd21s"
+            }],
+            "href": "https://api.spotify.com/v1/albums/4MxbRuLNbxf0RERbT8OHsU",
+            "id": "4MxbRuLNbxf0RERbT8OHsU",
+            "name": "Cinder",
+            "release_date": "2025-04-18",
+            "release_date_precision": "day",
+            "tracks": {
+              "total": 10
+            },
+            "type": "album",
+            "uri": "spotify:album:4MxbRuLNbxf0RERbT8OHsU"
+          }
+        }, {
+          "added_at": "2025-11-25T18:26:03Z",
+          "album": {
+            "album_type": "album",
+            "artists": [{
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5sGsy5o8hBSMmDUFTC5Q2P"
+              },
+              "href": "https://api.spotify.com/v1/artists/5sGsy5o8hBSMmDUFTC5Q2P",
+              "id": "5sGsy5o8hBSMmDUFTC5Q2P",
+              "name": "KASHIWA Daisuke",
+              "type": "artist",
+              "uri": "spotify:artist:5sGsy5o8hBSMmDUFTC5Q2P"
+            }],
+            "href": "https://api.spotify.com/v1/albums/7aIEHWiuOkDywdjyQyt8CL",
+            "id": "7aIEHWiuOkDywdjyQyt8CL",
+            "name": "program music II",
+            "release_date": "2016-04-30",
+            "release_date_precision": "day",
+            "tracks": {
+              "total": 8
+            },
+            "type": "album",
+            "uri": "spotify:album:7aIEHWiuOkDywdjyQyt8CL"
+          }
+        }, {
+          "added_at": "2025-03-20T21:24:38Z",
+          "album": {
+            "album_type": "album",
+            "artists": [{
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4X42BfuhWCAZ2swiVze9O0"
+              },
+              "href": "https://api.spotify.com/v1/artists/4X42BfuhWCAZ2swiVze9O0",
+              "id": "4X42BfuhWCAZ2swiVze9O0",
+              "name": "Steven Wilson",
+              "type": "artist",
+              "uri": "spotify:artist:4X42BfuhWCAZ2swiVze9O0"
+            }],
+            "href": "https://api.spotify.com/v1/albums/3xOcExpIWzroZldcdc212q",
+            "id": "3xOcExpIWzroZldcdc212q",
+            "name": "The Overview",
+            "release_date": "2025-03-14",
+            "release_date_precision": "day",
+            "tracks": {
+              "total": 12
+            },
+            "type": "album",
+            "uri": "spotify:album:3xOcExpIWzroZldcdc212q"
+          }
+        }, {
+          "added_at": "2025-11-25T00:41:40Z",
+          "album": {
+            "album_type": "album",
+            "artists": [{
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2SDGIFzEh9xmE5zDKcMRkj"
+              },
+              "href": "https://api.spotify.com/v1/artists/2SDGIFzEh9xmE5zDKcMRkj",
+              "id": "2SDGIFzEh9xmE5zDKcMRkj",
+              "name": "The Human Abstract",
+              "type": "artist",
+              "uri": "spotify:artist:2SDGIFzEh9xmE5zDKcMRkj"
+            }],
+            "href": "https://api.spotify.com/v1/albums/6azzagF3oeYffG22gIiLWz",
+            "id": "6azzagF3oeYffG22gIiLWz",
+            "name": "Nocturne",
+            "release_date": "2006-08-22",
+            "release_date_precision": "day",
+            "tracks": {
+              "total": 12
+            },
+            "type": "album",
+            "uri": "spotify:album:6azzagF3oeYffG22gIiLWz"
+          }
+        }, {
+          "added_at": "2025-11-24T23:54:26Z",
+          "album": {
+            "album_type": "album",
+            "artists": [{
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2SDGIFzEh9xmE5zDKcMRkj"
+              },
+              "href": "https://api.spotify.com/v1/artists/2SDGIFzEh9xmE5zDKcMRkj",
+              "id": "2SDGIFzEh9xmE5zDKcMRkj",
+              "name": "The Human Abstract",
+              "type": "artist",
+              "uri": "spotify:artist:2SDGIFzEh9xmE5zDKcMRkj"
+            }],
+            "href": "https://api.spotify.com/v1/albums/4abjNrXQcMRQlm0O4iyUSZ",
+            "id": "4abjNrXQcMRQlm0O4iyUSZ",
+            "name": "Digital Veil",
+            "release_date": "2011-03-08",
+            "release_date_precision": "day",
+            "tracks": {
+              "total": 8
+            },
+            "type": "album",
+            "uri": "spotify:album:4abjNrXQcMRQlm0O4iyUSZ"
+          }
+        }],
+        "limit": 50,
+        "next": null,
+        "offset": 0,
+        "previous": null,
+        "total": 6
+      }
+    ))
+  }),
+
   rest.get('https://api.spotify.com/v1/albums', (req, res, ctx) => {
     handlerCalled(req.url.toString())
 
