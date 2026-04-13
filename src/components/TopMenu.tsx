@@ -129,6 +129,7 @@ class TopMenu extends React.Component<TopMenuProps> {
           <Dropdown.Menu>
             {this.renderLanguageDropdownItem("en", "English")}
             {this.renderLanguageDropdownItem("de", "Deutsch")}
+            {this.renderLanguageDropdownItem("el", "Ελληνικά")}
             {this.renderLanguageDropdownItem("es", "Español")}
             {this.renderLanguageDropdownItem("fr", "Français")}
             {this.renderLanguageDropdownItem("it", "Italiano")}
