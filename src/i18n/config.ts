@@ -4,6 +4,28 @@ import LanguageDetector from "i18next-browser-languagedetector"
 
 const supportedLanguages = ['de', 'en', 'el', 'es', 'fr', 'it', 'nl', 'pt', 'sv', 'ar', 'ja', 'tr', 'zh-Hans', 'zh-Hant', 'yue-Hant-HK'] as const
 
+const normalizeDetectedLanguage = (language: string): string => {
+  switch (language.toLowerCase()) {
+    case 'zh-cn':
+    case 'zh-sg':
+    case 'zh-hans':
+      return 'zh-Hans'
+    case 'zh-tw':
+    case 'zh-mo':
+    case 'zh-hant':
+      return 'zh-Hant'
+    case 'zh-hk':
+    case 'yue':
+    case 'yue-hk':
+    case 'yue-hant-hk':
+      return 'yue-Hant-HK'
+    case 'zh':
+      return 'en'
+    default:
+      return language
+  }
+}
+
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)
@@ -25,6 +47,7 @@ i18n
       lookupLocalStorage: 'i18nextLng',
       lookupSessionStorage: 'i18nextLng',
       lookupCookie: 'i18nextLng',
+      convertDetectedLanguage: normalizeDetectedLanguage,
     },
     interpolation: {
       escapeValue: false,
