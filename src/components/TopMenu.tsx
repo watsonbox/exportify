@@ -139,6 +139,9 @@ class TopMenu extends React.Component<TopMenuProps> {
             {this.renderLanguageDropdownItem("ar", "العربية")}
             {this.renderLanguageDropdownItem("ja", "日本語")}
             {this.renderLanguageDropdownItem("tr", "Türkçe")}
+            {this.renderLanguageDropdownItem("zh-Hans", "简体中文")}
+            {this.renderLanguageDropdownItem("zh-Hant", "正體中文")}
+            {this.renderLanguageDropdownItem("yue-Hant-HK", "粵語（香港）")}
           </Dropdown.Menu>
         </Dropdown>
         {logoutButton}
