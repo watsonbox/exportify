@@ -2,11 +2,14 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 import LanguageDetector from "i18next-browser-languagedetector"
 
+const supportedLanguages = ['de', 'en', 'el', 'es', 'fr', 'it', 'nl', 'pt', 'sv', 'ar', 'ja', 'tr', 'zh-Hans', 'zh-Hant', 'yue-Hant-HK'] as const
+
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
     fallbackLng: "en",
+    supportedLngs: supportedLanguages,
     interpolation: {
       escapeValue: false,
     },
@@ -46,6 +49,15 @@ i18n
       },
       tr: {
         translations: require('./locales/tr/translation.json')
+      },
+      'zh-Hans': {
+        translations: require('./locales/zh-Hans/translation.json')
+      },
+      'zh-Hant': {
+        translations: require('./locales/zh-Hant/translation.json')
+      },
+      'yue-Hant-HK': {
+        translations: require('./locales/yue-Hant-HK/translation.json')
       }
     },
     ns: ['translations'],
