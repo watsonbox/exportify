@@ -8,7 +8,17 @@ i18n
   .use(initReactI18next)
   .use(LanguageDetector)
   .init({
-    fallbackLng: "en",
+    fallbackLng: {
+      'zh-CN': ['zh-Hans'],
+      'zh-SG': ['zh-Hans'],
+      'zh-Hans': ['zh-Hans'],
+      'zh-TW': ['zh-Hant'],
+      'zh-MO': ['zh-Hant'],
+      'zh-Hant': ['zh-Hant'],
+      'zh-HK': ['yue-Hant-HK'],
+      'yue-Hant-HK': ['yue-Hant-HK'],
+      default: ['en']
+    },
     supportedLngs: supportedLanguages,
     detection: {
       order: ['localStorage', 'sessionStorage', 'cookie', 'navigator', 'htmlTag'],
