@@ -10,6 +10,12 @@ i18n
   .init({
     fallbackLng: "en",
     supportedLngs: supportedLanguages,
+    detection: {
+      order: ['localStorage', 'sessionStorage', 'cookie', 'navigator', 'htmlTag'],
+      lookupLocalStorage: 'i18nextLng',
+      lookupSessionStorage: 'i18nextLng',
+      lookupCookie: 'i18nextLng',
+    },
     interpolation: {
       escapeValue: false,
     },
