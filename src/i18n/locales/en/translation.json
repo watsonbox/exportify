@@ -32,6 +32,7 @@
       "collaborative_false": "Don't show collaborative playlists",
       "owner_me": "Only show playlists I own",
       "owner_owner": "Only show playlists owned by <code>[owner]</code>",
+      "multiple_filters": "Combine multiple filters and/or a name search",
       "more_detail": "For more detail please refer to the <a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>full project documentation</a>."
     }
   },

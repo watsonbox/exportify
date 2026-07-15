@@ -102,6 +102,10 @@ class TopMenu extends React.Component<TopMenuProps> {
                   <td><code>owner:[owner]</code></td>
                   <td><Trans i18nKey="help.search_syntax.owner_owner" components={{ code: <code /> }} /></td>
                 </tr>
+                <tr>
+                  <td><code>public:true collaborative:false</code></td>
+                  <td><Trans i18nKey="help.search_syntax.multiple_filters" components={{ code: <code /> }} /></td>
+                </tr>
               </tbody>
             </Table>
 
