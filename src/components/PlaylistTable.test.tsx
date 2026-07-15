@@ -9,7 +9,7 @@ import JSZip from "jszip"
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
+import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers, multipleFilterPlaylistsHandlers } from "../mocks/handlers"
 
 const server = setupServer(...handlers)
 
@@ -485,6 +485,40 @@ describe("searching playlists", () => {
       expect(screen.queryAllByRole('row')).toHaveLength(1)
       expect(screen.queryByText("Liked")).not.toBeInTheDocument()
       expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
+    })
+  })
+
+  test("multiple filters can be combined", async () => {
+    server.use(...multipleFilterPlaylistsHandlers)
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+
+    expect(await screen.findByRole('searchbox')).toBeInTheDocument()
+
+    userEvent.type(screen.getByRole('searchbox'), 'public:true owner:otheruser{enter}')
+
+    await waitFor(() => {
+      expect(screen.queryAllByRole('row')).toHaveLength(2)
+      expect(screen.queryByText("Public Playlist")).toBeInTheDocument()
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
+      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
+    })
+  })
+
+  test("filters can be combined with a name search", async () => {
+    server.use(...multipleFilterPlaylistsHandlers)
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+
+    expect(await screen.findByRole('searchbox')).toBeInTheDocument()
+
+    userEvent.type(screen.getByRole('searchbox'), 'public:false Ghost{enter}')
+
+    await waitFor(() => {
+      expect(screen.queryAllByRole('row')).toHaveLength(2)
+      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+      expect(screen.queryByText("Public Playlist")).not.toBeInTheDocument()
+      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
     })
   })
 })

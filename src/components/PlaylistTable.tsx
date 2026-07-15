@@ -74,7 +74,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     })
 
     let key = "subtitle_search"
-    if (query.startsWith("public:") || query.startsWith("collaborative:") || query.startsWith("owner:")) {
+    if (/\b(public|collaborative|owner):/.test(query)) {
       key += "_advanced"
     }
 

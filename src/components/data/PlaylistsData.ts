@@ -56,20 +56,47 @@ class PlaylistsData {
     // Remove any uninitialized playlists when exporting
     let results = this.data.filter(p => p && Object.keys(p).length > 0)
 
-    if (query.startsWith("public:")) {
-      return results.filter(p => p.public === query.endsWith(":true"))
-    } else if (query.startsWith("collaborative:")) {
-      return results.filter(p => p.collaborative === query.endsWith(":true"))
-    } else if (query.startsWith("owner:")) {
-      let owner = query.match(/owner:(.*)/)?.at(-1)?.toLowerCase()
-      if (owner === "me") owner = this.userId
+    const { filters, textQuery } = this.parseQuery(query)
 
-      return results.filter(p => p.owner).filter(p => p.owner.id === owner)
-    } else {
+    filters.forEach(filter => {
+      if (filter.key === "public") {
+        results = results.filter(p => p.public === filter.value)
+      } else if (filter.key === "collaborative") {
+        results = results.filter(p => p.collaborative === filter.value)
+      } else if (filter.key === "owner") {
+        results = results.filter(p => p.owner && p.owner.id === filter.value)
+      }
+    })
+
+    if (textQuery) {
       // Case-insensitive search in playlist name
       // TODO: Add lazy evaluation for performance?
-      return results.filter(p => p.name.toLowerCase().includes(query.toLowerCase()))
+      results = results.filter(p => p.name.toLowerCase().includes(textQuery.toLowerCase()))
     }
+
+    return results
+  }
+
+  private parseQuery(query: string) {
+    const tokens = query.trim() ? query.trim().split(/\s+/) : []
+    const filters: { key: string, value: any }[] = []
+    const textTokens: string[] = []
+
+    tokens.forEach(token => {
+      if (/^public:(true|false)$/.test(token)) {
+        filters.push({ key: "public", value: token.endsWith(":true") })
+      } else if (/^collaborative:(true|false)$/.test(token)) {
+        filters.push({ key: "collaborative", value: token.endsWith(":true") })
+      } else if (/^owner:(.+)$/.test(token)) {
+        let owner = token.match(/^owner:(.+)$/)![1].toLowerCase()
+        if (owner === "me") owner = this.userId
+        filters.push({ key: "owner", value: owner })
+      } else {
+        textTokens.push(token)
+      }
+    })
+
+    return { filters, textQuery: textTokens.join(" ") }
   }
 
   async loadAll() {
