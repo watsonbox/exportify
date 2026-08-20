@@ -1,12 +1,13 @@
 import React from "react"
 import "i18n/config"
-import { render, screen, waitFor, act, waitForElementToBeRemoved } from "@testing-library/react"
+import { render, screen, waitFor, fireEvent } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { setupServer } from "msw/node"
 import FileSaver from "file-saver"
 import JSZip from "jszip"
 
 import PlaylistTable from "./PlaylistTable"
+import PlaylistImportService from "./data/PlaylistImportService"
 
 import "../icons"
 import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
@@ -620,4 +621,121 @@ test("exporting of search results", async () => {
   })
 
   expect(saveAsMock).toHaveBeenCalledWith("zip_content", "spotify_playlists.zip")
+})
+
+describe("importing playlists", () => {
+  let alertMock: jest.SpyInstance
+
+  beforeEach(() => {
+    alertMock = jest.spyOn(window, "alert").mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    alertMock.mockRestore()
+  })
+
+  it("renders import playlist button and handles import flow", async () => {
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={jest.fn()} />)
+    expect(await screen.findByRole("button", { name: /Import Playlist/i })).toBeInTheDocument()
+  })
+
+  it("handles successful multi-playlist import flow with progress and cache reset", async () => {
+    const importMultipleSpy = jest.spyOn(PlaylistImportService, "importMultiplePlaylists").mockImplementation(async (params) => {
+      params.onProgress?.(0, 2, "List 1", 1, 1)
+      params.onProgress?.(1, 2, "List 2", 2, 2)
+      return {
+        successfulPlaylistsCount: 2,
+        totalTracksCount: 3,
+        failedPlaylists: []
+      }
+    })
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={jest.fn()} />)
+
+    expect(await screen.findByRole("button", { name: /Import Playlist/i })).toBeInTheDocument()
+
+    const file1 = new File(['"Track URI"\n"spotify:track:1"'], "List_1.csv", { type: "text/csv" })
+    const file2 = new File(['"Track URI"\n"spotify:track:2"\n"spotify:track:3"'], "List_2.csv", { type: "text/csv" })
+
+    const fileInput = screen.getByTestId("playlist-import-input")
+    fireEvent.change(fileInput, { target: { files: [file1, file2] } })
+
+    expect(await screen.findByRole("button", { name: /Import to Spotify/i })).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole("button", { name: /Import to Spotify/i }))
+
+    await waitFor(() => {
+      expect(importMultipleSpy).toHaveBeenCalled()
+    })
+
+    await waitFor(() => {
+      expect(screen.getByText(/Successfully imported 2 playlists \(3 tracks total\)!/i)).toBeInTheDocument()
+    })
+  })
+
+  it("handles successful import flow with progress and cache reset", async () => {
+    const importSpy = jest.spyOn(PlaylistImportService, "importMultiplePlaylists").mockImplementation(async (params) => {
+      const totalTracks = params.items.reduce((acc, item) => acc + item.trackUris.length, 0)
+      params.onProgress?.(0, 1, params.items[0].name, totalTracks, totalTracks)
+      return {
+        successfulPlaylistsCount: 1,
+        totalTracksCount: totalTracks,
+        failedPlaylists: []
+      }
+    })
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={jest.fn()} />)
+
+    expect(await screen.findByRole("button", { name: /Import Playlist/i })).toBeInTheDocument()
+
+    const file = new File(
+      ['"Track URI"\n"spotify:track:abc12345"\n"spotify:track:xyz67890"'],
+      "My_New_Playlist.csv",
+      { type: "text/csv" }
+    )
+
+    const fileInput = screen.getByTestId("playlist-import-input")
+    fireEvent.change(fileInput, { target: { files: [file] } })
+
+    expect(await screen.findByRole("button", { name: /Import to Spotify/i })).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole("button", { name: /Import to Spotify/i }))
+
+    await waitFor(() => {
+      expect(importSpy).toHaveBeenCalled()
+    })
+
+    await waitFor(() => {
+      expect(screen.getByText(/Successfully imported 2 tracks into "My New Playlist"!/i)).toBeInTheDocument()
+    })
+  })
+
+  it("handles 403 scope error with alert", async () => {
+    jest.spyOn(PlaylistImportService, "importMultiplePlaylists").mockRejectedValue({
+      response: { status: 403 }
+    })
+
+    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={jest.fn()} />)
+
+    expect(await screen.findByRole("button", { name: /Import Playlist/i })).toBeInTheDocument()
+
+    const file = new File(
+      ['"Track URI"\n"spotify:track:abc12345"'],
+      "Scope_Error.csv",
+      { type: "text/csv" }
+    )
+
+    const fileInput = screen.getByTestId("playlist-import-input")
+    fireEvent.change(fileInput, { target: { files: [file] } })
+
+    expect(await screen.findByRole("button", { name: /Import to Spotify/i })).toBeInTheDocument()
+
+    fireEvent.click(screen.getByRole("button", { name: /Import to Spotify/i }))
+
+    await waitFor(() => {
+      expect(alertMock).toHaveBeenCalledWith(
+        "Spotify permissions needed to create playlists. Please re-login."
+      )
+    })
+  })
 })

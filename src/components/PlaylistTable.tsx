@@ -9,6 +9,7 @@ import PlaylistSearch, { PlaylistSearchRef } from "./PlaylistSearch"
 import PlaylistRow from "./PlaylistRow"
 import Paginator from "./Paginator"
 import PlaylistsExporter from "./PlaylistsExporter"
+import PlaylistImporter from "./PlaylistImporter"
 import { apiCall, apiCallErrorHandler } from "helpers"
 
 interface PlaylistTableProps extends WithTranslation {
@@ -38,7 +39,8 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     progressBar: {
       show: false,
       label: "",
-      value: 0
+      value: 0,
+      max: 0
     },
     config: {
       includeArtistsData: false,
@@ -154,6 +156,98 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     })
   }
 
+  handleImportStarted = (playlistName: string, totalTracks: number, totalPlaylists: number) => {
+    Bugsnag.leaveBreadcrumb(`Started importing ${totalPlaylists} playlist(s)`)
+    const label =
+      totalPlaylists > 1
+        ? this.props.i18n.t("importing_batch_started", {
+            current: 1,
+            total: totalPlaylists,
+            playlistName
+          })
+        : this.props.i18n.t("importing_started", { playlistName })
+
+    this.setState({
+      progressBar: {
+        show: true,
+        label,
+        value: 0,
+        max: totalTracks
+      }
+    })
+  }
+
+  handleImportProgress = (
+    playlistIndex: number,
+    totalPlaylists: number,
+    playlistName: string,
+    importedCount: number,
+    totalTracks: number
+  ) => {
+    const label =
+      totalPlaylists > 1
+        ? this.props.i18n.t("importing_batch_progress", {
+            current: playlistIndex + 1,
+            total: totalPlaylists,
+            playlistName,
+            count: importedCount,
+            trackTotal: totalTracks
+          })
+        : this.props.i18n.t("importing_progress", {
+            count: importedCount,
+            total: totalTracks,
+            playlistName
+          })
+
+    this.setState({
+      progressBar: {
+        show: true,
+        label,
+        value: importedCount,
+        max: totalTracks
+      }
+    })
+  }
+
+  handleImportDone = async (
+    importedPlaylistsCount: number,
+    totalTracksCount: number,
+    singlePlaylistName?: string
+  ) => {
+    Bugsnag.leaveBreadcrumb(`Finished importing ${importedPlaylistsCount} playlists`)
+    const label = singlePlaylistName
+      ? this.props.i18n.t("importing_done", {
+          count: totalTracksCount,
+          playlistName: singlePlaylistName
+        })
+      : this.props.i18n.t("importing_batch_done", {
+          playlistCount: importedPlaylistsCount,
+          trackCount: totalTracksCount
+        })
+
+    this.playlistsData?.reset()
+    this.setState({ currentPage: 1 }, async () => {
+      await this.loadCurrentPlaylistPage()
+      this.setState({
+        progressBar: {
+          show: true,
+          label,
+          value: totalTracksCount,
+          max: totalTracksCount
+        }
+      })
+    })
+  }
+
+  handleImportError = (error: any) => {
+    Bugsnag.notify(error)
+    if (error?.response?.status === 403) {
+      alert(this.props.i18n.t("import_error_scope"))
+    } else {
+      apiCallErrorHandler(error)
+    }
+  }
+
   handleConfigChanged = (config: any) => {
     Bugsnag.leaveBreadcrumb(`Config updated to ${JSON.stringify(config)}`)
 
@@ -193,7 +287,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
   }
 
   render() {
-    const progressBar = <ProgressBar striped variant="primary" animated={this.state.progressBar.value < this.state.playlistCount} now={this.state.progressBar.value} max={this.state.playlistCount} label={this.state.progressBar.label} />
+    const progressBar = <ProgressBar striped variant="primary" animated={this.state.progressBar.value < (this.state.progressBar.max || this.state.playlistCount)} now={this.state.progressBar.value} max={this.state.progressBar.max || this.state.playlistCount} label={this.state.progressBar.label} />
 
     if (this.state.initialized) {
       return (
@@ -215,14 +309,23 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
                   <th className="public d-none d-sm-table-cell">{this.props.i18n.t("playlist.public")}</th>
                   <th className="collaborative d-none d-md-table-cell">{this.props.i18n.t("playlist.collaborative")}</th>
                   <th className="export text-end">
-                    <PlaylistsExporter
-                      accessToken={this.props.accessToken}
-                      onPlaylistsExportDone={this.handlePlaylistsExportDone}
-                      onPlaylistExportStarted={this.handlePlaylistExportStarted}
-                      playlistsData={this.playlistsData!}
-                      searchQuery={this.state.searchQuery}
-                      config={this.state.config}
-                    />
+                    <div className="d-flex justify-content-end align-items-center">
+                      <PlaylistImporter
+                        accessToken={this.props.accessToken}
+                        onImportStarted={this.handleImportStarted}
+                        onImportProgress={this.handleImportProgress}
+                        onImportDone={this.handleImportDone}
+                        onImportError={this.handleImportError}
+                      />
+                      <PlaylistsExporter
+                        accessToken={this.props.accessToken}
+                        onPlaylistsExportDone={this.handlePlaylistsExportDone}
+                        onPlaylistExportStarted={this.handlePlaylistExportStarted}
+                        playlistsData={this.playlistsData!}
+                        searchQuery={this.state.searchQuery}
+                        config={this.state.config}
+                      />
+                    </div>
                   </th>
                 </tr>
               </thead>
