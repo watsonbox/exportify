@@ -7,7 +7,7 @@ import axios from "axios"
 const SPOTIFY_CLIENT_ID = "9950ac751e34487dbbe027c4fd7f8e99"
 const SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
-const SPOTIFY_SCOPES = "playlist-read-private playlist-read-collaborative user-library-read"
+const SPOTIFY_SCOPES = "playlist-read-private playlist-read-collaborative user-library-read playlist-modify-public playlist-modify-private"
 
 // Access token management
 export function loadAccessToken(): string | null {

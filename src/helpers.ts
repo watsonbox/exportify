@@ -40,6 +40,15 @@ export const apiCall = limiter.wrap(function(url: string, accessToken: string) {
   return axios.get(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
 })
 
+export const apiPost = limiter.wrap(function(url: string, accessToken: string, data: any) {
+  return axios.post(url, data, {
+    headers: {
+      'Authorization': 'Bearer ' + accessToken,
+      'Content-Type': 'application/json'
+    }
+  })
+})
+
 export function apiCallErrorHandler(error: any) {
   if (error.isAxiosError) {
     if (error.request.status === 401) {
