@@ -22,6 +22,12 @@ class PlaylistsData {
     this.likedTracksPlaylist = null
   }
 
+  reset(): void {
+    this.data = []
+    this.dataInitialized = false
+    this.likedTracksPlaylist = null
+  }
+
   async total() {
     if (!this.dataInitialized) {
       await this.loadSlice()
