@@ -4,7 +4,6 @@ import "./icons"
 import React, { useEffect, useState, useRef } from 'react'
 import { useTranslation, Translation } from "react-i18next"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import "url-search-params-polyfill"
 
 import Login from 'components/Login'
 import PlaylistTable from "components/PlaylistTable"
