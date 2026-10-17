@@ -23,9 +23,9 @@ class TracksAlbumData extends TracksData {
   async data() {
     const albumIds = Array.from(new Set(this.tracks.filter((track: any) => track.album.id).map((track: any) => track.album.id)))
 
-    let requests = []
+    const requests = []
 
-    for (var offset = 0; offset < albumIds.length; offset = offset + this.ALBUM_LIMIT) {
+    for (let offset = 0; offset < albumIds.length; offset = offset + this.ALBUM_LIMIT) {
       requests.push(`https://api.spotify.com/v1/albums?ids=${albumIds.slice(offset, offset + this.ALBUM_LIMIT)}`)
     }
 

@@ -16,7 +16,7 @@ const server = setupServer(...handlers)
 
 beforeAll(() => {
   server.listen({ onUnhandledRequest: 'warn' })
-  // @ts-ignore
+  // @ts-expect-error - jsdom location is not optional
   delete window.location
 })
 
@@ -26,7 +26,7 @@ afterAll(() => {
 })
 
 beforeAll(() => {
-  // @ts-ignore
+  // @ts-expect-error - partial Location mock
   window.location = { hash: "" }
 })
 
@@ -101,7 +101,7 @@ describe("logging in", () => {
     test("uses the custom client ID for both authorization and token exchange", async () => {
       // Record redirects so late 401 handling from earlier tests can't mask the authorize URL
       const redirects: string[] = []
-      // @ts-ignore
+      // @ts-expect-error - partial Location mock
       window.location = {
         search: "?app_client_id=CUSTOM_CLIENT_ID",
         pathname: "/exportify",
@@ -119,7 +119,7 @@ describe("logging in", () => {
       unmount()
 
       vi.spyOn(window.history, 'replaceState').mockImplementation(() => {})
-      // @ts-ignore
+      // @ts-expect-error - partial Location mock
       window.location = {
         search: "?code=TEST_AUTH_CODE",
         pathname: "/exportify",
@@ -156,7 +156,7 @@ describe("logging in", () => {
       replaceStateSpy = vi.spyOn(window.history, 'replaceState').mockImplementation(() => {})
 
       // Mock window.location with code parameter
-      // @ts-ignore
+      // @ts-expect-error - partial Location mock
       window.location = {
         search: "?code=TEST_AUTH_CODE",
         pathname: "/exportify",
@@ -219,7 +219,7 @@ describe("logging in", () => {
         return null
       })
 
-      // @ts-ignore - No code parameter in URL
+      // @ts-expect-error - No code parameter in URL
       window.location = {
         pathname: "/exportify",
         href: "https://www.example.com/exportify",
@@ -254,7 +254,7 @@ describe("logging out", () => {
     // Spy on logout function
     logoutSpy = vi.spyOn(auth, 'logout').mockImplementation(() => {})
 
-    // @ts-ignore - Simple window.location mock
+    // @ts-expect-error - Simple window.location mock
     window.location = {
       pathname: "/exportify",
       href: "https://www.example.com/exportify",

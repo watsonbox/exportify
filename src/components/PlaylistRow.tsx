@@ -50,7 +50,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
   }
 
   render() {
-    let playlist = this.props.playlist
+    const playlist = this.props.playlist
     const icon = ['fas', (this.state.exporting ? 'sync' : 'download')]
 
     if (playlist.uri == null) return (
@@ -73,9 +73,9 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
         <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-end">
-          {/* @ts-ignore */}
+          {/* @ts-expect-error - custom xs size from index.scss */}
           <Button type="submit" variant="primary" size="xs" onClick={this.exportPlaylist} disabled={this.state.exporting} className="text-nowrap">
-            {/* @ts-ignore */}
+            {/* @ts-expect-error - icon is a plain string array */}
             <FontAwesomeIcon icon={icon} size="sm" spin={this.state.exporting} /> {this.props.i18n.t("playlist.export")}
           </Button>
         </td>

@@ -57,7 +57,7 @@ class TracksCsvFile {
 
     csvContent += this.columnNames.map(this.sanitize).join() + "\n"
 
-    this.lineTrackData.forEach((lineTrackData, trackId) => {
+    this.lineTrackData.forEach((lineTrackData) => {
       csvContent += lineTrackData.map(this.sanitize).join(",") + "\n"
     })
 
@@ -83,7 +83,7 @@ class PlaylistExporter {
 
   async export() {
     return this.csvData().then((data) => {
-      var blob = new Blob([data], { type: "text/csv;charset=utf-8" })
+      const blob = new Blob([data], { type: "text/csv;charset=utf-8" })
       saveAs(blob, this.fileName(), { autoBom: false })
     })
   }

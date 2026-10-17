@@ -27,9 +27,9 @@ class TracksArtistsData extends TracksData {
         .filter((i: string) => i)
     })))
 
-    let requests = []
+    const requests = []
 
-    for (var offset = 0; offset < artistIds.length; offset = offset + this.ARTIST_LIMIT) {
+    for (let offset = 0; offset < artistIds.length; offset = offset + this.ARTIST_LIMIT) {
       requests.push(`https://api.spotify.com/v1/artists?ids=${artistIds.slice(offset, offset + this.ARTIST_LIMIT)}`)
     }
 

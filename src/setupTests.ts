@@ -16,7 +16,7 @@ Object.defineProperty(global, 'crypto', {
       return arr;
     },
     subtle: {
-      digest: async (algorithm: string, data: ArrayBuffer) => {
+      digest: async () => {
         // Return a mock hash
         return new ArrayBuffer(32);
       }

@@ -54,7 +54,7 @@ class PlaylistsData {
     await this.loadAll()
 
     // Remove any uninitialized playlists when exporting
-    let results = this.data.filter(p => p && Object.keys(p).length > 0)
+    const results = this.data.filter(p => p && Object.keys(p).length > 0)
 
     if (query.startsWith("public:")) {
       return results.filter(p => p.public === query.endsWith(":true"))
@@ -80,7 +80,7 @@ class PlaylistsData {
     await this.loadSlice()
 
     // Get the rest of them if necessary
-    for (var offset = this.PLAYLIST_LIMIT; offset < this.data.length; offset = offset + this.PLAYLIST_LIMIT) {
+    for (let offset = this.PLAYLIST_LIMIT; offset < this.data.length; offset = offset + this.PLAYLIST_LIMIT) {
       await this.loadSlice(offset, offset + this.PLAYLIST_LIMIT)
     }
 

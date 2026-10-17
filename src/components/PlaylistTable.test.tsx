@@ -22,7 +22,7 @@ server.listen({
 })
 
 beforeAll(() => {
-  // @ts-ignore
+  // @ts-expect-error - minimal Blob stand-in
   global.Blob = function (content, options) { return ({ content, options }) }
 
   // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
@@ -44,7 +44,7 @@ beforeAll(() => {
 const { location } = window
 
 beforeAll(() => {
-  // @ts-ignore
+  // @ts-expect-error - jsdom location is not optional
   delete window.location
 })
 
@@ -70,7 +70,7 @@ test("playlist loading", async () => {
 })
 
 test("redirecting when access token is invalid", async () => {
-  // @ts-ignore
+  // @ts-expect-error - partial Location mock
   window.location = { pathname: "/exportify", href: "http://www.example.com/exportify" }
 
   render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)

@@ -32,9 +32,9 @@ class TracksAudioFeaturesData extends TracksData {
   async data() {
     const trackIds = this.tracks.map((track: any) => track.id)
 
-    let requests = []
+    const requests = []
 
-    for (var offset = 0; offset < trackIds.length; offset = offset + this.AUDIO_FEATURES_LIMIT) {
+    for (let offset = 0; offset < trackIds.length; offset = offset + this.AUDIO_FEATURES_LIMIT) {
       requests.push(`https://api.spotify.com/v1/audio-features?ids=${trackIds.slice(offset, offset + this.AUDIO_FEATURES_LIMIT)}`)
     }
 

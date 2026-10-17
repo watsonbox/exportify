@@ -25,8 +25,8 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
   }
 
   async export(accessToken: string, playlistsData: PlaylistsData, searchQuery: string, config: any) {
-    let playlistFileNames = new Set<string>()
-    let playlistCsvExports = new Array<string>()
+    const playlistFileNames = new Set<string>()
+    const playlistCsvExports = new Array<string>()
 
     const playlists = searchQuery === "" ? await playlistsData.all() : await playlistsData.search(searchQuery)
 
@@ -35,8 +35,8 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
     for (const playlist of playlists) {
       this.props.onPlaylistExportStarted(playlist.name, doneCount)
 
-      let exporter = new PlaylistExporter(accessToken, playlist, config)
-      let csvData = await exporter.csvData()
+      const exporter = new PlaylistExporter(accessToken, playlist, config)
+      const csvData = await exporter.csvData()
       let fileName = exporter.fileName(false)
 
       for (let i = 1; playlistFileNames.has(fileName + exporter.fileExtension()); i++) {
@@ -51,7 +51,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
 
     this.props.onPlaylistsExportDone()
 
-    var zip = new JSZip()
+    const zip = new JSZip()
 
     Array.from(playlistFileNames).forEach(function (fileName, i) {
       zip.file(fileName, playlistCsvExports[i])
@@ -81,7 +81,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
   render() {
     const text = this.props.searchQuery === "" ? this.props.i18n.t("export_all") : this.props.i18n.t("export_search_results")
 
-    // @ts-ignore
+    // @ts-expect-error - custom xs size from index.scss
     return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap" disabled={this.state.exporting} >
       <FontAwesomeIcon icon={['far', 'file-archive']} /> {text}
     </Button >

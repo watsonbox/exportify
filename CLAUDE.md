@@ -9,7 +9,7 @@ Tooling is pinned in `mise.toml` (Node 22, pnpm 10).
 - `mise s`: install dependencies if needed and start the dev server on http://127.0.0.1:3000
 - `mise test`: run the Vitest and script test suites once. It doesn't install dependencies, so run `mise install` first after a lockfile change
 - Agents don't run dependency changes (`pnpm add`, `update`, `install`) themselves: work out the exact command and ask the maintainer to run it
-- `pnpm exec eslint --ext .js,.jsx,.ts,.tsx src`: lint (should report zero problems)
+- `pnpm lint`: lint (should report zero problems)
 - `pnpm build`: typecheck and production build into `dist/`
 - `pnpm preview`: serve the production build locally
 
