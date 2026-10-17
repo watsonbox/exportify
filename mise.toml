@@ -19,7 +19,7 @@ env = { BROWSER = "none" }
 [tasks.test]
 description = "Run the test suite once"
 depends = ["install:js"]
-run = "pnpm test --watchAll=false"
+run = ["pnpm test --watchAll=false", "node --test scripts/*.test.mjs"]
 env = { CI = "true" }
 
 [tasks."fixtures:scrub"]

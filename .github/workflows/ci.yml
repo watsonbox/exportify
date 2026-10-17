@@ -9,25 +9,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [18.x]
-
     steps:
       - uses: actions/checkout@v4
       - name: 📦 Install pnpm
         uses: pnpm/action-setup@v6
-      - name: 🛠️ Use Node.js ${{ matrix.node-version }}
+      - name: 🛠️ Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version-file: .nvmrc
           cache: 'pnpm'
       - name: 📦 Install dependencies
         run: pnpm install --frozen-lockfile
       - name: 🧪 Test
-        run: pnpm test
+        run: |
+          pnpm test
+          node --test scripts/*.test.mjs
       - name: 🔨 Build
         run: pnpm build
+      - name: 💨 Smoke check build
+        run: node scripts/smoke-check-build.mjs --dir build
       - name: 🚀 Deploy to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@v4
