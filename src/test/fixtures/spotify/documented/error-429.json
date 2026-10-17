@@ -1,0 +1,15 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/me",
+  "status": 429,
+  "headers": {
+    "content-type": "application/json; charset=utf-8",
+    "retry-after": "5"
+  },
+  "body": {
+    "error": {
+      "status": 429,
+      "message": "API rate limit exceeded"
+    }
+  }
+}

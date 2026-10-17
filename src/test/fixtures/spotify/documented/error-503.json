@@ -1,0 +1,14 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/me",
+  "status": 503,
+  "headers": {
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "error": {
+      "status": 503,
+      "message": "Service unavailable"
+    }
+  }
+}

@@ -1,0 +1,580 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000004/tracks?offset=0&limit=100",
+  "status": 200,
+  "headers": {
+    "cache-control": "public, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000004/tracks?offset=0&limit=100&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "items": [
+      {
+        "added_at": "2026-10-17T14:33:23Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/d330662cd15f71285d490b2d7a451445bee89925?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/1XFNz6KIvLyIsLFOiLRKqP",
+            "id": "1XFNz6KIvLyIsLFOiLRKqP",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273b893831d1a12d3d4024a5867",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02b893831d1a12d3d4024a5867",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851b893831d1a12d3d4024a5867",
+                "width": 64
+              }
+            ],
+            "name": "Crooked Rain, Crooked Rain",
+            "release_date": "1994-02-14",
+            "release_date_precision": "day",
+            "uri": "spotify:album:1XFNz6KIvLyIsLFOiLRKqP",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/3inCNiUr4R6XQ3W43s9Aqi"
+                },
+                "href": "https://api.spotify.com/v1/artists/3inCNiUr4R6XQ3W43s9Aqi",
+                "id": "3inCNiUr4R6XQ3W43s9Aqi",
+                "name": "Pavement",
+                "type": "artist",
+                "uri": "spotify:artist:3inCNiUr4R6XQ3W43s9Aqi"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1XFNz6KIvLyIsLFOiLRKqP"
+            },
+            "total_tracks": 12
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3inCNiUr4R6XQ3W43s9Aqi"
+              },
+              "href": "https://api.spotify.com/v1/artists/3inCNiUr4R6XQ3W43s9Aqi",
+              "id": "3inCNiUr4R6XQ3W43s9Aqi",
+              "name": "Pavement",
+              "type": "artist",
+              "uri": "spotify:artist:3inCNiUr4R6XQ3W43s9Aqi"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 4,
+          "duration_ms": 186733,
+          "external_ids": {
+            "isrc": "USMTD9407904"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/4tBl1xhBg5PETpBvFnQmGl"
+          },
+          "href": "https://api.spotify.com/v1/tracks/4tBl1xhBg5PETpBvFnQmGl",
+          "id": "4tBl1xhBg5PETpBvFnQmGl",
+          "name": "Cut Your Hair",
+          "popularity": 57,
+          "uri": "spotify:track:4tBl1xhBg5PETpBvFnQmGl",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/d330662cd15f71285d490b2d7a451445bee89925?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/1XFNz6KIvLyIsLFOiLRKqP",
+            "id": "1XFNz6KIvLyIsLFOiLRKqP",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273b893831d1a12d3d4024a5867",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02b893831d1a12d3d4024a5867",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851b893831d1a12d3d4024a5867",
+                "width": 64
+              }
+            ],
+            "name": "Crooked Rain, Crooked Rain",
+            "release_date": "1994-02-14",
+            "release_date_precision": "day",
+            "uri": "spotify:album:1XFNz6KIvLyIsLFOiLRKqP",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/3inCNiUr4R6XQ3W43s9Aqi"
+                },
+                "href": "https://api.spotify.com/v1/artists/3inCNiUr4R6XQ3W43s9Aqi",
+                "id": "3inCNiUr4R6XQ3W43s9Aqi",
+                "name": "Pavement",
+                "type": "artist",
+                "uri": "spotify:artist:3inCNiUr4R6XQ3W43s9Aqi"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1XFNz6KIvLyIsLFOiLRKqP"
+            },
+            "total_tracks": 12
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3inCNiUr4R6XQ3W43s9Aqi"
+              },
+              "href": "https://api.spotify.com/v1/artists/3inCNiUr4R6XQ3W43s9Aqi",
+              "id": "3inCNiUr4R6XQ3W43s9Aqi",
+              "name": "Pavement",
+              "type": "artist",
+              "uri": "spotify:artist:3inCNiUr4R6XQ3W43s9Aqi"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 4,
+          "duration_ms": 186733,
+          "external_ids": {
+            "isrc": "USMTD9407904"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/4tBl1xhBg5PETpBvFnQmGl"
+          },
+          "href": "https://api.spotify.com/v1/tracks/4tBl1xhBg5PETpBvFnQmGl",
+          "id": "4tBl1xhBg5PETpBvFnQmGl",
+          "name": "Cut Your Hair",
+          "popularity": 57,
+          "uri": "spotify:track:4tBl1xhBg5PETpBvFnQmGl",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:33:28Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/9241188a00b7ae5feb607bf10c21a067c83ed487?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/0TGTGuc2vXv6ZECoAf52N0",
+            "id": "0TGTGuc2vXv6ZECoAf52N0",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273cc68329bfbf34037df965dc1",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02cc68329bfbf34037df965dc1",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851cc68329bfbf34037df965dc1",
+                "width": 64
+              }
+            ],
+            "name": "Good News For People Who Love Bad News",
+            "release_date": "2004-04-05",
+            "release_date_precision": "day",
+            "uri": "spotify:album:0TGTGuc2vXv6ZECoAf52N0",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/1yAwtBaoHLEDWAnWR87hBT"
+                },
+                "href": "https://api.spotify.com/v1/artists/1yAwtBaoHLEDWAnWR87hBT",
+                "id": "1yAwtBaoHLEDWAnWR87hBT",
+                "name": "Modest Mouse",
+                "type": "artist",
+                "uri": "spotify:artist:1yAwtBaoHLEDWAnWR87hBT"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/0TGTGuc2vXv6ZECoAf52N0"
+            },
+            "total_tracks": 16
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1yAwtBaoHLEDWAnWR87hBT"
+              },
+              "href": "https://api.spotify.com/v1/artists/1yAwtBaoHLEDWAnWR87hBT",
+              "id": "1yAwtBaoHLEDWAnWR87hBT",
+              "name": "Modest Mouse",
+              "type": "artist",
+              "uri": "spotify:artist:1yAwtBaoHLEDWAnWR87hBT"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 208466,
+          "external_ids": {
+            "isrc": "USSM10315494"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2lwwrWVKdf3LR9lbbhnr6R"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2lwwrWVKdf3LR9lbbhnr6R",
+          "id": "2lwwrWVKdf3LR9lbbhnr6R",
+          "name": "Float On",
+          "popularity": 76,
+          "uri": "spotify:track:2lwwrWVKdf3LR9lbbhnr6R",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/9241188a00b7ae5feb607bf10c21a067c83ed487?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/0TGTGuc2vXv6ZECoAf52N0",
+            "id": "0TGTGuc2vXv6ZECoAf52N0",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273cc68329bfbf34037df965dc1",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02cc68329bfbf34037df965dc1",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851cc68329bfbf34037df965dc1",
+                "width": 64
+              }
+            ],
+            "name": "Good News For People Who Love Bad News",
+            "release_date": "2004-04-05",
+            "release_date_precision": "day",
+            "uri": "spotify:album:0TGTGuc2vXv6ZECoAf52N0",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/1yAwtBaoHLEDWAnWR87hBT"
+                },
+                "href": "https://api.spotify.com/v1/artists/1yAwtBaoHLEDWAnWR87hBT",
+                "id": "1yAwtBaoHLEDWAnWR87hBT",
+                "name": "Modest Mouse",
+                "type": "artist",
+                "uri": "spotify:artist:1yAwtBaoHLEDWAnWR87hBT"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/0TGTGuc2vXv6ZECoAf52N0"
+            },
+            "total_tracks": 16
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1yAwtBaoHLEDWAnWR87hBT"
+              },
+              "href": "https://api.spotify.com/v1/artists/1yAwtBaoHLEDWAnWR87hBT",
+              "id": "1yAwtBaoHLEDWAnWR87hBT",
+              "name": "Modest Mouse",
+              "type": "artist",
+              "uri": "spotify:artist:1yAwtBaoHLEDWAnWR87hBT"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 208466,
+          "external_ids": {
+            "isrc": "USSM10315494"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2lwwrWVKdf3LR9lbbhnr6R"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2lwwrWVKdf3LR9lbbhnr6R",
+          "id": "2lwwrWVKdf3LR9lbbhnr6R",
+          "name": "Float On",
+          "popularity": 76,
+          "uri": "spotify:track:2lwwrWVKdf3LR9lbbhnr6R",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:33:33Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/b285095f783b0cc66ee26f0273a3a618bc419250?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "compilation",
+            "href": "https://api.spotify.com/v1/albums/2A4zIVdm7JjHaNo9cop985",
+            "id": "2A4zIVdm7JjHaNo9cop985",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273aa13b5cb5c07db8c508b96db",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02aa13b5cb5c07db8c508b96db",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851aa13b5cb5c07db8c508b96db",
+                "width": 64
+              }
+            ],
+            "name": "Death to the Pixies",
+            "release_date": "1997-10-06",
+            "release_date_precision": "day",
+            "uri": "spotify:album:2A4zIVdm7JjHaNo9cop985",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6zvul52xwTWzilBZl6BUbT"
+                },
+                "href": "https://api.spotify.com/v1/artists/6zvul52xwTWzilBZl6BUbT",
+                "id": "6zvul52xwTWzilBZl6BUbT",
+                "name": "Pixies",
+                "type": "artist",
+                "uri": "spotify:artist:6zvul52xwTWzilBZl6BUbT"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/2A4zIVdm7JjHaNo9cop985"
+            },
+            "total_tracks": 17
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6zvul52xwTWzilBZl6BUbT"
+              },
+              "href": "https://api.spotify.com/v1/artists/6zvul52xwTWzilBZl6BUbT",
+              "id": "6zvul52xwTWzilBZl6BUbT",
+              "name": "Pixies",
+              "type": "artist",
+              "uri": "spotify:artist:6zvul52xwTWzilBZl6BUbT"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 14,
+          "duration_ms": 229226,
+          "external_ids": {
+            "isrc": "GBAFL9700100"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0KzAbK6nItSqNh8q70tb0K"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0KzAbK6nItSqNh8q70tb0K",
+          "id": "0KzAbK6nItSqNh8q70tb0K",
+          "name": "Where Is My Mind?",
+          "popularity": 76,
+          "uri": "spotify:track:0KzAbK6nItSqNh8q70tb0K",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/b285095f783b0cc66ee26f0273a3a618bc419250?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "compilation",
+            "href": "https://api.spotify.com/v1/albums/2A4zIVdm7JjHaNo9cop985",
+            "id": "2A4zIVdm7JjHaNo9cop985",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273aa13b5cb5c07db8c508b96db",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02aa13b5cb5c07db8c508b96db",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851aa13b5cb5c07db8c508b96db",
+                "width": 64
+              }
+            ],
+            "name": "Death to the Pixies",
+            "release_date": "1997-10-06",
+            "release_date_precision": "day",
+            "uri": "spotify:album:2A4zIVdm7JjHaNo9cop985",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6zvul52xwTWzilBZl6BUbT"
+                },
+                "href": "https://api.spotify.com/v1/artists/6zvul52xwTWzilBZl6BUbT",
+                "id": "6zvul52xwTWzilBZl6BUbT",
+                "name": "Pixies",
+                "type": "artist",
+                "uri": "spotify:artist:6zvul52xwTWzilBZl6BUbT"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/2A4zIVdm7JjHaNo9cop985"
+            },
+            "total_tracks": 17
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6zvul52xwTWzilBZl6BUbT"
+              },
+              "href": "https://api.spotify.com/v1/artists/6zvul52xwTWzilBZl6BUbT",
+              "id": "6zvul52xwTWzilBZl6BUbT",
+              "name": "Pixies",
+              "type": "artist",
+              "uri": "spotify:artist:6zvul52xwTWzilBZl6BUbT"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 14,
+          "duration_ms": 229226,
+          "external_ids": {
+            "isrc": "GBAFL9700100"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0KzAbK6nItSqNh8q70tb0K"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0KzAbK6nItSqNh8q70tb0K",
+          "id": "0KzAbK6nItSqNh8q70tb0K",
+          "name": "Where Is My Mind?",
+          "popularity": 76,
+          "uri": "spotify:track:0KzAbK6nItSqNh8q70tb0K",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      }
+    ],
+    "limit": 100,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 3
+  }
+}

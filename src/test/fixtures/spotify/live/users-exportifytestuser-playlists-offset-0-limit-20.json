@@ -1,0 +1,343 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/users/exportifytestuser/playlists?offset=0&limit=20",
+  "status": 200,
+  "headers": {
+    "cache-control": "public, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "href": "https://api.spotify.com/v1/users/exportifytestuser/playlists?offset=0&limit=20&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "limit": 20,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 8,
+    "items": [
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/0Sm64Lu6z1OK8yM3Oeo4Wx"
+        },
+        "href": "https://api.spotify.com/v1/playlists/0Sm64Lu6z1OK8yM3Oeo4Wx",
+        "id": "0Sm64Lu6z1OK8yM3Oeo4Wx",
+        "images": [
+          {
+            "height": null,
+            "url": "https://image-cdn-ak.spotifycdn.com/image/ab67706c0000d72c48374d513f803d8575ad33d0",
+            "width": null
+          }
+        ],
+        "name": "Best indie songs of all time ",
+        "owner": {
+          "display_name": "Jen Affleck",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/jennifer.knupfer"
+          },
+          "href": "https://api.spotify.com/v1/users/jennifer.knupfer",
+          "id": "jennifer.knupfer",
+          "type": "user",
+          "uri": "spotify:user:jennifer.knupfer"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "AAAAY37VVgzWbwZaRFg4knFkecjPfmKQ",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/0Sm64Lu6z1OK8yM3Oeo4Wx/tracks",
+          "total": 93
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/0Sm64Lu6z1OK8yM3Oeo4Wx/items",
+          "total": 93
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:0Sm64Lu6z1OK8yM3Oeo4Wx"
+      },
+      {
+        "collaborative": false,
+        "description": "The classics, the modern hits, the genre at it's best. Cover: Arctic Monkeys ",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/37i9dQZF1DWYBF1dYDPlHw"
+        },
+        "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYBF1dYDPlHw",
+        "id": "37i9dQZF1DWYBF1dYDPlHw",
+        "images": [
+          {
+            "height": null,
+            "url": "https://i.scdn.co/image/ab67706f000000028083844d865befc311650585",
+            "width": null
+          }
+        ],
+        "name": "Indie Forever ",
+        "owner": {
+          "display_name": "Spotify",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/spotify"
+          },
+          "href": "https://api.spotify.com/v1/users/spotify",
+          "id": "spotify",
+          "type": "user",
+          "uri": "spotify:user:spotify"
+        },
+        "primary_color": "#ffffff",
+        "public": true,
+        "snapshot_id": "AAAAAOlH23pbxTvxpU9j1miVMbXEzzOS",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYBF1dYDPlHw/tracks",
+          "total": 300
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYBF1dYDPlHw/items",
+          "total": 300
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:37i9dQZF1DWYBF1dYDPlHw"
+      },
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/fakeplaylist0000000001"
+        },
+        "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000001",
+        "id": "fakeplaylist0000000001",
+        "images": [
+          {
+            "height": null,
+            "url": "https://i.scdn.co/image/ab67616d00001e02f6e31941d10e4819d290af41",
+            "width": null
+          }
+        ],
+        "name": "Collab: Indie Picks",
+        "owner": {
+          "display_name": "Test User",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "primary_color": null,
+        "public": false,
+        "snapshot_id": "fakesnapshot00000000000000000001",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000001/tracks",
+          "total": 2
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000001/items",
+          "total": 2
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:fakeplaylist0000000001"
+      },
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/fakeplaylist0000000002"
+        },
+        "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000002",
+        "id": "fakeplaylist0000000002",
+        "images": null,
+        "name": "Empty Playlist",
+        "owner": {
+          "display_name": "Test User",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "fakesnapshot00000000000000000002",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000002/tracks",
+          "total": 0
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000002/items",
+          "total": 0
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:fakeplaylist0000000002"
+      },
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/fakeplaylist0000000003"
+        },
+        "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000003",
+        "id": "fakeplaylist0000000003",
+        "images": [
+          {
+            "height": null,
+            "url": "https://i.scdn.co/image/ab67616d00001e0297df071531069c6d18e0cec3",
+            "width": null
+          }
+        ],
+        "name": "أغاني مستقلة",
+        "owner": {
+          "display_name": "Test User",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "fakesnapshot00000000000000000003",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000003/tracks",
+          "total": 3
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000003/items",
+          "total": 3
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:fakeplaylist0000000003"
+      },
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/fakeplaylist0000000004"
+        },
+        "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000004",
+        "id": "fakeplaylist0000000004",
+        "images": [
+          {
+            "height": null,
+            "url": "https://i.scdn.co/image/ab67616d00001e02b893831d1a12d3d4024a5867",
+            "width": null
+          }
+        ],
+        "name": "=1+1 Formula Test",
+        "owner": {
+          "display_name": "Test User",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "fakesnapshot00000000000000000004",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000004/tracks",
+          "total": 3
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000004/items",
+          "total": 3
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:fakeplaylist0000000004"
+      },
+      {
+        "collaborative": false,
+        "description": "Test playlist for Exportify: &quot;quotes&quot;, commas, and accents — café",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/fakeplaylist0000000005"
+        },
+        "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000005",
+        "id": "fakeplaylist0000000005",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://mosaic.scdn.co/640/ab67616d00001e0208afb5dc296054856909f8fdab67616d00001e02262a1a1877d135af75d94198ab67616d00001e025dfe60e5f5fb82bfa8a62919ab67616d00001e02cc0e4e5c8a618daf90693b57",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://mosaic.scdn.co/300/ab67616d00001e0208afb5dc296054856909f8fdab67616d00001e02262a1a1877d135af75d94198ab67616d00001e025dfe60e5f5fb82bfa8a62919ab67616d00001e02cc0e4e5c8a618daf90693b57",
+            "width": 300
+          },
+          {
+            "height": 60,
+            "url": "https://mosaic.scdn.co/60/ab67616d00001e0208afb5dc296054856909f8fdab67616d00001e02262a1a1877d135af75d94198ab67616d00001e025dfe60e5f5fb82bfa8a62919ab67616d00001e02cc0e4e5c8a618daf90693b57",
+            "width": 60
+          }
+        ],
+        "name": "Indie Mix ✨ Ümlauts & Émojis 🎸",
+        "owner": {
+          "display_name": "Test User",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "fakesnapshot00000000000000000005",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000005/tracks",
+          "total": 23
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000005/items",
+          "total": 23
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:fakeplaylist0000000005"
+      },
+      {
+        "collaborative": false,
+        "description": "",
+        "external_urls": {
+          "spotify": "https://open.spotify.com/playlist/fakeplaylist0000000006"
+        },
+        "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000006",
+        "id": "fakeplaylist0000000006",
+        "images": [
+          {
+            "height": null,
+            "url": "https://i.scdn.co/image/ab67616d00001e022fcb0a3c7a66e516b11cd26e",
+            "width": null
+          }
+        ],
+        "name": "To Listen",
+        "owner": {
+          "display_name": "Test User",
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "primary_color": null,
+        "public": true,
+        "snapshot_id": "fakesnapshot00000000000000000006",
+        "tracks": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000006/tracks",
+          "total": 2
+        },
+        "items": {
+          "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000006/items",
+          "total": 2
+        },
+        "type": "playlist",
+        "uri": "spotify:playlist:fakeplaylist0000000006"
+      }
+    ]
+  }
+}

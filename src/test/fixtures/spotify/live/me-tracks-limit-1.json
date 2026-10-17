@@ -1,0 +1,107 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/me/tracks?limit=1",
+  "status": 200,
+  "headers": {
+    "cache-control": "private, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "href": "https://api.spotify.com/v1/me/tracks?offset=0&limit=1&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "items": [
+      {
+        "added_at": "2026-10-17T14:36:37Z",
+        "track": {
+          "album": {
+            "album_type": "album",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                },
+                "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                "name": "Mk.gee",
+                "type": "artist",
+                "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+              }
+            ],
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/62xd4emBJXINuYl0RzfvO8"
+            },
+            "href": "https://api.spotify.com/v1/albums/62xd4emBJXINuYl0RzfvO8",
+            "id": "62xd4emBJXINuYl0RzfvO8",
+            "images": [
+              {
+                "height": 640,
+                "width": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2738b048b6486231cca4766a076"
+              },
+              {
+                "height": 300,
+                "width": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e028b048b6486231cca4766a076"
+              },
+              {
+                "height": 64,
+                "width": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048518b048b6486231cca4766a076"
+              }
+            ],
+            "is_playable": true,
+            "name": "Two Star & The Dream Police",
+            "release_date": "2024-02-09",
+            "release_date_precision": "day",
+            "total_tracks": 12,
+            "type": "album",
+            "uri": "spotify:album:62xd4emBJXINuYl0RzfvO8"
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+              },
+              "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+              "id": "7tr9pbgNEKtG0GQTKe08Tz",
+              "name": "Mk.gee",
+              "type": "artist",
+              "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+            }
+          ],
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "disc_number": 1,
+          "duration_ms": 166179,
+          "explicit": false,
+          "external_ids": {
+            "isrc": "QM24S2307357"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/1jFmW64G9u4uNklySVI7BP"
+          },
+          "href": "https://api.spotify.com/v1/tracks/1jFmW64G9u4uNklySVI7BP",
+          "id": "1jFmW64G9u4uNklySVI7BP",
+          "is_local": false,
+          "is_playable": true,
+          "name": "Are You Looking Up",
+          "popularity": 65,
+          "preview_url": "https://p.scdn.co/mp3-preview/a62b1572d44a657cbd321d05f87f0d1a58bd9911?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "track_number": 3,
+          "type": "track",
+          "uri": "spotify:track:1jFmW64G9u4uNklySVI7BP"
+        }
+      }
+    ],
+    "limit": 1,
+    "next": "https://api.spotify.com/v1/me/tracks?offset=1&limit=1&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "offset": 0,
+    "previous": null,
+    "total": 15
+  }
+}

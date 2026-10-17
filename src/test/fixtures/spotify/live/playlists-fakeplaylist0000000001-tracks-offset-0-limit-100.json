@@ -1,0 +1,393 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000001/tracks?offset=0&limit=100",
+  "status": 200,
+  "headers": {
+    "cache-control": "public, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000001/tracks?offset=0&limit=100&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "items": [
+      {
+        "added_at": "2026-10-17T14:34:30Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/073a709bc647e5ebadd37a8e7412dfebcccf13e3?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/53eHm1f3sFiSzWMaKOl98Z",
+            "id": "53eHm1f3sFiSzWMaKOl98Z",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273f6e31941d10e4819d290af41",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02f6e31941d10e4819d290af41",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851f6e31941d10e4819d290af41",
+                "width": 64
+              }
+            ],
+            "name": "Souvlaki",
+            "release_date": "1993",
+            "release_date_precision": "year",
+            "uri": "spotify:album:53eHm1f3sFiSzWMaKOl98Z",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/72X6FHxaShda0XeQw3vbeF"
+                },
+                "href": "https://api.spotify.com/v1/artists/72X6FHxaShda0XeQw3vbeF",
+                "id": "72X6FHxaShda0XeQw3vbeF",
+                "name": "Slowdive",
+                "type": "artist",
+                "uri": "spotify:artist:72X6FHxaShda0XeQw3vbeF"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/53eHm1f3sFiSzWMaKOl98Z"
+            },
+            "total_tracks": 10
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/72X6FHxaShda0XeQw3vbeF"
+              },
+              "href": "https://api.spotify.com/v1/artists/72X6FHxaShda0XeQw3vbeF",
+              "id": "72X6FHxaShda0XeQw3vbeF",
+              "name": "Slowdive",
+              "type": "artist",
+              "uri": "spotify:artist:72X6FHxaShda0XeQw3vbeF"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 7,
+          "duration_ms": 285906,
+          "external_ids": {
+            "isrc": "GBBQY0400041"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0oxYB9GoOIDrdzniNdKC44"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0oxYB9GoOIDrdzniNdKC44",
+          "id": "0oxYB9GoOIDrdzniNdKC44",
+          "name": "When the Sun Hits",
+          "popularity": 81,
+          "uri": "spotify:track:0oxYB9GoOIDrdzniNdKC44",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/073a709bc647e5ebadd37a8e7412dfebcccf13e3?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/53eHm1f3sFiSzWMaKOl98Z",
+            "id": "53eHm1f3sFiSzWMaKOl98Z",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273f6e31941d10e4819d290af41",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02f6e31941d10e4819d290af41",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851f6e31941d10e4819d290af41",
+                "width": 64
+              }
+            ],
+            "name": "Souvlaki",
+            "release_date": "1993",
+            "release_date_precision": "year",
+            "uri": "spotify:album:53eHm1f3sFiSzWMaKOl98Z",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/72X6FHxaShda0XeQw3vbeF"
+                },
+                "href": "https://api.spotify.com/v1/artists/72X6FHxaShda0XeQw3vbeF",
+                "id": "72X6FHxaShda0XeQw3vbeF",
+                "name": "Slowdive",
+                "type": "artist",
+                "uri": "spotify:artist:72X6FHxaShda0XeQw3vbeF"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/53eHm1f3sFiSzWMaKOl98Z"
+            },
+            "total_tracks": 10
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/72X6FHxaShda0XeQw3vbeF"
+              },
+              "href": "https://api.spotify.com/v1/artists/72X6FHxaShda0XeQw3vbeF",
+              "id": "72X6FHxaShda0XeQw3vbeF",
+              "name": "Slowdive",
+              "type": "artist",
+              "uri": "spotify:artist:72X6FHxaShda0XeQw3vbeF"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 7,
+          "duration_ms": 285906,
+          "external_ids": {
+            "isrc": "GBBQY0400041"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0oxYB9GoOIDrdzniNdKC44"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0oxYB9GoOIDrdzniNdKC44",
+          "id": "0oxYB9GoOIDrdzniNdKC44",
+          "name": "When the Sun Hits",
+          "popularity": 81,
+          "uri": "spotify:track:0oxYB9GoOIDrdzniNdKC44",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:34:35Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/3ce2f30f504874f771d1adab4eac348ef05e5fd9?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/6TzgWk5HZItbFmMT7hH4bU",
+            "id": "6TzgWk5HZItbFmMT7hH4bU",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2735cce078fbf09bbe8211caf12",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e025cce078fbf09bbe8211caf12",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048515cce078fbf09bbe8211caf12",
+                "width": 64
+              }
+            ],
+            "name": "God Save The Animals",
+            "release_date": "2022-09-23",
+            "release_date_precision": "day",
+            "uri": "spotify:album:6TzgWk5HZItbFmMT7hH4bU",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6lcwlkAjBPSKnFBZjjZFJs"
+                },
+                "href": "https://api.spotify.com/v1/artists/6lcwlkAjBPSKnFBZjjZFJs",
+                "id": "6lcwlkAjBPSKnFBZjjZFJs",
+                "name": "Alex G",
+                "type": "artist",
+                "uri": "spotify:artist:6lcwlkAjBPSKnFBZjjZFJs"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/6TzgWk5HZItbFmMT7hH4bU"
+            },
+            "total_tracks": 13
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6lcwlkAjBPSKnFBZjjZFJs"
+              },
+              "href": "https://api.spotify.com/v1/artists/6lcwlkAjBPSKnFBZjjZFJs",
+              "id": "6lcwlkAjBPSKnFBZjjZFJs",
+              "name": "Alex G",
+              "type": "artist",
+              "uri": "spotify:artist:6lcwlkAjBPSKnFBZjjZFJs"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 2,
+          "duration_ms": 156772,
+          "external_ids": {
+            "isrc": "GBCEL2200057"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/5DRnssBoVo8e7uAQZkNT8O"
+          },
+          "href": "https://api.spotify.com/v1/tracks/5DRnssBoVo8e7uAQZkNT8O",
+          "id": "5DRnssBoVo8e7uAQZkNT8O",
+          "name": "Runner",
+          "popularity": 54,
+          "uri": "spotify:track:5DRnssBoVo8e7uAQZkNT8O",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/3ce2f30f504874f771d1adab4eac348ef05e5fd9?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/6TzgWk5HZItbFmMT7hH4bU",
+            "id": "6TzgWk5HZItbFmMT7hH4bU",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2735cce078fbf09bbe8211caf12",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e025cce078fbf09bbe8211caf12",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048515cce078fbf09bbe8211caf12",
+                "width": 64
+              }
+            ],
+            "name": "God Save The Animals",
+            "release_date": "2022-09-23",
+            "release_date_precision": "day",
+            "uri": "spotify:album:6TzgWk5HZItbFmMT7hH4bU",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6lcwlkAjBPSKnFBZjjZFJs"
+                },
+                "href": "https://api.spotify.com/v1/artists/6lcwlkAjBPSKnFBZjjZFJs",
+                "id": "6lcwlkAjBPSKnFBZjjZFJs",
+                "name": "Alex G",
+                "type": "artist",
+                "uri": "spotify:artist:6lcwlkAjBPSKnFBZjjZFJs"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/6TzgWk5HZItbFmMT7hH4bU"
+            },
+            "total_tracks": 13
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6lcwlkAjBPSKnFBZjjZFJs"
+              },
+              "href": "https://api.spotify.com/v1/artists/6lcwlkAjBPSKnFBZjjZFJs",
+              "id": "6lcwlkAjBPSKnFBZjjZFJs",
+              "name": "Alex G",
+              "type": "artist",
+              "uri": "spotify:artist:6lcwlkAjBPSKnFBZjjZFJs"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 2,
+          "duration_ms": 156772,
+          "external_ids": {
+            "isrc": "GBCEL2200057"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/5DRnssBoVo8e7uAQZkNT8O"
+          },
+          "href": "https://api.spotify.com/v1/tracks/5DRnssBoVo8e7uAQZkNT8O",
+          "id": "5DRnssBoVo8e7uAQZkNT8O",
+          "name": "Runner",
+          "popularity": 54,
+          "uri": "spotify:track:5DRnssBoVo8e7uAQZkNT8O",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      }
+    ],
+    "limit": 100,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 2
+  }
+}

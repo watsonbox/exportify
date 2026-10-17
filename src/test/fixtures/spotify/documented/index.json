@@ -1,0 +1,42 @@
+[
+  {
+    "file": "token.json",
+    "method": "POST",
+    "url": "https://accounts.spotify.com/api/token",
+    "status": 200,
+    "source": "https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow",
+    "note": "Authorization code exchange; tokens are placeholders"
+  },
+  {
+    "file": "token-invalid-grant.json",
+    "method": "POST",
+    "url": "https://accounts.spotify.com/api/token",
+    "status": 400,
+    "source": "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2",
+    "note": "Expired, reused or mismatched authorization code; Spotify follows RFC 6749 error responses"
+  },
+  {
+    "file": "error-401.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me",
+    "status": 401,
+    "source": "https://developer.spotify.com/documentation/web-api/concepts/api-calls#response-status-codes",
+    "note": "Bad or expired token; any API endpoint"
+  },
+  {
+    "file": "error-429.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me",
+    "status": 429,
+    "source": "https://developer.spotify.com/documentation/web-api/concepts/rate-limits",
+    "note": "Rate limited; Retry-After is in seconds; any API endpoint"
+  },
+  {
+    "file": "error-503.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me",
+    "status": 503,
+    "source": "https://developer.spotify.com/documentation/web-api/concepts/api-calls#response-status-codes",
+    "note": "Service unavailable; any API endpoint"
+  }
+]

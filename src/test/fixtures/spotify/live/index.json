@@ -1,0 +1,134 @@
+[
+  {
+    "file": "me.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me",
+    "status": 200
+  },
+  {
+    "file": "users-exportifytestuser-playlists-offset-0-limit-20.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/users/exportifytestuser/playlists?offset=0&limit=20",
+    "status": 200
+  },
+  {
+    "file": "me-tracks.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me/tracks",
+    "status": 200
+  },
+  {
+    "file": "me-playlists-limit-50.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me/playlists?limit=50",
+    "status": 200
+  },
+  {
+    "file": "me-tracks-limit-1.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me/tracks?limit=1",
+    "status": 200
+  },
+  {
+    "file": "me-albums-limit-50.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me/albums?limit=50",
+    "status": 200
+  },
+  {
+    "file": "me-tracks-offset-0-limit-50.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/me/tracks?offset=0&limit=50",
+    "status": 200
+  },
+  {
+    "file": "artists-1.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/artists?ids=7tr9pbgNEKtG0GQTKe08Tz,4MXUO7sVCaFgFjoTI5ox5c,56ZTgzPBDge0OvCGgMO3OY,4aEnNH9PuU1HF3TsZTru54,2mVVjNmdjXZZDvhgQWiakk,3qnGvpP8Yth1AqSBMqON5x,2TwOrUcYnAlIiKmVQkkoSZ,1hLiboQ98IQWhpKeP9vRFw,12zbUHbPHL5DGuJtiUfsip,1r1uxoy19fzMxunt3ONAkG,07D1Bjaof0NFlU32KXiqUP,2uYWxilOVlUdk4oV9DvwqK,6UUrUCIZtQeOf8tC0WuzRy,7MoIc5s9KXolCBH1fy9kkw,4QkSD9TRUnMtI8Fq1jXJJe,3kzwYV3OCB010YfXMF0Avt,5QdyldG4Fl4TPiOIeMNpBZ,72X6FHxaShda0XeQw3vbeF",
+    "status": 200
+  },
+  {
+    "file": "audio-features-1.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/audio-features?ids=1jFmW64G9u4uNklySVI7BP,1yupbrI7ROhigIHpQBevPh,1ZgMsA55GIY7ICkQh5MILA,35p0Z5yZDogaXoWXhMVEv4,24ntSW3QVJzR79lHAAOTaY,7iqAuZe5yS0suLQcFfVK39,09DR0sHnQUhHOiSNttc1mv,2P5yIMu2DNeMXTyOANKS6k,6eTGxxQxiTFE6LfZHC33Wm,0dpyzcT3RMNNSd2xKBf35I,5JX6gZ5mOASumPrU1JbfbV,5GAB1X0AJq2EZjxXP9zMFt,25Syi9wnfn6ZGAmiOBypPq,7lrhugjSbiImrNSLIFIq0c,0oxYB9GoOIDrdzniNdKC44",
+    "status": 200
+  },
+  {
+    "file": "albums-1.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/albums?ids=62xd4emBJXINuYl0RzfvO8,1pOl0KEC1iQnA6F0XxV4To,4SkZTSXdPpzTbf6C0m1UKv,5ysMC5s4nOCDtPBYrTa5pl,4HFO9PDRxsdbcegkcNhxgz,2X6hKiTx3P5LGBEvc8oJq6,0e9GjrztzBw8oMC6n2CDeI,42cH7mrkfljkqkxA2Ip9Xq,3sE83l3A58DipFp3EzNLiE,1uD1kdwTWH1DZQZqGKz6rY,2ZlrWJ4Ev4DhG6mRo5h1AP,1j3pIPXjLIFkp84OfVUsNT,5rcJ5xCMYYLCgGilFDKRZl,5pp7px9MITK2MqeFVbRWGo,53eHm1f3sFiSzWMaKOl98Z",
+    "status": 200
+  },
+  {
+    "file": "playlists-0Sm64Lu6z1OK8yM3Oeo4Wx-tracks-offset-0-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/0Sm64Lu6z1OK8yM3Oeo4Wx/tracks?offset=0&limit=100",
+    "status": 200,
+    "note": "items trimmed from 93 to 25"
+  },
+  {
+    "file": "playlists-37i9dQZF1DWYBF1dYDPlHw-tracks-offset-0-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYBF1dYDPlHw/tracks?offset=0&limit=100",
+    "status": 200,
+    "note": "items trimmed from 100 to 25"
+  },
+  {
+    "file": "playlists-37i9dQZF1DWYBF1dYDPlHw-tracks-offset-100-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYBF1dYDPlHw/tracks?offset=100&limit=100",
+    "status": 200,
+    "note": "items trimmed from 100 to 25"
+  },
+  {
+    "file": "playlists-37i9dQZF1DWYBF1dYDPlHw-tracks-offset-200-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/37i9dQZF1DWYBF1dYDPlHw/tracks?offset=200&limit=100",
+    "status": 200,
+    "note": "items trimmed from 100 to 25"
+  },
+  {
+    "file": "playlists-fakeplaylist0000000001-tracks-offset-0-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000001/tracks?offset=0&limit=100",
+    "status": 200
+  },
+  {
+    "file": "playlists-fakeplaylist0000000003-tracks-offset-0-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000003/tracks?offset=0&limit=100",
+    "status": 200
+  },
+  {
+    "file": "playlists-fakeplaylist0000000004-tracks-offset-0-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000004/tracks?offset=0&limit=100",
+    "status": 200
+  },
+  {
+    "file": "playlists-fakeplaylist0000000005-tracks-offset-0-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000005/tracks?offset=0&limit=100",
+    "status": 200
+  },
+  {
+    "file": "audio-features-9.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/audio-features?ids=7lrhugjSbiImrNSLIFIq0c,7lrhugjSbiImrNSLIFIq0c,25Syi9wnfn6ZGAmiOBypPq,5GAB1X0AJq2EZjxXP9zMFt,5JX6gZ5mOASumPrU1JbfbV,5idVbYWHOBsFktyGq9KhkL,0dpyzcT3RMNNSd2xKBf35I,6eTGxxQxiTFE6LfZHC33Wm,2P5yIMu2DNeMXTyOANKS6k,09DR0sHnQUhHOiSNttc1mv,35KiiILklye1JRRctaLUb4,7iqAuZe5yS0suLQcFfVK39,3cNgKAwVBCb4SRrCjFZ1uH,24ntSW3QVJzR79lHAAOTaY,0xOeB16JDbBJBJKSdHbElT,35p0Z5yZDogaXoWXhMVEv4,1ZgMsA55GIY7ICkQh5MILA,7cucVWdmNeaPJuo7WkxaZ8,1yupbrI7ROhigIHpQBevPh,19Qi2Cymjh7HDQESDrDBzs,1jFmW64G9u4uNklySVI7BP,2lVPHHSn8elKFEf1d6evFG,0RLDQG6aMcnI4Cn2QdDEX1",
+    "status": 200,
+    "note": "contains null entries"
+  },
+  {
+    "file": "albums-24.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/albums?ids=1pBRAyTNXs1QRRAFRZ4Ygs,10lMwCjvzLCLwth2AW6cLG",
+    "status": 200,
+    "note": "contains null entries"
+  },
+  {
+    "file": "playlists-fakeplaylist0000000006-tracks-offset-0-limit-100.json",
+    "method": "GET",
+    "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000006/tracks?offset=0&limit=100",
+    "status": 200
+  }
+]

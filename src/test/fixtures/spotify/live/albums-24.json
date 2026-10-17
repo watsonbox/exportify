@@ -1,0 +1,171 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/albums?ids=1pBRAyTNXs1QRRAFRZ4Ygs,10lMwCjvzLCLwth2AW6cLG",
+  "status": 200,
+  "headers": {
+    "cache-control": "public, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "albums": [
+      {
+        "album_type": "single",
+        "total_tracks": 2,
+        "available_markets": [
+          "AR",
+          "AU"
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/1pBRAyTNXs1QRRAFRZ4Ygs"
+        },
+        "href": "https://api.spotify.com/v1/albums/1pBRAyTNXs1QRRAFRZ4Ygs?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+        "id": "1pBRAyTNXs1QRRAFRZ4Ygs",
+        "images": [
+          {
+            "url": "https://i.scdn.co/image/ab67616d0000b273a5b8c651627eb5f17c8c7db0",
+            "height": 640,
+            "width": 640
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00001e02a5b8c651627eb5f17c8c7db0",
+            "height": 300,
+            "width": 300
+          },
+          {
+            "url": "https://i.scdn.co/image/ab67616d00004851a5b8c651627eb5f17c8c7db0",
+            "height": 64,
+            "width": 64
+          }
+        ],
+        "name": "Spotify Singles",
+        "release_date": "2021-03-08",
+        "release_date_precision": "day",
+        "type": "album",
+        "uri": "spotify:album:1pBRAyTNXs1QRRAFRZ4Ygs",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+            },
+            "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+            "id": "1r1uxoy19fzMxunt3ONAkG",
+            "name": "Phoebe Bridgers",
+            "type": "artist",
+            "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+          }
+        ],
+        "tracks": {
+          "href": "https://api.spotify.com/v1/albums/1pBRAyTNXs1QRRAFRZ4Ygs/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+          "limit": 50,
+          "next": null,
+          "offset": 0,
+          "previous": null,
+          "total": 2,
+          "items": [
+            {
+              "artists": [
+                {
+                  "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                  },
+                  "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                  "id": "1r1uxoy19fzMxunt3ONAkG",
+                  "name": "Phoebe Bridgers",
+                  "type": "artist",
+                  "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                },
+                {
+                  "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/5lkiCO9UQ8B23dZ1o0UV4m"
+                  },
+                  "href": "https://api.spotify.com/v1/artists/5lkiCO9UQ8B23dZ1o0UV4m",
+                  "id": "5lkiCO9UQ8B23dZ1o0UV4m",
+                  "name": "Jackson Browne",
+                  "type": "artist",
+                  "uri": "spotify:artist:5lkiCO9UQ8B23dZ1o0UV4m"
+                }
+              ],
+              "available_markets": [
+                "AR",
+                "AU"
+              ],
+              "disc_number": 1,
+              "duration_ms": 210353,
+              "explicit": false,
+              "external_urls": {
+                "spotify": "https://open.spotify.com/track/1w2gRlZvcIkuJHYr9Y0cE4"
+              },
+              "href": "https://api.spotify.com/v1/tracks/1w2gRlZvcIkuJHYr9Y0cE4",
+              "id": "1w2gRlZvcIkuJHYr9Y0cE4",
+              "name": "Kyoto - Spotify Singles",
+              "preview_url": "https://p.scdn.co/mp3-preview/75a01bc3ddf5d24c71eb6824a006cbf49a4c5dc1?cid=9950ac751e34487dbbe027c4fd7f8e99",
+              "track_number": 1,
+              "type": "track",
+              "uri": "spotify:track:1w2gRlZvcIkuJHYr9Y0cE4",
+              "is_local": false
+            },
+            {
+              "artists": [
+                {
+                  "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                  },
+                  "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                  "id": "1r1uxoy19fzMxunt3ONAkG",
+                  "name": "Phoebe Bridgers",
+                  "type": "artist",
+                  "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                },
+                {
+                  "external_urls": {
+                    "spotify": "https://open.spotify.com/artist/6iKiDPed4LAQEcPZpvf00m"
+                  },
+                  "href": "https://api.spotify.com/v1/artists/6iKiDPed4LAQEcPZpvf00m",
+                  "id": "6iKiDPed4LAQEcPZpvf00m",
+                  "name": "Maria Taylor",
+                  "type": "artist",
+                  "uri": "spotify:artist:6iKiDPed4LAQEcPZpvf00m"
+                }
+              ],
+              "available_markets": [
+                "AR",
+                "AU"
+              ],
+              "disc_number": 1,
+              "duration_ms": 234079,
+              "explicit": false,
+              "external_urls": {
+                "spotify": "https://open.spotify.com/track/2lVPHHSn8elKFEf1d6evFG"
+              },
+              "href": "https://api.spotify.com/v1/tracks/2lVPHHSn8elKFEf1d6evFG",
+              "id": "2lVPHHSn8elKFEf1d6evFG",
+              "name": "Summer's End - Spotify Singles",
+              "preview_url": "https://p.scdn.co/mp3-preview/19fa8418100c3491f84e5a9758e4ed2fc9ba5f83?cid=9950ac751e34487dbbe027c4fd7f8e99",
+              "track_number": 2,
+              "type": "track",
+              "uri": "spotify:track:2lVPHHSn8elKFEf1d6evFG",
+              "is_local": false
+            }
+          ]
+        },
+        "copyrights": [
+          {
+            "text": "2021 Dead Oceans",
+            "type": "C"
+          },
+          {
+            "text": "2021 Dead Oceans",
+            "type": "P"
+          }
+        ],
+        "external_ids": {
+          "upc": "656605156668"
+        },
+        "genres": [],
+        "label": "Dead Oceans",
+        "popularity": 60
+      },
+      null
+    ]
+  }
+}

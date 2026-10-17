@@ -1,0 +1,3601 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/me/albums?limit=50",
+  "status": 200,
+  "headers": {
+    "cache-control": "private, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "href": "https://api.spotify.com/v1/me/albums?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "items": [
+      {
+        "added_at": "2026-10-17T14:37:28Z",
+        "album": {
+          "album_type": "album",
+          "total_tracks": 12,
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/62xd4emBJXINuYl0RzfvO8"
+          },
+          "href": "https://api.spotify.com/v1/albums/62xd4emBJXINuYl0RzfvO8?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+          "id": "62xd4emBJXINuYl0RzfvO8",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b2738b048b6486231cca4766a076",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e028b048b6486231cca4766a076",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d000048518b048b6486231cca4766a076",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Two Star & The Dream Police",
+          "release_date": "2024-02-09",
+          "release_date_precision": "day",
+          "type": "album",
+          "uri": "spotify:album:62xd4emBJXINuYl0RzfvO8",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+              },
+              "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+              "id": "7tr9pbgNEKtG0GQTKe08Tz",
+              "name": "Mk.gee",
+              "type": "artist",
+              "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+            }
+          ],
+          "tracks": {
+            "href": "https://api.spotify.com/v1/albums/62xd4emBJXINuYl0RzfvO8/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 12,
+            "items": [
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 126978,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4Ii5hUiRCt51B4eY4XzvcA"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4Ii5hUiRCt51B4eY4XzvcA",
+                "id": "4Ii5hUiRCt51B4eY4XzvcA",
+                "name": "New Low",
+                "preview_url": "https://p.scdn.co/mp3-preview/48634bfa145eab0066761043249170da63764318?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:4Ii5hUiRCt51B4eY4XzvcA",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 141236,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1ED6fIsQtKmFf83bMxDXKl"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1ED6fIsQtKmFf83bMxDXKl",
+                "id": "1ED6fIsQtKmFf83bMxDXKl",
+                "name": "How many miles",
+                "preview_url": "https://p.scdn.co/mp3-preview/ae7876cd6be5e128809ac21cfbea39d5d9a1df40?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:1ED6fIsQtKmFf83bMxDXKl",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 166179,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1jFmW64G9u4uNklySVI7BP"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1jFmW64G9u4uNklySVI7BP",
+                "id": "1jFmW64G9u4uNklySVI7BP",
+                "name": "Are You Looking Up",
+                "preview_url": "https://p.scdn.co/mp3-preview/a62b1572d44a657cbd321d05f87f0d1a58bd9911?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:1jFmW64G9u4uNklySVI7BP",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 118269,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6YqTkfq6JoJTAnlgIywt7v"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6YqTkfq6JoJTAnlgIywt7v",
+                "id": "6YqTkfq6JoJTAnlgIywt7v",
+                "name": "DNM",
+                "preview_url": "https://p.scdn.co/mp3-preview/37a3616c4bfd831ad099090f9dd1aa00610ec8a6?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:6YqTkfq6JoJTAnlgIywt7v",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 134701,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/31WcLIsqUmKYe7H8hXGktc"
+                },
+                "href": "https://api.spotify.com/v1/tracks/31WcLIsqUmKYe7H8hXGktc",
+                "id": "31WcLIsqUmKYe7H8hXGktc",
+                "name": "You got it",
+                "preview_url": "https://p.scdn.co/mp3-preview/3ec9bca383fe8953f497c9423d073062984645af?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:31WcLIsqUmKYe7H8hXGktc",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 142793,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1r6wz7cylPMLQFSakRor8b"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1r6wz7cylPMLQFSakRor8b",
+                "id": "1r6wz7cylPMLQFSakRor8b",
+                "name": "Rylee & I",
+                "preview_url": "https://p.scdn.co/mp3-preview/bfaba94c781e6d27ce442280f2af51eff8c34d7e?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:1r6wz7cylPMLQFSakRor8b",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 174824,
+                "explicit": true,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/30nSDFwnTjVweKupURDK1g"
+                },
+                "href": "https://api.spotify.com/v1/tracks/30nSDFwnTjVweKupURDK1g",
+                "id": "30nSDFwnTjVweKupURDK1g",
+                "name": "Candy",
+                "preview_url": "https://p.scdn.co/mp3-preview/a959666e21ff67ad83a3c7f911074b5ef0757dde?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:30nSDFwnTjVweKupURDK1g",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 218766,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/63E1KzqmJcSl0likZCCNZo"
+                },
+                "href": "https://api.spotify.com/v1/tracks/63E1KzqmJcSl0likZCCNZo",
+                "id": "63E1KzqmJcSl0likZCCNZo",
+                "name": "I Want",
+                "preview_url": "https://p.scdn.co/mp3-preview/28a6bc776306b3ef2404a26ab88a9799a31afb72?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:63E1KzqmJcSl0likZCCNZo",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 198295,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1fAaC0BVOACO5hmyiwIqAG"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1fAaC0BVOACO5hmyiwIqAG",
+                "id": "1fAaC0BVOACO5hmyiwIqAG",
+                "name": "Alesis",
+                "preview_url": "https://p.scdn.co/mp3-preview/6fce5271b769efcdb4c01e198bac44258839fe7a?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:1fAaC0BVOACO5hmyiwIqAG",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 267052,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/7jUKpCHhWM7UF6Sxy33xMV"
+                },
+                "href": "https://api.spotify.com/v1/tracks/7jUKpCHhWM7UF6Sxy33xMV",
+                "id": "7jUKpCHhWM7UF6Sxy33xMV",
+                "name": "Breakthespell",
+                "preview_url": "https://p.scdn.co/mp3-preview/0bef42110f88c5b66c71ff05f38a5c5e4d4ab69c?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:7jUKpCHhWM7UF6Sxy33xMV",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 139397,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1n5HZdNGSS4wzhKbBNHWxo"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1n5HZdNGSS4wzhKbBNHWxo",
+                "id": "1n5HZdNGSS4wzhKbBNHWxo",
+                "name": "Little Bit More",
+                "preview_url": "https://p.scdn.co/mp3-preview/3464d8f718681aa1b7bd58f7dbb32e9ebb4145bf?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 11,
+                "type": "track",
+                "uri": "spotify:track:1n5HZdNGSS4wzhKbBNHWxo",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7tr9pbgNEKtG0GQTKe08Tz"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7tr9pbgNEKtG0GQTKe08Tz",
+                    "id": "7tr9pbgNEKtG0GQTKe08Tz",
+                    "name": "Mk.gee",
+                    "type": "artist",
+                    "uri": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 169519,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/7gvh80lWlcPBsbctsWoIBJ"
+                },
+                "href": "https://api.spotify.com/v1/tracks/7gvh80lWlcPBsbctsWoIBJ",
+                "id": "7gvh80lWlcPBsbctsWoIBJ",
+                "name": "Dream police",
+                "preview_url": "https://p.scdn.co/mp3-preview/9fb253761303642bb77b48b5725063e08939924c?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 12,
+                "type": "track",
+                "uri": "spotify:track:7gvh80lWlcPBsbctsWoIBJ",
+                "is_local": false
+              }
+            ]
+          },
+          "copyrights": [
+            {
+              "text": "© 2024 R&R",
+              "type": "C"
+            },
+            {
+              "text": "℗ 2024 R&R",
+              "type": "P"
+            }
+          ],
+          "external_ids": {
+            "upc": "193436368681"
+          },
+          "genres": [],
+          "label": "R&R Digital",
+          "popularity": 71
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:37:20Z",
+        "album": {
+          "album_type": "album",
+          "total_tracks": 22,
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/1pOl0KEC1iQnA6F0XxV4To"
+          },
+          "href": "https://api.spotify.com/v1/albums/1pOl0KEC1iQnA6F0XxV4To?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+          "id": "1pOl0KEC1iQnA6F0XxV4To",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273712c76b4152918fb8d37c53d",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e02712c76b4152918fb8d37c53d",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00004851712c76b4152918fb8d37c53d",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Illinois",
+          "release_date": "2005-07-05",
+          "release_date_precision": "day",
+          "type": "album",
+          "uri": "spotify:album:1pOl0KEC1iQnA6F0XxV4To",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+              },
+              "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+              "id": "4MXUO7sVCaFgFjoTI5ox5c",
+              "name": "Sufjan Stevens",
+              "type": "artist",
+              "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+            }
+          ],
+          "tracks": {
+            "href": "https://api.spotify.com/v1/albums/1pOl0KEC1iQnA6F0XxV4To/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 22,
+            "items": [
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 128985,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/2BjRhZ2IJmsO1GRquNldsP"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2BjRhZ2IJmsO1GRquNldsP",
+                "id": "2BjRhZ2IJmsO1GRquNldsP",
+                "name": "Concerning the UFO sighting near Highland, Illinois",
+                "preview_url": "https://p.scdn.co/mp3-preview/d3f40fe516b09939e64373060e4be10ed62c6c7a?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:2BjRhZ2IJmsO1GRquNldsP",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 134786,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4LyO99BhEMAyVGe4J5genE"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4LyO99BhEMAyVGe4J5genE",
+                "id": "4LyO99BhEMAyVGe4J5genE",
+                "name": "The Black Hawk War, Or, How to Demolish an Entire Civilization and Still Feel Good About Yourself In the Morning, Or, We Apologize for the Inconvenience But You're Going to Have to Leave Now, Or...",
+                "preview_url": "https://p.scdn.co/mp3-preview/79280a1336712622fe1c3a5c3ba7aa572974e577?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:4LyO99BhEMAyVGe4J5genE",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 405626,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3vbxQpZdIXJ3oALBd8OyQ6"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3vbxQpZdIXJ3oALBd8OyQ6",
+                "id": "3vbxQpZdIXJ3oALBd8OyQ6",
+                "name": "Come On! Feel the Illinoise! Part I: The World's Columbian Exposition Part II: Carl Sandburg Visits Me In A Dream",
+                "preview_url": "https://p.scdn.co/mp3-preview/11ea5cc2b8338d61ebb65a72bf3c9d43df11aa05?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:3vbxQpZdIXJ3oALBd8OyQ6",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 199920,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/2R3g9k14OAcUzZYwo90Tx6"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2R3g9k14OAcUzZYwo90Tx6",
+                "id": "2R3g9k14OAcUzZYwo90Tx6",
+                "name": "John Wayne Gacy, Jr.",
+                "preview_url": "https://p.scdn.co/mp3-preview/d95336fef868fcb892288b68988e0feb624ef130?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:2R3g9k14OAcUzZYwo90Tx6",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 324720,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/7iYaPj3pAQ3UJrSmYZChYY"
+                },
+                "href": "https://api.spotify.com/v1/tracks/7iYaPj3pAQ3UJrSmYZChYY",
+                "id": "7iYaPj3pAQ3UJrSmYZChYY",
+                "name": "Jacksonville",
+                "preview_url": "https://p.scdn.co/mp3-preview/65519d390484d3ee85c062e9db7d88782462623f?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:7iYaPj3pAQ3UJrSmYZChYY",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 47640,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6hfxGStZ4L3IBvRaCqmPQc"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6hfxGStZ4L3IBvRaCqmPQc",
+                "id": "6hfxGStZ4L3IBvRaCqmPQc",
+                "name": "A short reprise for Mary Todd, who went insane, but for very good reasons",
+                "preview_url": "https://p.scdn.co/mp3-preview/e0267d6d2fb1add6f2f39ad2a6a8d58cd470debd?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:6hfxGStZ4L3IBvRaCqmPQc",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 183906,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5PrrtlnYNokmpECpZtQhVO"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5PrrtlnYNokmpECpZtQhVO",
+                "id": "5PrrtlnYNokmpECpZtQhVO",
+                "name": "Decatur, or, Round of Applause for Your Step-Mother!",
+                "preview_url": "https://p.scdn.co/mp3-preview/e842bf78eba7d0f8ace3e6eb32b4a4716e175196?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:5PrrtlnYNokmpECpZtQhVO",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 6466,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5bve8lKmi1CafK0olcfU0l"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5bve8lKmi1CafK0olcfU0l",
+                "id": "5bve8lKmi1CafK0olcfU0l",
+                "name": "One last \"Whoo-hoo!\" for the Pullman",
+                "preview_url": "https://p.scdn.co/mp3-preview/e301a62938c96f4424425a46489f15271e5a2362?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:5bve8lKmi1CafK0olcfU0l",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 364613,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1yupbrI7ROhigIHpQBevPh"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1yupbrI7ROhigIHpQBevPh",
+                "id": "1yupbrI7ROhigIHpQBevPh",
+                "name": "Chicago",
+                "preview_url": "https://p.scdn.co/mp3-preview/a6cc0830f2f9271a7737b85015efbbefb65c6f2e?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:1yupbrI7ROhigIHpQBevPh",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 353946,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/53TIOhzNpRpl8xKdscSQSv"
+                },
+                "href": "https://api.spotify.com/v1/tracks/53TIOhzNpRpl8xKdscSQSv",
+                "id": "53TIOhzNpRpl8xKdscSQSv",
+                "name": "Casimir Pulaski Day",
+                "preview_url": "https://p.scdn.co/mp3-preview/df8683f7240fbb960e09c0ed1c03864f61924fa9?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:53TIOhzNpRpl8xKdscSQSv",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 100760,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4nHnXZfr4IdxYgmYkH8ivZ"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4nHnXZfr4IdxYgmYkH8ivZ",
+                "id": "4nHnXZfr4IdxYgmYkH8ivZ",
+                "name": "To The Workers of The Rock River Valley Region, I have an idea concerning your predicament, and it involves an inner tube, bath mats, and 21 able-bodied men",
+                "preview_url": "https://p.scdn.co/mp3-preview/deaabf0c61a6393605a68aa3fd0f6ed9b40ce786?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 11,
+                "type": "track",
+                "uri": "spotify:track:4nHnXZfr4IdxYgmYkH8ivZ",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 377013,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0kyZp51e1snCfUtDJlXVhq"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0kyZp51e1snCfUtDJlXVhq",
+                "id": "0kyZp51e1snCfUtDJlXVhq",
+                "name": "The Man of Metropolis Steals Our Hearts",
+                "preview_url": "https://p.scdn.co/mp3-preview/56b0db577348cf5520c9bddcda968b7e658c5b42?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 12,
+                "type": "track",
+                "uri": "spotify:track:0kyZp51e1snCfUtDJlXVhq",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 131373,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6VwLJAvYv7oUVKMAvC46sH"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6VwLJAvYv7oUVKMAvC46sH",
+                "id": "6VwLJAvYv7oUVKMAvC46sH",
+                "name": "Prairie Fire That Wanders About",
+                "preview_url": "https://p.scdn.co/mp3-preview/028495e43c173b3e7f00c13698b1553578986ae2?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 13,
+                "type": "track",
+                "uri": "spotify:track:6VwLJAvYv7oUVKMAvC46sH",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 19653,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4a82CKrAXdeHFJPTwEuEm8"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4a82CKrAXdeHFJPTwEuEm8",
+                "id": "4a82CKrAXdeHFJPTwEuEm8",
+                "name": "A conjunction of drones simulating the way in which Sufjan Stevens has an existential crisis in the Great Godfrey Maze",
+                "preview_url": "https://p.scdn.co/mp3-preview/f3452e1057cab0b29a9bb9007f150200fa2e3a7b?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 14,
+                "type": "track",
+                "uri": "spotify:track:4a82CKrAXdeHFJPTwEuEm8",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 323013,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4wFBbeR03fah9nwy0isyO8"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4wFBbeR03fah9nwy0isyO8",
+                "id": "4wFBbeR03fah9nwy0isyO8",
+                "name": "The Predatory Wasp of the Palisades Is Out to Get Us!",
+                "preview_url": "https://p.scdn.co/mp3-preview/ba0e08d0919707b131e917df1011520552989a9b?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 15,
+                "type": "track",
+                "uri": "spotify:track:4wFBbeR03fah9nwy0isyO8",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 309786,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6pvwYMVs13EJ8jj4LMX0aV"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6pvwYMVs13EJ8jj4LMX0aV",
+                "id": "6pvwYMVs13EJ8jj4LMX0aV",
+                "name": "They Are Night Zombies!! They Are Neighbors!! They Have Come Back From the Dead!! Ahhhh!",
+                "preview_url": "https://p.scdn.co/mp3-preview/0cf6cccba23ed38ed35c36438bba55184b6ad28b?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 16,
+                "type": "track",
+                "uri": "spotify:track:6pvwYMVs13EJ8jj4LMX0aV",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 40373,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6dZms5gdDcCFvfuBzGPRDH"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6dZms5gdDcCFvfuBzGPRDH",
+                "id": "6dZms5gdDcCFvfuBzGPRDH",
+                "name": "Let's hear that string part again, because I don't think they heard it all the way out in Bushnell",
+                "preview_url": "https://p.scdn.co/mp3-preview/cb47c91365020857bd711fbafaf98814753636ae?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 17,
+                "type": "track",
+                "uri": "spotify:track:6dZms5gdDcCFvfuBzGPRDH",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 35386,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4AXlxpofniQO0rJrXuc3U5"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4AXlxpofniQO0rJrXuc3U5",
+                "id": "4AXlxpofniQO0rJrXuc3U5",
+                "name": "In This Temple As in The Hearts of Man For Whom He Saved The Earth",
+                "preview_url": "https://p.scdn.co/mp3-preview/ef78ef331cf4a49abd2fabf2535b97ee1b846c84?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 18,
+                "type": "track",
+                "uri": "spotify:track:4AXlxpofniQO0rJrXuc3U5",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 233986,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4tcxg3xWf4y0V6mTt1VSFo"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4tcxg3xWf4y0V6mTt1VSFo",
+                "id": "4tcxg3xWf4y0V6mTt1VSFo",
+                "name": "The Seer's Tower",
+                "preview_url": "https://p.scdn.co/mp3-preview/115425ea008f7f032abc11d0cfa6d48a2da59f20?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 19,
+                "type": "track",
+                "uri": "spotify:track:4tcxg3xWf4y0V6mTt1VSFo",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 422986,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5LLa7Xb6xfRVpRXgjyevvM"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5LLa7Xb6xfRVpRXgjyevvM",
+                "id": "5LLa7Xb6xfRVpRXgjyevvM",
+                "name": "The Tallest Man, the Broadest Shoulders Part I: The Great Frontier Part II: Come to Me Only With Playthings Now",
+                "preview_url": "https://p.scdn.co/mp3-preview/5fa7f193d2e29cae871a4ad6e513a6173754710f?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 20,
+                "type": "track",
+                "uri": "spotify:track:5LLa7Xb6xfRVpRXgjyevvM",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 46880,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0Hq2ZhF4uuDJheQBfsXU4p"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0Hq2ZhF4uuDJheQBfsXU4p",
+                "id": "0Hq2ZhF4uuDJheQBfsXU4p",
+                "name": "Riffs and Variations on a single note for Jelly Roll, Earl Hines, Louis Armstrong, Baby Dodds, and the King of Swing, to name a few",
+                "preview_url": "https://p.scdn.co/mp3-preview/562d403e8aeea04409898941d543c9b2afb82124?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 21,
+                "type": "track",
+                "uri": "spotify:track:0Hq2ZhF4uuDJheQBfsXU4p",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4MXUO7sVCaFgFjoTI5ox5c"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4MXUO7sVCaFgFjoTI5ox5c",
+                    "id": "4MXUO7sVCaFgFjoTI5ox5c",
+                    "name": "Sufjan Stevens",
+                    "type": "artist",
+                    "uri": "spotify:artist:4MXUO7sVCaFgFjoTI5ox5c"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 261385,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3zFy1R0QhiT3YMXTxV0KRd"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3zFy1R0QhiT3YMXTxV0KRd",
+                "id": "3zFy1R0QhiT3YMXTxV0KRd",
+                "name": "Out of Egypt, into the Great Laugh of Mankind, and I shake the dirt from my sandals as I run",
+                "preview_url": "https://p.scdn.co/mp3-preview/d3d601b78b2d17c9d03f53260b78b370d6099bd4?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 22,
+                "type": "track",
+                "uri": "spotify:track:3zFy1R0QhiT3YMXTxV0KRd",
+                "is_local": false
+              }
+            ]
+          },
+          "copyrights": [
+            {
+              "text": "2005 Asthmatic Kitty",
+              "type": "C"
+            },
+            {
+              "text": "2005 Asthmatic Kitty",
+              "type": "P"
+            }
+          ],
+          "external_ids": {
+            "upc": "656605892665"
+          },
+          "genres": [],
+          "label": "Asthmatic Kitty",
+          "popularity": 63
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:37:12Z",
+        "album": {
+          "album_type": "album",
+          "total_tracks": 10,
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/1uD1kdwTWH1DZQZqGKz6rY"
+          },
+          "href": "https://api.spotify.com/v1/albums/1uD1kdwTWH1DZQZqGKz6rY?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+          "id": "1uD1kdwTWH1DZQZqGKz6rY",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273e58724521fe7e84276b4c373",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e02e58724521fe7e84276b4c373",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00004851e58724521fe7e84276b4c373",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Jubilee",
+          "release_date": "2021-06-04",
+          "release_date_precision": "day",
+          "type": "album",
+          "uri": "spotify:album:1uD1kdwTWH1DZQZqGKz6rY",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+              },
+              "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+              "id": "7MoIc5s9KXolCBH1fy9kkw",
+              "name": "Japanese Breakfast",
+              "type": "artist",
+              "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+            }
+          ],
+          "tracks": {
+            "href": "https://api.spotify.com/v1/albums/1uD1kdwTWH1DZQZqGKz6rY/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 10,
+            "items": [
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 220316,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3zyqphgXvgHe436IMKeey3"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3zyqphgXvgHe436IMKeey3",
+                "id": "3zyqphgXvgHe436IMKeey3",
+                "name": "Paprika",
+                "preview_url": "https://p.scdn.co/mp3-preview/1e4e2206d7fc9e5378a5f4f0de11fc06758f14f2?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:3zyqphgXvgHe436IMKeey3",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 195370,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0dpyzcT3RMNNSd2xKBf35I"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0dpyzcT3RMNNSd2xKBf35I",
+                "id": "0dpyzcT3RMNNSd2xKBf35I",
+                "name": "Be Sweet",
+                "preview_url": "https://p.scdn.co/mp3-preview/27defb323f184658b473ee976fa71fd883440bff?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:0dpyzcT3RMNNSd2xKBf35I",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 218744,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0O4sIQ728ugLlwBVaxF8UM"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0O4sIQ728ugLlwBVaxF8UM",
+                "id": "0O4sIQ728ugLlwBVaxF8UM",
+                "name": "Kokomo, IN",
+                "preview_url": "https://p.scdn.co/mp3-preview/49a42317cfa8975cb6c559962960de951261ee12?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:0O4sIQ728ugLlwBVaxF8UM",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 219782,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5ksM8r8u4AjMwvtqUif9W1"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5ksM8r8u4AjMwvtqUif9W1",
+                "id": "5ksM8r8u4AjMwvtqUif9W1",
+                "name": "Slide Tackle",
+                "preview_url": "https://p.scdn.co/mp3-preview/e3d7139f9d8096d1305ddf15cb352f854e7a3e10?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:5ksM8r8u4AjMwvtqUif9W1",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 244691,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/33qgZ7mWvlH95efOGQqfzZ"
+                },
+                "href": "https://api.spotify.com/v1/tracks/33qgZ7mWvlH95efOGQqfzZ",
+                "id": "33qgZ7mWvlH95efOGQqfzZ",
+                "name": "Posing In Bondage",
+                "preview_url": "https://p.scdn.co/mp3-preview/2d3bc481b4fb75a3dc1375b3fb80458ab9ddf34e?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:33qgZ7mWvlH95efOGQqfzZ",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 187314,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5PV9b2F303FbivyOoKNo0k"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5PV9b2F303FbivyOoKNo0k",
+                "id": "5PV9b2F303FbivyOoKNo0k",
+                "name": "Sit",
+                "preview_url": "https://p.scdn.co/mp3-preview/c8d3962f85cea12ce86242976af3f0fa5909bd18?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:5PV9b2F303FbivyOoKNo0k",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 146184,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0EredcGoVUJTRiBLmwI0AO"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0EredcGoVUJTRiBLmwI0AO",
+                "id": "0EredcGoVUJTRiBLmwI0AO",
+                "name": "Savage Good Boy",
+                "preview_url": "https://p.scdn.co/mp3-preview/35d4171c245e8e9313106a78ad1b8a7d0fc938cf?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:0EredcGoVUJTRiBLmwI0AO",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 158358,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6AbCMuMMJbBcTtt2IaC0Wq"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6AbCMuMMJbBcTtt2IaC0Wq",
+                "id": "6AbCMuMMJbBcTtt2IaC0Wq",
+                "name": "In Hell",
+                "preview_url": "https://p.scdn.co/mp3-preview/9edeb998266b2269acd7a7f515259f26099f84d2?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:6AbCMuMMJbBcTtt2IaC0Wq",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 233591,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/11ordD2gD4DNi9n5sX2GxC"
+                },
+                "href": "https://api.spotify.com/v1/tracks/11ordD2gD4DNi9n5sX2GxC",
+                "id": "11ordD2gD4DNi9n5sX2GxC",
+                "name": "Tactics",
+                "preview_url": "https://p.scdn.co/mp3-preview/79fc4ee888dc1f48238f4703de54f1dffd67e115?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:11ordD2gD4DNi9n5sX2GxC",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7MoIc5s9KXolCBH1fy9kkw"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7MoIc5s9KXolCBH1fy9kkw",
+                    "id": "7MoIc5s9KXolCBH1fy9kkw",
+                    "name": "Japanese Breakfast",
+                    "type": "artist",
+                    "uri": "spotify:artist:7MoIc5s9KXolCBH1fy9kkw"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 398783,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/525BSr4N8jG8MpWbFTd6A9"
+                },
+                "href": "https://api.spotify.com/v1/tracks/525BSr4N8jG8MpWbFTd6A9",
+                "id": "525BSr4N8jG8MpWbFTd6A9",
+                "name": "Posing For Cars",
+                "preview_url": "https://p.scdn.co/mp3-preview/a90cb9ca6d172170f30e87a58a9887f1a31fd815?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:525BSr4N8jG8MpWbFTd6A9",
+                "is_local": false
+              }
+            ]
+          },
+          "copyrights": [
+            {
+              "text": "2021 Dead Oceans",
+              "type": "C"
+            },
+            {
+              "text": "2021 Dead Oceans",
+              "type": "P"
+            }
+          ],
+          "external_ids": {
+            "upc": "656605152561"
+          },
+          "genres": [],
+          "label": "Dead Oceans",
+          "popularity": 65
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:37:04Z",
+        "album": {
+          "album_type": "album",
+          "total_tracks": 9,
+          "available_markets": [
+            "AD",
+            "AL"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/1j3pIPXjLIFkp84OfVUsNT"
+          },
+          "href": "https://api.spotify.com/v1/albums/1j3pIPXjLIFkp84OfVUsNT?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+          "id": "1j3pIPXjLIFkp84OfVUsNT",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273262a1a1877d135af75d94198",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e02262a1a1877d135af75d94198",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00004851262a1a1877d135af75d94198",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Alvvays",
+          "release_date": "2014-07-21",
+          "release_date_precision": "day",
+          "type": "album",
+          "uri": "spotify:album:1j3pIPXjLIFkp84OfVUsNT",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+              },
+              "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+              "id": "3kzwYV3OCB010YfXMF0Avt",
+              "name": "Alvvays",
+              "type": "artist",
+              "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+            }
+          ],
+          "tracks": {
+            "href": "https://api.spotify.com/v1/albums/1j3pIPXjLIFkp84OfVUsNT/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 9,
+            "items": [
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 207640,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0GBG7b2BuF336A6lk6spGw"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0GBG7b2BuF336A6lk6spGw",
+                "id": "0GBG7b2BuF336A6lk6spGw",
+                "name": "Adult Diversion",
+                "preview_url": "https://p.scdn.co/mp3-preview/ad58313f7d36320a127a6563e2faff917ae79a4a?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:0GBG7b2BuF336A6lk6spGw",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 196560,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5GAB1X0AJq2EZjxXP9zMFt"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5GAB1X0AJq2EZjxXP9zMFt",
+                "id": "5GAB1X0AJq2EZjxXP9zMFt",
+                "name": "Archie, Marry Me",
+                "preview_url": "https://p.scdn.co/mp3-preview/fb178ea3c17b48fddaf35ee61ed3b9915ed073b4?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:5GAB1X0AJq2EZjxXP9zMFt",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 227240,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/08bHD16xTlOZmqPHo7r01d"
+                },
+                "href": "https://api.spotify.com/v1/tracks/08bHD16xTlOZmqPHo7r01d",
+                "id": "08bHD16xTlOZmqPHo7r01d",
+                "name": "Ones Who Love You",
+                "preview_url": "https://p.scdn.co/mp3-preview/41026ac7c9db191095406d7340a74aa4ba312434?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:08bHD16xTlOZmqPHo7r01d",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 228453,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6ltwQhB1VYzr7QLpJYwwXn"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6ltwQhB1VYzr7QLpJYwwXn",
+                "id": "6ltwQhB1VYzr7QLpJYwwXn",
+                "name": "Next of Kin",
+                "preview_url": "https://p.scdn.co/mp3-preview/4193233156152bd2d1bc773bcf7e1962b94b05fa?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:6ltwQhB1VYzr7QLpJYwwXn",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 227719,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/594B8EVF8pxMZDtS3aytHX"
+                },
+                "href": "https://api.spotify.com/v1/tracks/594B8EVF8pxMZDtS3aytHX",
+                "id": "594B8EVF8pxMZDtS3aytHX",
+                "name": "Party Police",
+                "preview_url": "https://p.scdn.co/mp3-preview/0d028f2fa0f8c9ed4d23220a75a100e213cd8647?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:594B8EVF8pxMZDtS3aytHX",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 271226,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3djNMrHZkcDs3jeTCtE0vy"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3djNMrHZkcDs3jeTCtE0vy",
+                "id": "3djNMrHZkcDs3jeTCtE0vy",
+                "name": "The Agency Group",
+                "preview_url": "https://p.scdn.co/mp3-preview/2a23547bae431aa23901a8e49677e8eb3124d736?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:3djNMrHZkcDs3jeTCtE0vy",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 176626,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3UVi58okVm2VsOeuSnqUOj"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3UVi58okVm2VsOeuSnqUOj",
+                "id": "3UVi58okVm2VsOeuSnqUOj",
+                "name": "Dives",
+                "preview_url": "https://p.scdn.co/mp3-preview/90fa1fa26b25de3af8aa19149d103dc284c128de?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:3UVi58okVm2VsOeuSnqUOj",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 199573,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/65mtOjEf0eYDb3YpdjrwMR"
+                },
+                "href": "https://api.spotify.com/v1/tracks/65mtOjEf0eYDb3YpdjrwMR",
+                "id": "65mtOjEf0eYDb3YpdjrwMR",
+                "name": "Atop a Cake",
+                "preview_url": "https://p.scdn.co/mp3-preview/01bcd2f17581a8e4a94e6443908e0bf5b5783421?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:65mtOjEf0eYDb3YpdjrwMR",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3kzwYV3OCB010YfXMF0Avt"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3kzwYV3OCB010YfXMF0Avt",
+                    "id": "3kzwYV3OCB010YfXMF0Avt",
+                    "name": "Alvvays",
+                    "type": "artist",
+                    "uri": "spotify:artist:3kzwYV3OCB010YfXMF0Avt"
+                  }
+                ],
+                "available_markets": [
+                  "AD",
+                  "AL"
+                ],
+                "disc_number": 1,
+                "duration_ms": 238760,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1VBAlyNYofCEHAKBt8jWEy"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1VBAlyNYofCEHAKBt8jWEy",
+                "id": "1VBAlyNYofCEHAKBt8jWEy",
+                "name": "Red Planet",
+                "preview_url": "https://p.scdn.co/mp3-preview/18b7d43efc0f8f7ebb25125745ad95ccbf4c8c58?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:1VBAlyNYofCEHAKBt8jWEy",
+                "is_local": false
+              }
+            ]
+          },
+          "copyrights": [
+            {
+              "text": "2014 Polyvinyl Records, under exclusive license to Transgressive Records Ltd.",
+              "type": "C"
+            },
+            {
+              "text": "2014 Polyvinyl Records, under exclusive license to Transgressive Records Ltd.",
+              "type": "P"
+            }
+          ],
+          "external_ids": {
+            "upc": "5414939719776"
+          },
+          "genres": [],
+          "label": "Transgressive",
+          "popularity": 52
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:36:57Z",
+        "album": {
+          "album_type": "album",
+          "total_tracks": 13,
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/5rcJ5xCMYYLCgGilFDKRZl"
+          },
+          "href": "https://api.spotify.com/v1/albums/5rcJ5xCMYYLCgGilFDKRZl?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+          "id": "5rcJ5xCMYYLCgGilFDKRZl",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b27308afb5dc296054856909f8fd",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e0208afb5dc296054856909f8fd",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000485108afb5dc296054856909f8fd",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Stranger in the Alps (Deluxe Edition)",
+          "release_date": "2018-10-02",
+          "release_date_precision": "day",
+          "type": "album",
+          "uri": "spotify:album:5rcJ5xCMYYLCgGilFDKRZl",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+              },
+              "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+              "id": "1r1uxoy19fzMxunt3ONAkG",
+              "name": "Phoebe Bridgers",
+              "type": "artist",
+              "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+            }
+          ],
+          "tracks": {
+            "href": "https://api.spotify.com/v1/albums/5rcJ5xCMYYLCgGilFDKRZl/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 13,
+            "items": [
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 323711,
+                "explicit": true,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/2zMjyH4hqFkTNjlqZWK3YL"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2zMjyH4hqFkTNjlqZWK3YL",
+                "id": "2zMjyH4hqFkTNjlqZWK3YL",
+                "name": "Smoke Signals",
+                "preview_url": "https://p.scdn.co/mp3-preview/13c2eba1ac1237c22c8844f16cbc1f0aa6dcfddb?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:2zMjyH4hqFkTNjlqZWK3YL",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 229760,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/25Syi9wnfn6ZGAmiOBypPq"
+                },
+                "href": "https://api.spotify.com/v1/tracks/25Syi9wnfn6ZGAmiOBypPq",
+                "id": "25Syi9wnfn6ZGAmiOBypPq",
+                "name": "Motion Sickness",
+                "preview_url": "https://p.scdn.co/mp3-preview/3f1548fc575756e1e3eaa36653637e1172253646?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:25Syi9wnfn6ZGAmiOBypPq",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 232373,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4GvdsVns332wQ3JsWAg2OV"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4GvdsVns332wQ3JsWAg2OV",
+                "id": "4GvdsVns332wQ3JsWAg2OV",
+                "name": "Funeral",
+                "preview_url": "https://p.scdn.co/mp3-preview/22030fbfe561341790288df8cb58ea64cbd62a6e?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:4GvdsVns332wQ3JsWAg2OV",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 198532,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0in4mX3ZUJNmBIyzuQoayG"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0in4mX3ZUJNmBIyzuQoayG",
+                "id": "0in4mX3ZUJNmBIyzuQoayG",
+                "name": "Demi Moore",
+                "preview_url": "https://p.scdn.co/mp3-preview/a492380bcf67a1b91153836fc30fc4e96d144b6a?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:0in4mX3ZUJNmBIyzuQoayG",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 305000,
+                "explicit": true,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/21uFPefbgeR3QLVJWATlrr"
+                },
+                "href": "https://api.spotify.com/v1/tracks/21uFPefbgeR3QLVJWATlrr",
+                "id": "21uFPefbgeR3QLVJWATlrr",
+                "name": "Scott Street",
+                "preview_url": "https://p.scdn.co/mp3-preview/fd8d5d04d07f42496e1b64181a3405a130c2c0a2?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:21uFPefbgeR3QLVJWATlrr",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 189213,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0LuyoQtrplnft7hoVf35QE"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0LuyoQtrplnft7hoVf35QE",
+                "id": "0LuyoQtrplnft7hoVf35QE",
+                "name": "Killer",
+                "preview_url": "https://p.scdn.co/mp3-preview/80b20b472625aec4b019c9396048eebfb1ea2c97?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:0LuyoQtrplnft7hoVf35QE",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 247306,
+                "explicit": true,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5ASPgiUgnrHCfwnJlh04ZR"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5ASPgiUgnrHCfwnJlh04ZR",
+                "id": "5ASPgiUgnrHCfwnJlh04ZR",
+                "name": "Georgia",
+                "preview_url": "https://p.scdn.co/mp3-preview/0e405522bf839b10f8b67da325821ef91cb084a6?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:5ASPgiUgnrHCfwnJlh04ZR",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 282000,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0X9dI1bvADrtAz9Uptharo"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0X9dI1bvADrtAz9Uptharo",
+                "id": "0X9dI1bvADrtAz9Uptharo",
+                "name": "Chelsea",
+                "preview_url": "https://p.scdn.co/mp3-preview/05ccb4163a6c4d1b89da94fd916d36e52fc4f989?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:0X9dI1bvADrtAz9Uptharo",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 199080,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6BbvPVwcZM0KO8XOv0wkcs"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6BbvPVwcZM0KO8XOv0wkcs",
+                "id": "6BbvPVwcZM0KO8XOv0wkcs",
+                "name": "Would You Rather",
+                "preview_url": "https://p.scdn.co/mp3-preview/69763b696611f9a1d288a479102bde10762b5ace?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:6BbvPVwcZM0KO8XOv0wkcs",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 417493,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3BGzKSHUVJawX3x2z6W7js"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3BGzKSHUVJawX3x2z6W7js",
+                "id": "3BGzKSHUVJawX3x2z6W7js",
+                "name": "You Missed My Heart",
+                "preview_url": "https://p.scdn.co/mp3-preview/4cd449c29e401df2c0e902e238bedc24c7f09ad8?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:3BGzKSHUVJawX3x2z6W7js",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 33813,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4VmQEkVgdTcjn2ksGRZMAR"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4VmQEkVgdTcjn2ksGRZMAR",
+                "id": "4VmQEkVgdTcjn2ksGRZMAR",
+                "name": "Smoke Signals (Reprise)",
+                "preview_url": "https://p.scdn.co/mp3-preview/299c3d4b1ccbaa909ce314a14c7d147aae91dcd4?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 11,
+                "type": "track",
+                "uri": "spotify:track:4VmQEkVgdTcjn2ksGRZMAR",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 166133,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0QTdNeshBSmLmpgHP7R5iV"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0QTdNeshBSmLmpgHP7R5iV",
+                "id": "0QTdNeshBSmLmpgHP7R5iV",
+                "name": "It'll All Work Out (Bonus Track)",
+                "preview_url": "https://p.scdn.co/mp3-preview/47ae631f940324449c177f40e49ef4763804539a?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 12,
+                "type": "track",
+                "uri": "spotify:track:0QTdNeshBSmLmpgHP7R5iV",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1r1uxoy19fzMxunt3ONAkG"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1r1uxoy19fzMxunt3ONAkG",
+                    "id": "1r1uxoy19fzMxunt3ONAkG",
+                    "name": "Phoebe Bridgers",
+                    "type": "artist",
+                    "uri": "spotify:artist:1r1uxoy19fzMxunt3ONAkG"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 264452,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/7xwyvVWewy01DhdgEt2WWq"
+                },
+                "href": "https://api.spotify.com/v1/tracks/7xwyvVWewy01DhdgEt2WWq",
+                "id": "7xwyvVWewy01DhdgEt2WWq",
+                "name": "Motion Sickness (Demo - Bonus Track)",
+                "preview_url": "https://p.scdn.co/mp3-preview/9698ec85854c37bf00e587f3e660d78630f1047a?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 13,
+                "type": "track",
+                "uri": "spotify:track:7xwyvVWewy01DhdgEt2WWq",
+                "is_local": false
+              }
+            ]
+          },
+          "copyrights": [
+            {
+              "text": "2017 Dead Oceans",
+              "type": "C"
+            },
+            {
+              "text": "2017 Dead Oceans",
+              "type": "P"
+            }
+          ],
+          "external_ids": {
+            "upc": "656605379852"
+          },
+          "genres": [],
+          "label": "Dead Oceans",
+          "popularity": 74
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:36:49Z",
+        "album": {
+          "album_type": "album",
+          "total_tracks": 10,
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/5pp7px9MITK2MqeFVbRWGo"
+          },
+          "href": "https://api.spotify.com/v1/albums/5pp7px9MITK2MqeFVbRWGo?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+          "id": "5pp7px9MITK2MqeFVbRWGo",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273cc0e4e5c8a618daf90693b57",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e02cc0e4e5c8a618daf90693b57",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00004851cc0e4e5c8a618daf90693b57",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Two Hands",
+          "release_date": "2019-10-11",
+          "release_date_precision": "day",
+          "type": "album",
+          "uri": "spotify:album:5pp7px9MITK2MqeFVbRWGo",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+              },
+              "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+              "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+              "name": "Big Thief",
+              "type": "artist",
+              "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+            }
+          ],
+          "tracks": {
+            "href": "https://api.spotify.com/v1/albums/5pp7px9MITK2MqeFVbRWGo/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 10,
+            "items": [
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 123320,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5kfH55pli3gCkprV3OJerd"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5kfH55pli3gCkprV3OJerd",
+                "id": "5kfH55pli3gCkprV3OJerd",
+                "name": "Rock and Sing",
+                "preview_url": "https://p.scdn.co/mp3-preview/001d11a2486893a9ddd007754a336c9e6146def8?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:5kfH55pli3gCkprV3OJerd",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 211560,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3uVlbYb1nUwwcYziaJk9LD"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3uVlbYb1nUwwcYziaJk9LD",
+                "id": "3uVlbYb1nUwwcYziaJk9LD",
+                "name": "Forgotten Eyes",
+                "preview_url": "https://p.scdn.co/mp3-preview/16a13ace1800daddc8a512bb83a19801b5672a49?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:3uVlbYb1nUwwcYziaJk9LD",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 256093,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0ezWGI9iDPKTgV078UG7qf"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0ezWGI9iDPKTgV078UG7qf",
+                "id": "0ezWGI9iDPKTgV078UG7qf",
+                "name": "The Toy",
+                "preview_url": "https://p.scdn.co/mp3-preview/4be3e7e2f2bcebabf42dd7f7dc0555fa80aa08c0?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:0ezWGI9iDPKTgV078UG7qf",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 232466,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/75Y8OgF0HypPrCKcbYu3no"
+                },
+                "href": "https://api.spotify.com/v1/tracks/75Y8OgF0HypPrCKcbYu3no",
+                "id": "75Y8OgF0HypPrCKcbYu3no",
+                "name": "Two Hands",
+                "preview_url": "https://p.scdn.co/mp3-preview/16e4ba12d8c01f0b7f375685960773e7e3618ccc?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:75Y8OgF0HypPrCKcbYu3no",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 202360,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/7jpyzblcTVwcPWk31GwUmL"
+                },
+                "href": "https://api.spotify.com/v1/tracks/7jpyzblcTVwcPWk31GwUmL",
+                "id": "7jpyzblcTVwcPWk31GwUmL",
+                "name": "Those Girls",
+                "preview_url": "https://p.scdn.co/mp3-preview/30a7089f790de326d8260d2c06fbeaef2ee5c09d?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:7jpyzblcTVwcPWk31GwUmL",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 193506,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/79zOjwivNbq4XVaWufOyvu"
+                },
+                "href": "https://api.spotify.com/v1/tracks/79zOjwivNbq4XVaWufOyvu",
+                "id": "79zOjwivNbq4XVaWufOyvu",
+                "name": "Shoulders",
+                "preview_url": "https://p.scdn.co/mp3-preview/5b9f9def50967e8d8ce200b26d73605451340c34?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:79zOjwivNbq4XVaWufOyvu",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 367093,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/7lrhugjSbiImrNSLIFIq0c"
+                },
+                "href": "https://api.spotify.com/v1/tracks/7lrhugjSbiImrNSLIFIq0c",
+                "id": "7lrhugjSbiImrNSLIFIq0c",
+                "name": "Not",
+                "preview_url": "https://p.scdn.co/mp3-preview/162540491b803bc33e4e5378858bf3b2131efa3c?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:7lrhugjSbiImrNSLIFIq0c",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 282320,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5dW8gOPZsZRQOzjdmcOREc"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5dW8gOPZsZRQOzjdmcOREc",
+                "id": "5dW8gOPZsZRQOzjdmcOREc",
+                "name": "Wolf",
+                "preview_url": "https://p.scdn.co/mp3-preview/8aee2af0605f48e2ab9dde83b6aeedd8bed31e78?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:5dW8gOPZsZRQOzjdmcOREc",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 294160,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3i6UKQvMXGKXMr2Xwq3KXs"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3i6UKQvMXGKXMr2Xwq3KXs",
+                "id": "3i6UKQvMXGKXMr2Xwq3KXs",
+                "name": "Replaced",
+                "preview_url": "https://p.scdn.co/mp3-preview/38d4377a04eaebe74c88807154bf116b0fdf56d5?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:3i6UKQvMXGKXMr2Xwq3KXs",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5QdyldG4Fl4TPiOIeMNpBZ"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5QdyldG4Fl4TPiOIeMNpBZ",
+                    "id": "5QdyldG4Fl4TPiOIeMNpBZ",
+                    "name": "Big Thief",
+                    "type": "artist",
+                    "uri": "spotify:artist:5QdyldG4Fl4TPiOIeMNpBZ"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AU"
+                ],
+                "disc_number": 1,
+                "duration_ms": 216253,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/77GvAE5Ui2dwRZNEgsGoSd"
+                },
+                "href": "https://api.spotify.com/v1/tracks/77GvAE5Ui2dwRZNEgsGoSd",
+                "id": "77GvAE5Ui2dwRZNEgsGoSd",
+                "name": "Cut My Hair",
+                "preview_url": "https://p.scdn.co/mp3-preview/ccd6fe4fe91d09ff79a3d08c1fae760c6a20029a?cid=9950ac751e34487dbbe027c4fd7f8e99",
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:77GvAE5Ui2dwRZNEgsGoSd",
+                "is_local": false
+              }
+            ]
+          },
+          "copyrights": [
+            {
+              "text": "2019 Big Thief under exclusive license to 4AD Ltd",
+              "type": "C"
+            },
+            {
+              "text": "2019 Big Thief under exclusive license to 4AD Ltd",
+              "type": "P"
+            }
+          ],
+          "external_ids": {
+            "upc": "191400018068"
+          },
+          "genres": [],
+          "label": "4AD",
+          "popularity": 64
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:24:04Z",
+        "album": {
+          "album_type": "album",
+          "total_tracks": 14,
+          "available_markets": [
+            "AR",
+            "AT"
+          ],
+          "external_urls": {
+            "spotify": "https://open.spotify.com/album/1F8y2bg9V9nRoy8zuxo3Jt"
+          },
+          "href": "https://api.spotify.com/v1/albums/1F8y2bg9V9nRoy8zuxo3Jt?locale=en-GB%2Cen-US%3Bq%3D0.9%2Cen%3Bq%3D0.8",
+          "id": "1F8y2bg9V9nRoy8zuxo3Jt",
+          "images": [
+            {
+              "url": "https://i.scdn.co/image/ab67616d0000b273852aaa233e122f1dbfefcf00",
+              "height": 640,
+              "width": 640
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00001e02852aaa233e122f1dbfefcf00",
+              "height": 300,
+              "width": 300
+            },
+            {
+              "url": "https://i.scdn.co/image/ab67616d00004851852aaa233e122f1dbfefcf00",
+              "height": 64,
+              "width": 64
+            }
+          ],
+          "name": "Heligoland",
+          "release_date": "2010-02-08",
+          "release_date_precision": "day",
+          "type": "album",
+          "uri": "spotify:album:1F8y2bg9V9nRoy8zuxo3Jt",
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+              },
+              "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+              "id": "6FXMGgJwohJLUSr5nVlf9X",
+              "name": "Massive Attack",
+              "type": "artist",
+              "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+            }
+          ],
+          "tracks": {
+            "href": "https://api.spotify.com/v1/albums/1F8y2bg9V9nRoy8zuxo3Jt/tracks?offset=0&limit=50&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+            "limit": 50,
+            "next": null,
+            "offset": 0,
+            "previous": null,
+            "total": 14,
+            "items": [
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/3and7uje1nuMnKJczCKox9"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/3and7uje1nuMnKJczCKox9",
+                    "id": "3and7uje1nuMnKJczCKox9",
+                    "name": "Tunde Adebimpe",
+                    "type": "artist",
+                    "uri": "spotify:artist:3and7uje1nuMnKJczCKox9"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 403533,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/2ttOFglLynQA0J1B7RhlgX"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2ttOFglLynQA0J1B7RhlgX",
+                "id": "2ttOFglLynQA0J1B7RhlgX",
+                "name": "Pray For Rain",
+                "preview_url": null,
+                "track_number": 1,
+                "type": "track",
+                "uri": "spotify:track:2ttOFglLynQA0J1B7RhlgX",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6sKLLGj7SqbP2qDBdEOoZ6"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6sKLLGj7SqbP2qDBdEOoZ6",
+                    "id": "6sKLLGj7SqbP2qDBdEOoZ6",
+                    "name": "Martina Topley-Bird",
+                    "type": "artist",
+                    "uri": "spotify:artist:6sKLLGj7SqbP2qDBdEOoZ6"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 319692,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3vpzJwxVjwcbuqPclqOX9I"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3vpzJwxVjwcbuqPclqOX9I",
+                "id": "3vpzJwxVjwcbuqPclqOX9I",
+                "name": "Babel",
+                "preview_url": null,
+                "track_number": 2,
+                "type": "track",
+                "uri": "spotify:track:3vpzJwxVjwcbuqPclqOX9I",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/2ieAXAuLe6qQ3RJsqCxpoC"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/2ieAXAuLe6qQ3RJsqCxpoC",
+                    "id": "2ieAXAuLe6qQ3RJsqCxpoC",
+                    "name": "Horace Andy",
+                    "type": "artist",
+                    "uri": "spotify:artist:2ieAXAuLe6qQ3RJsqCxpoC"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 316627,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/1r9mGafUiSgumJoRqyLrSt"
+                },
+                "href": "https://api.spotify.com/v1/tracks/1r9mGafUiSgumJoRqyLrSt",
+                "id": "1r9mGafUiSgumJoRqyLrSt",
+                "name": "Splitting The Atom",
+                "preview_url": null,
+                "track_number": 3,
+                "type": "track",
+                "uri": "spotify:track:1r9mGafUiSgumJoRqyLrSt",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/2ieAXAuLe6qQ3RJsqCxpoC"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/2ieAXAuLe6qQ3RJsqCxpoC",
+                    "id": "2ieAXAuLe6qQ3RJsqCxpoC",
+                    "name": "Horace Andy",
+                    "type": "artist",
+                    "uri": "spotify:artist:2ieAXAuLe6qQ3RJsqCxpoC"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 326680,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/3zkPvQZx6ZflYZtw6PZ82X"
+                },
+                "href": "https://api.spotify.com/v1/tracks/3zkPvQZx6ZflYZtw6PZ82X",
+                "id": "3zkPvQZx6ZflYZtw6PZ82X",
+                "name": "Girl I Love You",
+                "preview_url": null,
+                "track_number": 4,
+                "type": "track",
+                "uri": "spotify:track:3zkPvQZx6ZflYZtw6PZ82X",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6sKLLGj7SqbP2qDBdEOoZ6"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6sKLLGj7SqbP2qDBdEOoZ6",
+                    "id": "6sKLLGj7SqbP2qDBdEOoZ6",
+                    "name": "Martina Topley-Bird",
+                    "type": "artist",
+                    "uri": "spotify:artist:6sKLLGj7SqbP2qDBdEOoZ6"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 204800,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/5HZrnSHCqaazNzr5w1enKG"
+                },
+                "href": "https://api.spotify.com/v1/tracks/5HZrnSHCqaazNzr5w1enKG",
+                "id": "5HZrnSHCqaazNzr5w1enKG",
+                "name": "Psyche",
+                "preview_url": null,
+                "track_number": 5,
+                "type": "track",
+                "uri": "spotify:track:5HZrnSHCqaazNzr5w1enKG",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/2j3K3e7Jnnmd2KwlFgCC5u"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/2j3K3e7Jnnmd2KwlFgCC5u",
+                    "id": "2j3K3e7Jnnmd2KwlFgCC5u",
+                    "name": "Guy Garvey",
+                    "type": "artist",
+                    "uri": "spotify:artist:2j3K3e7Jnnmd2KwlFgCC5u"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 330324,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6zk1khryPZPj0fwcw4PoRO"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6zk1khryPZPj0fwcw4PoRO",
+                "id": "6zk1khryPZPj0fwcw4PoRO",
+                "name": "Flat Of The Blade",
+                "preview_url": null,
+                "track_number": 6,
+                "type": "track",
+                "uri": "spotify:track:6zk1khryPZPj0fwcw4PoRO",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7zS53Xa6sVgfoh00kckgyV"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7zS53Xa6sVgfoh00kckgyV",
+                    "id": "7zS53Xa6sVgfoh00kckgyV",
+                    "name": "Hope Sandoval",
+                    "type": "artist",
+                    "uri": "spotify:artist:7zS53Xa6sVgfoh00kckgyV"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 297774,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/2BndJYJQ17UcEeUFJP5JmY"
+                },
+                "href": "https://api.spotify.com/v1/tracks/2BndJYJQ17UcEeUFJP5JmY",
+                "id": "2BndJYJQ17UcEeUFJP5JmY",
+                "name": "Paradise Circus",
+                "preview_url": null,
+                "track_number": 7,
+                "type": "track",
+                "uri": "spotify:track:2BndJYJQ17UcEeUFJP5JmY",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 290962,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6nS5Vfs6Kv75ZFUa2MKvaz"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6nS5Vfs6Kv75ZFUa2MKvaz",
+                "id": "6nS5Vfs6Kv75ZFUa2MKvaz",
+                "name": "Rush Minute",
+                "preview_url": null,
+                "track_number": 8,
+                "type": "track",
+                "uri": "spotify:track:6nS5Vfs6Kv75ZFUa2MKvaz",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/0O98jlCaPzvsoei6U5jfEL"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/0O98jlCaPzvsoei6U5jfEL",
+                    "id": "0O98jlCaPzvsoei6U5jfEL",
+                    "name": "Damon Albarn",
+                    "type": "artist",
+                    "uri": "spotify:artist:0O98jlCaPzvsoei6U5jfEL"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 223766,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4MeckCCA1IaxipPl3y1agG"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4MeckCCA1IaxipPl3y1agG",
+                "id": "4MeckCCA1IaxipPl3y1agG",
+                "name": "Saturday Come Slow",
+                "preview_url": null,
+                "track_number": 9,
+                "type": "track",
+                "uri": "spotify:track:4MeckCCA1IaxipPl3y1agG",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 471528,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/4y6aEDPYJ2ObOWoDL84W9u"
+                },
+                "href": "https://api.spotify.com/v1/tracks/4y6aEDPYJ2ObOWoDL84W9u",
+                "id": "4y6aEDPYJ2ObOWoDL84W9u",
+                "name": "Atlas Air",
+                "preview_url": null,
+                "track_number": 10,
+                "type": "track",
+                "uri": "spotify:track:4y6aEDPYJ2ObOWoDL84W9u",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7zS53Xa6sVgfoh00kckgyV"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7zS53Xa6sVgfoh00kckgyV",
+                    "id": "7zS53Xa6sVgfoh00kckgyV",
+                    "name": "Hope Sandoval",
+                    "type": "artist",
+                    "uri": "spotify:artist:7zS53Xa6sVgfoh00kckgyV"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/27LGatz1m8aJ7ZaVVWEphc"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/27LGatz1m8aJ7ZaVVWEphc",
+                    "id": "27LGatz1m8aJ7ZaVVWEphc",
+                    "name": "Gui Boratto",
+                    "type": "artist",
+                    "uri": "spotify:artist:27LGatz1m8aJ7ZaVVWEphc"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 487574,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/6rU0dLXyWbXqti69nrQP4H"
+                },
+                "href": "https://api.spotify.com/v1/tracks/6rU0dLXyWbXqti69nrQP4H",
+                "id": "6rU0dLXyWbXqti69nrQP4H",
+                "name": "Paradise Circus - Gui Boratto Remix",
+                "preview_url": null,
+                "track_number": 11,
+                "type": "track",
+                "uri": "spotify:track:6rU0dLXyWbXqti69nrQP4H",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/2j3K3e7Jnnmd2KwlFgCC5u"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/2j3K3e7Jnnmd2KwlFgCC5u",
+                    "id": "2j3K3e7Jnnmd2KwlFgCC5u",
+                    "name": "Guy Garvey",
+                    "type": "artist",
+                    "uri": "spotify:artist:2j3K3e7Jnnmd2KwlFgCC5u"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/1tcgfoMTT1szjUeaikxRjA"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/1tcgfoMTT1szjUeaikxRjA",
+                    "id": "1tcgfoMTT1szjUeaikxRjA",
+                    "name": "Ryuichi Sakamoto",
+                    "type": "artist",
+                    "uri": "spotify:artist:1tcgfoMTT1szjUeaikxRjA"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/5Rv28BOArteQRhL8YUYgD5"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/5Rv28BOArteQRhL8YUYgD5",
+                    "id": "5Rv28BOArteQRhL8YUYgD5",
+                    "name": "Yukihiro Takahashi",
+                    "type": "artist",
+                    "uri": "spotify:artist:5Rv28BOArteQRhL8YUYgD5"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 294120,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/28koK0b9NRDZ8Jo5mJy5Za"
+                },
+                "href": "https://api.spotify.com/v1/tracks/28koK0b9NRDZ8Jo5mJy5Za",
+                "id": "28koK0b9NRDZ8Jo5mJy5Za",
+                "name": "Fatalism - Ryuchi Sakamoto & Yukihiro Takahashi Remix",
+                "preview_url": null,
+                "track_number": 12,
+                "type": "track",
+                "uri": "spotify:track:28koK0b9NRDZ8Jo5mJy5Za",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/2ieAXAuLe6qQ3RJsqCxpoC"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/2ieAXAuLe6qQ3RJsqCxpoC",
+                    "id": "2ieAXAuLe6qQ3RJsqCxpoC",
+                    "name": "Horace Andy",
+                    "type": "artist",
+                    "uri": "spotify:artist:2ieAXAuLe6qQ3RJsqCxpoC"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/4vB9fhUf2wybKWZe8jfJoL"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/4vB9fhUf2wybKWZe8jfJoL",
+                    "id": "4vB9fhUf2wybKWZe8jfJoL",
+                    "name": "She is Danger",
+                    "type": "artist",
+                    "uri": "spotify:artist:4vB9fhUf2wybKWZe8jfJoL"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 300513,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0ZV4E9Ko7pQW278jRJ5o4J"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0ZV4E9Ko7pQW278jRJ5o4J",
+                "id": "0ZV4E9Ko7pQW278jRJ5o4J",
+                "name": "Girl I Love You - She Is Danger Remix",
+                "preview_url": null,
+                "track_number": 13,
+                "type": "track",
+                "uri": "spotify:track:0ZV4E9Ko7pQW278jRJ5o4J",
+                "is_local": false
+              },
+              {
+                "artists": [
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                    "id": "6FXMGgJwohJLUSr5nVlf9X",
+                    "name": "Massive Attack",
+                    "type": "artist",
+                    "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/7zS53Xa6sVgfoh00kckgyV"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/7zS53Xa6sVgfoh00kckgyV",
+                    "id": "7zS53Xa6sVgfoh00kckgyV",
+                    "name": "Hope Sandoval",
+                    "type": "artist",
+                    "uri": "spotify:artist:7zS53Xa6sVgfoh00kckgyV"
+                  },
+                  {
+                    "external_urls": {
+                      "spotify": "https://open.spotify.com/artist/68Wb5Pcy71lLaKdIB6cBA5"
+                    },
+                    "href": "https://api.spotify.com/v1/artists/68Wb5Pcy71lLaKdIB6cBA5",
+                    "id": "68Wb5Pcy71lLaKdIB6cBA5",
+                    "name": "Breakage",
+                    "type": "artist",
+                    "uri": "spotify:artist:68Wb5Pcy71lLaKdIB6cBA5"
+                  }
+                ],
+                "available_markets": [
+                  "AR",
+                  "AT"
+                ],
+                "disc_number": 1,
+                "duration_ms": 284781,
+                "explicit": false,
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/track/0ki5EwphQNTH3Tw02VtCRC"
+                },
+                "href": "https://api.spotify.com/v1/tracks/0ki5EwphQNTH3Tw02VtCRC",
+                "id": "0ki5EwphQNTH3Tw02VtCRC",
+                "name": "Paradise Circus - Breakage's Tight Rope Remix",
+                "preview_url": null,
+                "track_number": 14,
+                "type": "track",
+                "uri": "spotify:track:0ki5EwphQNTH3Tw02VtCRC",
+                "is_local": false
+              }
+            ]
+          },
+          "copyrights": [
+            {
+              "text": "© 2010 Virgin Records Limited",
+              "type": "C"
+            },
+            {
+              "text": "℗ 2010 Virgin Records Limited",
+              "type": "P"
+            }
+          ],
+          "external_ids": {
+            "upc": "05099960946751"
+          },
+          "genres": [],
+          "label": "Virgin Records",
+          "popularity": 65
+        }
+      }
+    ],
+    "limit": 50,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 7
+  }
+}

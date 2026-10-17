@@ -1,0 +1,433 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000006/tracks?offset=0&limit=100",
+  "status": 200,
+  "headers": {
+    "cache-control": "public, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000006/tracks?offset=0&limit=100&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "items": [
+      {
+        "added_at": "2026-10-17T14:23:41Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": null,
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/49MNmJhZQewjt06rpwp6QR",
+            "id": "49MNmJhZQewjt06rpwp6QR",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2732fcb0a3c7a66e516b11cd26e",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e022fcb0a3c7a66e516b11cd26e",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048512fcb0a3c7a66e516b11cd26e",
+                "width": 64
+              }
+            ],
+            "name": "Mezzanine",
+            "release_date": "1998-01-01",
+            "release_date_precision": "day",
+            "uri": "spotify:album:49MNmJhZQewjt06rpwp6QR",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                },
+                "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                "id": "6FXMGgJwohJLUSr5nVlf9X",
+                "name": "Massive Attack",
+                "type": "artist",
+                "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/49MNmJhZQewjt06rpwp6QR"
+            },
+            "total_tracks": 11
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+              },
+              "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+              "id": "6FXMGgJwohJLUSr5nVlf9X",
+              "name": "Massive Attack",
+              "type": "artist",
+              "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/791Z3924aa619hZ3xsOJEx"
+              },
+              "href": "https://api.spotify.com/v1/artists/791Z3924aa619hZ3xsOJEx",
+              "id": "791Z3924aa619hZ3xsOJEx",
+              "name": "Elizabeth Fraser",
+              "type": "artist",
+              "uri": "spotify:artist:791Z3924aa619hZ3xsOJEx"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 330773,
+          "external_ids": {
+            "isrc": "GBAAA9800322"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/67Hna13dNDkZvBpTXRIaOJ"
+          },
+          "href": "https://api.spotify.com/v1/tracks/67Hna13dNDkZvBpTXRIaOJ",
+          "id": "67Hna13dNDkZvBpTXRIaOJ",
+          "name": "Teardrop",
+          "popularity": 77,
+          "uri": "spotify:track:67Hna13dNDkZvBpTXRIaOJ",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": null,
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/49MNmJhZQewjt06rpwp6QR",
+            "id": "49MNmJhZQewjt06rpwp6QR",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b2732fcb0a3c7a66e516b11cd26e",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e022fcb0a3c7a66e516b11cd26e",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d000048512fcb0a3c7a66e516b11cd26e",
+                "width": 64
+              }
+            ],
+            "name": "Mezzanine",
+            "release_date": "1998-01-01",
+            "release_date_precision": "day",
+            "uri": "spotify:album:49MNmJhZQewjt06rpwp6QR",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                },
+                "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                "id": "6FXMGgJwohJLUSr5nVlf9X",
+                "name": "Massive Attack",
+                "type": "artist",
+                "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/49MNmJhZQewjt06rpwp6QR"
+            },
+            "total_tracks": 11
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+              },
+              "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+              "id": "6FXMGgJwohJLUSr5nVlf9X",
+              "name": "Massive Attack",
+              "type": "artist",
+              "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/791Z3924aa619hZ3xsOJEx"
+              },
+              "href": "https://api.spotify.com/v1/artists/791Z3924aa619hZ3xsOJEx",
+              "id": "791Z3924aa619hZ3xsOJEx",
+              "name": "Elizabeth Fraser",
+              "type": "artist",
+              "uri": "spotify:artist:791Z3924aa619hZ3xsOJEx"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 330773,
+          "external_ids": {
+            "isrc": "GBAAA9800322"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/67Hna13dNDkZvBpTXRIaOJ"
+          },
+          "href": "https://api.spotify.com/v1/tracks/67Hna13dNDkZvBpTXRIaOJ",
+          "id": "67Hna13dNDkZvBpTXRIaOJ",
+          "name": "Teardrop",
+          "popularity": 77,
+          "uri": "spotify:track:67Hna13dNDkZvBpTXRIaOJ",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:23:42Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": null,
+          "available_markets": [
+            "AR",
+            "AT"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AT"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/1F8y2bg9V9nRoy8zuxo3Jt",
+            "id": "1F8y2bg9V9nRoy8zuxo3Jt",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273852aaa233e122f1dbfefcf00",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02852aaa233e122f1dbfefcf00",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851852aaa233e122f1dbfefcf00",
+                "width": 64
+              }
+            ],
+            "name": "Heligoland",
+            "release_date": "2010-02-08",
+            "release_date_precision": "day",
+            "uri": "spotify:album:1F8y2bg9V9nRoy8zuxo3Jt",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                },
+                "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                "id": "6FXMGgJwohJLUSr5nVlf9X",
+                "name": "Massive Attack",
+                "type": "artist",
+                "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1F8y2bg9V9nRoy8zuxo3Jt"
+            },
+            "total_tracks": 14
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+              },
+              "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+              "id": "6FXMGgJwohJLUSr5nVlf9X",
+              "name": "Massive Attack",
+              "type": "artist",
+              "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7zS53Xa6sVgfoh00kckgyV"
+              },
+              "href": "https://api.spotify.com/v1/artists/7zS53Xa6sVgfoh00kckgyV",
+              "id": "7zS53Xa6sVgfoh00kckgyV",
+              "name": "Hope Sandoval",
+              "type": "artist",
+              "uri": "spotify:artist:7zS53Xa6sVgfoh00kckgyV"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 7,
+          "duration_ms": 297774,
+          "external_ids": {
+            "isrc": "GBAAA0900963"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2BndJYJQ17UcEeUFJP5JmY"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2BndJYJQ17UcEeUFJP5JmY",
+          "id": "2BndJYJQ17UcEeUFJP5JmY",
+          "name": "Paradise Circus",
+          "popularity": 68,
+          "uri": "spotify:track:2BndJYJQ17UcEeUFJP5JmY",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": null,
+          "available_markets": [
+            "AR",
+            "AT"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AT"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/1F8y2bg9V9nRoy8zuxo3Jt",
+            "id": "1F8y2bg9V9nRoy8zuxo3Jt",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273852aaa233e122f1dbfefcf00",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02852aaa233e122f1dbfefcf00",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851852aaa233e122f1dbfefcf00",
+                "width": 64
+              }
+            ],
+            "name": "Heligoland",
+            "release_date": "2010-02-08",
+            "release_date_precision": "day",
+            "uri": "spotify:album:1F8y2bg9V9nRoy8zuxo3Jt",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+                },
+                "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+                "id": "6FXMGgJwohJLUSr5nVlf9X",
+                "name": "Massive Attack",
+                "type": "artist",
+                "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/1F8y2bg9V9nRoy8zuxo3Jt"
+            },
+            "total_tracks": 14
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/6FXMGgJwohJLUSr5nVlf9X"
+              },
+              "href": "https://api.spotify.com/v1/artists/6FXMGgJwohJLUSr5nVlf9X",
+              "id": "6FXMGgJwohJLUSr5nVlf9X",
+              "name": "Massive Attack",
+              "type": "artist",
+              "uri": "spotify:artist:6FXMGgJwohJLUSr5nVlf9X"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/7zS53Xa6sVgfoh00kckgyV"
+              },
+              "href": "https://api.spotify.com/v1/artists/7zS53Xa6sVgfoh00kckgyV",
+              "id": "7zS53Xa6sVgfoh00kckgyV",
+              "name": "Hope Sandoval",
+              "type": "artist",
+              "uri": "spotify:artist:7zS53Xa6sVgfoh00kckgyV"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 7,
+          "duration_ms": 297774,
+          "external_ids": {
+            "isrc": "GBAAA0900963"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/2BndJYJQ17UcEeUFJP5JmY"
+          },
+          "href": "https://api.spotify.com/v1/tracks/2BndJYJQ17UcEeUFJP5JmY",
+          "id": "2BndJYJQ17UcEeUFJP5JmY",
+          "name": "Paradise Circus",
+          "popularity": 68,
+          "uri": "spotify:track:2BndJYJQ17UcEeUFJP5JmY",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      }
+    ],
+    "limit": 100,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 2
+  }
+}

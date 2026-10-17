@@ -21,3 +21,7 @@ description = "Run the test suite once"
 depends = ["install:js"]
 run = "pnpm test --watchAll=false"
 env = { CI = "true" }
+
+[tasks."fixtures:scrub"]
+description = "Regenerate Spotify fixtures from a raw capture: mise run fixtures:scrub <responses-raw.json>"
+run = "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/scrub-spotify-fixtures.ts"

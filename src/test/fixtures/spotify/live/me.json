@@ -1,0 +1,25 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/me",
+  "status": 200,
+  "headers": {
+    "cache-control": "private, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "account_id": "FakeAcct00",
+    "display_name": "Test User",
+    "external_urls": {
+      "spotify": "https://open.spotify.com/user/exportifytestuser"
+    },
+    "followers": {
+      "href": null,
+      "total": 0
+    },
+    "href": "https://api.spotify.com/v1/users/exportifytestuser",
+    "id": "exportifytestuser",
+    "images": [],
+    "type": "user",
+    "uri": "spotify:user:exportifytestuser"
+  }
+}

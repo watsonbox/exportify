@@ -1,0 +1,620 @@
+{
+  "method": "GET",
+  "url": "https://api.spotify.com/v1/playlists/fakeplaylist0000000003/tracks?offset=0&limit=100",
+  "status": 200,
+  "headers": {
+    "cache-control": "public, max-age=0",
+    "content-type": "application/json; charset=utf-8"
+  },
+  "body": {
+    "href": "https://api.spotify.com/v1/playlists/fakeplaylist0000000003/tracks?offset=0&limit=100&locale=en-GB,en-US;q%3D0.9,en;q%3D0.8",
+    "items": [
+      {
+        "added_at": "2026-10-17T14:33:58Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/89d8c4134f6b554f5c258951358029932976eb67?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/7rMT0DJ7hmVbGf4SPfdFE4",
+            "id": "7rMT0DJ7hmVbGf4SPfdFE4",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b27397df071531069c6d18e0cec3",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e0297df071531069c6d18e0cec3",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d0000485197df071531069c6d18e0cec3",
+                "width": 64
+              }
+            ],
+            "name": "The Beirut School",
+            "release_date": "2019-03-01",
+            "release_date_precision": "day",
+            "uri": "spotify:album:7rMT0DJ7hmVbGf4SPfdFE4",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/2RIrl9cApI8HwM6aF4Jt5m"
+                },
+                "href": "https://api.spotify.com/v1/artists/2RIrl9cApI8HwM6aF4Jt5m",
+                "id": "2RIrl9cApI8HwM6aF4Jt5m",
+                "name": "Mashrou' Leila",
+                "type": "artist",
+                "uri": "spotify:artist:2RIrl9cApI8HwM6aF4Jt5m"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/7rMT0DJ7hmVbGf4SPfdFE4"
+            },
+            "total_tracks": 14
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2RIrl9cApI8HwM6aF4Jt5m"
+              },
+              "href": "https://api.spotify.com/v1/artists/2RIrl9cApI8HwM6aF4Jt5m",
+              "id": "2RIrl9cApI8HwM6aF4Jt5m",
+              "name": "Mashrou' Leila",
+              "type": "artist",
+              "uri": "spotify:artist:2RIrl9cApI8HwM6aF4Jt5m"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 218218,
+          "external_ids": {
+            "isrc": "FRPH91300150"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0kACQJFWL2SCrdABvRyY5W"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0kACQJFWL2SCrdABvRyY5W",
+          "id": "0kACQJFWL2SCrdABvRyY5W",
+          "name": "Lil Watan",
+          "popularity": 22,
+          "uri": "spotify:track:0kACQJFWL2SCrdABvRyY5W",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/89d8c4134f6b554f5c258951358029932976eb67?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/7rMT0DJ7hmVbGf4SPfdFE4",
+            "id": "7rMT0DJ7hmVbGf4SPfdFE4",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b27397df071531069c6d18e0cec3",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e0297df071531069c6d18e0cec3",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d0000485197df071531069c6d18e0cec3",
+                "width": 64
+              }
+            ],
+            "name": "The Beirut School",
+            "release_date": "2019-03-01",
+            "release_date_precision": "day",
+            "uri": "spotify:album:7rMT0DJ7hmVbGf4SPfdFE4",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/2RIrl9cApI8HwM6aF4Jt5m"
+                },
+                "href": "https://api.spotify.com/v1/artists/2RIrl9cApI8HwM6aF4Jt5m",
+                "id": "2RIrl9cApI8HwM6aF4Jt5m",
+                "name": "Mashrou' Leila",
+                "type": "artist",
+                "uri": "spotify:artist:2RIrl9cApI8HwM6aF4Jt5m"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/7rMT0DJ7hmVbGf4SPfdFE4"
+            },
+            "total_tracks": 14
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2RIrl9cApI8HwM6aF4Jt5m"
+              },
+              "href": "https://api.spotify.com/v1/artists/2RIrl9cApI8HwM6aF4Jt5m",
+              "id": "2RIrl9cApI8HwM6aF4Jt5m",
+              "name": "Mashrou' Leila",
+              "type": "artist",
+              "uri": "spotify:artist:2RIrl9cApI8HwM6aF4Jt5m"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 218218,
+          "external_ids": {
+            "isrc": "FRPH91300150"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/0kACQJFWL2SCrdABvRyY5W"
+          },
+          "href": "https://api.spotify.com/v1/tracks/0kACQJFWL2SCrdABvRyY5W",
+          "id": "0kACQJFWL2SCrdABvRyY5W",
+          "name": "Lil Watan",
+          "popularity": 22,
+          "uri": "spotify:track:0kACQJFWL2SCrdABvRyY5W",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:34:02Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/766681850aaff2cd33a40dc45b0dd7025f89be73?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/3k2xz3n3vbfLHtz2BzuKdO",
+            "id": "3k2xz3n3vbfLHtz2BzuKdO",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273da3c4c4878c12d963e31f73a",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02da3c4c4878c12d963e31f73a",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851da3c4c4878c12d963e31f73a",
+                "width": 64
+              }
+            ],
+            "name": "Tassili",
+            "release_date": "2011-08-29",
+            "release_date_precision": "day",
+            "uri": "spotify:album:3k2xz3n3vbfLHtz2BzuKdO",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/2sf2owtFSCvz2MLfxmNdkb"
+                },
+                "href": "https://api.spotify.com/v1/artists/2sf2owtFSCvz2MLfxmNdkb",
+                "id": "2sf2owtFSCvz2MLfxmNdkb",
+                "name": "Tinariwen",
+                "type": "artist",
+                "uri": "spotify:artist:2sf2owtFSCvz2MLfxmNdkb"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/3k2xz3n3vbfLHtz2BzuKdO"
+            },
+            "total_tracks": 16
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2sf2owtFSCvz2MLfxmNdkb"
+              },
+              "href": "https://api.spotify.com/v1/artists/2sf2owtFSCvz2MLfxmNdkb",
+              "id": "2sf2owtFSCvz2MLfxmNdkb",
+              "name": "Tinariwen",
+              "type": "artist",
+              "uri": "spotify:artist:2sf2owtFSCvz2MLfxmNdkb"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2ppllDLrUVkJMtMXptA8GS"
+              },
+              "href": "https://api.spotify.com/v1/artists/2ppllDLrUVkJMtMXptA8GS",
+              "id": "2ppllDLrUVkJMtMXptA8GS",
+              "name": "Kyp Malone",
+              "type": "artist",
+              "uri": "spotify:artist:2ppllDLrUVkJMtMXptA8GS"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3and7uje1nuMnKJczCKox9"
+              },
+              "href": "https://api.spotify.com/v1/artists/3and7uje1nuMnKJczCKox9",
+              "id": "3and7uje1nuMnKJczCKox9",
+              "name": "Tunde Adebimpe",
+              "type": "artist",
+              "uri": "spotify:artist:3and7uje1nuMnKJczCKox9"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 253320,
+          "external_ids": {
+            "isrc": "GBUM71105610"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/5njUDUOxj4MKrDP0M4l5ht"
+          },
+          "href": "https://api.spotify.com/v1/tracks/5njUDUOxj4MKrDP0M4l5ht",
+          "id": "5njUDUOxj4MKrDP0M4l5ht",
+          "name": "Tenere Taqqim Tossam",
+          "popularity": 37,
+          "uri": "spotify:track:5njUDUOxj4MKrDP0M4l5ht",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/766681850aaff2cd33a40dc45b0dd7025f89be73?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/3k2xz3n3vbfLHtz2BzuKdO",
+            "id": "3k2xz3n3vbfLHtz2BzuKdO",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273da3c4c4878c12d963e31f73a",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02da3c4c4878c12d963e31f73a",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851da3c4c4878c12d963e31f73a",
+                "width": 64
+              }
+            ],
+            "name": "Tassili",
+            "release_date": "2011-08-29",
+            "release_date_precision": "day",
+            "uri": "spotify:album:3k2xz3n3vbfLHtz2BzuKdO",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/2sf2owtFSCvz2MLfxmNdkb"
+                },
+                "href": "https://api.spotify.com/v1/artists/2sf2owtFSCvz2MLfxmNdkb",
+                "id": "2sf2owtFSCvz2MLfxmNdkb",
+                "name": "Tinariwen",
+                "type": "artist",
+                "uri": "spotify:artist:2sf2owtFSCvz2MLfxmNdkb"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/3k2xz3n3vbfLHtz2BzuKdO"
+            },
+            "total_tracks": 16
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2sf2owtFSCvz2MLfxmNdkb"
+              },
+              "href": "https://api.spotify.com/v1/artists/2sf2owtFSCvz2MLfxmNdkb",
+              "id": "2sf2owtFSCvz2MLfxmNdkb",
+              "name": "Tinariwen",
+              "type": "artist",
+              "uri": "spotify:artist:2sf2owtFSCvz2MLfxmNdkb"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/2ppllDLrUVkJMtMXptA8GS"
+              },
+              "href": "https://api.spotify.com/v1/artists/2ppllDLrUVkJMtMXptA8GS",
+              "id": "2ppllDLrUVkJMtMXptA8GS",
+              "name": "Kyp Malone",
+              "type": "artist",
+              "uri": "spotify:artist:2ppllDLrUVkJMtMXptA8GS"
+            },
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/3and7uje1nuMnKJczCKox9"
+              },
+              "href": "https://api.spotify.com/v1/artists/3and7uje1nuMnKJczCKox9",
+              "id": "3and7uje1nuMnKJczCKox9",
+              "name": "Tunde Adebimpe",
+              "type": "artist",
+              "uri": "spotify:artist:3and7uje1nuMnKJczCKox9"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 253320,
+          "external_ids": {
+            "isrc": "GBUM71105610"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/5njUDUOxj4MKrDP0M4l5ht"
+          },
+          "href": "https://api.spotify.com/v1/tracks/5njUDUOxj4MKrDP0M4l5ht",
+          "id": "5njUDUOxj4MKrDP0M4l5ht",
+          "name": "Tenere Taqqim Tossam",
+          "popularity": 37,
+          "uri": "spotify:track:5njUDUOxj4MKrDP0M4l5ht",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      },
+      {
+        "added_at": "2026-10-17T14:34:08Z",
+        "added_by": {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/user/exportifytestuser"
+          },
+          "href": "https://api.spotify.com/v1/users/exportifytestuser",
+          "id": "exportifytestuser",
+          "type": "user",
+          "uri": "spotify:user:exportifytestuser"
+        },
+        "is_local": false,
+        "primary_color": null,
+        "track": {
+          "preview_url": "https://p.scdn.co/mp3-preview/487be0b384ff2bcc1c4fc99120141fc9b59ab3c3?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/6AmmrlB9qABCgBdr8SCLZt",
+            "id": "6AmmrlB9qABCgBdr8SCLZt",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273a53ea6f00eba1ade5cc11bc7",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02a53ea6f00eba1ade5cc11bc7",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851a53ea6f00eba1ade5cc11bc7",
+                "width": 64
+              }
+            ],
+            "name": "On",
+            "release_date": "2018-03-30",
+            "release_date_precision": "day",
+            "uri": "spotify:album:6AmmrlB9qABCgBdr8SCLZt",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/37PL04N8kBWWW69jdrMMWT"
+                },
+                "href": "https://api.spotify.com/v1/artists/37PL04N8kBWWW69jdrMMWT",
+                "id": "37PL04N8kBWWW69jdrMMWT",
+                "name": "Altin Gün",
+                "type": "artist",
+                "uri": "spotify:artist:37PL04N8kBWWW69jdrMMWT"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/6AmmrlB9qABCgBdr8SCLZt"
+            },
+            "total_tracks": 10
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/37PL04N8kBWWW69jdrMMWT"
+              },
+              "href": "https://api.spotify.com/v1/artists/37PL04N8kBWWW69jdrMMWT",
+              "id": "37PL04N8kBWWW69jdrMMWT",
+              "name": "Altin Gün",
+              "type": "artist",
+              "uri": "spotify:artist:37PL04N8kBWWW69jdrMMWT"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 240093,
+          "external_ids": {
+            "isrc": "CHA831792503"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/5QO3UJc1gF1ummP75n2b3R"
+          },
+          "href": "https://api.spotify.com/v1/tracks/5QO3UJc1gF1ummP75n2b3R",
+          "id": "5QO3UJc1gF1ummP75n2b3R",
+          "name": "Goca Dünya",
+          "popularity": 54,
+          "uri": "spotify:track:5QO3UJc1gF1ummP75n2b3R",
+          "is_local": false
+        },
+        "item": {
+          "preview_url": "https://p.scdn.co/mp3-preview/487be0b384ff2bcc1c4fc99120141fc9b59ab3c3?cid=9950ac751e34487dbbe027c4fd7f8e99",
+          "available_markets": [
+            "AR",
+            "AU"
+          ],
+          "explicit": false,
+          "type": "track",
+          "episode": false,
+          "track": true,
+          "album": {
+            "available_markets": [
+              "AR",
+              "AU"
+            ],
+            "type": "album",
+            "album_type": "album",
+            "href": "https://api.spotify.com/v1/albums/6AmmrlB9qABCgBdr8SCLZt",
+            "id": "6AmmrlB9qABCgBdr8SCLZt",
+            "images": [
+              {
+                "height": 640,
+                "url": "https://i.scdn.co/image/ab67616d0000b273a53ea6f00eba1ade5cc11bc7",
+                "width": 640
+              },
+              {
+                "height": 300,
+                "url": "https://i.scdn.co/image/ab67616d00001e02a53ea6f00eba1ade5cc11bc7",
+                "width": 300
+              },
+              {
+                "height": 64,
+                "url": "https://i.scdn.co/image/ab67616d00004851a53ea6f00eba1ade5cc11bc7",
+                "width": 64
+              }
+            ],
+            "name": "On",
+            "release_date": "2018-03-30",
+            "release_date_precision": "day",
+            "uri": "spotify:album:6AmmrlB9qABCgBdr8SCLZt",
+            "artists": [
+              {
+                "external_urls": {
+                  "spotify": "https://open.spotify.com/artist/37PL04N8kBWWW69jdrMMWT"
+                },
+                "href": "https://api.spotify.com/v1/artists/37PL04N8kBWWW69jdrMMWT",
+                "id": "37PL04N8kBWWW69jdrMMWT",
+                "name": "Altin Gün",
+                "type": "artist",
+                "uri": "spotify:artist:37PL04N8kBWWW69jdrMMWT"
+              }
+            ],
+            "external_urls": {
+              "spotify": "https://open.spotify.com/album/6AmmrlB9qABCgBdr8SCLZt"
+            },
+            "total_tracks": 10
+          },
+          "artists": [
+            {
+              "external_urls": {
+                "spotify": "https://open.spotify.com/artist/37PL04N8kBWWW69jdrMMWT"
+              },
+              "href": "https://api.spotify.com/v1/artists/37PL04N8kBWWW69jdrMMWT",
+              "id": "37PL04N8kBWWW69jdrMMWT",
+              "name": "Altin Gün",
+              "type": "artist",
+              "uri": "spotify:artist:37PL04N8kBWWW69jdrMMWT"
+            }
+          ],
+          "disc_number": 1,
+          "track_number": 3,
+          "duration_ms": 240093,
+          "external_ids": {
+            "isrc": "CHA831792503"
+          },
+          "external_urls": {
+            "spotify": "https://open.spotify.com/track/5QO3UJc1gF1ummP75n2b3R"
+          },
+          "href": "https://api.spotify.com/v1/tracks/5QO3UJc1gF1ummP75n2b3R",
+          "id": "5QO3UJc1gF1ummP75n2b3R",
+          "name": "Goca Dünya",
+          "popularity": 54,
+          "uri": "spotify:track:5QO3UJc1gF1ummP75n2b3R",
+          "is_local": false
+        },
+        "video_thumbnail": {
+          "url": null
+        }
+      }
+    ],
+    "limit": 100,
+    "next": null,
+    "offset": 0,
+    "previous": null,
+    "total": 3
+  }
+}

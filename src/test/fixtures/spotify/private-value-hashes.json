@@ -1,0 +1,77 @@
+[
+  {
+    "label": "account id",
+    "length": 10,
+    "sha256": "f9daa1ab415c31ff222dde92a21f32155c9de526d714d3965063495d8bbe49e1"
+  },
+  {
+    "label": "display name",
+    "length": 13,
+    "sha256": "ab0c829d1411e514f59c3fbddd8c063939159440a0d3939bdf73e6e216f6ed17"
+  },
+  {
+    "label": "owned playlist id",
+    "length": 22,
+    "sha256": "429335c07accfbb164e74da76ea43a9a05f9b2a13d0a539fe87b9b50400b48d0"
+  },
+  {
+    "label": "owned playlist id",
+    "length": 22,
+    "sha256": "4690678045d83cf6934082c50b7ee558eae778baa587eed856e6442f62cb875e"
+  },
+  {
+    "label": "owned playlist id",
+    "length": 22,
+    "sha256": "47acdca273d1f8775bb252a2a2f233b785d1141e47fed3255f036a683a4d0ab7"
+  },
+  {
+    "label": "owned playlist id",
+    "length": 22,
+    "sha256": "ad254e6a9a45d2d09c53c5286d4dcf4bcd2f5bd2c5fff97e80c1fac70e0189e4"
+  },
+  {
+    "label": "owned playlist id",
+    "length": 22,
+    "sha256": "cbdc5edd6cd67d0c6953a5b3a41fc91c2a9a197461108104bb69b7acdd105137"
+  },
+  {
+    "label": "owned playlist id",
+    "length": 22,
+    "sha256": "f1ae5f4fb316cefd85a13d5a5d0acbbf67e1dca6f5695a24a839c4785cfb3a1b"
+  },
+  {
+    "label": "owned playlist snapshot id",
+    "length": 32,
+    "sha256": "122d70eb82a5e22e7ff05079ba1d57372a956ddd75d8333af03b64ed38424433"
+  },
+  {
+    "label": "owned playlist snapshot id",
+    "length": 32,
+    "sha256": "175107c935ae046d65733b837d74de0b61d724eb0ec042d5b4210e88100139d7"
+  },
+  {
+    "label": "owned playlist snapshot id",
+    "length": 32,
+    "sha256": "8391ec957e1d34fb4706925c29d621f683a6fe08f14da8601186fe3ceefc027e"
+  },
+  {
+    "label": "owned playlist snapshot id",
+    "length": 32,
+    "sha256": "902540aa8606b072d71178706086418c1792b528000df32cf26a136a2b2e2b4a"
+  },
+  {
+    "label": "owned playlist snapshot id",
+    "length": 32,
+    "sha256": "d59ced4ab327fce07b656fe4c379a73dff8b560d3c3db022200bb2316206ddef"
+  },
+  {
+    "label": "owned playlist snapshot id",
+    "length": 32,
+    "sha256": "dca3899faa797d2a76fd804a5b9010333523755038c48da3e1e900ccea955bfc"
+  },
+  {
+    "label": "user id",
+    "length": 28,
+    "sha256": "431196cda74497f71ee4a3a957cabcc1b8818aa947a1f874c46a47549fdfa0aa"
+  }
+]
