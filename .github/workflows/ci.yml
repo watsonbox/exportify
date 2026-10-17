@@ -22,14 +22,14 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: 🧪 Test
         run: |
-          pnpm test
+          pnpm test --run
           node --test scripts/*.test.mjs
       - name: 🔨 Build
         run: pnpm build
       - name: 💨 Smoke check build
-        run: node scripts/smoke-check-build.mjs --dir build
+        run: node scripts/smoke-check-build.mjs
       - name: 🚀 Deploy to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build
+          folder: dist

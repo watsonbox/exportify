@@ -7,6 +7,7 @@ import { rest } from "msw"
 import { handlers } from "./mocks/handlers"
 import App from "./App"
 import * as auth from "./auth"
+import type { MockInstance } from "vitest"
 
 const { location } = window
 
@@ -94,7 +95,7 @@ describe("logging in", () => {
     })
 
     afterEach(() => {
-      jest.restoreAllMocks()
+      vi.restoreAllMocks()
     })
 
     test("uses the custom client ID for both authorization and token exchange", async () => {
@@ -117,7 +118,7 @@ describe("logging in", () => {
       })
       unmount()
 
-      jest.spyOn(window.history, 'replaceState').mockImplementation(() => {})
+      vi.spyOn(window.history, 'replaceState').mockImplementation(() => {})
       // @ts-ignore
       window.location = {
         search: "?code=TEST_AUTH_CODE",
@@ -139,20 +140,20 @@ describe("logging in", () => {
   })
 
   describe("OAuth callback with authorization code", () => {
-    let setItemSpy: jest.SpyInstance
-    let replaceStateSpy: jest.SpyInstance
+    let setItemSpy: MockInstance
+    let replaceStateSpy: MockInstance
     let tokenRequestBody: URLSearchParams | null = null
 
     beforeEach(() => {
       tokenRequestBody = null
 
       // Mock localStorage
-      jest.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
+      vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
         if (key === 'code_verifier') return 'TEST_CODE_VERIFIER'
         return null
       })
-      setItemSpy = jest.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {})
-      replaceStateSpy = jest.spyOn(window.history, 'replaceState').mockImplementation(() => {})
+      setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {})
+      replaceStateSpy = vi.spyOn(window.history, 'replaceState').mockImplementation(() => {})
 
       // Mock window.location with code parameter
       // @ts-ignore
@@ -181,7 +182,7 @@ describe("logging in", () => {
     })
 
     afterEach(() => {
-      jest.restoreAllMocks()
+      vi.restoreAllMocks()
     })
 
     test("exchanges authorization code for access token with correct PKCE parameters", async () => {
@@ -209,11 +210,11 @@ describe("logging in", () => {
   })
 
   describe("post-login state", () => {
-    let getItemSpy: jest.SpyInstance
+    let getItemSpy: MockInstance
 
     beforeEach(() => {
       // Mock localStorage for access token
-      getItemSpy = jest.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
+      getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
         if (key === 'access_token') return 'TEST_ACCESS_TOKEN'
         return null
       })
@@ -240,18 +241,18 @@ describe("logging in", () => {
 })
 
 describe("logging out", () => {
-  let getItemSpy: jest.SpyInstance
-  let logoutSpy: jest.SpyInstance
+  let getItemSpy: MockInstance
+  let logoutSpy: MockInstance
 
   beforeEach(() => {
     // Mock localStorage with access token
-    getItemSpy = jest.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
+    getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
       if (key === 'access_token') return 'TEST_ACCESS_TOKEN'
       return null
     })
 
     // Spy on logout function
-    logoutSpy = jest.spyOn(auth, 'logout').mockImplementation(() => {})
+    logoutSpy = vi.spyOn(auth, 'logout').mockImplementation(() => {})
 
     // @ts-ignore - Simple window.location mock
     window.location = {

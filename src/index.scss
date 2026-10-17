@@ -11,7 +11,7 @@ $link-hover-decoration: underline;
 $pagination-focus-box-shadow: none;
 $pagination-focus-bg: none;
 
-@import "~bootstrap/scss/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 h1 a {
   color: var(--bs-dark);

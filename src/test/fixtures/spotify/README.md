@@ -1,6 +1,6 @@
 # Spotify API fixtures
 
-Recorded and documented Spotify Web API responses for tests. They are plain JSON with no dependency on MSW or Jest, so handlers, fixture builders or any other tooling can load them. They live under `src/` because Create React App's Jest only looks there and the app's TypeScript can import JSON from there.
+Recorded and documented Spotify Web API responses for tests. They are plain JSON with no dependency on MSW or Vitest, so handlers, fixture builders or any other tooling can load them. They live under `src/` because Vitest only looks there (`test.include` in `vite.config.ts`) and the app's TypeScript can import JSON from there.
 
 Each fixture file has the same shape:
 
@@ -15,7 +15,7 @@ Each fixture file has the same shape:
 - `private-value-hashes.json`: SHA-256 hashes of the values the scrub script replaced. Never store the values themselves.
 - `scrub.ts`: the scrub and leak-check logic; `scrub.test.ts` covers it.
 - `leaks.test.ts`: fails if any file in this directory contains a hashed private value or something shaped like a Spotify access or refresh token.
-- `builders.ts`: fixture builders (`buildTrack`, `buildPlaylist`, `buildPlaylistItem`, `buildLocalTrack`, `buildPage`, `paginate`, `pageAt`, `apiError` and friends). Each starts from a live response and takes overrides, deriving `href`, `uri` and `external_urls` from the `id`, so a test states only the values it asserts on. Like the JSON, they don't depend on MSW or Jest; `src/mocks/handlers.ts` wraps them in MSW handlers.
+- `builders.ts`: fixture builders (`buildTrack`, `buildPlaylist`, `buildPlaylistItem`, `buildLocalTrack`, `buildPage`, `paginate`, `pageAt`, `apiError` and friends). Each starts from a live response and takes overrides, deriving `href`, `uri` and `external_urls` from the `id`, so a test states only the values it asserts on. Like the JSON, they don't depend on MSW or Vitest; `src/mocks/handlers.ts` wraps them in MSW handlers.
 
 ## Regenerating `live/`
 

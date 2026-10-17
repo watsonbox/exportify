@@ -4,7 +4,7 @@ import {
   buildPage, buildPlaylist, buildPlaylistItem, buildSavedTrack, buildTrack, buildUser, pageAt,
 } from '../test/fixtures/spotify/builders'
 
-export const handlerCalled = jest.fn()
+export const handlerCalled = vi.fn()
 
 const image = (hash: string) => [{ height: 640, url: `https://i.scdn.co/image/ab67616d0000b273${hash}`, width: 640 }]
 

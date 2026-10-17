@@ -14,13 +14,11 @@ alias = "s"
 description = "Start the development server on http://127.0.0.1:3000"
 depends = ["install:js"]
 run = "pnpm start"
-env = { BROWSER = "none" }
 
 [tasks.test]
 description = "Run the test suite once"
-run = ["pnpm test --watchAll=false", "node --test scripts/*.test.mjs"]
-env = { CI = "true" }
+run = ["pnpm test --run", "node --test scripts/*.test.mjs"]
 
 [tasks."fixtures:scrub"]
 description = "Regenerate Spotify fixtures from a raw capture: mise run fixtures:scrub <responses-raw.json>"
-run = "node --experimental-strip-types --disable-warning=ExperimentalWarning --disable-warning=MODULE_TYPELESS_PACKAGE_JSON scripts/scrub-spotify-fixtures.ts"
+run = "node --experimental-strip-types --disable-warning=ExperimentalWarning scripts/scrub-spotify-fixtures.ts"

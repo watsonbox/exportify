@@ -2,13 +2,8 @@
 // allows you to do things like:
 // expect(element).toHaveTextContent(/react/i)
 // learn more: https://github.com/testing-library/jest-dom
-import '@testing-library/jest-dom';
-import { TextEncoder, TextDecoder } from 'util';
-
-// Mock TextEncoder/TextDecoder for tests
-global.TextEncoder = TextEncoder;
-// @ts-ignore
-global.TextDecoder = TextDecoder;
+import '@testing-library/jest-dom/vitest';
+import type { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
 
 // Mock Web Crypto API for tests
 Object.defineProperty(global, 'crypto', {
@@ -28,3 +23,9 @@ Object.defineProperty(global, 'crypto', {
     }
   }
 });
+
+// jest-dom 6 augments @vitest/expect, which Vitest 5 merged into vitest
+declare module 'vitest' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface Matchers<R extends void | Promise<void> = void | Promise<void>, T = unknown> extends TestingLibraryMatchers<any, R> {}
+}

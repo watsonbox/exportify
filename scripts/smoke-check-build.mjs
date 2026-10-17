@@ -55,7 +55,7 @@ if (import.meta.filename === process.argv[1]) {
   const homepage = JSON.parse(fs.readFileSync(path.join(import.meta.dirname, '../package.json'), 'utf8')).homepage
   const { values } = parseArgs({
     options: {
-      dir: { type: 'string', default: 'build' },
+      dir: { type: 'string', default: 'dist' },
       base: { type: 'string', default: new URL(homepage).pathname }
     }
   })

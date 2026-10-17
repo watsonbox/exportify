@@ -2,6 +2,7 @@
   "name": "exportify",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "homepage": "https://exportify.app",
   "dependencies": {
     "@bugsnag/js": "^7.25.0",
@@ -15,12 +16,10 @@
     "@testing-library/react": "^16.0.0",
     "@testing-library/user-event": "^14.5.2",
     "@types/file-saver": "^2.0.7",
-    "@types/jest": "^29.5.12",
     "@types/node": "^22.4.1",
     "@types/react": "^18.3.3",
     "@types/react-bootstrap": "^0.32.37",
     "@types/react-dom": "^18.3.0",
-    "array.prototype.flatmap": "^1.3.0",
     "axios": "^1.20.0",
     "bootstrap": "^5.3.3",
     "bottleneck": "^2.19.5",
@@ -34,17 +33,16 @@
     "react-bootstrap": "^2.10.4",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.1",
-    "react-scripts": "^5.0.1",
     "stream": "^0.0.3",
     "typescript": "^5.5.4",
     "url-search-params-polyfill": "^8.2.5",
     "web-vitals": "^4.2.3"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "eslintConfig": {
     "root": true,
@@ -54,36 +52,18 @@
       "plugin:jest-dom/recommended"
     ]
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "jest": {
-    "transformIgnorePatterns": [
-      "node_modules/(?!axios)/"
-    ]
-  },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
+    "@vitejs/plugin-react": "^6.1.2",
     "eslint": "8.19.0",
     "eslint-config-react-app": "7.0.1",
     "gh-pages": "^6.1.1",
+    "jsdom": "^30.1.3",
     "msw": "^0.49.1",
     "react-test-renderer": "^18.3.1",
-    "sass": "^1.77.8"
-  },
-  "pnpm": {
-    "overrides": {
-      "fork-ts-checker-webpack-plugin": "^6.5.3"
-    }
+    "sass": "^1.77.8",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
   },
   "packageManager": "pnpm@10.34.5+sha512.a4ee05f2f73658255bd6a89859c065a45c28a57daefae2c893a168ee2b73168c37b91e83e57ea67654ad03f03031746430e8bce38e362e042605fb8abc80192e"
 }

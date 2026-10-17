@@ -7,12 +7,13 @@ Client-only React SPA that exports Spotify playlists to CSV, deployed to GitHub 
 Tooling is pinned in `mise.toml` (Node 22, pnpm 10).
 
 - `mise s`: install dependencies if needed and start the dev server on http://127.0.0.1:3000
-- `mise test`: run the Jest and script test suites once. It doesn't install dependencies, so run `mise install` first after a lockfile change
+- `mise test`: run the Vitest and script test suites once. It doesn't install dependencies, so run `mise install` first after a lockfile change
 - Agents don't run dependency changes (`pnpm add`, `update`, `install`) themselves: work out the exact command and ask the maintainer to run it
 - `pnpm exec eslint --ext .js,.jsx,.ts,.tsx src`: lint (should report zero problems)
-- `pnpm build`: production build
+- `pnpm build`: typecheck and production build into `dist/`
+- `pnpm preview`: serve the production build locally
 
-The build is still Create React App (`react-scripts`) with Jest. Migrating to Vite and Vitest is planned, so don't add new CRA-specific config.
+The build is Vite (`vite.config.ts`, with `index.html` at the root) and the tests run on Vitest in jsdom.
 
 ## Spotify login and the test account
 

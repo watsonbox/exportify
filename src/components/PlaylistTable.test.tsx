@@ -14,8 +14,8 @@ import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTra
 const server = setupServer(...handlers)
 
 // Mock out Bugsnag calls
-jest.mock('@bugsnag/js')
-const onSetSubtitle = jest.fn()
+vi.mock('@bugsnag/js')
+const onSetSubtitle = vi.fn()
 
 server.listen({
   onUnhandledRequest: 'warn'
@@ -28,15 +28,15 @@ beforeAll(() => {
   // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation(query => ({
+    value: vi.fn().mockImplementation(query => ({
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(), // Deprecated
-      removeListener: jest.fn(), // Deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(), // Deprecated
+      removeListener: vi.fn(), // Deprecated
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 })
@@ -53,7 +53,7 @@ afterAll(() => {
 })
 
 afterEach(() => {
-  jest.restoreAllMocks()
+  vi.restoreAllMocks()
   server.resetHandlers()
 })
 
@@ -82,8 +82,8 @@ test("redirecting when access token is invalid", async () => {
 
 describe("single playlist exporting", () => {
   test("standard case exports successfully", async () => {
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
@@ -130,8 +130,8 @@ describe("single playlist exporting", () => {
   })
 
   test("including additional artist data", async () => {
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeArtistsData: true }} onSetSubtitle={onSetSubtitle} />);
 
@@ -179,8 +179,8 @@ describe("single playlist exporting", () => {
   })
 
   test("including additional audio features data", async () => {
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAudioFeaturesData: true }} onSetSubtitle={onSetSubtitle} />);
 
@@ -228,8 +228,8 @@ describe("single playlist exporting", () => {
   })
 
   test("including additional album data", async () => {
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} onSetSubtitle={onSetSubtitle} />);
 
@@ -279,8 +279,8 @@ describe("single playlist exporting", () => {
   test("tracks without album data omit it", async () => {
     server.use(...nullAlbumHandlers)
 
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} onSetSubtitle={onSetSubtitle} />);
 
@@ -330,8 +330,8 @@ describe("single playlist exporting", () => {
   test("playlist with null track skips null track", async () => {
     server.use(...nullTrackHandlers)
 
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
@@ -362,8 +362,8 @@ describe("single playlist exporting", () => {
   test("playlist with local tracks includes them", async () => {
     server.use(...localTrackHandlers)
 
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
@@ -396,8 +396,8 @@ describe("single playlist exporting", () => {
   test("playlist with duplicate tracks includes them", async () => {
     server.use(...duplicateTrackHandlers)
 
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
 
@@ -482,11 +482,11 @@ describe("missing playlists", () => {
   test("exporting of all playlists", async () => {
     server.use(...missingPlaylistsHandlers)
 
-    const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(jest.fn())
+    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+    saveAsMock.mockImplementation(vi.fn())
 
-    const jsZipFileMock = jest.spyOn(JSZip.prototype, 'file')
-    const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
+    const jsZipFileMock = vi.spyOn(JSZip.prototype, 'file')
+    const jsZipGenerateAsync = vi.spyOn(JSZip.prototype, 'generateAsync')
     jsZipGenerateAsync.mockResolvedValue("zip_content")
 
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
@@ -521,11 +521,11 @@ describe("missing playlists", () => {
 })
 
 test("exporting of all playlists", async () => {
-  const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-  saveAsMock.mockImplementation(jest.fn())
+  const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+  saveAsMock.mockImplementation(vi.fn())
 
-  const jsZipFileMock = jest.spyOn(JSZip.prototype, 'file')
-  const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
+  const jsZipFileMock = vi.spyOn(JSZip.prototype, 'file')
+  const jsZipGenerateAsync = vi.spyOn(JSZip.prototype, 'generateAsync')
   jsZipGenerateAsync.mockResolvedValue("zip_content")
 
   render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
@@ -563,11 +563,11 @@ test("exporting of all playlists", async () => {
 })
 
 test("exporting of search results", async () => {
-  const saveAsMock = jest.spyOn(FileSaver, "saveAs")
-  saveAsMock.mockImplementation(jest.fn())
+  const saveAsMock = vi.spyOn(FileSaver, "saveAs")
+  saveAsMock.mockImplementation(vi.fn())
 
-  const jsZipFileMock = jest.spyOn(JSZip.prototype, 'file')
-  const jsZipGenerateAsync = jest.spyOn(JSZip.prototype, 'generateAsync')
+  const jsZipFileMock = vi.spyOn(JSZip.prototype, 'file')
+  const jsZipGenerateAsync = vi.spyOn(JSZip.prototype, 'generateAsync')
   jsZipGenerateAsync.mockResolvedValue("zip_content")
 
   render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);

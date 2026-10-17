@@ -2,6 +2,11 @@ import i18n from "i18next"
 import { initReactI18next } from "react-i18next"
 import LanguageDetector from "i18next-browser-languagedetector"
 
+const localeFiles = import.meta.glob<Record<string, unknown>>("./locales/*/translation.json", { eager: true, import: "default" })
+const resources = Object.fromEntries(
+  Object.entries(localeFiles).map(([path, translations]) => [path.split("/")[2], { translations }])
+)
+
 i18n
   .use(initReactI18next)
   .use(LanguageDetector)
@@ -10,44 +15,7 @@ i18n
     interpolation: {
       escapeValue: false,
     },
-    resources: {
-      de: {
-        translations: require('./locales/de/translation.json')
-      },
-      en: {
-        translations: require('./locales/en/translation.json')
-      },
-      el: {
-        translations: require('./locales/el/translation.json')
-      },
-      es: {
-        translations: require('./locales/es/translation.json')
-      },
-      fr: {
-        translations: require('./locales/fr/translation.json')
-      },
-      it: {
-        translations: require('./locales/it/translation.json')
-      },
-      nl: {
-        translations: require('./locales/nl/translation.json')
-      },
-      pt: {
-        translations: require('./locales/pt/translation.json')
-      },
-      sv: {
-        translations: require('./locales/sv/translation.json')
-      },
-      ar: {
-        translations: require('./locales/ar/translation.json')
-      },
-      ja: {
-        translations: require('./locales/ja/translation.json')
-      },
-      tr: {
-        translations: require('./locales/tr/translation.json')
-      }
-    },
+    resources,
     ns: ['translations'],
     defaultNS: 'translations'
   })

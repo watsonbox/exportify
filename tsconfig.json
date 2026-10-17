@@ -19,6 +19,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
+    "types": ["node", "vite/client", "vitest/globals"],
     "baseUrl": "src"
   },
   "include": [

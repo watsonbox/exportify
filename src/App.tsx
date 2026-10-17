@@ -61,7 +61,7 @@ function App() {
         <div className="d-sm-none d-block mb-5" />
         <TopMenu loggedIn={!!accessToken} />
         <h1>
-          <FontAwesomeIcon icon={['fab', 'spotify']} color="#84BD00" size="sm" /> <a href={process.env.PUBLIC_URL}>Exportify</a>
+          <FontAwesomeIcon icon={['fab', 'spotify']} color="#84BD00" size="sm" /> <a href={import.meta.env.BASE_URL}>Exportify</a>
         </h1>
 
         <p id="subtitle" className="lead text-secondary">{subtitle}</p>
