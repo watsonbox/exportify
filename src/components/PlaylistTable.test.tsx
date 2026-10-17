@@ -5,6 +5,7 @@ import userEvent from "@testing-library/user-event"
 import { setupServer } from "msw/node"
 import FileSaver from "file-saver"
 import JSZip from "jszip"
+import type { MockInstance } from "vitest"
 
 import PlaylistTable from "./PlaylistTable"
 
@@ -17,13 +18,8 @@ const server = setupServer(...handlers)
 vi.mock('@bugsnag/js')
 const onSetSubtitle = vi.fn()
 
-server.listen({
-  onUnhandledRequest: 'warn'
-})
-
 beforeAll(() => {
-  // @ts-expect-error - minimal Blob stand-in
-  global.Blob = function (content, options) { return ({ content, options }) }
+  server.listen({ onUnhandledRequest: 'warn' })
 
   // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
   Object.defineProperty(window, 'matchMedia', {
@@ -43,12 +39,28 @@ beforeAll(() => {
 
 const { location } = window
 
+// Resolves assigned hrefs like a browser, so MSW can still resolve request URLs against it after a redirect
+function stubLocation(initialHref: string) {
+  let current = new URL(initialHref)
+  // @ts-expect-error - partial Location mock
+  window.location = {
+    get href() { return current.href },
+    set href(href: string) { current = new URL(href, current) },
+    get pathname() { return current.pathname },
+  }
+}
+
 beforeAll(() => {
   // @ts-expect-error - jsdom location is not optional
   delete window.location
 })
 
+beforeEach(() => {
+  stubLocation("http://www.example.com/exportify")
+})
+
 afterAll(() => {
+  server.close()
   window.location = location
 })
 
@@ -56,6 +68,14 @@ afterEach(() => {
   vi.restoreAllMocks()
   server.resetHandlers()
 })
+
+async function expectSavedCsv(saveAsMock: MockInstance, fileName: string, csv: string) {
+  expect(saveAsMock).toHaveBeenCalledWith(expect.any(Blob), fileName, { autoBom: false })
+
+  const blob: Blob = saveAsMock.mock.calls[0][0]
+  expect(blob.type).toBe('text/csv;charset=utf-8')
+  expect(await blob.text()).toBe(csv)
+}
 
 const baseTrackHeaders = '"Track URI","Track Name","Artist URI(s)","Artist Name(s)","Album URI","Album Name","Album Artist URI(s)","Album Artist Name(s)","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","ISRC","Added By","Added At"'
 const baseTrackDataCrying = '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","UK4UP1300002","","2020-07-19T09:24:39Z"'
@@ -70,13 +90,12 @@ test("playlist loading", async () => {
 })
 
 test("redirecting when access token is invalid", async () => {
-  // @ts-expect-error - partial Location mock
-  window.location = { pathname: "/exportify", href: "http://www.example.com/exportify" }
+  window.location.href = "http://www.example.com/exportify?some=state"
 
   render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
 
   await waitFor(() => {
-    expect(window.location.href).toBe("/exportify")
+    expect(window.location.href).toBe("http://www.example.com/exportify")
   })
 })
 
@@ -116,16 +135,9 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders}\n` +
-          `${baseTrackDataCrying}\n`
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'liked.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'liked.csv',
+      `${baseTrackHeaders}\n` +
+      `${baseTrackDataCrying}\n`
     )
   })
 
@@ -165,16 +177,9 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders},"Artist Genres"\n` +
-          `${baseTrackDataCrying},"nottingham indie"\n`
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'liked.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'liked.csv',
+      `${baseTrackHeaders},"Artist Genres"\n` +
+      `${baseTrackDataCrying},"nottingham indie"\n`
     )
   })
 
@@ -214,16 +219,9 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders},"Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time Signature"\n` +
-          `${baseTrackDataCrying},"0.416","0.971","0","-5.55","1","0.0575","0.00104","0.0391","0.44","0.19","131.988","4"\n`
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'liked.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'liked.csv',
+      `${baseTrackHeaders},"Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time Signature"\n` +
+      `${baseTrackDataCrying},"0.416","0.971","0","-5.55","1","0.0575","0.00104","0.0391","0.44","0.19","131.988","4"\n`
     )
   })
 
@@ -263,16 +261,9 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
-          `${baseTrackDataCrying},"something, something else","Beggars Banquet","C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd."\n`
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'liked.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'liked.csv',
+      `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
+      `${baseTrackDataCrying},"something, something else","Beggars Banquet","C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd."\n`
     )
   })
 
@@ -314,16 +305,9 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
-          `${baseTrackDataCrying},"","",""\n`
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'liked.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'liked.csv',
+      `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
+      `${baseTrackDataCrying},"","",""\n`
     )
   })
 
@@ -347,15 +331,8 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders}\n`
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
+      `${baseTrackHeaders}\n`
     )
   })
 
@@ -379,17 +356,10 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders}\n` +
-          '"spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128","Heart of Stone","","The Waymores","","Heart of Stone","","","","","0","0","128000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n' +
-          '"spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227","Heard It Through The Red Wine","","Charlie Marie","","Heard It Through The Red Wine","","","","","0","0","227000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n'
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
+      `${baseTrackHeaders}\n` +
+      '"spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128","Heart of Stone","","The Waymores","","Heart of Stone","","","","","0","0","128000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n' +
+      '"spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227","Heard It Through The Red Wine","","Charlie Marie","","Heard It Through The Red Wine","","","","","0","0","227000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n'
     )
   })
 
@@ -413,17 +383,10 @@ describe("single playlist exporting", () => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
     })
 
-    expect(saveAsMock).toHaveBeenCalledWith(
-      {
-        content: [
-          `${baseTrackHeaders}\n` +
-          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-          '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-20T15:19:04Z"\n'
-        ],
-        options: { type: 'text/csv;charset=utf-8' }
-      },
-      'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      { "autoBom": false }
+    await expectSavedCsv(saveAsMock, 'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
+      `${baseTrackHeaders}\n` +
+      '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
+      '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-20T15:19:04Z"\n'
     )
   })
 })

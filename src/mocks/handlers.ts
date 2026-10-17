@@ -1,4 +1,4 @@
-import { rest, RestRequest } from 'msw'
+import { http, HttpResponse } from 'msw'
 import {
   API, apiError, buildAlbum, buildArtist, buildAudioFeatures, buildFullAlbum, buildFullArtist, buildLocalTrack, buildMe,
   buildPage, buildPlaylist, buildPlaylistItem, buildSavedTrack, buildTrack, buildUser, pageAt,
@@ -75,31 +75,31 @@ const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks`
 const addedByWatsonbox = (track: object | null, added_at = '2020-11-03T15:19:04Z') =>
   buildPlaylistItem({ track, added_at, added_by: watsonbox })
 
-const spotifyGet = (url: string, body: (req: RestRequest) => object, { ids }: { ids?: string } = {}) =>
-  rest.get(url, (req, res, ctx) => {
-    handlerCalled(req.url.toString())
+const spotifyGet = (url: string, body: (request: Request) => object, { ids }: { ids?: string } = {}) =>
+  http.get(url, ({ request }) => {
+    handlerCalled(request.url)
 
     const error =
-      req.headers.get('Authorization') !== 'Bearer TEST_ACCESS_TOKEN' ? apiError(401) :
-      ids !== undefined && req.url.searchParams.get('ids') !== ids ? apiError(500, 'Invalid request for this handler') :
+      request.headers.get('Authorization') !== 'Bearer TEST_ACCESS_TOKEN' ? apiError(401) :
+      ids !== undefined && new URL(request.url).searchParams.get('ids') !== ids ? apiError(500, 'Invalid request for this handler') :
       null
 
-    if (error) return res(ctx.status(error.status), ctx.set(error.headers), ctx.json(error.body))
+    if (error) return HttpResponse.json(error.body, { status: error.status, headers: error.headers })
 
-    return res(ctx.json(body(req)))
+    return HttpResponse.json(body(request))
   })
 
-const tracksPage = (items: object[]) => spotifyGet(ghostpoetTracksUrl, req => pageAt(items, req.url.toString(), 100))
+const pagedGet = (url: string, items: object[], defaultLimit?: number) =>
+  spotifyGet(url, request => pageAt(items, request.url, defaultLimit))
+
+const tracksPage = (items: object[]) => pagedGet(ghostpoetTracksUrl, items, 100)
 
 export const handlers = [
-  rest.options(`${API}/me`, (req, res, ctx) => {
-    return res(ctx.text('body'))
-  }),
+  http.options(`${API}/me`, () => HttpResponse.text('body')),
 
   spotifyGet(`${API}/me`, () => buildMe({ id: 'watsonbox', display_name: 'watsonbox' })),
 
-  spotifyGet(`${API}/me/tracks`, req =>
-    pageAt([buildSavedTrack({ added_at: '2020-07-19T09:24:39Z', track: crying })], req.url.toString())),
+  pagedGet(`${API}/me/tracks`, [buildSavedTrack({ added_at: '2020-07-19T09:24:39Z', track: crying })]),
 
   // Ensure that a null playlist doesn't break anything
   spotifyGet(playlistsUrl, () => buildPage([ghostpoetPlaylist, null], { url: playlistsUrl, total: 1 })),

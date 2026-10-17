@@ -3,7 +3,7 @@ import i18n from "i18n/config"
 import { render, screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { setupServer } from "msw/node"
-import { rest } from "msw"
+import { http, HttpResponse } from "msw"
 import { handlers } from "./mocks/handlers"
 import App from "./App"
 import * as auth from "./auth"
@@ -86,10 +86,10 @@ describe("logging in", () => {
       tokenRequestBody = null
 
       server.use(
-        rest.post('https://accounts.spotify.com/api/token', async (req, res, ctx) => {
-          tokenRequestBody = new URLSearchParams(await req.text())
+        http.post('https://accounts.spotify.com/api/token', async ({ request }) => {
+          tokenRequestBody = new URLSearchParams(await request.text())
 
-          return res(ctx.json({ access_token: 'TEST_ACCESS_TOKEN' }))
+          return HttpResponse.json({ access_token: 'TEST_ACCESS_TOKEN' })
         })
       )
     })
@@ -166,17 +166,17 @@ describe("logging in", () => {
 
       // Mock Spotify token endpoint and capture request
       server.use(
-        rest.post('https://accounts.spotify.com/api/token', async (req, res, ctx) => {
+        http.post('https://accounts.spotify.com/api/token', async ({ request }) => {
           // Capture the request body for verification
-          tokenRequestBody = new URLSearchParams(await req.text())
+          tokenRequestBody = new URLSearchParams(await request.text())
 
-          return res(ctx.json({
+          return HttpResponse.json({
             access_token: 'EXCHANGED_ACCESS_TOKEN',
             token_type: 'Bearer',
             expires_in: 3600,
             refresh_token: 'REFRESH_TOKEN',
             scope: 'playlist-read-private playlist-read-collaborative user-library-read'
-          }))
+          })
         })
       )
     })
