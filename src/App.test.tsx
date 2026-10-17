@@ -1,42 +1,38 @@
 import React from "react"
+import { createHash } from "node:crypto"
 import i18n from "i18n/config"
 import { render, screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { setupServer } from "msw/node"
 import { http, HttpResponse } from "msw"
-import { handlers } from "./mocks/handlers"
+import { server } from "./mocks/server"
+import { redirectTo } from "./navigation"
 import App from "./App"
 import * as auth from "./auth"
-import type { MockInstance } from "vitest"
 
-const { location } = window
+const visit = (path: string) => window.history.replaceState(null, "", path)
 
-// Set up MSW server for mocking Spotify API and token exchange
-const server = setupServer(...handlers)
+// Records each token request body and answers with accessToken
+function mockTokenEndpoint(accessToken = "TEST_ACCESS_TOKEN") {
+  const requests: URLSearchParams[] = []
 
-beforeAll(() => {
-  server.listen({ onUnhandledRequest: 'warn' })
-  // @ts-expect-error - jsdom location is not optional
-  delete window.location
-})
+  server.use(
+    http.post("https://accounts.spotify.com/api/token", async ({ request }) => {
+      requests.push(new URLSearchParams(await request.text()))
+      return HttpResponse.json({ access_token: accessToken, token_type: "Bearer", expires_in: 3600 })
+    })
+  )
 
-afterAll(() => {
-  server.close()
-  window.location = location
-})
+  return requests
+}
 
-beforeAll(() => {
-  // @ts-expect-error - partial Location mock
-  window.location = { hash: "" }
-})
+async function authorizeUrl() {
+  await waitFor(() => expect(redirectTo).toHaveBeenCalled())
+  return new URL(vi.mocked(redirectTo).mock.calls[0][0])
+}
 
 beforeEach(() => {
   i18n.changeLanguage("en")
-  server.resetHandlers()
-})
-
-afterEach(() => {
-  localStorage.clear()
+  visit("/exportify")
 })
 
 describe("i18n", () => {
@@ -59,224 +55,92 @@ describe("i18n", () => {
   })
 })
 
+describe("PKCE", () => {
+  test("derives the code challenge per RFC 7636 Appendix B", async () => {
+    expect(await auth.generateCodeChallenge("dBjftJeZ4CVP-mB92K27uhbUJU1p1r_wW1gFWFOEjXk"))
+      .toBe("E9Melhoa2OwvFrEMTJguCHaoeK1t8URWbuGJSstw-cM")
+  })
+})
+
 describe("logging in", () => {
-  test("renders get started button and redirects to Spotify with correct scopes", async () => {
+  test("redirects to Spotify with the read-only scopes and an S256 challenge for the stored verifier", async () => {
     render(<App />)
 
-    const linkElement = screen.getByText(/Get Started/i)
+    await userEvent.click(screen.getByText(/Get Started/i))
 
-    expect(linkElement).toBeInTheDocument()
+    const url = await authorizeUrl()
+    const verifier = localStorage.getItem("code_verifier")!
 
-    await userEvent.click(linkElement)
-
-    // Now uses PKCE flow with authorization code
-    expect(window.location.href).toMatch(/^https:\/\/accounts\.spotify\.com\/authorize\?/)
-    expect(window.location.href).toContain('response_type=code')
-    expect(window.location.href).toContain('client_id=9950ac751e34487dbbe027c4fd7f8e99')
-    expect(window.location.href).toContain('scope=playlist-read-private')
-    expect(window.location.href).toContain('code_challenge_method=S256')
-    expect(window.location.href).toContain('code_challenge=')
-    expect(window.location.href).toContain('show_dialog=false')
+    expect(url.origin + url.pathname).toBe("https://accounts.spotify.com/authorize")
+    expect(Object.fromEntries(url.searchParams)).toEqual({
+      response_type: "code",
+      client_id: "9950ac751e34487dbbe027c4fd7f8e99",
+      scope: "playlist-read-private playlist-read-collaborative user-library-read",
+      code_challenge_method: "S256",
+      code_challenge: createHash("sha256").update(verifier).digest("base64url"),
+      redirect_uri: "https://exportify.app/exportify",
+      show_dialog: "false",
+    })
+    expect(verifier).toMatch(/^[A-Za-z0-9]{64}$/)
   })
 
-  describe("with the app_client_id override", () => {
-    let tokenRequestBody: URLSearchParams | null = null
+  test("uses the app_client_id override for both authorization and token exchange", async () => {
+    const tokenRequests = mockTokenEndpoint()
+    visit("/exportify?app_client_id=CUSTOM_CLIENT_ID")
 
-    beforeEach(() => {
-      tokenRequestBody = null
+    const { unmount } = render(<App />)
+    await userEvent.click(screen.getByText(/Get Started/i))
 
-      server.use(
-        http.post('https://accounts.spotify.com/api/token', async ({ request }) => {
-          tokenRequestBody = new URLSearchParams(await request.text())
+    expect((await authorizeUrl()).searchParams.get("client_id")).toBe("CUSTOM_CLIENT_ID")
+    unmount()
 
-          return HttpResponse.json({ access_token: 'TEST_ACCESS_TOKEN' })
-        })
-      )
-    })
+    visit("/exportify?code=TEST_AUTH_CODE")
+    render(<App />)
 
-    afterEach(() => {
-      vi.restoreAllMocks()
-    })
+    await waitFor(() => expect(tokenRequests).toHaveLength(1))
+    expect(tokenRequests[0].get("client_id")).toBe("CUSTOM_CLIENT_ID")
 
-    test("uses the custom client ID for both authorization and token exchange", async () => {
-      // Record redirects so late 401 handling from earlier tests can't mask the authorize URL
-      const redirects: string[] = []
-      // @ts-expect-error - partial Location mock
-      window.location = {
-        search: "?app_client_id=CUSTOM_CLIENT_ID",
-        pathname: "/exportify",
-        protocol: "https:",
-        host: "exportify.app",
-        set href(url: string) { redirects.push(url) }
-      }
-
-      const { unmount } = render(<App />)
-      await userEvent.click(screen.getByText(/Get Started/i))
-
-      await waitFor(() => {
-        expect(redirects).toContainEqual(expect.stringMatching(/^https:\/\/accounts\.spotify\.com\/authorize\?.*client_id=CUSTOM_CLIENT_ID/))
-      })
-      unmount()
-
-      vi.spyOn(window.history, 'replaceState').mockImplementation(() => {})
-      // @ts-expect-error - partial Location mock
-      window.location = {
-        search: "?code=TEST_AUTH_CODE",
-        pathname: "/exportify",
-        protocol: "https:",
-        host: "exportify.app"
-      }
-
-      render(<App />)
-
-      await waitFor(() => {
-        expect(tokenRequestBody).not.toBeNull()
-      })
-      expect(tokenRequestBody?.get('client_id')).toBe('CUSTOM_CLIENT_ID')
-
-      auth.clearAccessToken()
-      expect(localStorage.getItem('client_id')).toBeNull()
-    })
+    auth.clearAccessToken()
+    expect(localStorage.getItem("client_id")).toBeNull()
   })
 
-  describe("OAuth callback with authorization code", () => {
-    let setItemSpy: MockInstance
-    let replaceStateSpy: MockInstance
-    let tokenRequestBody: URLSearchParams | null = null
+  test("exchanges the authorization code for an access token and loads playlists", async () => {
+    const tokenRequests = mockTokenEndpoint()
+    localStorage.setItem("code_verifier", "TEST_CODE_VERIFIER")
+    visit("/exportify?code=TEST_AUTH_CODE")
 
-    beforeEach(() => {
-      tokenRequestBody = null
+    render(<App />)
 
-      // Mock localStorage
-      vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
-        if (key === 'code_verifier') return 'TEST_CODE_VERIFIER'
-        return null
-      })
-      setItemSpy = vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {})
-      replaceStateSpy = vi.spyOn(window.history, 'replaceState').mockImplementation(() => {})
-
-      // Mock window.location with code parameter
-      // @ts-expect-error - partial Location mock
-      window.location = {
-        search: "?code=TEST_AUTH_CODE",
-        pathname: "/exportify",
-        protocol: "https:",
-        host: "exportify.app"
-      }
-
-      // Mock Spotify token endpoint and capture request
-      server.use(
-        http.post('https://accounts.spotify.com/api/token', async ({ request }) => {
-          // Capture the request body for verification
-          tokenRequestBody = new URLSearchParams(await request.text())
-
-          return HttpResponse.json({
-            access_token: 'EXCHANGED_ACCESS_TOKEN',
-            token_type: 'Bearer',
-            expires_in: 3600,
-            refresh_token: 'REFRESH_TOKEN',
-            scope: 'playlist-read-private playlist-read-collaborative user-library-read'
-          })
-        })
-      )
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
+    expect(localStorage.getItem("access_token")).toBe("TEST_ACCESS_TOKEN")
+    expect(Object.fromEntries(tokenRequests[0])).toEqual({
+      client_id: "9950ac751e34487dbbe027c4fd7f8e99",
+      grant_type: "authorization_code",
+      code: "TEST_AUTH_CODE",
+      redirect_uri: "https://exportify.app/exportify",
+      code_verifier: "TEST_CODE_VERIFIER",
     })
-
-    afterEach(() => {
-      vi.restoreAllMocks()
-    })
-
-    test("exchanges authorization code for access token with correct PKCE parameters", async () => {
-      render(<App />)
-
-      // Wait for token exchange to complete
-      await waitFor(() => {
-        expect(setItemSpy).toHaveBeenCalledWith('access_token', 'EXCHANGED_ACCESS_TOKEN')
-      })
-
-      // Verify the token endpoint was called with correct parameters
-      expect(tokenRequestBody).not.toBeNull()
-      expect(tokenRequestBody?.get('client_id')).toBe('9950ac751e34487dbbe027c4fd7f8e99')
-      expect(tokenRequestBody?.get('grant_type')).toBe('authorization_code')
-      expect(tokenRequestBody?.get('code')).toBe('TEST_AUTH_CODE')
-      expect(tokenRequestBody?.get('code_verifier')).toBe('TEST_CODE_VERIFIER')
-      expect(tokenRequestBody?.get('redirect_uri')).toBe('https://exportify.app/exportify')
-
-      // Verify code is removed from URL
-      expect(replaceStateSpy).toHaveBeenCalledWith({}, expect.any(String), '/exportify')
-
-      // Verify playlist component is rendered
-      expect(screen.getByTestId('playlistTableSpinner')).toBeInTheDocument()
-    })
+    expect(window.location.search).toBe("")
   })
 
-  describe("post-login state", () => {
-    let getItemSpy: MockInstance
+  test("renders the playlist table when an access token is already stored", () => {
+    localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
 
-    beforeEach(() => {
-      // Mock localStorage for access token
-      getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
-        if (key === 'access_token') return 'TEST_ACCESS_TOKEN'
-        return null
-      })
+    render(<App />)
 
-      // @ts-expect-error - No code parameter in URL
-      window.location = {
-        pathname: "/exportify",
-        href: "https://www.example.com/exportify",
-        search: "",
-        hash: ""
-      }
-    })
-
-    afterEach(() => {
-      getItemSpy.mockRestore()
-    })
-
-    test("renders playlist component when access token exists in localStorage", () => {
-      render(<App />)
-
-      expect(screen.getByTestId('playlistTableSpinner')).toBeInTheDocument()
-    })
+    expect(screen.getByTestId("playlistTableSpinner")).toBeInTheDocument()
   })
 })
 
 describe("logging out", () => {
-  let getItemSpy: MockInstance
-  let logoutSpy: MockInstance
+  test("clears the token and returns to login forcing a permission request", async () => {
+    localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
 
-  beforeEach(() => {
-    // Mock localStorage with access token
-    getItemSpy = vi.spyOn(Storage.prototype, 'getItem').mockImplementation((key) => {
-      if (key === 'access_token') return 'TEST_ACCESS_TOKEN'
-      return null
-    })
-
-    // Spy on logout function
-    logoutSpy = vi.spyOn(auth, 'logout').mockImplementation(() => {})
-
-    // @ts-expect-error - Simple window.location mock
-    window.location = {
-      pathname: "/exportify",
-      href: "https://www.example.com/exportify",
-      search: "",
-      hash: ""
-    }
-  })
-
-  afterEach(() => {
-    getItemSpy.mockRestore()
-    logoutSpy.mockRestore()
-  })
-
-  test("redirects user to login screen which will force a permission request", async () => {
     render(<App />)
 
-    const changeUserElement = screen.getByTitle("Change user")
+    await userEvent.click(screen.getByTitle("Change user"))
 
-    expect(changeUserElement).toBeInTheDocument()
-
-    await userEvent.click(changeUserElement)
-
-    expect(logoutSpy).toHaveBeenCalledWith(true)
+    expect(redirectTo).toHaveBeenCalledWith("/exportify?change_user=true")
+    expect(localStorage.getItem("access_token")).toBeNull()
   })
 })

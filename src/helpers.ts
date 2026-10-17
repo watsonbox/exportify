@@ -2,6 +2,7 @@ import Bugsnag from "@bugsnag/js"
 import axios from "axios"
 import Bottleneck from "bottleneck"
 import { clearAccessToken } from "./auth"
+import { redirectTo } from "./navigation"
 
 const REQUEST_RETRY_BUFFER = 1000
 const MAX_RATE_LIMIT_RETRIES = 2 // 3 attempts in total
@@ -45,11 +46,11 @@ export function apiCallErrorHandler(error: any) {
     if (error.request.status === 401) {
       // Clear token and return to home page after auth token expiry
       clearAccessToken()
-      window.location.href = window.location.pathname
+      redirectTo(window.location.pathname)
       return
     } else if (error.request.status >= 500 && error.request.status < 600) {
       // Show error page when we get a 5XX that fails retries
-      window.location.href = `${window.location.pathname}?spotify_error=true`
+      redirectTo(`${window.location.pathname}?spotify_error=true`)
       return
     }
   }

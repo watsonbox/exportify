@@ -1,88 +1,160 @@
 import React from "react"
 import "i18n/config"
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
-import { setupServer } from "msw/node"
 import FileSaver from "file-saver"
 import JSZip from "jszip"
-import type { MockInstance } from "vitest"
 
 import PlaylistTable from "./PlaylistTable"
 
 import "../icons"
-import { handlerCalled, handlers, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
+import { server } from "../mocks/server"
+import { redirectTo } from "../navigation"
+import { csvRecords } from "../test/csv"
+import { handlerCalled, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
 
-const server = setupServer(...handlers)
-
-// Mock out Bugsnag calls
 vi.mock('@bugsnag/js')
-const onSetSubtitle = vi.fn()
 
-beforeAll(() => {
-  server.listen({ onUnhandledRequest: 'warn' })
+const ghostpoetPlaylist = "Ghostpoet – Peanut Butter Blues and Melancholy Jam"
+const ghostpoetFileName = "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv"
 
-  // https://jestjs.io/docs/manual-mocks#mocking-methods-which-are-not-implemented-in-jsdom
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: vi.fn().mockImplementation(query => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: vi.fn(), // Deprecated
-      removeListener: vi.fn(), // Deprecated
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
-      dispatchEvent: vi.fn(),
-    })),
-  });
-})
+const likedRequests = [
+  'https://api.spotify.com/v1/me',
+  'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20',
+  'https://api.spotify.com/v1/me/tracks',
+  'https://api.spotify.com/v1/me/tracks?offset=0&limit=50',
+]
 
-const { location } = window
-
-// Resolves assigned hrefs like a browser, so MSW can still resolve request URLs against it after a redirect
-function stubLocation(initialHref: string) {
-  let current = new URL(initialHref)
-  // @ts-expect-error - partial Location mock
-  window.location = {
-    get href() { return current.href },
-    set href(href: string) { current = new URL(href, current) },
-    get pathname() { return current.pathname },
-  }
+const crying = {
+  "Track URI": "spotify:track:1GrLfs4TEvAZ86HVzXHchS",
+  "Track Name": "Crying",
+  "Artist URI(s)": "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz",
+  "Artist Name(s)": "Six by Seven",
+  "Album URI": "spotify:album:4iwv7b8gDPKztLkKCbWyhi",
+  "Album Name": "Best of Six By Seven",
+  "Album Artist URI(s)": "spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz",
+  "Album Artist Name(s)": "Six by Seven",
+  "Album Release Date": "2017-02-17",
+  "Album Image URL": "https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea",
+  "Disc Number": "1",
+  "Track Number": "3",
+  "Track Duration (ms)": "198093",
+  "Track Preview URL": "https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99",
+  "Explicit": "false",
+  "Popularity": "2",
+  "ISRC": "UK4UP1300002",
+  "Added By": "",
+  "Added At": "2020-07-19T09:24:39Z",
 }
 
-beforeAll(() => {
-  // @ts-expect-error - jsdom location is not optional
-  delete window.location
+const ghostpoetTrack = {
+  "Artist URI(s)": "spotify:artist:69lEbRQRe29JdyLrewNAvD",
+  "Artist Name(s)": "Ghostpoet",
+  "Album URI": "spotify:album:6jiLkuSnhzDvzsHJlweoGh",
+  "Album Name": "Peanut Butter Blues and Melancholy Jam",
+  "Album Artist URI(s)": "spotify:artist:69lEbRQRe29JdyLrewNAvD",
+  "Album Artist Name(s)": "Ghostpoet",
+  "Album Release Date": "2011",
+  "Album Image URL": "https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80",
+  "Disc Number": "1",
+  "Explicit": "false",
+  "Added By": "spotify:user:watsonbox",
+  "Added At": "2020-11-03T15:19:04Z",
+}
+
+const oneTwos = {
+  ...ghostpoetTrack,
+  "Track URI": "spotify:track:7ATyvp3TmYBmGW7YuC8DJ3",
+  "Track Name": "One Twos / Run Run Run",
+  "Track Number": "1",
+  "Track Duration (ms)": "241346",
+  "Track Preview URL": "https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99",
+  "Popularity": "22",
+  "ISRC": "GBMEF1100339",
+}
+
+const usAgainstWhatever = {
+  ...ghostpoetTrack,
+  "Track URI": "spotify:track:0FNanBLvmFEDyD75Whjj52",
+  "Track Name": "Us Against Whatever Ever",
+  "Track Number": "2",
+  "Track Duration (ms)": "269346",
+  "Track Preview URL": "https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99",
+  "Popularity": "36",
+  "ISRC": "GBMEF1000270",
+}
+
+const localTrack = (name: string, artist: string, durationMs: number) => ({
+  "Track URI": `spotify:local:${artist.replace(/ /g, '+')}:${name.replace(/ /g, '+')}:${name.replace(/ /g, '+')}:${durationMs / 1000}`,
+  "Track Name": name,
+  "Artist URI(s)": "",
+  "Artist Name(s)": artist,
+  "Album URI": "",
+  "Album Name": name,
+  "Album Artist URI(s)": "",
+  "Album Artist Name(s)": "",
+  "Album Release Date": "",
+  "Album Image URL": "",
+  "Disc Number": "0",
+  "Track Number": "0",
+  "Track Duration (ms)": String(durationMs),
+  "Track Preview URL": "",
+  "Explicit": "false",
+  "Popularity": "0",
+  "ISRC": "",
+  "Added By": "spotify:user:u8ins5esg43wtxk4h66o5d1nb",
+  "Added At": "2021-02-24T06:12:40Z",
 })
+
+const requestedUrls = () => handlerCalled.mock.calls.map(([url]) => url)
+
+const renderTable = (config = {}) =>
+  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={config} onSetSubtitle={vi.fn()} />)
+
+async function savedFile() {
+  const saveAs = vi.mocked(FileSaver.saveAs)
+  await waitFor(() => expect(saveAs).toHaveBeenCalledTimes(1))
+  return saveAs.mock.calls[0]
+}
+
+// Exports one playlist from its row and returns the saved CSV
+async function exportPlaylist(playlistName: string, config = {}) {
+  renderTable(config)
+
+  const row = await screen.findByRole('row', { name: name => name.includes(playlistName) })
+  const button = within(row).getByRole('button', { name: 'Export' })
+  await userEvent.click(button)
+  expect(button).toBeDisabled()
+
+  const [blob, fileName, options] = await savedFile()
+  await waitFor(() => expect(button).toBeEnabled())
+
+  expect(options).toEqual({ autoBom: false })
+  expect((blob as Blob).type).toBe('text/csv;charset=utf-8')
+
+  return { fileName, records: csvRecords(await (blob as Blob).text()) }
+}
+
+// Clicks the zip export button and returns each CSV in the saved archive
+async function exportZip(buttonName: RegExp) {
+  await userEvent.click(await screen.findByRole('button', { name: buttonName }))
+
+  const [blob, fileName] = await savedFile()
+  expect(fileName).toBe('spotify_playlists.zip')
+
+  const zip = await JSZip.loadAsync(blob as Blob)
+  const files = await Promise.all(Object.values(zip.files).map(async file => [file.name, csvRecords(await file.async('string'))]))
+  return Object.fromEntries(files)
+}
 
 beforeEach(() => {
-  stubLocation("http://www.example.com/exportify")
+  window.history.replaceState(null, '', '/exportify')
+  vi.spyOn(FileSaver, 'saveAs').mockImplementation(() => {})
 })
-
-afterAll(() => {
-  server.close()
-  window.location = location
-})
-
-afterEach(() => {
-  vi.restoreAllMocks()
-  server.resetHandlers()
-})
-
-async function expectSavedCsv(saveAsMock: MockInstance, fileName: string, csv: string) {
-  expect(saveAsMock).toHaveBeenCalledWith(expect.any(Blob), fileName, { autoBom: false })
-
-  const blob: Blob = saveAsMock.mock.calls[0][0]
-  expect(blob.type).toBe('text/csv;charset=utf-8')
-  expect(await blob.text()).toBe(csv)
-}
-
-const baseTrackHeaders = '"Track URI","Track Name","Artist URI(s)","Artist Name(s)","Album URI","Album Name","Album Artist URI(s)","Album Artist Name(s)","Album Release Date","Album Image URL","Disc Number","Track Number","Track Duration (ms)","Track Preview URL","Explicit","Popularity","ISRC","Added By","Added At"'
-const baseTrackDataCrying = '"spotify:track:1GrLfs4TEvAZ86HVzXHchS","Crying","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","spotify:album:4iwv7b8gDPKztLkKCbWyhi","Best of Six By Seven","spotify:artist:4TXdHyuAOl3rAOFmZ6MeKz","Six by Seven","2017-02-17","https://i.scdn.co/image/ab67616d0000b273f485821b346237acbbca07ea","1","3","198093","https://p.scdn.co/mp3-preview/daf08df57a49c215c8c53dc5fe88dec5461f15c9?cid=9950ac751e34487dbbe027c4fd7f8e99","false","2","UK4UP1300002","","2020-07-19T09:24:39Z"'
 
 // Use a snapshot test to ensure exact component rendering
 test("playlist loading", async () => {
-  const { asFragment } = render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+  const { asFragment } = renderTable()
 
   expect(await screen.findByText(/Export All/)).toBeInTheDocument()
 
@@ -90,310 +162,102 @@ test("playlist loading", async () => {
 })
 
 test("redirecting when access token is invalid", async () => {
-  window.location.href = "http://www.example.com/exportify?some=state"
-
-  render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+  render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" onSetSubtitle={vi.fn()} />)
 
   await waitFor(() => {
-    expect(window.location.href).toBe("http://www.example.com/exportify")
+    expect(redirectTo).toHaveBeenCalledWith("/exportify")
   })
 })
 
 describe("single playlist exporting", () => {
   test("standard case exports successfully", async () => {
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { fileName, records } = await exportPlaylist("Liked")
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[0]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled()
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeEnabled()
-    })
-
-    await waitFor(() => {
-      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        ['https://api.spotify.com/v1/me'],
-        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
-        ['https://api.spotify.com/v1/me/tracks'],
-        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50']
-      ])
-    })
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'liked.csv',
-      `${baseTrackHeaders}\n` +
-      `${baseTrackDataCrying}\n`
-    )
+    expect(fileName).toBe('liked.csv')
+    expect(records).toEqual([crying])
+    expect(requestedUrls()).toEqual(likedRequests) // Ensure API call order and no duplicates
   })
 
   test("including additional artist data", async () => {
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { records } = await exportPlaylist("Liked", { includeArtistsData: true })
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeArtistsData: true }} onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[0]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled()
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeEnabled()
-    })
-
-    await waitFor(() => {
-      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        ['https://api.spotify.com/v1/me'],
-        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
-        ['https://api.spotify.com/v1/me/tracks'],
-        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
-        ['https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz']
-      ])
-    })
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'liked.csv',
-      `${baseTrackHeaders},"Artist Genres"\n` +
-      `${baseTrackDataCrying},"nottingham indie"\n`
-    )
+    expect(records).toEqual([{ ...crying, "Artist Genres": "nottingham indie" }])
+    expect(requestedUrls()).toEqual([...likedRequests, 'https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz'])
   })
 
   test("including additional audio features data", async () => {
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { records } = await exportPlaylist("Liked", { includeAudioFeaturesData: true })
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAudioFeaturesData: true }} onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[0]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled()
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeEnabled()
-    })
-
-    await waitFor(() => {
-      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        ['https://api.spotify.com/v1/me'],
-        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
-        ['https://api.spotify.com/v1/me/tracks'],
-        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
-        ['https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS']
-      ])
-    })
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'liked.csv',
-      `${baseTrackHeaders},"Danceability","Energy","Key","Loudness","Mode","Speechiness","Acousticness","Instrumentalness","Liveness","Valence","Tempo","Time Signature"\n` +
-      `${baseTrackDataCrying},"0.416","0.971","0","-5.55","1","0.0575","0.00104","0.0391","0.44","0.19","131.988","4"\n`
-    )
+    expect(records).toEqual([{
+      ...crying,
+      "Danceability": "0.416",
+      "Energy": "0.971",
+      "Key": "0",
+      "Loudness": "-5.55",
+      "Mode": "1",
+      "Speechiness": "0.0575",
+      "Acousticness": "0.00104",
+      "Instrumentalness": "0.0391",
+      "Liveness": "0.44",
+      "Valence": "0.19",
+      "Tempo": "131.988",
+      "Time Signature": "4",
+    }])
+    expect(requestedUrls()).toEqual([...likedRequests, 'https://api.spotify.com/v1/audio-features?ids=1GrLfs4TEvAZ86HVzXHchS'])
   })
 
   test("including additional album data", async () => {
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { records } = await exportPlaylist("Liked", { includeAlbumData: true })
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[0]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled()
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeEnabled()
-    })
-
-    await waitFor(() => {
-      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        ['https://api.spotify.com/v1/me'],
-        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
-        ['https://api.spotify.com/v1/me/tracks'],
-        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
-        ['https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi']
-      ])
-    })
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'liked.csv',
-      `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
-      `${baseTrackDataCrying},"something, something else","Beggars Banquet","C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd."\n`
-    )
+    expect(records).toEqual([{
+      ...crying,
+      "Album Genres": "something, something else",
+      "Label": "Beggars Banquet",
+      "Copyrights": "C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd.",
+    }])
+    expect(requestedUrls()).toEqual([...likedRequests, 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi'])
   })
 
   test("tracks without album data omit it", async () => {
     server.use(...nullAlbumHandlers)
 
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { records } = await exportPlaylist("Liked", { includeAlbumData: true })
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={{ includeAlbumData: true }} onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[0]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled()
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeEnabled()
-    })
-
-    await waitFor(() => {
-      expect(handlerCalled.mock.calls).toEqual([ // Ensure API call order and no duplicates
-        ['https://api.spotify.com/v1/me'],
-        ['https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20'],
-        ['https://api.spotify.com/v1/me/tracks'],
-        ['https://api.spotify.com/v1/me/tracks?offset=0&limit=50'],
-        ['https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi']
-      ])
-    })
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'liked.csv',
-      `${baseTrackHeaders},"Album Genres","Label","Copyrights"\n` +
-      `${baseTrackDataCrying},"","",""\n`
-    )
+    expect(records).toEqual([{ ...crying, "Album Genres": "", "Label": "", "Copyrights": "" }])
   })
 
   test("playlist with null track skips null track", async () => {
     server.use(...nullTrackHandlers)
 
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { fileName, records } = await exportPlaylist(ghostpoetPlaylist)
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[1]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      `${baseTrackHeaders}\n`
-    )
+    expect(fileName).toBe(ghostpoetFileName)
+    expect(records).toEqual([])
   })
 
   test("playlist with local tracks includes them", async () => {
     server.use(...localTrackHandlers)
 
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { records } = await exportPlaylist(ghostpoetPlaylist)
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[1]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      `${baseTrackHeaders}\n` +
-      '"spotify:local:The+Waymores:Heart+of+Stone:Heart+of+Stone:128","Heart of Stone","","The Waymores","","Heart of Stone","","","","","0","0","128000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n' +
-      '"spotify:local:Charlie+Marie:Heard+It+Through+The+Red+Wine:Heard+It+Through+The+Red+Wine:227","Heard It Through The Red Wine","","Charlie Marie","","Heard It Through The Red Wine","","","","","0","0","227000","","false","0","","spotify:user:u8ins5esg43wtxk4h66o5d1nb","2021-02-24T06:12:40Z"\n'
-    )
+    expect(records).toEqual([
+      localTrack("Heart of Stone", "The Waymores", 128000),
+      localTrack("Heard It Through The Red Wine", "Charlie Marie", 227000),
+    ])
   })
 
   test("playlist with duplicate tracks includes them", async () => {
     server.use(...duplicateTrackHandlers)
 
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
+    const { records } = await exportPlaylist(ghostpoetPlaylist)
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getAllByText("Export")[1]
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(saveAsMock).toHaveBeenCalledTimes(1)
-    })
-
-    await expectSavedCsv(saveAsMock, 'ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv',
-      `${baseTrackHeaders}\n` +
-      '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-      '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-20T15:19:04Z"\n'
-    )
+    expect(records).toEqual([oneTwos, { ...oneTwos, "Added At": "2020-11-20T15:19:04Z" }])
   })
 })
 
 describe("searching playlists", () => {
   test("simple successful search", async () => {
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+    renderTable()
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
@@ -404,7 +268,7 @@ describe("searching playlists", () => {
       expect(screen.queryAllByRole('row')).toHaveLength(2)
     })
     expect(screen.queryByText("Liked")).not.toBeInTheDocument()
-    expect(screen.getByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    expect(screen.getByText(ghostpoetPlaylist)).toBeInTheDocument()
 
     await userEvent.type(screen.getByRole('searchbox'), '{Escape}')
 
@@ -413,11 +277,11 @@ describe("searching playlists", () => {
       expect(screen.queryAllByRole('row')).toHaveLength(3)
     })
     expect(screen.getByText("Liked")).toBeInTheDocument()
-    expect(screen.getByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
+    expect(screen.getByText(ghostpoetPlaylist)).toBeInTheDocument()
   })
 
   test("search with no results", async () => {
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+    renderTable()
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
@@ -428,50 +292,31 @@ describe("searching playlists", () => {
       expect(screen.queryAllByRole('row')).toHaveLength(1)
     })
     expect(screen.queryByText("Liked")).not.toBeInTheDocument()
-    expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
+    expect(screen.queryByText(ghostpoetPlaylist)).not.toBeInTheDocument()
   })
 })
 
 describe("missing playlists", () => {
-  test("playlist loading", async () => {
+  beforeEach(() => {
     server.use(...missingPlaylistsHandlers)
+  })
 
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+  test("playlist loading", async () => {
+    renderTable()
 
     expect(await screen.findByText(/This playlist is not supported/)).toBeInTheDocument() // FIXME
     expect(screen.getAllByRole('row')).toHaveLength(4)
   })
 
   test("exporting of all playlists", async () => {
-    server.use(...missingPlaylistsHandlers)
+    renderTable()
 
-    const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-    saveAsMock.mockImplementation(vi.fn())
-
-    const jsZipFileMock = vi.spyOn(JSZip.prototype, 'file')
-    const jsZipGenerateAsync = vi.spyOn(JSZip.prototype, 'generateAsync')
-    jsZipGenerateAsync.mockResolvedValue("zip_content")
-
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
-
-    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-    const linkElement = screen.getByText("Export All")
-
-    expect(linkElement).toBeInTheDocument()
-
-    await userEvent.click(linkElement)
-
-    await waitFor(() => {
-      expect(jsZipFileMock).toHaveBeenCalledTimes(2)
-    })
+    expect(Object.keys(await exportZip(/Export All/))).toEqual(['liked.csv', ghostpoetFileName])
   })
 
   // FIXME: Repeated searches producing extra request
   test("searching", async () => {
-    server.use(...missingPlaylistsHandlers)
-
-    render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
+    renderTable()
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
@@ -484,83 +329,20 @@ describe("missing playlists", () => {
 })
 
 test("exporting of all playlists", async () => {
-  const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-  saveAsMock.mockImplementation(vi.fn())
+  renderTable()
 
-  const jsZipFileMock = vi.spyOn(JSZip.prototype, 'file')
-  const jsZipGenerateAsync = vi.spyOn(JSZip.prototype, 'generateAsync')
-  jsZipGenerateAsync.mockResolvedValue("zip_content")
-
-  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
-
-  expect(await screen.findByText(/Export All/)).toBeInTheDocument()
-
-  const linkElement = screen.getByText("Export All")
-
-  expect(linkElement).toBeInTheDocument()
-
-  await userEvent.click(linkElement)
-
-  await waitFor(() => {
-    expect(jsZipFileMock).toHaveBeenCalledTimes(2)
+  expect(await exportZip(/Export All/)).toEqual({
+    'liked.csv': [crying],
+    [ghostpoetFileName]: [oneTwos, usAgainstWhatever],
   })
-
-  expect(jsZipFileMock).toHaveBeenCalledWith(
-    "liked.csv",
-    `${baseTrackHeaders}\n` +
-    `${baseTrackDataCrying}\n`
-  )
-
-  expect(jsZipFileMock).toHaveBeenCalledWith(
-    "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv",
-    `${baseTrackHeaders}\n` +
-    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","2","269346","https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99","false","36","GBMEF1000270","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
-  )
-
-  await waitFor(() => {
-    expect(saveAsMock).toHaveBeenCalledTimes(1)
-  })
-
-  expect(saveAsMock).toHaveBeenCalledWith("zip_content", "spotify_playlists.zip")
 })
 
 test("exporting of search results", async () => {
-  const saveAsMock = vi.spyOn(FileSaver, "saveAs")
-  saveAsMock.mockImplementation(vi.fn())
+  renderTable()
 
-  const jsZipFileMock = vi.spyOn(JSZip.prototype, 'file')
-  const jsZipGenerateAsync = vi.spyOn(JSZip.prototype, 'generateAsync')
-  jsZipGenerateAsync.mockResolvedValue("zip_content")
+  await userEvent.type(await screen.findByRole('searchbox'), 'Ghost{enter}')
 
-  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />);
-
-  expect(await screen.findByRole('searchbox')).toBeInTheDocument()
-
-  await userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
-
-  expect(await screen.findByText(/Export Results/)).toBeInTheDocument()
-
-  const linkElement = screen.getByText("Export Results")
-
-  expect(linkElement).toBeInTheDocument()
-
-  await userEvent.click(linkElement)
-
-  await waitFor(() => {
-    expect(jsZipFileMock).toHaveBeenCalledTimes(1)
+  expect(await exportZip(/Export Results/)).toEqual({
+    [ghostpoetFileName]: [oneTwos, usAgainstWhatever],
   })
-
-  expect(jsZipFileMock).toHaveBeenCalledWith(
-    "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv",
-    `${baseTrackHeaders}\n` +
-    '"spotify:track:7ATyvp3TmYBmGW7YuC8DJ3","One Twos / Run Run Run","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","1","241346","https://p.scdn.co/mp3-preview/137d431ad0cf987b147dccea6304aca756e923c1?cid=9950ac751e34487dbbe027c4fd7f8e99","false","22","GBMEF1100339","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n' +
-    '"spotify:track:0FNanBLvmFEDyD75Whjj52","Us Against Whatever Ever","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","spotify:album:6jiLkuSnhzDvzsHJlweoGh","Peanut Butter Blues and Melancholy Jam","spotify:artist:69lEbRQRe29JdyLrewNAvD","Ghostpoet","2011","https://i.scdn.co/image/ab67616d0000b273306e7640be17c5b3468e6e80","1","2","269346","https://p.scdn.co/mp3-preview/e5e39be10697be8755532d02c52319ffa6d58688?cid=9950ac751e34487dbbe027c4fd7f8e99","false","36","GBMEF1000270","spotify:user:watsonbox","2020-11-03T15:19:04Z"\n'
-  )
-
-  await waitFor(() => {
-    expect(saveAsMock).toHaveBeenCalledTimes(1)
-  })
-
-  expect(saveAsMock).toHaveBeenCalledWith("zip_content", "spotify_playlists.zip")
 })

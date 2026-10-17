@@ -1,28 +1,17 @@
-// jest-dom adds custom jest matchers for asserting on DOM nodes.
-// allows you to do things like:
-// expect(element).toHaveTextContent(/react/i)
-// learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/vitest';
 import type { TestingLibraryMatchers } from '@testing-library/jest-dom/matchers';
+import { server } from './mocks/server';
 
-// Mock Web Crypto API for tests
-Object.defineProperty(global, 'crypto', {
-  value: {
-    getRandomValues: (arr: Uint8Array) => {
-      // Fill with deterministic values for testing
-      for (let i = 0; i < arr.length; i++) {
-        arr[i] = i % 256;
-      }
-      return arr;
-    },
-    subtle: {
-      digest: async () => {
-        // Return a mock hash
-        return new ArrayBuffer(32);
-      }
-    }
-  }
+// jsdom can't navigate, so tests assert on redirectTo calls instead
+vi.mock('./navigation');
+
+beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+afterEach(() => {
+  server.resetHandlers();
+  localStorage.clear();
+  window.history.replaceState(null, '', '/');
 });
+afterAll(() => server.close());
 
 // jest-dom 6 augments @vitest/expect, which Vitest 5 merged into vitest
 declare module 'vitest' {

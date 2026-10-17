@@ -3,6 +3,7 @@
 // - https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 
 import axios from "axios"
+import { redirectTo } from "./navigation"
 
 const SPOTIFY_CLIENT_ID = "9950ac751e34487dbbe027c4fd7f8e99"
 const SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
@@ -34,7 +35,7 @@ function generateCodeVerifier(): string {
 }
 
 // Generate code challenge from verifier
-async function generateCodeChallenge(codeVerifier: string): Promise<string> {
+export async function generateCodeChallenge(codeVerifier: string): Promise<string> {
   const encoder = new TextEncoder()
   const data = encoder.encode(codeVerifier)
   const hashed = await crypto.subtle.digest("SHA-256", data)
@@ -82,7 +83,7 @@ export async function initiateSpotifyAuth(options?: { clientId?: string; changeU
   authUrl.search = new URLSearchParams(params).toString()
 
   // Redirect to Spotify authorization page
-  window.location.href = authUrl.toString()
+  redirectTo(authUrl.toString())
 }
 
 // Exchange authorization code for access token
@@ -125,5 +126,5 @@ export function logout(changeUser: boolean = false): void {
   const url = changeUser
     ? `${window.location.pathname}?change_user=true`
     : window.location.pathname
-  window.location.href = url
+  redirectTo(url)
 }

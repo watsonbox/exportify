@@ -75,7 +75,7 @@ const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks`
 const addedByWatsonbox = (track: object | null, added_at = '2020-11-03T15:19:04Z') =>
   buildPlaylistItem({ track, added_at, added_by: watsonbox })
 
-const spotifyGet = (url: string, body: (request: Request) => object, { ids }: { ids?: string } = {}) =>
+export const spotifyGet = (url: string, body: (request: Request) => object, { ids }: { ids?: string } = {}) =>
   http.get(url, ({ request }) => {
     handlerCalled(request.url)
 
@@ -89,7 +89,7 @@ const spotifyGet = (url: string, body: (request: Request) => object, { ids }: { 
     return HttpResponse.json(body(request))
   })
 
-const pagedGet = (url: string, items: object[], defaultLimit?: number) =>
+export const pagedGet = (url: string, items: object[], defaultLimit?: number) =>
   spotifyGet(url, request => pageAt(items, request.url, defaultLimit))
 
 const tracksPage = (items: object[]) => pagedGet(ghostpoetTracksUrl, items, 100)
