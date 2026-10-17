@@ -25,3 +25,6 @@ yarn-error.log*
 *.csv
 .ipynb_checkpoints
 .~*
+
+# HAR recordings carry bearer tokens in their request headers
+*.har
