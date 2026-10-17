@@ -21,6 +21,7 @@ export function saveAccessToken(token: string): void {
 export function clearAccessToken(): void {
   localStorage.removeItem('access_token')
   localStorage.removeItem('code_verifier')
+  localStorage.removeItem('client_id')
 }
 
 // Generate code verifier for PKCE flow
@@ -64,6 +65,7 @@ export async function initiateSpotifyAuth(options?: { clientId?: string; changeU
   const codeVerifier = generateCodeVerifier()
   const codeChallenge = await generateCodeChallenge(codeVerifier)
   localStorage.setItem("code_verifier", codeVerifier)
+  localStorage.setItem("client_id", clientId)
 
   // Construct authorization URL
   const authUrl = new URL(SPOTIFY_AUTH_URL)
@@ -87,6 +89,7 @@ export async function initiateSpotifyAuth(options?: { clientId?: string; changeU
 export async function exchangeCodeForToken(code: string): Promise<string> {
   const redirectUri = getRedirectUri()
   const codeVerifier = localStorage.getItem('code_verifier')
+  const clientId = localStorage.getItem('client_id') || SPOTIFY_CLIENT_ID
 
   if (!codeVerifier) {
     throw new Error('Code verifier not found in localStorage')
@@ -95,7 +98,7 @@ export async function exchangeCodeForToken(code: string): Promise<string> {
   const response = await axios.post(
     SPOTIFY_TOKEN_URL,
     new URLSearchParams({
-      client_id: SPOTIFY_CLIENT_ID,
+      client_id: clientId,
       grant_type: "authorization_code",
       code: code,
       redirect_uri: redirectUri,

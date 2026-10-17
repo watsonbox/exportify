@@ -78,6 +78,66 @@ describe("logging in", () => {
     expect(window.location.href).toContain('show_dialog=false')
   })
 
+  describe("with the app_client_id override", () => {
+    let tokenRequestBody: URLSearchParams | null = null
+
+    beforeEach(() => {
+      tokenRequestBody = null
+
+      server.use(
+        rest.post('https://accounts.spotify.com/api/token', async (req, res, ctx) => {
+          tokenRequestBody = new URLSearchParams(await req.text())
+
+          return res(ctx.json({ access_token: 'TEST_ACCESS_TOKEN' }))
+        })
+      )
+    })
+
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
+    test("uses the custom client ID for both authorization and token exchange", async () => {
+      // Record redirects so late 401 handling from earlier tests can't mask the authorize URL
+      const redirects: string[] = []
+      // @ts-ignore
+      window.location = {
+        search: "?app_client_id=CUSTOM_CLIENT_ID",
+        pathname: "/exportify",
+        protocol: "https:",
+        host: "exportify.app",
+        set href(url: string) { redirects.push(url) }
+      }
+
+      const { unmount } = render(<App />)
+      await userEvent.click(screen.getByText(/Get Started/i))
+
+      await waitFor(() => {
+        expect(redirects).toContainEqual(expect.stringMatching(/^https:\/\/accounts\.spotify\.com\/authorize\?.*client_id=CUSTOM_CLIENT_ID/))
+      })
+      unmount()
+
+      jest.spyOn(window.history, 'replaceState').mockImplementation(() => {})
+      // @ts-ignore
+      window.location = {
+        search: "?code=TEST_AUTH_CODE",
+        pathname: "/exportify",
+        protocol: "https:",
+        host: "exportify.app"
+      }
+
+      render(<App />)
+
+      await waitFor(() => {
+        expect(tokenRequestBody).not.toBeNull()
+      })
+      expect(tokenRequestBody?.get('client_id')).toBe('CUSTOM_CLIENT_ID')
+
+      auth.clearAccessToken()
+      expect(localStorage.getItem('client_id')).toBeNull()
+    })
+  })
+
   describe("OAuth callback with authorization code", () => {
     let setItemSpy: jest.SpyInstance
     let replaceStateSpy: jest.SpyInstance
