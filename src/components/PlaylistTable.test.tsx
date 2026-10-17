@@ -1,6 +1,6 @@
 import React from "react"
 import "i18n/config"
-import { render, screen, waitFor, act, waitForElementToBeRemoved } from "@testing-library/react"
+import { render, screen, waitFor } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { setupServer } from "msw/node"
 import FileSaver from "file-saver"
@@ -93,18 +93,14 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
-      expect(linkElement).toHaveAttribute("disabled")
+      expect(linkElement).toBeDisabled()
     })
 
     await waitFor(() => {
-      expect(linkElement).toBeEnabled
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled
+      expect(linkElement).toBeEnabled()
     })
 
     await waitFor(() => {
@@ -145,18 +141,14 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
-      expect(linkElement).toHaveAttribute("disabled")
+      expect(linkElement).toBeDisabled()
     })
 
     await waitFor(() => {
-      expect(linkElement).toBeEnabled
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled
+      expect(linkElement).toBeEnabled()
     })
 
     await waitFor(() => {
@@ -198,18 +190,14 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
-      expect(linkElement).toHaveAttribute("disabled")
+      expect(linkElement).toBeDisabled()
     })
 
     await waitFor(() => {
-      expect(linkElement).toBeEnabled
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled
+      expect(linkElement).toBeEnabled()
     })
 
     await waitFor(() => {
@@ -251,18 +239,14 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
-      expect(linkElement).toHaveAttribute("disabled")
+      expect(linkElement).toBeDisabled()
     })
 
     await waitFor(() => {
-      expect(linkElement).toBeEnabled
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled
+      expect(linkElement).toBeEnabled()
     })
 
     await waitFor(() => {
@@ -306,18 +290,14 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
-      expect(linkElement).toHaveAttribute("disabled")
+      expect(linkElement).toBeDisabled()
     })
 
     await waitFor(() => {
-      expect(linkElement).toBeEnabled
-    })
-
-    await waitFor(() => {
-      expect(linkElement).toBeDisabled
+      expect(linkElement).toBeEnabled()
     })
 
     await waitFor(() => {
@@ -361,7 +341,7 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
@@ -393,7 +373,7 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
@@ -427,7 +407,7 @@ describe("single playlist exporting", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(saveAsMock).toHaveBeenCalledTimes(1)
@@ -454,23 +434,23 @@ describe("searching playlists", () => {
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
-    userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
+    await userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
 
+    // Liked tracks is gone but Ghostpoet still matches
     await waitFor(() => {
-      // Liked tracks is gone but Ghostpoet still matches
       expect(screen.queryAllByRole('row')).toHaveLength(2)
-      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
-      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
     })
+    expect(screen.queryByText("Liked")).not.toBeInTheDocument()
+    expect(screen.getByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
 
-    userEvent.type(screen.getByRole('searchbox'), '{Escape}')
+    await userEvent.type(screen.getByRole('searchbox'), '{Escape}')
 
+    // Both liked tracks and Ghostpoet are present
     await waitFor(() => {
-      // Both liked tracks and Ghostpoet are present
       expect(screen.queryAllByRole('row')).toHaveLength(3)
-      expect(screen.queryByText("Liked")).toBeInTheDocument()
-      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
     })
+    expect(screen.getByText("Liked")).toBeInTheDocument()
+    expect(screen.getByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).toBeInTheDocument()
   })
 
   test("search with no results", async () => {
@@ -478,14 +458,14 @@ describe("searching playlists", () => {
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
-    userEvent.type(screen.getByRole('searchbox'), 'test{enter}')
+    await userEvent.type(screen.getByRole('searchbox'), 'test{enter}')
 
+    // Both liked tracks and Ghostpoet are missing
     await waitFor(() => {
-      // Both liked tracks and Ghostpoet are missing
       expect(screen.queryAllByRole('row')).toHaveLength(1)
-      expect(screen.queryByText("Liked")).not.toBeInTheDocument()
-      expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
     })
+    expect(screen.queryByText("Liked")).not.toBeInTheDocument()
+    expect(screen.queryByText("Ghostpoet – Peanut Butter Blues and Melancholy Jam")).not.toBeInTheDocument()
   })
 })
 
@@ -496,7 +476,7 @@ describe("missing playlists", () => {
     render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" onSetSubtitle={onSetSubtitle} />)
 
     expect(await screen.findByText(/This playlist is not supported/)).toBeInTheDocument() // FIXME
-    expect(await screen.queryAllByRole('row')).toHaveLength(4)
+    expect(screen.getAllByRole('row')).toHaveLength(4)
   })
 
   test("exporting of all playlists", async () => {
@@ -517,7 +497,7 @@ describe("missing playlists", () => {
 
     expect(linkElement).toBeInTheDocument()
 
-    userEvent.click(linkElement)
+    await userEvent.click(linkElement)
 
     await waitFor(() => {
       expect(jsZipFileMock).toHaveBeenCalledTimes(2)
@@ -532,7 +512,7 @@ describe("missing playlists", () => {
 
     expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
-    userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
+    await userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
 
     await waitFor(() => {
       expect(screen.queryAllByRole('row')).toHaveLength(2)
@@ -556,7 +536,7 @@ test("exporting of all playlists", async () => {
 
   expect(linkElement).toBeInTheDocument()
 
-  userEvent.click(linkElement)
+  await userEvent.click(linkElement)
 
   await waitFor(() => {
     expect(jsZipFileMock).toHaveBeenCalledTimes(2)
@@ -594,7 +574,7 @@ test("exporting of search results", async () => {
 
   expect(await screen.findByRole('searchbox')).toBeInTheDocument()
 
-  userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
+  await userEvent.type(screen.getByRole('searchbox'), 'Ghost{enter}')
 
   expect(await screen.findByText(/Export Results/)).toBeInTheDocument()
 
@@ -602,7 +582,7 @@ test("exporting of search results", async () => {
 
   expect(linkElement).toBeInTheDocument()
 
-  userEvent.click(linkElement)
+  await userEvent.click(linkElement)
 
   await waitFor(() => {
     expect(jsZipFileMock).toHaveBeenCalledTimes(1)

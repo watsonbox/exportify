@@ -73,6 +73,8 @@
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
+    "eslint": "8.19.0",
+    "eslint-config-react-app": "7.0.1",
     "gh-pages": "^6.1.1",
     "msw": "^0.49.1",
     "react-test-renderer": "^18.3.1",

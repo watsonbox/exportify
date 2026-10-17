@@ -1,6 +1,6 @@
 import React from "react"
 import i18n from "i18n/config"
-import { render, screen, waitFor } from "@testing-library/react"
+import { render, screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { setupServer } from "msw/node"
 import { rest } from "msw"
@@ -45,7 +45,7 @@ describe("i18n", () => {
     const linkElement = screen.getByText(/Get Started/i)
     expect(linkElement).toHaveTextContent("Get Started")
 
-    const changeLanguageButton = screen.getByTitle(/Change language/i).getElementsByTagName("button")[0]
+    const changeLanguageButton = within(screen.getByTitle(/Change language/i)).getByRole("button")
     await userEvent.click(changeLanguageButton)
 
     const frenchLanguageElement = screen.getByText(/Français/i)
