@@ -172,13 +172,13 @@ Error monitoring provided by Bugsnag.
 
 ## Running With Docker
 
-To build and run Exportify with docker, run:
+The Docker image builds the production bundle and serves it with nginx on port 80. To build and run it:
 
 **`docker build . -t exportify`**
 
-**`docker run -p 3000:3000 exportify`**
+**`docker run --rm -p 3000:80 exportify`**
 
-And then open [http://127.0.0.1:3000](http://127.0.0.1:3000) to view it in the browser.
+And then open [http://127.0.0.1:3000](http://127.0.0.1:3000) to view it in the browser. Spotify only accepts logins redirected back to a registered address, so keep the host port at 3000 and use `127.0.0.1` rather than `localhost`. To serve it anywhere else, register that address as a redirect URI on your own Spotify application and open Exportify with `?app_client_id=<your client ID>`.
 
 ## Contributing
 

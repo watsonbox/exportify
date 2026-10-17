@@ -1,0 +1,17 @@
+.git
+.github
+.claude
+node_modules
+.pnpm-store
+dist
+build
+coverage
+Dockerfile
+.dockerignore
+.env*
+mise.local.toml
+CLAUDE.local.md
+*.har
+*.csv
+*.log
+.DS_Store
