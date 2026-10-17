@@ -1,23 +1,23 @@
 [tools]
 node = "22"
-yarn = "1.22.22"
+pnpm = "10.34.5"
 
 [hooks]
 postinstall = [{ task = "install:js" }]
 
 [tasks."install:js"]
 description = "Install JS packages"
-run = "yarn install --frozen-lockfile"
+run = "pnpm install --frozen-lockfile"
 
 [tasks.server]
 alias = "s"
 description = "Start the development server on http://127.0.0.1:3000"
 depends = ["install:js"]
-run = "yarn start"
+run = "pnpm start"
 env = { BROWSER = "none" }
 
 [tasks.test]
 description = "Run the test suite once"
 depends = ["install:js"]
-run = "yarn test --watchAll=false"
+run = "pnpm test --watchAll=false"
 env = { CI = "true" }

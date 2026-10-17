@@ -4,11 +4,11 @@ Client-only React SPA that exports Spotify playlists to CSV, deployed to GitHub 
 
 ## Commands
 
-Tooling is pinned in `mise.toml` (Node 22, Yarn 1).
+Tooling is pinned in `mise.toml` (Node 22, pnpm 10).
 
 - `mise s`: install dependencies if needed and start the dev server on http://127.0.0.1:3000
 - `mise test`: run the test suite once
-- `yarn build`: production build
+- `pnpm build`: production build
 
 The build is still Create React App (`react-scripts`) with Jest. Migrating to Vite and Vitest is planned, so don't add new CRA-specific config.
 

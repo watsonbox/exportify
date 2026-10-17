@@ -15,17 +15,19 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: 📦 Install pnpm
+        uses: pnpm/action-setup@v6
       - name: 🛠️ Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'yarn'
+          cache: 'pnpm'
       - name: 📦 Install dependencies
-        run: yarn install
+        run: pnpm install --frozen-lockfile
       - name: 🧪 Test
-        run: yarn test
+        run: pnpm test
       - name: 🔨 Build
-        run: yarn build
+        run: pnpm build
       - name: 🚀 Deploy to GitHub Pages
         if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@v4
