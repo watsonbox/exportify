@@ -123,6 +123,9 @@ describe("logging in", () => {
     expect(window.location.search).toBe("")
   })
 
+  // A failed exchange is an unhandled rejection today, leaving the spent code in the URL and no error shown
+  test.todo("shows an error and clears the code when the token exchange fails")
+
   test("renders the playlist table when an access token is already stored", () => {
     localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
 
