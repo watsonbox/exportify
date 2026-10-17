@@ -2,21 +2,22 @@
 node = "22"
 yarn = "1.22.22"
 
-[tasks.install]
-description = "Install dependencies from the lockfile"
+[hooks]
+postinstall = [{ task = "install:js" }]
+
+[tasks."install:js"]
+description = "Install JS packages"
 run = "yarn install --frozen-lockfile"
-sources = ["package.json", "yarn.lock"]
-outputs = ["node_modules/.yarn-integrity"]
 
 [tasks.server]
 alias = "s"
 description = "Start the development server on http://127.0.0.1:3000"
-depends = ["install"]
+depends = ["install:js"]
 run = "yarn start"
 env = { BROWSER = "none" }
 
 [tasks.test]
 description = "Run the test suite once"
-depends = ["install"]
+depends = ["install:js"]
 run = "yarn test --watchAll=false"
 env = { CI = "true" }
