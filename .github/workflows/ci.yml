@@ -3,18 +3,18 @@ name: CI
 on: [push, pull_request, workflow_dispatch]
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - name: 📦 Install pnpm
         uses: pnpm/action-setup@v6
       - name: 🛠️ Use Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: .nvmrc
           cache: 'pnpm'
@@ -30,8 +30,32 @@ jobs:
         run: pnpm build
       - name: 💨 Smoke check build
         run: node scripts/smoke-check-build.mjs
-      - name: 🚀 Deploy to GitHub Pages
+      - name: 📤 Upload build
         if: github.ref == 'refs/heads/master'
+        uses: actions/upload-artifact@v7
+        with:
+          name: dist
+          path: dist
+          if-no-files-found: error
+
+  deploy:
+    needs: build
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: deploy-gh-pages
+      cancel-in-progress: false
+
+    steps:
+      - uses: actions/checkout@v7
+      - name: 📥 Download build
+        uses: actions/download-artifact@v8
+        with:
+          name: dist
+          path: dist
+      - name: 🚀 Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: dist
