@@ -9,6 +9,11 @@
   "exporting_done": "Ολοκληρώθηκε!",
   "exporting_playlist": "Γίνεται εξαγωγή {{playlistName}}...",
   "export_search_results": "Εξαγωγή αποτελεσμάτων",
+  "login_error": {
+    "failed": "Η σύνδεση στο Spotify απέτυχε. Δοκιμάστε ξανά.",
+    "cancelled": "Η σύνδεση στο Spotify ακυρώθηκε.",
+    "same_browser": "Ξεκινήστε και ολοκληρώστε τη σύνδεση στο ίδιο πρόγραμμα περιήγησης."
+  },
   "top_menu": {
     "help": "Βοήθεια",
     "toggle_dark_mode": "Εναλλαγή σκοτεινής λειτουργίας",

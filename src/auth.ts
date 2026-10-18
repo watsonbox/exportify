@@ -86,6 +86,14 @@ export async function initiateSpotifyAuth(options?: { clientId?: string; changeU
   redirectTo(authUrl.toString())
 }
 
+// Thrown when the callback lands in a browser context other than the one that started login
+export class MissingCodeVerifierError extends Error {
+  constructor() {
+    super('Code verifier not found in localStorage')
+    this.name = 'MissingCodeVerifierError'
+  }
+}
+
 // Exchange authorization code for access token
 export async function exchangeCodeForToken(code: string): Promise<string> {
   const redirectUri = getRedirectUri()
@@ -93,7 +101,7 @@ export async function exchangeCodeForToken(code: string): Promise<string> {
   const clientId = localStorage.getItem('client_id') || SPOTIFY_CLIENT_ID
 
   if (!codeVerifier) {
-    throw new Error('Code verifier not found in localStorage')
+    throw new MissingCodeVerifierError()
   }
 
   const response = await axios.post(
@@ -114,8 +122,9 @@ export async function exchangeCodeForToken(code: string): Promise<string> {
 
   const accessToken = response.data.access_token
 
-  // Save token and clean up code verifier
+  // The verifier is single-use, like the code it was paired with
   saveAccessToken(accessToken)
+  localStorage.removeItem('code_verifier')
 
   return accessToken
 }

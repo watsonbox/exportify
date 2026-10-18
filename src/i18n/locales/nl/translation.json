@@ -9,6 +9,11 @@
   "exporting_done": "Klaar!",
   "exporting_playlist": "Exporteer {{playlistName}}...",
   "export_search_results": "Resultaten exporteren",
+  "login_error": {
+    "failed": "Inloggen bij Spotify is mislukt. Probeer het opnieuw.",
+    "cancelled": "Inloggen bij Spotify is geannuleerd.",
+    "same_browser": "Begin en voltooi het inloggen in dezelfde browser."
+  },
   "top_menu": {
     "help": "Help",
     "toggle_dark_mode": "Donkere modus wisselen",

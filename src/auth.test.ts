@@ -8,6 +8,16 @@ beforeEach(() => {
 })
 
 describe("exchangeCodeForToken", () => {
+  test("stores the token and discards the single-use code verifier", async () => {
+    server.use(http.post("https://accounts.spotify.com/api/token", () =>
+      HttpResponse.json({ access_token: "TEST_ACCESS_TOKEN", token_type: "Bearer", expires_in: 3600 })))
+    localStorage.setItem("code_verifier", "TEST_CODE_VERIFIER")
+
+    await expect(exchangeCodeForToken("TEST_AUTH_CODE")).resolves.toBe("TEST_ACCESS_TOKEN")
+    expect(localStorage.getItem("access_token")).toBe("TEST_ACCESS_TOKEN")
+    expect(localStorage.getItem("code_verifier")).toBeNull()
+  })
+
   test("rejects without storing a token when Spotify refuses the code", async () => {
     server.use(http.post("https://accounts.spotify.com/api/token", () =>
       HttpResponse.json({ error: "invalid_grant", error_description: "Invalid authorization code" }, { status: 400 })))

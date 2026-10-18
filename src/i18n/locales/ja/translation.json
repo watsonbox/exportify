@@ -9,6 +9,11 @@
   "exporting_done": "完了！",
   "exporting_playlist": "プレイリスト {{playlistName}} をエクスポート中...",
   "export_search_results": "検索結果をエクスポート",
+  "login_error": {
+    "failed": "Spotifyにログインできませんでした。もう一度お試しください。",
+    "cancelled": "Spotifyへのログインがキャンセルされました。",
+    "same_browser": "ログインは同じブラウザで開始して完了してください。"
+  },
   "top_menu": {
     "help": "ヘルプ",
     "toggle_dark_mode": "ダークモード切り替え",

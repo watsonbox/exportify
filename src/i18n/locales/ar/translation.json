@@ -9,6 +9,11 @@
   "exporting_done": "تم التصدير!",
   "exporting_playlist": "جاري تصدير {{playlistName}}...",
   "export_search_results": "تصدير النتائج",
+  "login_error": {
+    "failed": "تعذّر تسجيل الدخول إلى Spotify. يُرجى المحاولة مرة أخرى.",
+    "cancelled": "تم إلغاء تسجيل الدخول إلى Spotify.",
+    "same_browser": "ابدأ تسجيل الدخول وأكمله في المتصفح نفسه."
+  },
   "top_menu": {
     "help": "المساعدة",
     "toggle_dark_mode": "تبديل الوضع الداكن",

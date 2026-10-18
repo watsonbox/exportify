@@ -9,6 +9,11 @@
   "exporting_done": "Fertig!",
   "exporting_playlist": "Exportiere {{playlistName}}...",
   "export_search_results": "Ergebnisse exportieren",
+  "login_error": {
+    "failed": "Die Anmeldung bei Spotify ist fehlgeschlagen. Bitte versuche es erneut.",
+    "cancelled": "Die Anmeldung bei Spotify wurde abgebrochen.",
+    "same_browser": "Starte und beende die Anmeldung im selben Browser."
+  },
   "top_menu": {
     "help": "Hilfe",
     "toggle_dark_mode": "Dunkelmodus umschalten",

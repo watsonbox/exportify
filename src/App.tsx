@@ -1,24 +1,70 @@
 import './App.scss'
 import "./icons"
 
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
+import Bugsnag from "@bugsnag/js"
 import { useTranslation, Translation } from "react-i18next"
+import { Alert } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import Login from 'components/Login'
 import PlaylistTable from "components/PlaylistTable"
 import TopMenu from "components/TopMenu"
-import { loadAccessToken, exchangeCodeForToken } from "auth"
+import { loadAccessToken, exchangeCodeForToken, MissingCodeVerifierError } from "auth"
 
 const baseUrl = import.meta.env.BASE_URL
 
+// detail is untranslated so what users quote in reports matches the Bugsnag grouping
+type LoginError = { kind: "failed" | "cancelled" | "wrong_browser", detail?: string }
+
+function loginErrorFrom(params: URLSearchParams): LoginError | null {
+  const error = params.get("error")
+  if (!error) { return null }
+
+  return error === "access_denied" ? { kind: "cancelled" } : { kind: "failed", detail: `Spotify: ${error}` }
+}
+
+function describeExchangeFailure(error: any): string {
+  const spotifyError = error.response?.data
+  if (!spotifyError?.error) { return error.message }
+
+  return spotifyError.error_description
+    ? `Spotify: ${spotifyError.error} (${spotifyError.error_description})`
+    : `Spotify: ${spotifyError.error}`
+}
+
+// Sends Spotify's reason but never the request, whose body holds the code and verifier
+function reportLoginFailure(error: Error, detail: string, response?: any) {
+  // Google's Read Aloud fetcher replays callback URLs with empty storage, so its failures are noise
+  if (navigator.userAgent.includes("Google-Read-Aloud")) { return }
+
+  Bugsnag.notify(error, (event) => {
+    event.groupingHash = `OAuth callback: ${detail}`
+    if (response) {
+      event.addMetadata("oauth", {
+        status: response.status,
+        error: response.data?.error,
+        error_description: response.data?.error_description,
+      })
+    }
+  })
+}
+
+// The redirect URI has no query of its own, so a callback's whole query string came from Spotify
+function removeCallbackParams() {
+  const params = new URLSearchParams(window.location.search)
+  if (!params.has("code") && !params.has("error")) { return }
+
+  window.history.replaceState({}, document.title, window.location.pathname + window.location.hash)
+}
+
 function App() {
-  useTranslation()
+  const { t } = useTranslation()
   const [subtitle, setSubtitle] = useState(<Translation>{(t) => t("tagline")}</Translation>)
   const searchParams = new URLSearchParams(window.location.search)
 
   const [accessToken, setAccessToken] = useState<string | null>(loadAccessToken())
-  const hasProcessedCode = useRef(false)
+  const [loginError, setLoginError] = useState(() => loginErrorFrom(searchParams))
 
   let view
 
@@ -26,23 +72,23 @@ function App() {
     setSubtitle(subtitle)
   }
 
+  // The code is single-use, so it leaves the URL before the exchange and a reload or StrictMode rerun can't send it again
   useEffect(() => {
-    const code = searchParams.get("code")
-    if (!code) { return }
+    const params = new URLSearchParams(window.location.search)
+    const code = params.get("code")
+    const callbackError = loginErrorFrom(params)
+    removeCallbackParams()
 
-    // Prevent multiple executions in StrictMode or re-renders
-    if (hasProcessedCode.current) {
-      return
+    if (callbackError?.detail) {
+      reportLoginFailure(new Error(`Spotify authorization error: ${params.get("error")}`), callbackError.detail)
+    } else if (code && !loadAccessToken()) {
+      exchangeCodeForToken(code).then(setAccessToken, (error) => {
+        const detail = describeExchangeFailure(error)
+        reportLoginFailure(error, detail, error.response)
+        setLoginError({ kind: error instanceof MissingCodeVerifierError ? "wrong_browser" : "failed", detail })
+      })
     }
-    hasProcessedCode.current = true
-
-    exchangeCodeForToken(code).then((accessToken) => {
-      setAccessToken(accessToken)
-
-      // Remove code from query string
-      window.history.replaceState({}, document.title, window.location.pathname)
-    })
-  })
+  }, [])
 
   if (searchParams.get('spotify_error')) {
     view = <div id="spotifyErrorMessage" className="lead">
@@ -53,7 +99,16 @@ function App() {
   } else if (accessToken) {
     view = <PlaylistTable accessToken={accessToken!} onSetSubtitle={onSetSubtitle} />
   } else {
-    view = <Login />
+    view = <>
+      {loginError && (
+        <Alert id="loginError" variant={loginError.kind === "cancelled" ? "secondary" : "danger"}>
+          <p className="mb-0">{loginError.kind === "cancelled" ? t("login_error.cancelled") : t("login_error.failed")}</p>
+          {loginError.kind === "wrong_browser" && <p className="mb-0">{t("login_error.same_browser")}</p>}
+          {loginError.detail && <p className="mt-2 mb-0 small opacity-75">{loginError.detail}</p>}
+        </Alert>
+      )}
+      <Login />
+    </>
   }
 
   return (

@@ -9,6 +9,11 @@
   "exporting_done": "Tamamlandı!",
   "exporting_playlist": "{{playlistName}} çalma listesi dışa aktarılıyor...",
   "export_search_results": "Sonuçları Dışa Aktar",
+  "login_error": {
+    "failed": "Spotify'a giriş yapılamadı. Lütfen tekrar deneyin.",
+    "cancelled": "Spotify girişi iptal edildi.",
+    "same_browser": "Girişi aynı tarayıcıda başlatıp tamamlayın."
+  },
   "top_menu": {
     "help": "Yardım",
     "toggle_dark_mode": "Karanlık mod aç/kapa",

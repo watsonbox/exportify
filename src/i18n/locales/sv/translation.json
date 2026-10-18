@@ -9,6 +9,11 @@
   "exporting_done": "Klart!",
   "exporting_playlist": "Exporterar {{playlistName}}...",
   "export_search_results": "Exportera resultat",
+  "login_error": {
+    "failed": "Det gick inte att logga in på Spotify. Försök igen.",
+    "cancelled": "Inloggningen på Spotify avbröts.",
+    "same_browser": "Påbörja och slutför inloggningen i samma webbläsare."
+  },
   "top_menu": {
     "help": "Hjälp",
     "toggle_dark_mode": "Växla mörkt läge",

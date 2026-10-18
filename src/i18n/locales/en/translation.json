@@ -9,6 +9,11 @@
   "exporting_done": "Done!",
   "exporting_playlist": "Exporting {{playlistName}}...",
   "export_search_results": "Export Results",
+  "login_error": {
+    "failed": "Couldn't log in to Spotify. Please try again.",
+    "cancelled": "Spotify login was cancelled.",
+    "same_browser": "Start and finish the login in the same browser."
+  },
   "top_menu": {
     "help": "Help",
     "toggle_dark_mode": "Toggle dark mode",

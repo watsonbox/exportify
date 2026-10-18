@@ -9,6 +9,11 @@
   "exporting_done": "Terminé!",
   "exporting_playlist": "Exportation de {{playlistName}}...",
   "export_search_results": "Exporter les résultats",
+  "login_error": {
+    "failed": "Impossible de se connecter à Spotify. Veuillez réessayer.",
+    "cancelled": "La connexion à Spotify a été annulée.",
+    "same_browser": "Commencez et terminez la connexion dans le même navigateur."
+  },
   "top_menu": {
     "help": "Aide",
     "toggle_dark_mode": "Activer/désactiver le mode sombre",
