@@ -10,6 +10,7 @@ Bugsnag.start({
   apiKey: 'a65916528275f084a1754a59797a36b3',
   plugins: [new BugsnagPluginReact()],
   redactedKeys: ['Authorization'],
+  releaseStage: import.meta.env.PROD ? 'production' : 'development',
   enabledReleaseStages: ['production', 'staging'],
   onError: function (event) {
     event.request.url = "[REDACTED]" // Don't send access tokens
