@@ -1,6 +1,7 @@
 import React from "react"
 import { withTranslation, WithTranslation, Translation } from "react-i18next"
-import { ProgressBar } from "react-bootstrap"
+import { Alert, ProgressBar } from "react-bootstrap"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Bugsnag from "@bugsnag/js"
 import PlaylistsData from "./data/PlaylistsData"
@@ -9,7 +10,7 @@ import PlaylistSearch, { PlaylistSearchRef } from "./PlaylistSearch"
 import PlaylistRow from "./PlaylistRow"
 import Paginator from "./Paginator"
 import PlaylistsExporter from "./PlaylistsExporter"
-import { apiCall, apiCallErrorHandler } from "helpers"
+import { apiCall, apiCallErrorHandler, ApiError } from "helpers"
 
 interface PlaylistTableProps extends WithTranslation {
   accessToken: string,
@@ -27,6 +28,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
 
   state = {
     initialized: false,
+    apiError: null as ApiError | null,
     searchQuery: "",
     playlists: [],
     playlistCount: 0,
@@ -61,7 +63,8 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
       return
     }
 
-    const playlists = await this.playlistsData!.search(query).catch(apiCallErrorHandler)
+    const playlists = await this.playlistsData!.search(query).catch(this.handleApiError)
+    if (!playlists) { return }
 
     this.setState({
       searchQuery: query,
@@ -82,7 +85,14 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
   }
 
   handlePlaylistSearchCancel = () => {
-    return this.loadCurrentPlaylistPage().catch(apiCallErrorHandler)
+    return this.loadCurrentPlaylistPage()
+  }
+
+  handleApiError = (error: unknown) => {
+    const apiError = apiCallErrorHandler(error)
+    if (apiError) {
+      this.setState({ apiError, progressBar: { show: false } })
+    }
   }
 
   loadCurrentPlaylistPage = async () => {
@@ -116,7 +126,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
         }
       )
     } catch (error) {
-      apiCallErrorHandler(error)
+      this.handleApiError(error)
     }
   }
 
@@ -167,7 +177,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
         this.loadCurrentPlaylistPage
       )
     } catch (error) {
-      apiCallErrorHandler(error)
+      this.handleApiError(error)
     }
   }
 
@@ -188,8 +198,28 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
 
       await this.loadCurrentPlaylistPage()
     } catch (error) {
-      apiCallErrorHandler(error)
+      this.handleApiError(error)
     }
+  }
+
+  renderApiError() {
+    const apiError = this.state.apiError
+    if (!apiError) { return null }
+
+    return (
+      <Alert id="apiError" variant="danger" dismissible onClose={() => this.setState({ apiError: null })}>
+        <p className="mb-0">
+          <FontAwesomeIcon icon={['fas', apiError.kind === "unavailable" ? 'server' : 'bolt']} className="me-2" />
+          {this.props.i18n.t(`api_error.${apiError.kind}`, { status: apiError.status })}
+        </p>
+        {apiError.kind === "unavailable" && (
+          <p className="mt-2 mb-0">
+            <a className="alert-link" target="_blank" rel="noreferrer" href="https://status.spotify.dev/">{this.props.i18n.t("api_error.status_page")}</a>
+          </p>
+        )}
+        {apiError.detail && <p className="mt-2 mb-0 small opacity-75">Spotify: {apiError.detail}</p>}
+      </Alert>
+    )
   }
 
   render() {
@@ -198,6 +228,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     if (this.state.initialized) {
       return (
         <div id="playlists">
+          {this.renderApiError()}
           <div id="playlistsHeader">
             <Paginator currentPage={this.state.currentPage} pageLimit={this.state.searchQuery === "" ? this.PAGE_SIZE : this.state.playlistCount} totalRecords={this.state.playlistCount} onPageChanged={this.handlePageChanged} />
             <PlaylistSearch onPlaylistSearch={this.handlePlaylistSearch} onPlaylistSearchCancel={this.handlePlaylistSearchCancel} ref={this.playlistSearch} />
@@ -222,6 +253,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
                       playlistsData={this.playlistsData!}
                       searchQuery={this.state.searchQuery}
                       config={this.state.config}
+                      onApiError={this.handleApiError}
                     />
                   </th>
                 </tr>
@@ -233,6 +265,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
                     key={playlist.id || i}
                     accessToken={this.props.accessToken}
                     config={this.state.config}
+                    onApiError={this.handleApiError}
                   />
                 })}
               </tbody>
@@ -243,6 +276,8 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
           </div>
         </div >
       );
+    } else if (this.state.apiError) {
+      return this.renderApiError()
     } else {
       return <div className="spinner" data-testid="playlistTableSpinner"></div>
     }

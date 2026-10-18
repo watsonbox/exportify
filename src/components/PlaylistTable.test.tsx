@@ -1,7 +1,8 @@
 import React from "react"
-import "i18n/config"
-import { render, screen, waitFor, within } from "@testing-library/react"
+import i18n from "i18n/config"
+import { act, render, screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { http, HttpResponse } from "msw"
 import FileSaver from "file-saver"
 import JSZip from "jszip"
 
@@ -11,7 +12,9 @@ import "../icons"
 import { server } from "../mocks/server"
 import { redirectTo } from "../navigation"
 import { csvRecords } from "../test/csv"
-import { handlerCalled, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
+import { captureBugsnagReports } from "../test/bugsnag"
+import { API } from "../test/fixtures/spotify/builders"
+import { errorResponse, ghostpoetTracksUrl, handlerCalled, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
 
 vi.mock('@bugsnag/js')
 
@@ -344,5 +347,96 @@ test("exporting of search results", async () => {
 
   expect(await exportZip(/Export Results/)).toEqual({
     [ghostpoetFileName]: [oneTwos, usAgainstWhatever],
+  })
+})
+
+describe("when Spotify can't be reached or refuses a request", () => {
+  const failWith = (url: string, respond: () => Response) => server.use(http.get(url, respond))
+  const networkError = () => HttpResponse.error()
+  const serviceUnavailable = errorResponse(503)
+  const countryUnavailable = errorResponse(403, "Spotify is unavailable in this country")
+
+  // Lets retry backoff run without waiting for it
+  const user = () => userEvent.setup({ advanceTimers: vi.advanceTimersByTime })
+  const runRetries = () => act(() => vi.runAllTimersAsync())
+
+  beforeEach(() => { vi.useFakeTimers({ shouldAdvanceTime: true }) })
+  afterEach(() => {
+    vi.useRealTimers()
+    window.dispatchEvent(new Event("pageshow"))
+  })
+
+  test("a row's export shows a message and can be tried again once retries run out", async () => {
+    const reports = captureBugsnagReports()
+    renderTable()
+    const row = await screen.findByRole('row', { name: name => name.includes(ghostpoetPlaylist) })
+    failWith(ghostpoetTracksUrl, networkError)
+
+    const button = within(row).getByRole('button', { name: 'Export' })
+    await user().click(button)
+    await runRetries()
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Couldn't reach Spotify. Check your connection, and that no browser extension is blocking Spotify, then try again.")
+    expect(button).toBeEnabled()
+    expect(reports).toHaveLength(1)
+    expect(reports[0].error.message).toBe("Network Error")
+  })
+
+  test("Export All shows a message and can be tried again once 5xx retries run out", async () => {
+    renderTable()
+    const button = await screen.findByRole('button', { name: /Export All/ })
+    failWith(ghostpoetTracksUrl, serviceUnavailable)
+
+    await user().click(button)
+    await runRetries()
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Spotify isn't working properly right now (error 503). Please try again later.")
+    expect(button).toBeEnabled()
+    expect(screen.queryByRole('progressbar')).not.toBeInTheDocument()
+    expect(redirectTo).not.toHaveBeenCalled()
+    expect(screen.getByRole('link', { name: 'Check the Spotify Web API status page for known problems' })).toHaveAttribute('href', 'https://status.spotify.dev/')
+  })
+
+  test("a refused request shows Spotify's reason straight away", async () => {
+    failWith(`${API}/me`, countryUnavailable)
+
+    renderTable()
+
+    const alert = await screen.findByRole('alert')
+    expect(alert).toHaveTextContent("Spotify refused the request (error 403).")
+    expect(alert).toHaveTextContent("Spotify is unavailable in this country")
+    expect(screen.queryByTestId('playlistTableSpinner')).not.toBeInTheDocument()
+  })
+
+  test("the message can be dismissed", async () => {
+    failWith(`${API}/me`, countryUnavailable)
+    renderTable()
+    await screen.findByRole('alert')
+
+    await user().click(screen.getByRole('button', { name: 'Close alert' }))
+
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+  })
+
+  test("the message falls back to English in other languages", async () => {
+    await i18n.changeLanguage("fr")
+    failWith(`${API}/me`, countryUnavailable)
+
+    renderTable()
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Spotify refused the request (error 403).")
+    await i18n.changeLanguage("en")
+  })
+
+  test("nothing is shown or reported for requests aborted by leaving the page", async () => {
+    const reports = captureBugsnagReports()
+    failWith(`${API}/me`, networkError)
+    window.dispatchEvent(new Event("pagehide"))
+
+    renderTable()
+    await runRetries()
+
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    expect(reports).toEqual([])
   })
 })

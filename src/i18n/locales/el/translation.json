@@ -1,6 +1,7 @@
 {
   "tagline": "Εξαγάγετε τις λίστες αναπαραγωγής σας στο Spotify.",
   "get_started": "Ξεκινήστε",
+  "logging_in": "Σύνδεση…",
   "subtitle": "{{min}}-{{max}} από {{total}} λίστες αναπαραγωγής για {{userId}}",
   "subtitle_search": "{{total}} αποτελέσματα με \"{{query}}\" στο όνομα της λίστας αναπαραγωγής",
   "subtitle_search_advanced": "{{total}} αποτελέσματα για προχωρημένο ερώτημα \"{{query}}\"",

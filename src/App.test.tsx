@@ -1,11 +1,11 @@
 import React from "react"
 import { createHash } from "node:crypto"
-import Bugsnag, { Event } from "@bugsnag/js"
 import i18n from "i18n/config"
 import { render, screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import { http, HttpResponse } from "msw"
 import { server } from "./mocks/server"
+import { captureBugsnagReports } from "./test/bugsnag"
 import { redirectTo } from "./navigation"
 import App from "./App"
 import * as auth from "./auth"
@@ -17,7 +17,7 @@ const grantToken = () => HttpResponse.json({ access_token: "TEST_ACCESS_TOKEN", 
 const refuseCode = () => HttpResponse.json(invalidGrant.body, { status: invalidGrant.status })
 
 // Records each token request body, and the query string at the time, and answers with respond
-function mockTokenEndpoint(respond: () => Response = grantToken) {
+function mockTokenEndpoint(respond: () => Response | Promise<Response> = grantToken) {
   const requests: URLSearchParams[] = []
   const searchesAtRequest: string[] = []
 
@@ -30,23 +30,6 @@ function mockTokenEndpoint(respond: () => Response = grantToken) {
   )
 
   return Object.assign(requests, { searchesAtRequest })
-}
-
-// Stubs Bugsnag.notify and returns what each report would send after its onError callback
-function captureBugsnagReports() {
-  const reports: { error: unknown, groupingHash?: string, metadata: Record<string, unknown> }[] = []
-
-  vi.spyOn(Bugsnag, "notify").mockImplementation((error, onError) => {
-    const report = { error, groupingHash: undefined as string | undefined, metadata: {} as Record<string, unknown> }
-    const event = {
-      set groupingHash(hash: string) { report.groupingHash = hash },
-      addMetadata: (section: string, values: unknown) => { report.metadata[section] = values },
-    }
-    if (typeof onError === "function") { onError(event as unknown as Event, () => {}) }
-    reports.push(report)
-  })
-
-  return reports
 }
 
 async function authorizeUrl() {
@@ -262,6 +245,24 @@ describe("returning from Spotify", () => {
     expect(tokenRequests).toHaveLength(0)
     expect(window.location.search).toBe("")
     expect(screen.getByText(/Get Started/i)).toBeInTheDocument()
+  })
+
+  test("disables the login button and shows it's logging in until the exchange settles", async () => {
+    let refuse = () => {}
+    mockTokenEndpoint(() => new Promise(resolve => { refuse = () => resolve(refuseCode()) }))
+    localStorage.setItem("code_verifier", "TEST_CODE_VERIFIER")
+    visit("/exportify?code=TEST_AUTH_CODE")
+
+    render(<App />)
+
+    expect(await screen.findByRole("status")).toHaveTextContent("Logging in…")
+    expect(screen.getByRole("button", { name: /Logging in…/ })).toBeDisabled()
+    expect(screen.queryByText(/Get Started/i)).not.toBeInTheDocument()
+
+    refuse()
+
+    expect(await screen.findByRole("button", { name: /Get Started/i })).toBeEnabled()
+    expect(screen.queryByRole("status")).not.toBeInTheDocument()
   })
 
   test("removes the code from the URL before exchanging it, so a reload can't reuse it", async () => {

@@ -1,6 +1,7 @@
 {
   "tagline": "Export your Spotify playlists.",
   "get_started": "Get Started",
+  "logging_in": "Logging in…",
   "subtitle": "{{min}}-{{max}} of {{total}} playlists for {{userId}}",
   "subtitle_search": "{{total}} results with \"{{query}}\" in playlist name",
   "subtitle_search_advanced": "{{total}} results for advanced query \"{{query}}\"",
@@ -13,6 +14,13 @@
     "failed": "Couldn't log in to Spotify. Please try again.",
     "cancelled": "Spotify login was cancelled.",
     "same_browser": "Start and finish the login in the same browser."
+  },
+  "api_error": {
+    "network": "Couldn't reach Spotify. Check your connection, and that no browser extension is blocking Spotify, then try again.",
+    "rate_limited": "Spotify is receiving too many requests right now. Please wait a few minutes and try again.",
+    "unavailable": "Spotify isn't working properly right now (error {{status}}). Please try again later.",
+    "refused": "Spotify refused the request (error {{status}}).",
+    "status_page": "Check the Spotify Web API status page for known problems"
   },
   "top_menu": {
     "help": "Help",

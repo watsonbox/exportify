@@ -1,6 +1,7 @@
 {
   "tagline": "Exporta tus playlists de Spotify.",
   "get_started": "Comenzar",
+  "logging_in": "Iniciando sesión…",
   "subtitle": "{{min}}-{{max}} de {{total}} playlists para {{userId}}",
   "subtitle_search": "{{total}} resultados con \"{{query}}\" en el nombre de la playlist",
   "subtitle_search_advanced": "{{total}} resultados para la búsqueda avanzada \"{{query}}\"",

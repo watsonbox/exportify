@@ -1,6 +1,7 @@
 {
   "tagline": "Exportera dina Spotify spellistor.",
   "get_started": "Kom igång",
+  "logging_in": "Loggar in…",
   "subtitle": "{{min}}-{{max}} av {{total}} spellistor för {{userId}}",
   "subtitle_search": "{{total}} resultat med \"{{query}}\" i spellistans namn",
   "subtitle_search_advanced": "{{total}} resultat för avancerad sökning \"{{query}}\"",

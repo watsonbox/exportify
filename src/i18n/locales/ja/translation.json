@@ -1,6 +1,7 @@
 {
   "tagline": "Spotifyのプレイリストをエクスポートします。",
   "get_started": "開始する",
+  "logging_in": "ログインしています…",
   "subtitle": "{{min}}-{{max}} / {{total}} プレイリスト （ユーザー: {{userId}}）",
   "subtitle_search": "プレイリスト名に \"{{query}}\" を含む結果: {{total}} 件",
   "subtitle_search_advanced": "高度なクエリ \"{{query}}\" の結果: {{total}} 件",

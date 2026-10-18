@@ -77,15 +77,17 @@ class PlaylistsData {
       this.onPlaylistsLoadingStarted()
     }
 
-    await this.loadSlice()
+    try {
+      await this.loadSlice()
 
-    // Get the rest of them if necessary
-    for (let offset = this.PLAYLIST_LIMIT; offset < this.data.length; offset = offset + this.PLAYLIST_LIMIT) {
-      await this.loadSlice(offset, offset + this.PLAYLIST_LIMIT)
-    }
-
-    if (this.onPlaylistsLoadingDone) {
-      this.onPlaylistsLoadingDone()
+      // Get the rest of them if necessary
+      for (let offset = this.PLAYLIST_LIMIT; offset < this.data.length; offset = offset + this.PLAYLIST_LIMIT) {
+        await this.loadSlice(offset, offset + this.PLAYLIST_LIMIT)
+      }
+    } finally {
+      if (this.onPlaylistsLoadingDone) {
+        this.onPlaylistsLoadingDone()
+      }
     }
   }
 

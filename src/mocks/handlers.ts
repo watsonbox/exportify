@@ -71,20 +71,25 @@ const ghostpoetPlaylist = buildPlaylist({
   tracks: { total: 10 },
 })
 const playlistsUrl = `${API}/users/watsonbox/playlists`
-const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks`
+export const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks`
 const addedByWatsonbox = (track: object | null, added_at = '2020-11-03T15:19:04Z') =>
   buildPlaylistItem({ track, added_at, added_by: watsonbox })
+
+export const errorResponse = (status: number, message?: string, headers: Record<string, string> = {}) => () => {
+  const error = apiError(status, message)
+  return HttpResponse.json(error.body, { status, headers: { ...error.headers, ...headers } })
+}
 
 export const spotifyGet = (url: string, body: (request: Request) => object, { ids }: { ids?: string } = {}) =>
   http.get(url, ({ request }) => {
     handlerCalled(request.url)
 
     const error =
-      request.headers.get('Authorization') !== 'Bearer TEST_ACCESS_TOKEN' ? apiError(401) :
-      ids !== undefined && new URL(request.url).searchParams.get('ids') !== ids ? apiError(500, 'Invalid request for this handler') :
+      request.headers.get('Authorization') !== 'Bearer TEST_ACCESS_TOKEN' ? errorResponse(401) :
+      ids !== undefined && new URL(request.url).searchParams.get('ids') !== ids ? errorResponse(500, 'Invalid request for this handler') :
       null
 
-    if (error) return HttpResponse.json(error.body, { status: error.status, headers: error.headers })
+    if (error) return error()
 
     return HttpResponse.json(body(request))
   })

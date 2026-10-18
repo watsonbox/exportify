@@ -1,6 +1,7 @@
 {
   "tagline": "Exporteer je Spotify-afspeellijsten.",
   "get_started": "Beginnen",
+  "logging_in": "Bezig met inloggen…",
   "subtitle": "{{min}}-{{max}} van {{total}} afspeellijsten voor {{userId}}",
   "subtitle_search": "{{total}} resultaten met \"{{query}}\" in afspeellijstnaam",
   "subtitle_search_advanced": "{{total}} resultaten voor geavanceerde zoekopdracht \"{{query}}\"",

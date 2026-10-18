@@ -1,6 +1,7 @@
 {
   "tagline": "صدّر قوائم التشغيل الخاصة بك من Spotify.",
   "get_started": "ابدأ الآن",
+  "logging_in": "جارٍ تسجيل الدخول…",
   "subtitle": "{{min}}-{{max}} من {{total}} قوائم التشغيل لـ {{userId}}",
   "subtitle_search": "{{total}} نتيجة تحتوي على \"{{query}}\" في اسم القائمة",
   "subtitle_search_advanced": "{{total}} نتيجة للبحث المتقدم \"{{query}}\"",

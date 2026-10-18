@@ -6,18 +6,48 @@ import { redirectTo } from "./navigation"
 
 const REQUEST_RETRY_BUFFER = 1000
 const MAX_RATE_LIMIT_RETRIES = 2 // 3 attempts in total
+const MAX_RETRY_AFTER = 60       // Seconds; a longer wait isn't worth holding an export open for
 const MAX_ERROR_RETRIES = 2      // 3 attempts in total
+const MAX_NETWORK_RETRIES = 5    // 6 attempts over about 30 seconds
+const NETWORK_RETRY_BASE = 1000  // Doubles on each retry
 const limiter = new Bottleneck({
   maxConcurrent: 1,
   minTime: 0
 })
 
+// Leaving the page aborts requests in flight, which is neither worth retrying nor reporting
+let pageUnloading = false
+window.addEventListener("pagehide", () => { pageUnloading = true })
+window.addEventListener("pageshow", () => { pageUnloading = false })
+
+// Requests queued before one gives up on a dropped connection fail with it, rather than each retrying in turn
+let requestsQueued = 0
+let queuedWhenConnectionLost = 0
+
 limiter.on("failed", async (error, jobInfo) => {
-  if (error.response.status === 429 && jobInfo.retryCount < MAX_RATE_LIMIT_RETRIES) {
+  if (pageUnloading) { return }
+
+  const status: number | undefined = error.response?.status
+
+  if (status === undefined) {
+    // Dropped connections, mostly during long exports on mobile
+    const queuedAs: number = jobInfo.args[0]
+    if (queuedAs <= queuedWhenConnectionLost) { return }
+
+    if (jobInfo.retryCount < MAX_NETWORK_RETRIES) {
+      Bugsnag.leaveBreadcrumb("Retrying request after network error", { url: error.config?.url, retryCount: jobInfo.retryCount })
+      return NETWORK_RETRY_BASE * 2 ** jobInfo.retryCount
+    }
+
+    queuedWhenConnectionLost = requestsQueued
+  } else if (status === 429) {
     // Retry according to the indication from the server with a small buffer
-    return ((error.response.headers["retry-after"] || 1) * 1000) + REQUEST_RETRY_BUFFER
-  } else if (error.response.status !== 401 && error.response.status !== 429 && jobInfo.retryCount < MAX_ERROR_RETRIES) {
-    // Log and retry any other failure once (e.g. 503/504 which sometimes occur)
+    const retryAfter = Number(error.response.headers["retry-after"] || 1)
+    if (jobInfo.retryCount < MAX_RATE_LIMIT_RETRIES && retryAfter <= MAX_RETRY_AFTER) {
+      return (retryAfter * 1000) + REQUEST_RETRY_BUFFER
+    }
+  } else if (status >= 500 && jobInfo.retryCount < MAX_ERROR_RETRIES) {
+    // Log and retry server errors (e.g. 503/504 which sometimes occur)
     Bugsnag.notify(
       error,
       (event) => {
@@ -27,7 +57,7 @@ limiter.on("failed", async (error, jobInfo) => {
       }
     )
 
-    if (error.response.status === 502) {
+    if (status === 502) {
       // Try waiting a little longer to reduce problems with large playlists
       // https://github.com/watsonbox/exportify/issues/142
       return REQUEST_RETRY_BUFFER * 3
@@ -37,23 +67,47 @@ limiter.on("failed", async (error, jobInfo) => {
   }
 })
 
-export const apiCall = limiter.wrap(function(url: string, accessToken: string) {
+function request(_queuedAs: number, url: string, accessToken: string) {
   return axios.get(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
-})
+}
 
-export function apiCallErrorHandler(error: any) {
-  if (error.isAxiosError) {
-    if (error.request.status === 401) {
-      // Clear token and return to home page after auth token expiry
-      clearAccessToken()
-      redirectTo(window.location.pathname)
-      return
-    } else if (error.request.status >= 500 && error.request.status < 600) {
-      // Show error page when we get a 5XX that fails retries
-      redirectTo(`${window.location.pathname}?spotify_error=true`)
-      return
-    }
+export function apiCall(url: string, accessToken: string) {
+  return limiter.schedule(request, ++requestsQueued, url, accessToken)
+}
+
+export type ApiError = {
+  kind: "network" | "rate_limited" | "unavailable" | "refused"
+  status?: number
+  detail?: string // Spotify's own reason, untranslated
+}
+
+function describeApiError(error: any): ApiError {
+  const status: number | undefined = error.response?.status
+
+  if (status === undefined) { return { kind: "network" } }
+  if (status === 429) { return { kind: "rate_limited", status } }
+  if (status >= 500) { return { kind: "unavailable", status } }
+
+  return { kind: "refused", status, detail: error.response.data?.error?.message }
+}
+
+// Handles a request that has run out of retries, returning what to tell the user if anything
+export function apiCallErrorHandler(error: any): ApiError | undefined {
+  if (!error.isAxiosError) { throw error }
+  if (pageUnloading) { return }
+
+  if (error.response?.status === 401) {
+    // Clear token and return to home page after auth token expiry
+    clearAccessToken()
+    redirectTo(window.location.pathname)
+    return
   }
 
-  throw error
+  const apiError = describeApiError(error)
+  Bugsnag.notify(error, (event) => {
+    event.addMetadata("request", { url: error.config?.url })
+    if (error.response) { event.addMetadata("response", { status: error.response.status, data: error.response.data }) }
+  })
+
+  return apiError
 }

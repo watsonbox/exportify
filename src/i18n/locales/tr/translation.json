@@ -1,6 +1,7 @@
 {
   "tagline": "Spotify çalma listelerinizi dışa aktarın.",
   "get_started": "Başlayın",
+  "logging_in": "Giriş yapılıyor…",
   "subtitle": "{{userId}} için toplam {{total}} oynatma listesinden {{min}}-{{max}} arası gösteriliyor",
   "subtitle_search": "{{total}} sonuç bulundu, çalma listesi adında \"{{query}}\" içeren listeler:",
   "subtitle_search_advanced": "{{total}} sonuç, gelişmiş sorgu \"{{query}}\" için",

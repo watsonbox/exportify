@@ -6,7 +6,6 @@ import { saveAs } from "file-saver"
 import JSZip from "jszip"
 
 import PlaylistExporter from "./PlaylistExporter"
-import { apiCallErrorHandler } from "helpers"
 import PlaylistsData from "./data/PlaylistsData"
 
 interface PlaylistsExporterProps extends WithTranslation {
@@ -16,6 +15,7 @@ interface PlaylistsExporterProps extends WithTranslation {
   config: any
   onPlaylistExportStarted: (playlistName: string, doneCount: number) => void
   onPlaylistsExportDone: () => void
+  onApiError: (error: unknown) => void
 }
 
 // Handles exporting all playlist data as a zip file
@@ -71,7 +71,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
           this.props.playlistsData,
           this.props.searchQuery,
           this.props.config
-        ).catch(apiCallErrorHandler).then(() => {
+        ).catch(this.props.onApiError).finally(() => {
           this.setState({ exporting: false })
         })
       }

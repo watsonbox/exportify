@@ -3,7 +3,6 @@ import { withTranslation, WithTranslation } from "react-i18next"
 import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
-import { apiCallErrorHandler } from "helpers"
 import PlaylistExporter from "./PlaylistExporter"
 
 interface PlaylistRowProps extends WithTranslation {
@@ -11,6 +10,7 @@ interface PlaylistRowProps extends WithTranslation {
   key: string,
   playlist: any,
   config: any
+  onApiError: (error: unknown) => void
 }
 
 class PlaylistRow extends React.Component<PlaylistRowProps> {
@@ -26,7 +26,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
           this.props.accessToken,
           this.props.playlist,
           this.props.config
-        )).export().catch(apiCallErrorHandler).then(() => {
+        )).export().catch(this.props.onApiError).finally(() => {
           this.setState({ exporting: false })
         })
       }

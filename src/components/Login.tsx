@@ -4,7 +4,11 @@ import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { initiateSpotifyAuth } from "auth"
 
-class Login extends React.Component<WithTranslation> {
+interface LoginProps extends WithTranslation {
+  loggingIn?: boolean
+}
+
+class Login extends React.Component<LoginProps> {
   authorize = async () => {
     const searchParams = new URLSearchParams(window.location.search)
     const clientId = searchParams.get("app_client_id") || undefined
@@ -14,9 +18,13 @@ class Login extends React.Component<WithTranslation> {
   }
 
   render() {
+    const { loggingIn, i18n } = this.props
+
     return (
-      <Button id="loginButton" type="submit" variant="outline-secondary" size="lg" onClick={this.authorize}>
-        <FontAwesomeIcon icon={['far', 'check-circle']} size="sm" /> {this.props.i18n.t("get_started")}
+      <Button id="loginButton" type="submit" variant="outline-secondary" size="lg" disabled={loggingIn} onClick={this.authorize}>
+        {loggingIn
+          ? <><FontAwesomeIcon icon={['fas', 'sync']} size="sm" spin /> <span role="status">{i18n.t("logging_in")}</span></>
+          : <><FontAwesomeIcon icon={['far', 'check-circle']} size="sm" /> {i18n.t("get_started")}</>}
       </Button>
     )
   }

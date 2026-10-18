@@ -65,6 +65,8 @@ function App() {
 
   const [accessToken, setAccessToken] = useState<string | null>(loadAccessToken())
   const [loginError, setLoginError] = useState(() => loginErrorFrom(searchParams))
+  // Clicking the login button mid-exchange would navigate away and abort it
+  const [exchangingCode, setExchangingCode] = useState(() => searchParams.has("code") && !accessToken)
 
   let view
 
@@ -86,28 +88,22 @@ function App() {
         const detail = describeExchangeFailure(error)
         reportLoginFailure(error, detail, error.response)
         setLoginError({ kind: error instanceof MissingCodeVerifierError ? "wrong_browser" : "failed", detail })
-      })
+      }).finally(() => setExchangingCode(false))
     }
   }, [])
 
-  if (searchParams.get('spotify_error')) {
-    view = <div id="spotifyErrorMessage" className="lead">
-      <p><FontAwesomeIcon icon={['fas', 'bolt']} style={{ fontSize: "50px", marginBottom: "20px" }} /></p>
-      <p>Oops, Exportify has encountered an unexpected error (5XX) while using the Spotify API. This kind of error is due to a problem on Spotify&apos;s side, and although it&apos;s rare, unfortunately all we can do is retry later.</p>
-      <p style={{ marginTop: "50px" }}>Keep an eye on the <a target="_blank" rel="noreferrer" href="https://status.spotify.dev/">Spotify Web API Status page</a> to see if there are any known problems right now, and then <a rel="noreferrer" href="?">retry</a>.</p>
-    </div>
-  } else if (accessToken) {
+  if (accessToken) {
     view = <PlaylistTable accessToken={accessToken!} onSetSubtitle={onSetSubtitle} />
   } else {
     view = <>
       {loginError && (
-        <Alert id="loginError" variant={loginError.kind === "cancelled" ? "secondary" : "danger"}>
+        <Alert id="loginError" className="mb-4" variant={loginError.kind === "cancelled" ? "secondary" : "danger"}>
           <p className="mb-0">{loginError.kind === "cancelled" ? t("login_error.cancelled") : t("login_error.failed")}</p>
           {loginError.kind === "wrong_browser" && <p className="mb-0">{t("login_error.same_browser")}</p>}
           {loginError.detail && <p className="mt-2 mb-0 small opacity-75">{loginError.detail}</p>}
         </Alert>
       )}
-      <Login />
+      <Login loggingIn={exchangingCode} />
     </>
   }
 
