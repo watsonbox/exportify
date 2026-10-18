@@ -85,7 +85,7 @@ exports[`playlist loading 1`] = `
         <button
           aria-expanded="false"
           class="dropdown-toggle btn btn-link"
-          id="react-aria-:r0:"
+          id="react-aria-_r_0_"
           type="button"
         >
           <svg
