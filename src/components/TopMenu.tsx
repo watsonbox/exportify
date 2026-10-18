@@ -122,7 +122,7 @@ class TopMenu extends React.Component<TopMenuProps> {
         <Button id="darkModeButton" type="submit" variant="link" size="lg" onClick={this.handleDarkModeClick} title={this.props.i18n.t("top_menu.toggle_dark_mode")}>
           <FontAwesomeIcon icon={['fas', 'lightbulb']} />
         </Button>
-        <Dropdown id="languageDropdown" title={this.props.i18n.t("top_menu.change_language")}>
+        <Dropdown id="languageDropdown" align="end" title={this.props.i18n.t("top_menu.change_language")}>
           <Dropdown.Toggle variant="link" id="dropdown-basic">
             <FontAwesomeIcon icon={['fas', 'globe']} />
           </Dropdown.Toggle>
