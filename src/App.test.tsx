@@ -53,6 +53,15 @@ describe("i18n", () => {
     expect(screen.getByText(/Commencer/)).toBeInTheDocument()
     expect(linkElement).toHaveTextContent("Commencer")
   })
+
+  test("ticks the base language for a regional variant", async () => {
+    await i18n.changeLanguage("en-GB")
+    render(<App />)
+
+    await userEvent.click(within(screen.getByTitle(/Change language/i)).getByRole("button"))
+
+    expect(screen.getByRole("button", { current: true })).toHaveTextContent("English")
+  })
 })
 
 describe("PKCE", () => {

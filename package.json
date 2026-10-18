@@ -16,13 +16,13 @@
     "bootstrap": "^5.3.3",
     "bottleneck": "^2.19.5",
     "file-saver": "^2.0.5",
-    "i18next": "^23.14.0",
-    "i18next-browser-languagedetector": "^8.0.0",
+    "i18next": "^26.4.2",
+    "i18next-browser-languagedetector": "^8.2.1",
     "jszip": "^3.10.1",
     "react": "^19.3.1",
     "react-bootstrap": "^2.10.4",
     "react-dom": "^19.3.1",
-    "react-i18next": "^15.0.1"
+    "react-i18next": "^17.0.15"
   },
   "scripts": {
     "start": "vite",

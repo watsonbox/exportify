@@ -50,13 +50,17 @@ class TopMenu extends React.Component<TopMenuProps> {
     this.setTheme(this.getPreferredTheme())
   }
 
-  renderLanguageDropdownItem = (language: string, label: string) => (
-    <Dropdown.Item onClick={() => this.handleLanguageSwitch(language)}>
-      <Form.Check type="radio" name="language">
-        <FontAwesomeIcon icon={['fas', 'check']} className={this.props.i18n.language === language ? 'me-1 selected' : 'me-1'} /> {label}
-      </Form.Check>
-    </Dropdown.Item>
-  )
+  renderLanguageDropdownItem = (language: string, label: string) => {
+    const selected = this.props.i18n.resolvedLanguage === language
+
+    return (
+      <Dropdown.Item onClick={() => this.handleLanguageSwitch(language)} aria-current={selected}>
+        <Form.Check type="radio" name="language">
+          <FontAwesomeIcon icon={['fas', 'check']} className={selected ? 'me-1 selected' : 'me-1'} /> {label}
+        </Form.Check>
+      </Dropdown.Item>
+    )
+  }
 
   render() {
     const helpButton = this.props.loggedIn ? (
