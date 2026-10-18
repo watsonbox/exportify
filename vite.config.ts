@@ -9,7 +9,8 @@ export default defineConfig({
   },
   css: {
     preprocessorOptions: {
-      scss: { quietDeps: true },
+      // Bootstrap 5 only supports being loaded with @import, and its own SCSS uses deprecated Sass features
+      scss: { quietDeps: true, silenceDeprecations: ["import"] },
     },
   },
   server: {

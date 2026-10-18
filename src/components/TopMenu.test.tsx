@@ -13,5 +13,5 @@ test("help explains the owner filter and links to the documentation", async () =
 
   expect(help.getByText("[owner]", { selector: "code" })).toBeInTheDocument()
   expect(help.getByRole("link", { name: "full project documentation" })).toHaveAttribute("href", "https://github.com/watsonbox/exportify")
-  expect(consoleError.mock.calls.filter(([message]) => String(message).includes('unique "key" prop'))).toEqual([])
+  expect(consoleError).not.toHaveBeenCalled()
 })
