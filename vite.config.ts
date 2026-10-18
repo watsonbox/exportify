@@ -28,7 +28,5 @@ export default defineConfig({
     setupFiles: ["src/setupTests.ts"],
     mockReset: true,
     restoreMocks: true,
-    // react-fontawesome's CJS entry would load a second svg-core instance alongside the ESM one icons.ts registers with
-    alias: { "@fortawesome/react-fontawesome": "@fortawesome/react-fontawesome/index.es.js" },
   },
 })
