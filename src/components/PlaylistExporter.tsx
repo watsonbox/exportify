@@ -1,22 +1,24 @@
 import { saveAs } from "file-saver"
 import i18n from "../i18n/config"
 
-import TracksData from "components/data/TracksData"
-import TracksBaseData from "components/data/TracksBaseData"
+import TracksData, { CsvValue } from "components/data/TracksData"
+import TracksBaseData, { TrackItem } from "components/data/TracksBaseData"
 import TracksArtistsData from "components/data/TracksArtistsData"
 import TracksAudioFeaturesData from "components/data/TracksAudioFeaturesData"
 import TracksAlbumData from "components/data/TracksAlbumData"
+import { ExportablePlaylist } from "components/data/PlaylistsData"
+import { ExportConfig } from "components/ConfigDropdown"
 
 class TracksCsvFile {
-  playlist: any
-  trackItems: any
+  playlist: ExportablePlaylist
+  trackItems: TrackItem[]
   columnNames: string[]
-  lineData: Map<string, string[]>
+  lineData: Map<string, CsvValue[]>
 
   lineTrackUris: string[]
-  lineTrackData: string[][]
+  lineTrackData: CsvValue[][]
 
-  constructor(playlist: any, trackItems: any) {
+  constructor(playlist: ExportablePlaylist, trackItems: TrackItem[]) {
     this.playlist = playlist
     this.trackItems = trackItems
     this.columnNames = [
@@ -25,8 +27,8 @@ class TracksCsvFile {
     ]
 
     this.lineData = new Map()
-    this.lineTrackUris = trackItems.map((i: any) => i.track.uri)
-    this.lineTrackData = trackItems.map((i: any) => [
+    this.lineTrackUris = trackItems.map((i) => i.track.uri)
+    this.lineTrackData = trackItems.map((i) => [
       i.added_by == null ? '' : i.added_by.uri,
       i.added_at
     ])
@@ -39,7 +41,7 @@ class TracksCsvFile {
       this.columnNames.push(...tracksData.dataLabels())
     }
 
-    const data: Map<string, string[]> = await tracksData.data()
+    const data = await tracksData.data()
 
     this.lineTrackUris.forEach((uri: string, index: number) => {
       if (data.has(uri)) {
@@ -64,17 +66,17 @@ class TracksCsvFile {
     return csvContent
   }
 
-  sanitize(string: string): string {
-    return '"' + String(string).replace(/"/g, '""') + '"'
+  sanitize(value: CsvValue): string {
+    return '"' + String(value).replace(/"/g, '""') + '"'
   }
 }
 
 // Handles exporting a single playlist as a CSV file
 class PlaylistExporter {
-  playlist: any
-  config: any
+  playlist: ExportablePlaylist
+  config: ExportConfig
 
-  constructor(playlist: any, config: any) {
+  constructor(playlist: ExportablePlaylist, config: ExportConfig) {
     this.playlist = playlist
     this.config = config
   }

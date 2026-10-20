@@ -8,13 +8,13 @@ interface PaginatorProps {
 }
 
 class Paginator extends React.Component<PaginatorProps> {
-  nextClick = (e: any) => {
+  nextClick = (e: React.MouseEvent) => {
     e.preventDefault()
 
     this.props.onPageChanged(this.props.currentPage + 1)
   }
 
-  prevClick = (e: any) => {
+  prevClick = (e: React.MouseEvent) => {
     e.preventDefault()
 
     this.props.onPageChanged(this.props.currentPage - 1)

@@ -3,7 +3,7 @@
 // - https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 
 import Bugsnag from "@bugsnag/js"
-import axios from "axios"
+import axios, { AxiosResponse } from "axios"
 import { redirectTo } from "./navigation"
 
 const SPOTIFY_CLIENT_ID = "9950ac751e34487dbbe027c4fd7f8e99"
@@ -13,6 +13,7 @@ const SPOTIFY_SCOPES = "playlist-read-private playlist-read-collaborative user-l
 const EXPIRY_MARGIN = 60 * 1000
 
 type TokenResponse = { access_token: string, expires_in: number, refresh_token?: string }
+export type OAuthErrorResponse = { error: string, error_description?: string }
 
 // Access token management
 export function loadAccessToken(): string | null {
@@ -55,7 +56,7 @@ async function requestRefresh(): Promise<string> {
   if (!refreshToken) { throw new SessionExpiredError() }
 
   try {
-    const response = await axios.post(
+    const response = await axios.post<TokenResponse>(
       SPOTIFY_TOKEN_URL,
       new URLSearchParams({
         grant_type: "refresh_token",
@@ -66,18 +67,17 @@ async function requestRefresh(): Promise<string> {
     )
     saveTokens(response.data)
     return response.data.access_token
-  } catch (error: any) {
+  } catch (error) {
     // With no response it's the connection, which the request's own retries can ride out
-    if (!error.response) { throw error }
+    if (!axios.isAxiosError<Partial<OAuthErrorResponse>>(error) || !error.response) { throw error }
 
-    reportRefreshFailure(error)
+    reportRefreshFailure(error.response)
     throw new SessionExpiredError()
   }
 }
 
 // Sends Spotify's reason but never the request, whose body holds the refresh token
-function reportRefreshFailure(error: any) {
-  const { status, data } = error.response
+function reportRefreshFailure({ status, data }: AxiosResponse<Partial<OAuthErrorResponse>>) {
   const reason = data?.error_description ? `${data.error} (${data.error_description})` : data?.error ?? status
 
   Bugsnag.notify(new Error(`Token refresh failed: ${reason}`), (event) => {
@@ -173,7 +173,7 @@ export async function exchangeCodeForToken(code: string): Promise<string> {
     throw new MissingCodeVerifierError()
   }
 
-  const response = await axios.post(
+  const response = await axios.post<TokenResponse>(
     SPOTIFY_TOKEN_URL,
     new URLSearchParams({
       client_id: clientId,

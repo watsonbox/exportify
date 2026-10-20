@@ -3,6 +3,7 @@ import "./icons"
 
 import React, { useEffect, useState } from 'react'
 import Bugsnag from "@bugsnag/js"
+import { AxiosResponse, isAxiosError } from "axios"
 import { useTranslation, Translation } from "react-i18next"
 import { Alert } from "react-bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -10,7 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Login from 'components/Login'
 import PlaylistTable from "components/PlaylistTable"
 import TopMenu from "components/TopMenu"
-import { loadAccessToken, exchangeCodeForToken, MissingCodeVerifierError } from "auth"
+import { loadAccessToken, exchangeCodeForToken, MissingCodeVerifierError, OAuthErrorResponse } from "auth"
 
 const baseUrl = import.meta.env.BASE_URL
 
@@ -24,8 +25,12 @@ function loginErrorFrom(params: URLSearchParams): LoginError | null {
   return error === "access_denied" ? { kind: "cancelled" } : { kind: "failed", detail: `Spotify: ${error}` }
 }
 
-function describeExchangeFailure(error: any): string {
-  const spotifyError = error.response?.data
+function oauthResponse(error: unknown) {
+  return isAxiosError<Partial<OAuthErrorResponse>>(error) ? error.response : undefined
+}
+
+function describeExchangeFailure(error: Error): string {
+  const spotifyError = oauthResponse(error)?.data
   if (!spotifyError?.error) { return error.message }
 
   return spotifyError.error_description
@@ -34,7 +39,7 @@ function describeExchangeFailure(error: any): string {
 }
 
 // Sends Spotify's reason but never the request, whose body holds the code and verifier
-function reportLoginFailure(error: Error, detail: string, response?: any) {
+function reportLoginFailure(error: Error, detail: string, response?: AxiosResponse<Partial<OAuthErrorResponse>>) {
   // Google's Read Aloud fetcher replays callback URLs with empty storage, so its failures are noise
   if (navigator.userAgent.includes("Google-Read-Aloud")) { return }
 
@@ -70,7 +75,7 @@ function App() {
 
   let view
 
-  const onSetSubtitle = (subtitle: any) => {
+  const onSetSubtitle = (subtitle: React.JSX.Element) => {
     setSubtitle(subtitle)
   }
 
@@ -84,9 +89,9 @@ function App() {
     if (callbackError?.detail) {
       reportLoginFailure(new Error(`Spotify authorization error: ${params.get("error")}`), callbackError.detail)
     } else if (code && !loadAccessToken()) {
-      exchangeCodeForToken(code).then(setAccessToken, (error) => {
+      exchangeCodeForToken(code).then(setAccessToken, (error: Error) => {
         const detail = describeExchangeFailure(error)
-        reportLoginFailure(error, detail, error.response)
+        reportLoginFailure(error, detail, oauthResponse(error))
         setLoginError({ kind: error instanceof MissingCodeVerifierError ? "wrong_browser" : "failed", detail })
       }).finally(() => setExchangingCode(false))
     }

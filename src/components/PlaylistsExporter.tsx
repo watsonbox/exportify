@@ -7,11 +7,12 @@ import JSZip from "jszip"
 
 import PlaylistExporter from "./PlaylistExporter"
 import PlaylistsData from "./data/PlaylistsData"
+import { ExportConfig } from "./ConfigDropdown"
 
 interface PlaylistsExporterProps extends WithTranslation {
   playlistsData: PlaylistsData
   searchQuery: string
-  config: any
+  config: ExportConfig
   onPlaylistExportStarted: (playlistName: string, doneCount: number) => void
   onPlaylistsExportDone: () => void
   onApiError: (error: unknown) => void
@@ -23,7 +24,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
     exporting: false
   }
 
-  async export(playlistsData: PlaylistsData, searchQuery: string, config: any) {
+  async export(playlistsData: PlaylistsData, searchQuery: string, config: ExportConfig) {
     const playlistFileNames = new Set<string>()
     const playlistCsvExports = new Array<string>()
 
@@ -77,8 +78,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
   render() {
     const text = this.props.searchQuery === "" ? this.props.i18n.t("export_all") : this.props.i18n.t("export_search_results")
 
-    // @ts-expect-error - custom xs size from index.scss
-    return <Button type="submit" variant="outline-secondary" size="xs" onClick={this.exportPlaylists} className="text-nowrap" disabled={this.state.exporting} >
+    return <Button type="submit" variant="outline-secondary" onClick={this.exportPlaylists} className="text-nowrap btn-xs" disabled={this.state.exporting} >
       <FontAwesomeIcon icon={['far', 'file-archive']} /> {text}
     </Button >
   }

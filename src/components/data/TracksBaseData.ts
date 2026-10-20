@@ -1,11 +1,22 @@
 import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
+import { Paging, PlaylistItem, SavedTrack, Track, UserReference } from "spotify"
+import { ExportablePlaylist } from "./PlaylistsData"
+
+// What playlist items and saved tracks have in common, once items whose track is gone are left out
+export interface TrackItem {
+  added_at: string
+  added_by?: UserReference | null
+  track: Track
+}
+
+const hasTrack = (item: PlaylistItem | SavedTrack): item is TrackItem => item.track != null
 
 class TracksBaseData extends TracksData {
-  playlist: any
+  playlist: ExportablePlaylist
 
-  constructor(playlist: any) {
+  constructor(playlist: ExportablePlaylist) {
     super()
     this.playlist = playlist
   }
@@ -47,12 +58,12 @@ class TracksBaseData extends TracksData {
         [
           item.track.uri,
           item.track.name,
-          item.track.artists.map((a: any) => { return a.uri }).join(', '),
-          item.track.artists.map((a: any) => { return String(a.name).replace(/,/g, "\\,") }).join(', '),
+          item.track.artists.map((a) => { return a.uri }).join(', '),
+          item.track.artists.map((a) => { return (a.name ?? "").replace(/,/g, "\\,") }).join(', '),
           item.track.album.uri == null ? '' : item.track.album.uri,
           item.track.album.name,
-          item.track.album.artists.map((a: any) => { return a.uri }).join(', '),
-          item.track.album.artists.map((a: any) => { return String(a.name).replace(/,/g, "\\,") }).join(', '),
+          item.track.album.artists.map((a) => { return a.uri }).join(', '),
+          item.track.album.artists.map((a) => { return (a.name ?? "").replace(/,/g, "\\,") }).join(', '),
           item.track.album.release_date == null ? '' : item.track.album.release_date,
           item.track.album.images[0] == null ? '' : item.track.album.images[0].url,
           item.track.disc_number,
@@ -68,7 +79,7 @@ class TracksBaseData extends TracksData {
   }
 
   // Memoization supporting multiple calls
-  private playlistItems: any[] = []
+  private playlistItems: TrackItem[] = []
   private async getPlaylistItems() {
     if (this.playlistItems.length > 0) {
       return this.playlistItems
@@ -81,11 +92,11 @@ class TracksBaseData extends TracksData {
       requests.push(`${this.playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}`)
     }
 
-    const trackPromises = requests.map(request => { return apiCall(request) })
+    const trackPromises = requests.map(request => { return apiCall<Paging<PlaylistItem | SavedTrack>>(request) })
     const trackResponses = await Promise.all(trackPromises)
 
     this.playlistItems = trackResponses.flatMap(response => {
-      return response.data.items.filter((i: any) => i.track) // Exclude null track attributes
+      return response.data.items.filter(hasTrack) // Exclude null track attributes
     })
   }
 }

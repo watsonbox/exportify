@@ -5,8 +5,14 @@ import { withTranslation, WithTranslation } from "react-i18next"
 import { Dropdown, Form } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
+export interface ExportConfig {
+  includeArtistsData: boolean
+  includeAudioFeaturesData: boolean
+  includeAlbumData: boolean
+}
+
 interface ConfigDropdownProps extends WithTranslation {
-  onConfigChanged: (config: any) => void
+  onConfigChanged: (config: ExportConfig) => void
 }
 
 class ConfigDropdown extends React.Component<ConfigDropdownProps> {

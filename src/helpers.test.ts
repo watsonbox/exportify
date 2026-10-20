@@ -1,4 +1,6 @@
 import { http, HttpResponse } from "msw"
+import { Event as BugsnagEvent } from "@bugsnag/js"
+import { AxiosError } from "axios"
 import { server } from "./mocks/server"
 import { apiCall, apiCallErrorHandler, prepareReport } from "./helpers"
 import { redirectTo } from "./navigation"
@@ -34,7 +36,7 @@ function respondWith(...responses: (() => Response)[]) {
 async function settle<T>(promise: Promise<T>) {
   const result = promise.then(value => ({ value }), error => ({ error }))
   await vi.runAllTimersAsync()
-  return result as Promise<{ value?: T, error?: any }>
+  return result as Promise<{ value?: T, error?: AxiosError }>
 }
 
 // Bottleneck remembers when it last ran, so the clock never goes back between tests
@@ -68,7 +70,7 @@ describe("a request that fails with no response", () => {
 
     const { error } = await settle(apiCall(url))
 
-    expect(error.code).toBe("ERR_NETWORK")
+    expect(error?.code).toBe("ERR_NETWORK")
     expect(attempts.delays()).toEqual([1000, 2000, 4000, 8000, 16000])
   })
 
@@ -96,7 +98,7 @@ describe("a request that fails with no response", () => {
 
     const { error } = await settle(apiCall(url))
 
-    expect(error.code).toBe("ERR_NETWORK")
+    expect(error?.code).toBe("ERR_NETWORK")
     expect(attempts).toHaveLength(1)
   })
 
@@ -125,7 +127,7 @@ describe("a 429", () => {
 
     const { error } = await settle(apiCall(url))
 
-    expect(error.response.status).toBe(429)
+    expect(error?.response?.status).toBe(429)
     expect(attempts).toHaveLength(3)
   })
 
@@ -134,7 +136,7 @@ describe("a 429", () => {
 
     const { error } = await settle(apiCall(url))
 
-    expect(error.response.status).toBe(429)
+    expect(error?.response?.status).toBe(429)
     expect(attempts).toHaveLength(1)
   })
 })
@@ -162,7 +164,7 @@ describe("a 5xx", () => {
 
     const { error } = await settle(apiCall(url))
 
-    expect(error.response.status).toBe(500)
+    expect(error?.response?.status).toBe(500)
     expect(attempts).toHaveLength(3)
   })
 
@@ -187,7 +189,7 @@ describe("a client error", () => {
 
     const { error } = await settle(apiCall(url))
 
-    expect(error.response.status).toBeGreaterThanOrEqual(400)
+    expect(error?.response?.status).toBeGreaterThanOrEqual(400)
     expect(attempts).toHaveLength(1)
     expect(reports).toEqual([])
   })
@@ -252,7 +254,7 @@ describe("an expiring session", () => {
 
     const { error } = await settle(apiCall(url))
 
-    expect(error.response.status).toBe(401)
+    expect(error?.response?.status).toBe(401)
     expect(tokenRequests).toHaveLength(1)
     expect(sentTokens).toHaveLength(2)
   })
@@ -350,7 +352,7 @@ describe("an expiring session", () => {
 
 describe("preparing a Bugsnag report", () => {
   const eventFor = (originalError: unknown) =>
-    ({ originalError, request: { url: "https://exportify.app/?access_token=SECRET" } }) as any
+    ({ originalError, request: { url: "https://exportify.app/?access_token=SECRET" } }) as unknown as BugsnagEvent
 
   test("redacts the page URL and groups axios errors by message", () => {
     const event = eventFor({ isAxiosError: true, message: "Network Error" })

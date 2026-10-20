@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface PlaylistSearchProps extends WithTranslation {
   onPlaylistSearch: (query: string) => void
-  onPlaylistSearchCancel: () => Promise<any>
+  onPlaylistSearchCancel: () => Promise<void>
 }
 
 class PlaylistSearch extends React.Component<PlaylistSearchProps> {

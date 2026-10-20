@@ -1,13 +1,14 @@
 import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
+import { ArtistsResponse, Track } from "spotify"
 
 class TracksArtistsData extends TracksData {
   ARTIST_LIMIT = 50
 
-  tracks: any[]
+  tracks: Track[]
 
-  constructor(tracks: any[]) {
+  constructor(tracks: Track[]) {
     super()
     this.tracks = tracks
   }
@@ -19,12 +20,12 @@ class TracksArtistsData extends TracksData {
   }
 
   async data() {
-    const artistIds = Array.from(new Set(this.tracks.flatMap((track: any) => {
+    const artistIds = Array.from(new Set(this.tracks.flatMap((track) => {
       return track
         .artists
-        .filter((a: any) => a.type === "artist")
-        .map((a: any) => a.id)
-        .filter((i: string) => i)
+        .filter((a) => a.type === "artist")
+        .map((a) => a.id)
+        .filter((id): id is string => Boolean(id))
     })))
 
     const requests = []
@@ -33,18 +34,19 @@ class TracksArtistsData extends TracksData {
       requests.push(`https://api.spotify.com/v1/artists?ids=${artistIds.slice(offset, offset + this.ARTIST_LIMIT)}`)
     }
 
-    const artistPromises = requests.map(request => { return apiCall(request) })
+    const artistPromises = requests.map(request => { return apiCall<ArtistsResponse>(request) })
     const artistResponses = await Promise.all(artistPromises)
 
-    const artistsById = new Map(artistResponses.flatMap((response) => response.data.artists).map((artist: any) => [artist.id, artist]))
+    const artistsById = new Map(artistResponses.flatMap((response) => response.data.artists).map((artist) => [artist.id, artist]))
 
-    return new Map<string, string[]>(this.tracks.map((track: any) => {
+    return new Map<string, string[]>(this.tracks.map((track) => {
       return [
         track.uri,
         [
-          track.artists.map((a: any) => {
-            return artistsById.has(a.id) ? artistsById.get(a.id)!.genres.filter((g: string) => g).join(',') : ""
-          }).filter((g: string) => g).join(",")
+          track.artists.map((a) => {
+            const artist = a.id == null ? undefined : artistsById.get(a.id)
+            return artist ? artist.genres.filter((g) => g).join(',') : ""
+          }).filter((g) => g).join(",")
         ]
       ]
     }))

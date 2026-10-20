@@ -142,7 +142,7 @@ exports[`playlist loading 1`] = `
               class="export text-end"
             >
               <button
-                class="text-nowrap btn btn-outline-secondary btn-xs"
+                class="text-nowrap btn-xs btn btn-outline-secondary"
                 type="submit"
               >
                 <svg
@@ -238,7 +238,7 @@ exports[`playlist loading 1`] = `
               class="text-end"
             >
               <button
-                class="text-nowrap btn btn-primary btn-xs"
+                class="text-nowrap btn-xs btn btn-primary"
                 type="submit"
               >
                 <svg
@@ -331,7 +331,7 @@ exports[`playlist loading 1`] = `
               class="text-end"
             >
               <button
-                class="text-nowrap btn btn-primary btn-xs"
+                class="text-nowrap btn-xs btn btn-primary"
                 type="submit"
               >
                 <svg

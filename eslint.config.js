@@ -14,8 +14,6 @@ export default tseslint.config(
   tseslint.configs.recommended,
   {
     rules: {
-      // Spotify responses are untyped for now: TASK-24.1 re-enables this
-      "@typescript-eslint/no-explicit-any": "off",
       "@typescript-eslint/no-unused-vars": ["error", { ignoreRestSiblings: true }],
       "@typescript-eslint/no-empty-object-type": ["error", { allowInterfaces: "with-single-extends" }],
     },

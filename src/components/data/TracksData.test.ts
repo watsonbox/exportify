@@ -6,6 +6,7 @@ import {
   buildPlaylistItem, buildSavedTrack, buildTrack,
 } from "../../test/fixtures/spotify/builders"
 import TracksBaseData from "./TracksBaseData"
+import { LikedSongsPlaylist } from "./PlaylistsData"
 import TracksArtistsData from "./TracksArtistsData"
 import TracksAudioFeaturesData from "./TracksAudioFeaturesData"
 import TracksAlbumData from "./TracksAlbumData"
@@ -34,7 +35,12 @@ describe("TracksBaseData", () => {
   })
 
   test("loads liked tracks 50 at a time", async () => {
-    const likedPlaylist = { id: 'liked', tracks: { href: `${API}/me/tracks`, limit: 20, total: 60 } }
+    const likedPlaylist: LikedSongsPlaylist = {
+      id: 'liked', name: 'Liked', public: false, collaborative: false,
+      owner: { id: 'me', display_name: 'me', uri: 'spotify:user:me' },
+      tracks: { href: `${API}/me/tracks`, limit: 20, total: 60 },
+      uri: 'spotify:user:me:saved',
+    }
     server.use(pagedGet(`${API}/me/tracks`, range(60).map(i => buildSavedTrack({ track: buildTrack({ id: `t${i}` }) }))))
 
     const trackItems = await new TracksBaseData(likedPlaylist).trackItems()
@@ -76,6 +82,19 @@ describe("TracksBaseData", () => {
       'spotify:album:al1', 'Hits', 'spotify:artist:a1', 'Earth\\, Wind & Fire', '', '',
       1, 4, 215000, '', true, 70, '',
     ])
+  })
+
+  test("blanks the artist names of podcast episodes, which Spotify sends as null", async () => {
+    const show = buildArtist({ id: 's1', name: null, type: 'Song Exploder', uri: 'spotify:show:s1' })
+    const episode = buildTrack({
+      id: 'e1', type: 'episode', uri: 'spotify:episode:e1', artists: [show], album: buildAlbum({ id: 's1', type: 'show', artists: [show] }),
+    })
+    server.use(pagedGet(`${API}/playlists/p1/tracks`, [buildPlaylistItem({ track: episode })]))
+
+    const data = await new TracksBaseData(buildPlaylist({ id: 'p1', tracks: { total: 1 } })).data()
+
+    const [, , artistUris, artistNames, , , albumArtistUris, albumArtistNames] = data.get('spotify:episode:e1')!
+    expect([artistUris, artistNames, albumArtistUris, albumArtistNames]).toEqual(['spotify:show:s1', '', 'spotify:show:s1', ''])
   })
 })
 

@@ -11,6 +11,7 @@ import playlistTracks from './live/playlists-fakeplaylist0000000001-tracks-offse
 import artists from './live/artists-1.json'
 import albums from './live/albums-1.json'
 import audioFeatures from './live/audio-features-1.json'
+import { Paging } from '../../../spotify'
 import page1 from './live/playlists-37i9dQZF1DWYBF1dYDPlHw-tracks-offset-0-limit-100.json'
 import page2 from './live/playlists-37i9dQZF1DWYBF1dYDPlHw-tracks-offset-100-limit-100.json'
 import page3 from './live/playlists-37i9dQZF1DWYBF1dYDPlHw-tracks-offset-200-limit-100.json'
@@ -20,7 +21,7 @@ import error503 from './documented/error-503.json'
 
 const keys = (value: object) => Object.keys(value).sort()
 const withoutLocale = (url: string | null) => url && url.replace(/&locale=[^&]*/, '')
-const pageFields = ({ items, ...page }: any) => ({
+const pageFields = ({ items, ...page }: Paging<unknown>) => ({
   ...page, href: withoutLocale(page.href), next: withoutLocale(page.next), previous: withoutLocale(page.previous),
 })
 
@@ -74,9 +75,9 @@ describe('entity builders', () => {
     const item = buildPlaylistItem({ track: buildTrack({ name: 'Song' }), added_by: buildUser({ id: 'someone' }) })
 
     expect(keys(item)).toEqual(keys(liveItem))
-    expect(keys(item.track)).toEqual(keys(liveItem.track))
+    expect(keys(item.track!)).toEqual(keys(liveItem.track))
     expect(item.item).toEqual(item.track)
-    expect(item.track.name).toBe('Song')
+    expect(item.track!.name).toBe('Song')
     expect(item.added_by).toEqual({
       external_urls: { spotify: 'https://open.spotify.com/user/someone' },
       href: `${API}/users/someone`,

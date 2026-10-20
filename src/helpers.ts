@@ -1,8 +1,9 @@
-import Bugsnag, { Event } from "@bugsnag/js"
-import axios from "axios"
+import Bugsnag, { Event, NotifiableError } from "@bugsnag/js"
+import axios, { AxiosError, AxiosResponse } from "axios"
 import Bottleneck from "bottleneck"
 import { clearAccessToken, currentAccessToken, loadAccessToken, refreshAccessToken, SessionExpiredError } from "./auth"
 import { redirectTo } from "./navigation"
+import { ErrorResponse } from "./spotify"
 
 const REQUEST_RETRY_BUFFER = 1000
 const MAX_RATE_LIMIT_RETRIES = 2 // 3 attempts in total
@@ -67,26 +68,26 @@ limiter.on("failed", async (error, jobInfo) => {
   }
 })
 
-function get(url: string, accessToken: string | null) {
-  return axios.get(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
+function get<T>(url: string, accessToken: string | null) {
+  return axios.get<T>(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
 }
 
 // A 401 gets one retry with a renewed token, which another request or tab may already have fetched
-async function request(_queuedAs: number, url: string) {
+async function request<T>(_queuedAs: number, url: string): Promise<AxiosResponse<T>> {
   const accessToken = await currentAccessToken()
 
   try {
-    return await get(url, accessToken)
-  } catch (error: any) {
-    if (error.response?.status !== 401) { throw error }
+    return await get<T>(url, accessToken)
+  } catch (error) {
+    if (!axios.isAxiosError(error) || error.response?.status !== 401) { throw error }
 
     const storedToken = loadAccessToken()
-    return get(url, storedToken !== accessToken ? storedToken : await refreshAccessToken())
+    return get<T>(url, storedToken !== accessToken ? storedToken : await refreshAccessToken())
   }
 }
 
-export function apiCall(url: string) {
-  return limiter.schedule(request, ++requestsQueued, url)
+export function apiCall<T>(url: string) {
+  return limiter.schedule(request<T>, ++requestsQueued, url)
 }
 
 export type ApiError = {
@@ -95,20 +96,20 @@ export type ApiError = {
   detail?: string // Spotify's own reason, untranslated
 }
 
-function describeApiError(error: any): ApiError {
+function describeApiError(error: AxiosError<Partial<ErrorResponse>>): ApiError {
   const status: number | undefined = error.response?.status
 
   if (status === undefined) { return { kind: "network" } }
   if (status === 429) { return { kind: "rate_limited", status } }
   if (status >= 500) { return { kind: "unavailable", status } }
 
-  return { kind: "refused", status, detail: error.response.data?.error?.message }
+  return { kind: "refused", status, detail: error.response?.data?.error?.message }
 }
 
 // Handles a request that has run out of retries, returning what to tell the user if anything
-export function apiCallErrorHandler(error: any): ApiError | undefined {
-  if (!error?.isAxiosError && !(error instanceof SessionExpiredError)) {
-    Bugsnag.notify(error)
+export function apiCallErrorHandler(error: unknown): ApiError | undefined {
+  if (!axios.isAxiosError<Partial<ErrorResponse>>(error) && !(error instanceof SessionExpiredError)) {
+    Bugsnag.notify(error as NotifiableError)
     return { kind: "unexpected" }
   }
   if (pageUnloading) { return }
