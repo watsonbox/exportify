@@ -1,8 +1,8 @@
-[![Build Status](https://api.travis-ci.com/watsonbox/exportify.svg?branch=master)](https://travis-ci.com/github/watsonbox/exportify)
+[![CI](https://github.com/watsonbox/exportify/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/watsonbox/exportify/actions/workflows/ci.yml)
 
 <a href="https://exportify.app/"><img src="assets/screenshot.png"/></a>
 
-Export your Spotify playlists to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) by clicking on this link: [https://exportify.app/](https://exportify.app/).
+Export your Spotify playlists, Liked Songs and saved albums to [CSV](https://en.wikipedia.org/wiki/Comma-separated_values) by clicking on this link: [https://exportify.app/](https://exportify.app/).
 
 As many users have noted, there is no way to export/archive/backup playlists from the Spotify client for safekeeping. This application provides a simple interface for doing that using the [Spotify Web API](https://developer.spotify.com/documentation/web-api/).
 
@@ -12,8 +12,9 @@ As many users have noted, there is no way to export/archive/backup playlists fro
 
 - ⚙️ Optional inclusion of album, artist and audio features data in export files
 - 🔍 Playlist search with [advanced search syntax](#advanced-search-syntax) and results export
+- 💿 Saved albums export, one line per album
 - 🌓 Dark mode
-- 🗺 Available in 10 languages (English, French, Spanish, Italian, German, Portuguese, Swedish, Dutch, Japanese and Arabic)
+- 🗺 Available in 12 languages (English, French, Spanish, Italian, German, Portuguese, Swedish, Dutch, Greek, Turkish, Japanese and Arabic)
 - 📱 Mobile friendly
 - ℹ Quick reference help
 - 🚀 [Advanced rate limiting handling](https://github.com/watsonbox/exportify/pull/75) for speedy exports
@@ -23,10 +24,12 @@ As many users have noted, there is no way to export/archive/backup playlists fro
 
 1. Fire up [the app](https://exportify.app/)
 2. Click 'Get Started'
-3. Grant Exportify read-only access to your playlists
+3. Grant Exportify read-only access to your playlists and library
 4. Click the 'Export' button to export a playlist
 
 Click 'Export All' to save a zip file containing a CSV file for each playlist in your account. This may take a while when many playlists exist and/or they are large.
+
+Liked Songs and saved albums appear as the first rows of the table. 'Export All' includes them, with your saved albums as `saved_albums.csv`.
 
 ### Re-importing Playlists
 
@@ -86,6 +89,25 @@ Additionally, by selecting "Include album data", the following fields will be ad
 - Copyrights
 
 Note that the more data being exported, the longer the export will take.
+
+#### Saved Albums
+
+Saved albums are exported one line per album, most recently saved first, with these fields from the [Spotify album object](https://developer.spotify.com/documentation/web-api/reference/get-users-saved-albums):
+
+- Album URI
+- Album Name
+- Album Artist URI(s)
+- Album Artist Name(s)
+- Album Type (album, single or compilation)
+- Album Release Date
+- Total Tracks
+- Label
+- UPC ([Universal Product Code](https://en.wikipedia.org/wiki/Universal_Product_Code))
+- Popularity
+- Album Image URL
+- Added At (when the album was saved)
+
+The settings under the cog don't apply to this file.
 
 ### Playlist Search
 
