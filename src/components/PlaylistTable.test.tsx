@@ -7,6 +7,7 @@ import FileSaver from "file-saver"
 import JSZip from "jszip"
 
 import PlaylistTable from "./PlaylistTable"
+import { ExportConfig } from "./ConfigDropdown"
 
 import "../icons"
 import { server } from "../mocks/server"
@@ -112,8 +113,8 @@ const localTrack = (name: string, artist: string, durationMs: number) => ({
 
 const requestedUrls = () => handlerCalled.mock.calls.map(([url]) => url)
 
-const renderTable = (config = {}) =>
-  render(<PlaylistTable config={config} onSetSubtitle={vi.fn()} />)
+const renderTable = (config: Partial<ExportConfig> = {}) =>
+  render(<PlaylistTable config={{ includeArtistsData: false, includeAudioFeaturesData: false, includeAlbumData: false, ...config }} onSetSubtitle={vi.fn()} />)
 
 async function savedFile() {
   const saveAs = vi.mocked(FileSaver.saveAs)
@@ -524,7 +525,7 @@ describe("when an export fails unexpectedly", () => {
 
   test("Export All stays busy until the zip is saved", async () => {
     let finishZip: (zip: Blob) => void = () => {}
-    generateAsync().mockReturnValue(new Promise(resolve => { finishZip = resolve }) as any)
+    generateAsync().mockReturnValue(new Promise<Blob>(resolve => { finishZip = resolve }))
     renderTable()
     const button = await screen.findByRole('button', { name: /Export All/ })
 

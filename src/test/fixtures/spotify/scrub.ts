@@ -1,6 +1,10 @@
 import { createHash } from 'crypto'
 
-export interface RawResponse { url: string; status: number; headers: Record<string, string>; body: any }
+// Captures hold whatever any endpoint returned, so their bodies stay untyped
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type RawBody = any
+
+export interface RawResponse { url: string; status: number; headers: Record<string, string>; body: RawBody }
 export interface Fixture extends RawResponse { method: 'GET' }
 export interface IndexEntry { file: string; method: 'GET'; url: string; status: number; note?: string }
 export interface PrivateValueHash { label: string; length: number; sha256: string }
@@ -44,7 +48,7 @@ function privateValues(raw: RawResponse[]): PrivateValue[] {
   ].filter(({ value }) => value)
 }
 
-function mapStrings(value: any, fn: (s: string) => string): any {
+function mapStrings(value: RawBody, fn: (s: string) => string): RawBody {
   if (typeof value === 'string') return fn(value)
   if (Array.isArray(value)) return value.map(item => mapStrings(item, fn))
   if (value && typeof value === 'object') {
@@ -53,7 +57,7 @@ function mapStrings(value: any, fn: (s: string) => string): any {
   return value
 }
 
-function trimMarkets(value: any): any {
+function trimMarkets(value: RawBody): RawBody {
   if (Array.isArray(value)) return value.map(trimMarkets)
   if (value && typeof value === 'object') {
     return Object.fromEntries(Object.entries(value).map(([key, child]) =>

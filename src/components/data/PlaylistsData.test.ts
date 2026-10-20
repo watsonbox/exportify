@@ -20,7 +20,7 @@ function servePlaylists(playlists: object[]) {
   )
 }
 
-const names = (playlists: any[]) => playlists.map(p => p.name)
+const names = (playlists: { name?: string }[]) => playlists.map(p => p.name)
 
 describe("PlaylistsData", () => {
   test("puts the liked tracks playlist first in the first slice", async () => {

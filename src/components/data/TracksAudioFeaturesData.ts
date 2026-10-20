@@ -1,13 +1,14 @@
 import i18n from "../../i18n/config"
-import TracksData from "./TracksData"
+import TracksData, { CsvValue } from "./TracksData"
 import { apiCall } from "helpers"
+import { AudioFeatures, AudioFeaturesResponse, Track } from "spotify"
 
 class TracksAudioFeaturesData extends TracksData {
   AUDIO_FEATURES_LIMIT = 100
 
-  tracks: any[]
+  tracks: Track[]
 
-  constructor(tracks: any[]) {
+  constructor(tracks: Track[]) {
     super()
     this.tracks = tracks
   }
@@ -30,7 +31,7 @@ class TracksAudioFeaturesData extends TracksData {
   }
 
   async data() {
-    const trackIds = this.tracks.map((track: any) => track.id)
+    const trackIds = this.tracks.map((track) => track.id)
 
     const requests = []
 
@@ -38,10 +39,10 @@ class TracksAudioFeaturesData extends TracksData {
       requests.push(`https://api.spotify.com/v1/audio-features?ids=${trackIds.slice(offset, offset + this.AUDIO_FEATURES_LIMIT)}`)
     }
 
-    const audioFeaturesPromises = requests.map(request => { return apiCall(request) })
+    const audioFeaturesPromises = requests.map(request => { return apiCall<AudioFeaturesResponse>(request) })
     const audioFeatures = (await Promise.all(audioFeaturesPromises)).flatMap((response) => response.data.audio_features)
 
-    const audioFeaturesData = new Map<string, string[]>(audioFeatures.filter((af: any) => af).map((audioFeatures: any) => {
+    const audioFeaturesData = new Map<string, CsvValue[]>(audioFeatures.filter((af): af is AudioFeatures => af != null).map((audioFeatures) => {
       return [
         audioFeatures.uri,
         [

@@ -4,16 +4,17 @@ import { Alert, ProgressBar } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import Bugsnag from "@bugsnag/js"
-import PlaylistsData from "./data/PlaylistsData"
-import ConfigDropdown, { ConfigDropdownRef } from "./ConfigDropdown"
+import PlaylistsData, { ExportablePlaylist, PlaylistPlaceholder } from "./data/PlaylistsData"
+import ConfigDropdown, { ConfigDropdownRef, ExportConfig } from "./ConfigDropdown"
 import PlaylistSearch, { PlaylistSearchRef } from "./PlaylistSearch"
 import PlaylistRow from "./PlaylistRow"
 import Paginator from "./Paginator"
 import PlaylistsExporter from "./PlaylistsExporter"
 import { apiCall, apiCallErrorHandler, ApiError } from "helpers"
+import { CurrentUser } from "spotify"
 
 interface PlaylistTableProps extends WithTranslation {
-  config?: any,
+  config?: ExportConfig,
   onSetSubtitle: (subtitile: React.JSX.Element) => void
 }
 
@@ -29,7 +30,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     initialized: false,
     apiError: null as ApiError | null,
     searchQuery: "",
-    playlists: [],
+    playlists: [] as (ExportablePlaylist | PlaylistPlaceholder)[],
     playlistCount: 0,
     likedSongs: {
       limit: 0,
@@ -162,7 +163,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     })
   }
 
-  handleConfigChanged = (config: any) => {
+  handleConfigChanged = (config: ExportConfig) => {
     Bugsnag.leaveBreadcrumb(`Config updated to ${JSON.stringify(config)}`)
 
     this.setState({ config: config })
@@ -181,10 +182,10 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
 
   async componentDidMount() {
     try {
-      const user = await apiCall("https://api.spotify.com/v1/me")
+      const user = await apiCall<CurrentUser>("https://api.spotify.com/v1/me")
         .then(response => response.data)
 
-      Bugsnag.setUser(user.id, user.uri, user.display_name)
+      Bugsnag.setUser(user.id, user.uri, user.display_name ?? undefined)
 
       this.userId = user.id
       this.playlistsData = new PlaylistsData(
@@ -255,7 +256,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
                 </tr>
               </thead>
               <tbody>
-                {this.state.playlists.map((playlist: any, i) => {
+                {this.state.playlists.map((playlist, i) => {
                   return <PlaylistRow
                     playlist={playlist}
                     key={playlist.id || i}

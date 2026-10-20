@@ -4,6 +4,7 @@ import { pagedGet, spotifyGet } from "../mocks/handlers"
 import { csvHeaders, csvRecords } from "../test/csv"
 import { API, buildArtist, buildPlaylist, buildPlaylistItem, buildTrack, buildUser } from "../test/fixtures/spotify/builders"
 import PlaylistExporter from "./PlaylistExporter"
+import { Track } from "../spotify"
 
 const baseHeaders = [
   "Track URI", "Track Name", "Artist URI(s)", "Artist Name(s)", "Album URI", "Album Name", "Album Artist URI(s)",
@@ -13,7 +14,9 @@ const baseHeaders = [
 
 const playlist = buildPlaylist({ id: 'p1', name: 'Mixtape', tracks: { total: 1 } })
 
-const serveTracks = (...tracks: object[]) =>
+const noExtraData = { includeArtistsData: false, includeAudioFeaturesData: false, includeAlbumData: false }
+
+const serveTracks = (...tracks: Track[]) =>
   server.use(pagedGet(`${API}/playlists/p1/tracks`, tracks.map(track => buildPlaylistItem({ track, added_by: buildUser({ id: 'dj' }), added_at: '2024-01-02T03:04:05Z' }))))
 
 beforeEach(() => {
@@ -24,7 +27,7 @@ describe("PlaylistExporter", () => {
   test("puts base track columns before the item columns", async () => {
     serveTracks(buildTrack())
 
-    const csv = await new PlaylistExporter(playlist, {}).csvData()
+    const csv = await new PlaylistExporter(playlist, noExtraData).csvData()
 
     expect(csvHeaders(csv)).toEqual(baseHeaders)
   })
@@ -51,7 +54,7 @@ describe("PlaylistExporter", () => {
   test("quotes every field so commas, quotes and newlines survive", async () => {
     serveTracks(buildTrack({ id: 't1', name: 'Say "Hi",\nthen leave', artists: [buildArtist({ name: 'A, B' })] }))
 
-    const csv = await new PlaylistExporter(playlist, {}).csvData()
+    const csv = await new PlaylistExporter(playlist, noExtraData).csvData()
 
     expect(csvRecords(csv)).toEqual([expect.objectContaining({
       "Track URI": "spotify:track:t1",
@@ -68,7 +71,7 @@ describe("PlaylistExporter", () => {
     ['tabs\tand "quotes"', 'tabs_and_quotes_'],
     ['Déjà Vu', 'déjà_vu'],
   ])("names the file for %j as %j", (name, fileName) => {
-    const exporter = new PlaylistExporter({ ...playlist, name }, {})
+    const exporter = new PlaylistExporter({ ...playlist, name }, noExtraData)
 
     expect(exporter.fileName(false)).toBe(fileName)
     expect(exporter.fileName()).toBe(`${fileName}.csv`)

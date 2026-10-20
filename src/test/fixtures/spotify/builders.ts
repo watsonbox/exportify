@@ -8,50 +8,58 @@ import audioFeatures from './live/audio-features-1.json'
 import error401 from './documented/error-401.json'
 import error429 from './documented/error-429.json'
 import error503 from './documented/error-503.json'
-
-type Json = Record<string, any>
+import {
+  Album, Artist, AudioFeatures, CurrentUser, Paging, PlaylistItem, PublicUser, SavedTrack, SimplifiedAlbum, SimplifiedArtist,
+  SimplifiedPlaylist, Track, UserReference,
+} from '../../../spotify'
 
 export const API = 'https://api.spotify.com/v1'
 
-const savedTrackTemplate = savedTracks.body.items[0]
-const playlistTemplate = playlists.body.items.find(playlist => playlist.owner.id === me.body.id)!
-const playlistItemTemplate = playlistTracks.body.items[0]
+// Typing the templates checks the response types against the recorded fixtures
+const meTemplate: CurrentUser = me.body
+const savedTrackTemplate: SavedTrack = savedTracks.body.items[0]
+const playlistTemplate: SimplifiedPlaylist = playlists.body.items.find(playlist => playlist.owner.id === me.body.id)!
+const playlistItemTemplate: PlaylistItem & { added_by: UserReference, track: Track } = playlistTracks.body.items[0]
+const fullArtistTemplate: Artist = artists.body.artists[0]
+const fullAlbumTemplate: Album = albums.body.albums[0]
+const audioFeaturesTemplate: AudioFeatures = audioFeatures.body.audio_features[0]
 const documentedErrors = [error401, error429, error503]
 
-const links = (type: string) => (id: string) => ({
+const links = (type: string) => (id: string | null) => ({
   external_urls: { spotify: `https://open.spotify.com/${type}/${id}` },
   href: `${API}/${type}s/${id}`,
   uri: `spotify:${type}:${id}`,
 })
 
-const build = (template: Json, overrides: Json, derive: (id: string) => Json): Json =>
+// Typed as the template refined by what's derived and overridden, so a built id or uri is known not to be null
+const build = <T extends { id: string | null }, D extends object, O extends Partial<T>>(template: T, overrides: O, derive: (id: string | null) => D): T & D & O =>
   ({ ...template, ...derive(overrides.id ?? template.id), ...overrides })
 
 // Keeps exactly the template's keys, so a value takes the live shape of the context it's used in
-const conform = (template: Json, value: Json) =>
-  Object.fromEntries(Object.keys(template).map(key => [key, key in value ? value[key] : template[key]]))
+const conform = <T extends object>(template: T, value: object): T =>
+  Object.fromEntries(Object.keys(template).map(key => [key, (key in value ? value : template)[key as keyof object]])) as T
 
-export const buildMe = (overrides: Json = {}) => build(me.body, overrides, links('user'))
+export const buildMe = <O extends Partial<CurrentUser>>(overrides = {} as O) => build(meTemplate, overrides, links('user'))
 
-export const buildUser = (overrides: Json = {}) =>
+export const buildUser = <O extends Partial<PublicUser>>(overrides = {} as O) =>
   build({ ...playlistTemplate.owner, display_name: overrides.id ?? playlistTemplate.owner.display_name }, overrides, links('user'))
 
-export const buildArtist = (overrides: Json = {}) => build(savedTrackTemplate.track.artists[0], overrides, links('artist'))
+export const buildArtist = <O extends Partial<SimplifiedArtist>>(overrides = {} as O) => build(savedTrackTemplate.track.artists[0], overrides, links('artist'))
 
-export const buildFullArtist = (overrides: Json = {}) => build(artists.body.artists[0], overrides, links('artist'))
+export const buildFullArtist = <O extends Partial<Artist>>(overrides = {} as O) => build(fullArtistTemplate, overrides, links('artist'))
 
-export const buildAlbum = (overrides: Json = {}) => build(savedTrackTemplate.track.album, overrides, links('album'))
+export const buildAlbum = <O extends Partial<SimplifiedAlbum>>(overrides = {} as O) => build(savedTrackTemplate.track.album, overrides, links('album'))
 
-export const buildFullAlbum = (overrides: Json = {}) => build(albums.body.albums[0], overrides, id => ({
+export const buildFullAlbum = <O extends Partial<Album>>(overrides = {} as O) => build(fullAlbumTemplate, overrides, id => ({
   ...links('album')(id),
   tracks: buildPage([], { url: `${API}/albums/${id}/tracks`, limit: 50 }),
 }))
 
-export const buildTrack = (overrides: Json = {}) => build(savedTrackTemplate.track, overrides, links('track'))
+export const buildTrack = <O extends Partial<Track>>(overrides = {} as O) => build(savedTrackTemplate.track, overrides, links('track'))
 
 const plusEncode = (value: string) => encodeURIComponent(value).replace(/%20/g, '+')
 
-export function buildLocalTrack({ name, artist, album, duration_ms }: { name: string; artist: string; album: string; duration_ms: number }) {
+export function buildLocalTrack({ name, artist, album, duration_ms }: { name: string; artist: string; album: string; duration_ms: number }): Track {
   return {
     album: {
       album_type: null, artists: [], available_markets: [], external_urls: {}, href: null, id: null, images: [],
@@ -76,10 +84,12 @@ export function buildLocalTrack({ name, artist, album, duration_ms }: { name: st
   }
 }
 
-export const buildSavedTrack = (overrides: Json = {}) =>
+export const buildSavedTrack = (overrides: Partial<SavedTrack> = {}): SavedTrack =>
   ({ added_at: savedTrackTemplate.added_at, track: buildTrack(), ...overrides })
 
-export function buildPlaylistItem({ track = buildTrack(), added_by = buildUser(), ...overrides }: Json = {}): Json {
+type PlaylistItemOverrides = Partial<Omit<PlaylistItem, 'added_by'>> & { added_by?: UserReference }
+
+export function buildPlaylistItem({ track = buildTrack(), added_by = buildUser(), ...overrides }: PlaylistItemOverrides = {}): PlaylistItem {
   const playlistTrack = track && conform(playlistItemTemplate.track, track)
 
   return {
@@ -92,7 +102,9 @@ export function buildPlaylistItem({ track = buildTrack(), added_by = buildUser()
   }
 }
 
-export function buildPlaylist({ tracks, ...overrides }: Json = {}) {
+type PlaylistOverrides = Partial<Omit<SimplifiedPlaylist, 'tracks'>> & { tracks?: { total: number } }
+
+export function buildPlaylist({ tracks, ...overrides }: PlaylistOverrides = {}) {
   const total = tracks?.total ?? playlistTemplate.tracks.total
 
   return build(playlistTemplate, overrides, id => ({
@@ -102,7 +114,7 @@ export function buildPlaylist({ tracks, ...overrides }: Json = {}) {
   }))
 }
 
-export const buildAudioFeatures = (overrides: Json = {}) => build(audioFeatures.body.audio_features[0], overrides, id => ({
+export const buildAudioFeatures = <O extends Partial<AudioFeatures>>(overrides = {} as O) => build(audioFeaturesTemplate, overrides, id => ({
   uri: `spotify:track:${id}`,
   track_href: `${API}/tracks/${id}`,
   analysis_url: `${API}/audio-analysis/${id}`,
@@ -110,7 +122,7 @@ export const buildAudioFeatures = (overrides: Json = {}) => build(audioFeatures.
 
 interface PageOptions { url: string; offset?: number; limit?: number; total?: number }
 
-export function buildPage<T>(items: T[], { url, offset = 0, limit = 20, total = items.length }: PageOptions) {
+export function buildPage<T>(items: T[], { url, offset = 0, limit = 20, total = items.length }: PageOptions): Paging<T> {
   const pageUrl = (pageOffset: number) => `${url}?offset=${pageOffset}&limit=${limit}`
 
   return {

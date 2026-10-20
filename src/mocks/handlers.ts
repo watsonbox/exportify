@@ -3,6 +3,7 @@ import {
   API, apiError, buildAlbum, buildArtist, buildAudioFeatures, buildFullAlbum, buildFullArtist, buildLocalTrack, buildMe,
   buildPage, buildPlaylist, buildPlaylistItem, buildSavedTrack, buildTrack, buildUser, pageAt,
 } from '../test/fixtures/spotify/builders'
+import { Track } from '../spotify'
 
 export const handlerCalled = vi.fn()
 
@@ -41,7 +42,7 @@ const peanutButterBlues = buildAlbum({
   release_date_precision: 'year',
   images: image('306e7640be17c5b3468e6e80'),
 })
-const ghostpoetTrack = (overrides: Record<string, any>) =>
+const ghostpoetTrack = (overrides: Partial<Track>) =>
   buildTrack({ artists: [ghostpoet], album: peanutButterBlues, disc_number: 1, explicit: false, ...overrides })
 const oneTwos = ghostpoetTrack({
   id: '7ATyvp3TmYBmGW7YuC8DJ3',
@@ -72,7 +73,7 @@ const ghostpoetPlaylist = buildPlaylist({
 })
 const playlistsUrl = `${API}/me/playlists`
 export const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks`
-const addedByWatsonbox = (track: object | null, added_at = '2020-11-03T15:19:04Z') =>
+const addedByWatsonbox = (track: Track | null, added_at = '2020-11-03T15:19:04Z') =>
   buildPlaylistItem({ track, added_at, added_by: watsonbox })
 
 export const errorResponse = (status: number, message?: string, headers: Record<string, string> = {}) => () => {
@@ -161,7 +162,7 @@ export const nullTrackHandlers = [
   tracksPage([buildPlaylistItem({ track: null, added_at: '2020-11-08T22:12:50Z', added_by: buildUser({ id: '' }) })]),
 ]
 
-const addedByOtherUser = (track: object) =>
+const addedByOtherUser = (track: Track) =>
   buildPlaylistItem({ track, added_at: '2021-02-24T06:12:40Z', added_by: buildUser({ id: 'u8ins5esg43wtxk4h66o5d1nb' }) })
 
 export const localTrackHandlers = [

@@ -1,15 +1,35 @@
 import { apiCall } from "helpers"
+import { Paging, SavedTrack, SimplifiedPlaylist } from "spotify"
+
+// Liked Songs isn't a playlist on Spotify, so it's built from /me/tracks and exported alongside them
+export interface LikedSongsPlaylist {
+  id: "liked"
+  name: string
+  public: false
+  collaborative: false
+  owner: { id: string; display_name: string; uri: string }
+  tracks: { href: string; limit: number; total: number }
+  uri: string
+}
+
+export type ExportablePlaylist = SimplifiedPlaylist | LikedSongsPlaylist
+
+// Stands in for a playlist that hasn't been loaded yet
+export type PlaylistPlaceholder = { [K in keyof SimplifiedPlaylist]?: undefined }
+
+const isLoaded = (playlist: SimplifiedPlaylist | PlaylistPlaceholder | null): playlist is SimplifiedPlaylist =>
+  playlist != null && Object.keys(playlist).length > 0
 
 // Handles cached loading of all or subsets of playlist data
 class PlaylistsData {
   PLAYLIST_LIMIT = 50
-  PLACEHOLDER = {}
+  PLACEHOLDER: PlaylistPlaceholder = {}
 
   userId: string
   private onPlaylistsLoadingStarted?: () => void
   private onPlaylistsLoadingDone?: () => void
-  private data: any[]
-  private likedTracksPlaylist: any
+  private data: (SimplifiedPlaylist | PlaylistPlaceholder | null)[]
+  private likedTracksPlaylist: LikedSongsPlaylist | null
   private dataInitialized = false
 
   constructor(userId: string, onPlaylistsLoadingStarted?: () => void, onPlaylistsLoadingDone?: () => void) {
@@ -28,31 +48,32 @@ class PlaylistsData {
     return this.data.filter(p => p).length
   }
 
-  async slice(start: number, end: number) {
+  async slice(start: number, end: number): Promise<(ExportablePlaylist | PlaylistPlaceholder)[]> {
     await this.loadSlice(start, end)
-    await this.loadLikedTracksPlaylist()
+    const likedTracksPlaylist = await this.loadLikedTracksPlaylist()
+    const playlists = this.data.slice(start, end).filter(p => p != null)
 
     // It's a little ugly, but we slip in liked tracks with the first slice
     if (start === 0) {
-      return [this.likedTracksPlaylist, ...this.data.slice(start, end).filter(p => p)]
+      return [likedTracksPlaylist, ...playlists]
     } else {
-      return this.data.slice(start, end).filter(p => p)
+      return playlists
     }
   }
 
-  async all() {
+  async all(): Promise<ExportablePlaylist[]> {
     await this.loadAll()
-    await this.loadLikedTracksPlaylist()
+    const likedTracksPlaylist = await this.loadLikedTracksPlaylist()
 
     // Remove any uninitialized playlists when exporting
-    return [this.likedTracksPlaylist, ...this.data.filter(p => p && Object.keys(p).length > 0)]
+    return [likedTracksPlaylist, ...this.data.filter(isLoaded)]
   }
 
-  async search(query: string) {
+  async search(query: string): Promise<SimplifiedPlaylist[]> {
     await this.loadAll()
 
     // Remove any uninitialized playlists when exporting
-    const results = this.data.filter(p => p && Object.keys(p).length > 0)
+    const results = this.data.filter(isLoaded)
 
     if (query.startsWith("public:")) {
       return results.filter(p => p.public === query.endsWith(":true"))
@@ -99,7 +120,7 @@ class PlaylistsData {
     }
 
     const playlistsUrl = `https://api.spotify.com/v1/me/playlists?offset=${start}&limit=${end - start}`
-    const playlistsResponse = await apiCall(playlistsUrl)
+    const playlistsResponse = await apiCall<Paging<SimplifiedPlaylist | null>>(playlistsUrl)
     const playlistsData = playlistsResponse.data
 
     if (!this.dataInitialized) {
@@ -110,13 +131,13 @@ class PlaylistsData {
     this.data.splice(start, playlistsData.items.length, ...playlistsData.items)
   }
 
-  private async loadLikedTracksPlaylist() {
+  private async loadLikedTracksPlaylist(): Promise<LikedSongsPlaylist> {
     if (this.likedTracksPlaylist !== null) {
-      return
+      return this.likedTracksPlaylist
     }
 
     const likedTracksUrl = `https://api.spotify.com/v1/me/tracks`
-    const likedTracksResponse = await apiCall(likedTracksUrl)
+    const likedTracksResponse = await apiCall<Paging<SavedTrack>>(likedTracksUrl)
     const likedTracksData = likedTracksResponse.data
 
     this.likedTracksPlaylist = {
@@ -136,6 +157,8 @@ class PlaylistsData {
       },
       "uri": "spotify:user:" + this.userId + ":saved"
     }
+
+    return this.likedTracksPlaylist
   }
 }
 
