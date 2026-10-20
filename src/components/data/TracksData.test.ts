@@ -14,13 +14,17 @@ const requestedUrls = () => handlerCalled.mock.calls.map(([url]) => url)
 const requestedIds = (request: Request) => new URL(request.url).searchParams.get('ids')!.split(',')
 const range = (count: number) => Array.from({ length: count }, (_, i) => i)
 
+beforeEach(() => {
+  localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
+})
+
 describe("TracksBaseData", () => {
   test("loads every page of a playlist 100 items at a time, skipping null tracks", async () => {
     const playlist = buildPlaylist({ id: 'p1', tracks: { total: 150 } })
     const items = range(150).map(i => buildPlaylistItem({ track: i === 7 ? null : buildTrack({ id: `t${i}` }) }))
     server.use(pagedGet(`${API}/playlists/p1/tracks`, items))
 
-    const trackItems = await new TracksBaseData('TEST_ACCESS_TOKEN', playlist).trackItems()
+    const trackItems = await new TracksBaseData(playlist).trackItems()
 
     expect(trackItems.map(item => item.track.id)).toEqual(range(150).filter(i => i !== 7).map(i => `t${i}`))
     expect(requestedUrls()).toEqual([
@@ -33,7 +37,7 @@ describe("TracksBaseData", () => {
     const likedPlaylist = { tracks: { href: `${API}/me/tracks`, limit: 20, total: 60 } }
     server.use(pagedGet(`${API}/me/tracks`, range(60).map(i => buildSavedTrack({ track: buildTrack({ id: `t${i}` }) }))))
 
-    const trackItems = await new TracksBaseData('TEST_ACCESS_TOKEN', likedPlaylist).trackItems()
+    const trackItems = await new TracksBaseData(likedPlaylist).trackItems()
 
     expect(trackItems).toHaveLength(60)
     expect(requestedUrls()).toEqual([`${API}/me/tracks?offset=0&limit=50`, `${API}/me/tracks?offset=50&limit=50`])
@@ -41,7 +45,7 @@ describe("TracksBaseData", () => {
 
   test("only requests the playlist once across trackItems and data", async () => {
     server.use(pagedGet(`${API}/playlists/p1/tracks`, [buildPlaylistItem()]))
-    const tracksData = new TracksBaseData('TEST_ACCESS_TOKEN', buildPlaylist({ id: 'p1', tracks: { total: 1 } }))
+    const tracksData = new TracksBaseData(buildPlaylist({ id: 'p1', tracks: { total: 1 } }))
 
     await tracksData.trackItems()
     await tracksData.data()
@@ -65,7 +69,7 @@ describe("TracksBaseData", () => {
     })
     server.use(pagedGet(`${API}/playlists/p1/tracks`, [buildPlaylistItem({ track })]))
 
-    const data = await new TracksBaseData('TEST_ACCESS_TOKEN', buildPlaylist({ id: 'p1', tracks: { total: 1 } })).data()
+    const data = await new TracksBaseData(buildPlaylist({ id: 'p1', tracks: { total: 1 } })).data()
 
     expect(data.get('spotify:track:t1')).toEqual([
       'spotify:track:t1', 'September', 'spotify:artist:a1, spotify:artist:a2', 'Earth\\, Wind & Fire, Guest',
@@ -86,7 +90,7 @@ describe("TracksArtistsData", () => {
     const shared = buildArtist({ id: 'shared' })
     const tracks = range(60).map(i => buildTrack({ id: `t${i}`, artists: [shared, buildArtist({ id: `a${i}` })] }))
 
-    await new TracksArtistsData('TEST_ACCESS_TOKEN', tracks).data()
+    await new TracksArtistsData(tracks).data()
 
     expect(requestedUrls().map(url => new URL(url).searchParams.get('ids')!.split(',').length)).toEqual([50, 11])
     expect(new Set(requestedUrls().flatMap(url => new URL(url).searchParams.get('ids')!.split(','))).size).toBe(61)
@@ -98,7 +102,7 @@ describe("TracksArtistsData", () => {
       buildLocalTrack({ name: 'Demo', artist: 'Me', album: 'Tapes', duration_ms: 1000 }),
     ]
 
-    const data = await new TracksArtistsData('TEST_ACCESS_TOKEN', tracks).data()
+    const data = await new TracksArtistsData(tracks).data()
 
     expect(data.get('spotify:track:t1')).toEqual(['a1 rock,a1 pop,a2 rock,a2 pop'])
     expect(data.get(tracks[1].uri)).toEqual([''])
@@ -113,7 +117,7 @@ describe("TracksAudioFeaturesData", () => {
   })
 
   test("requests 100 tracks at a time", async () => {
-    await new TracksAudioFeaturesData('TEST_ACCESS_TOKEN', range(101).map(i => buildTrack({ id: `t${i}` }))).data()
+    await new TracksAudioFeaturesData(range(101).map(i => buildTrack({ id: `t${i}` }))).data()
 
     expect(requestedUrls().map(url => new URL(url).searchParams.get('ids')!.split(',').length)).toEqual([100, 1])
   })
@@ -121,7 +125,7 @@ describe("TracksAudioFeaturesData", () => {
   test("fills empty fields for tracks without audio features", async () => {
     const tracks = [buildTrack({ id: 't1' }), buildTrack({ id: 'episode' })]
 
-    const data = await new TracksAudioFeaturesData('TEST_ACCESS_TOKEN', tracks).data()
+    const data = await new TracksAudioFeaturesData(tracks).data()
 
     expect(data.get('spotify:track:t1')).toHaveLength(12)
     expect(data.get('spotify:track:t1')![10]).toBe(120)
@@ -144,7 +148,7 @@ describe("TracksAlbumData", () => {
   test("fetches each distinct album once, 20 per request", async () => {
     const tracks = range(25).flatMap(i => [buildTrack({ id: `t${i}`, album: buildAlbum({ id: `al${i}` }) }), buildTrack({ id: `u${i}`, album: buildAlbum({ id: `al${i}` }) })])
 
-    await new TracksAlbumData('TEST_ACCESS_TOKEN', tracks).data()
+    await new TracksAlbumData(tracks).data()
 
     expect(requestedUrls().map(url => new URL(url).searchParams.get('ids')!.split(',').length)).toEqual([20, 5])
   })
@@ -153,7 +157,7 @@ describe("TracksAlbumData", () => {
     const local = buildLocalTrack({ name: 'Demo', artist: 'Me', album: 'Tapes', duration_ms: 1000 })
     const tracks = [buildTrack({ id: 't1', album: buildAlbum({ id: 'al1' }) }), buildTrack({ id: 't2', album: buildAlbum({ id: 'gone' }) }), local]
 
-    const data = await new TracksAlbumData('TEST_ACCESS_TOKEN', tracks).data()
+    const data = await new TracksAlbumData(tracks).data()
 
     expect(data.get('spotify:track:t1')).toEqual(['indie, rock', 'al1 Records', 'C 2020 Label, P 2020 Label'])
     expect(data.get('spotify:track:t2')).toEqual(['', '', ''])

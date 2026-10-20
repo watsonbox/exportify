@@ -13,7 +13,6 @@ import PlaylistsExporter from "./PlaylistsExporter"
 import { apiCall, apiCallErrorHandler, ApiError } from "helpers"
 
 interface PlaylistTableProps extends WithTranslation {
-  accessToken: string,
   config?: any,
   onSetSubtitle: (subtitile: React.JSX.Element) => void
 }
@@ -183,14 +182,13 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
 
   async componentDidMount() {
     try {
-      const user = await apiCall("https://api.spotify.com/v1/me", this.props.accessToken)
+      const user = await apiCall("https://api.spotify.com/v1/me")
         .then(response => response.data)
 
       Bugsnag.setUser(user.id, user.uri, user.display_name)
 
       this.userId = user.id
       this.playlistsData = new PlaylistsData(
-        this.props.accessToken,
         this.userId!,
         this.handlePlaylistsLoadingStarted,
         this.handlePlaylistsLoadingDone
@@ -247,7 +245,6 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
                   <th className="collaborative d-none d-md-table-cell">{this.props.i18n.t("playlist.collaborative")}</th>
                   <th className="export text-end">
                     <PlaylistsExporter
-                      accessToken={this.props.accessToken}
                       onPlaylistsExportDone={this.handlePlaylistsExportDone}
                       onPlaylistExportStarted={this.handlePlaylistExportStarted}
                       playlistsData={this.playlistsData!}
@@ -263,7 +260,6 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
                   return <PlaylistRow
                     playlist={playlist}
                     key={playlist.id || i}
-                    accessToken={this.props.accessToken}
                     config={this.state.config}
                     onApiError={this.handleApiError}
                   />

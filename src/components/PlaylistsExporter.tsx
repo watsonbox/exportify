@@ -9,7 +9,6 @@ import PlaylistExporter from "./PlaylistExporter"
 import PlaylistsData from "./data/PlaylistsData"
 
 interface PlaylistsExporterProps extends WithTranslation {
-  accessToken: string
   playlistsData: PlaylistsData
   searchQuery: string
   config: any
@@ -24,7 +23,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
     exporting: false
   }
 
-  async export(accessToken: string, playlistsData: PlaylistsData, searchQuery: string, config: any) {
+  async export(playlistsData: PlaylistsData, searchQuery: string, config: any) {
     const playlistFileNames = new Set<string>()
     const playlistCsvExports = new Array<string>()
 
@@ -35,7 +34,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
     for (const playlist of playlists) {
       this.props.onPlaylistExportStarted(playlist.name, doneCount)
 
-      const exporter = new PlaylistExporter(accessToken, playlist, config)
+      const exporter = new PlaylistExporter(playlist, config)
       const csvData = await exporter.csvData()
       let fileName = exporter.fileName(false)
 
@@ -67,7 +66,6 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
       { exporting: true },
       () => {
         this.export(
-          this.props.accessToken,
           this.props.playlistsData,
           this.props.searchQuery,
           this.props.config

@@ -1,7 +1,7 @@
 import Bugsnag from "@bugsnag/js"
 import axios from "axios"
 import Bottleneck from "bottleneck"
-import { clearAccessToken } from "./auth"
+import { clearAccessToken, currentAccessToken, loadAccessToken, refreshAccessToken, SessionExpiredError } from "./auth"
 import { redirectTo } from "./navigation"
 
 const REQUEST_RETRY_BUFFER = 1000
@@ -25,7 +25,7 @@ let requestsQueued = 0
 let queuedWhenConnectionLost = 0
 
 limiter.on("failed", async (error, jobInfo) => {
-  if (pageUnloading) { return }
+  if (pageUnloading || error instanceof SessionExpiredError) { return }
 
   const status: number | undefined = error.response?.status
 
@@ -67,12 +67,26 @@ limiter.on("failed", async (error, jobInfo) => {
   }
 })
 
-function request(_queuedAs: number, url: string, accessToken: string) {
+function get(url: string, accessToken: string | null) {
   return axios.get(url, { headers: { 'Authorization': 'Bearer ' + accessToken } })
 }
 
-export function apiCall(url: string, accessToken: string) {
-  return limiter.schedule(request, ++requestsQueued, url, accessToken)
+// A 401 gets one retry with a renewed token, which another request or tab may already have fetched
+async function request(_queuedAs: number, url: string) {
+  const accessToken = await currentAccessToken()
+
+  try {
+    return await get(url, accessToken)
+  } catch (error: any) {
+    if (error.response?.status !== 401) { throw error }
+
+    const storedToken = loadAccessToken()
+    return get(url, storedToken !== accessToken ? storedToken : await refreshAccessToken())
+  }
+}
+
+export function apiCall(url: string) {
+  return limiter.schedule(request, ++requestsQueued, url)
 }
 
 export type ApiError = {
@@ -93,11 +107,11 @@ function describeApiError(error: any): ApiError {
 
 // Handles a request that has run out of retries, returning what to tell the user if anything
 export function apiCallErrorHandler(error: any): ApiError | undefined {
-  if (!error.isAxiosError) { throw error }
+  if (!error.isAxiosError && !(error instanceof SessionExpiredError)) { throw error }
   if (pageUnloading) { return }
 
-  if (error.response?.status === 401) {
-    // Clear token and return to home page after auth token expiry
+  if (error instanceof SessionExpiredError || error.response?.status === 401) {
+    // Clear tokens and return to login once the session can't be renewed
     clearAccessToken()
     redirectTo(window.location.pathname)
     return

@@ -7,8 +7,8 @@ class TracksAudioFeaturesData extends TracksData {
 
   tracks: any[]
 
-  constructor(accessToken: string, tracks: any[]) {
-    super(accessToken)
+  constructor(tracks: any[]) {
+    super()
     this.tracks = tracks
   }
 
@@ -38,7 +38,7 @@ class TracksAudioFeaturesData extends TracksData {
       requests.push(`https://api.spotify.com/v1/audio-features?ids=${trackIds.slice(offset, offset + this.AUDIO_FEATURES_LIMIT)}`)
     }
 
-    const audioFeaturesPromises = requests.map(request => { return apiCall(request, this.accessToken) })
+    const audioFeaturesPromises = requests.map(request => { return apiCall(request) })
     const audioFeatures = (await Promise.all(audioFeaturesPromises)).flatMap((response) => response.data.audio_features)
 
     const audioFeaturesData = new Map<string, string[]>(audioFeatures.filter((af: any) => af).map((audioFeatures: any) => {

@@ -15,6 +15,7 @@ import { csvRecords } from "../test/csv"
 import { captureBugsnagReports } from "../test/bugsnag"
 import { API } from "../test/fixtures/spotify/builders"
 import { errorResponse, ghostpoetTracksUrl, handlerCalled, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
+import grantedToken from "../test/fixtures/spotify/documented/token.json"
 
 vi.mock('@bugsnag/js')
 
@@ -112,7 +113,7 @@ const localTrack = (name: string, artist: string, durationMs: number) => ({
 const requestedUrls = () => handlerCalled.mock.calls.map(([url]) => url)
 
 const renderTable = (config = {}) =>
-  render(<PlaylistTable accessToken="TEST_ACCESS_TOKEN" config={config} onSetSubtitle={vi.fn()} />)
+  render(<PlaylistTable config={config} onSetSubtitle={vi.fn()} />)
 
 async function savedFile() {
   const saveAs = vi.mocked(FileSaver.saveAs)
@@ -152,6 +153,7 @@ async function exportZip(buttonName: RegExp) {
 
 beforeEach(() => {
   window.history.replaceState(null, '', '/exportify')
+  localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
   vi.spyOn(FileSaver, 'saveAs').mockImplementation(() => {})
 })
 
@@ -165,7 +167,8 @@ test("playlist loading", async () => {
 })
 
 test("redirecting when access token is invalid", async () => {
-  render(<PlaylistTable accessToken="INVALID_ACCESS_TOKEN" onSetSubtitle={vi.fn()} />)
+  localStorage.setItem("access_token", "INVALID_ACCESS_TOKEN")
+  render(<PlaylistTable onSetSubtitle={vi.fn()} />)
 
   await waitFor(() => {
     expect(redirectTo).toHaveBeenCalledWith("/exportify")
@@ -438,5 +441,69 @@ describe("when Spotify can't be reached or refuses a request", () => {
 
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
     expect(reports).toEqual([])
+  })
+})
+
+describe("when the session expires", () => {
+  const playlistsUrl = `${API}/users/watsonbox/playlists`
+  const tokenRequests = vi.fn()
+  const refreshTokenWith = (respond: () => Response) =>
+    server.use(http.post("https://accounts.spotify.com/api/token", () => { tokenRequests(); return respond() }))
+
+  // Leaves one playlist unloaded, so that searching has to request it
+  async function openTableAwaitingSearch() {
+    server.use(...missingPlaylistsHandlers)
+    renderTable()
+    return await screen.findByRole('searchbox')
+  }
+
+  test("an export that hits an expired token refreshes it and finishes", async () => {
+    localStorage.setItem("refresh_token", "TEST_REFRESH_TOKEN")
+    refreshTokenWith(() => HttpResponse.json(grantedToken.body))
+    server.use(http.get(ghostpoetTracksUrl, errorResponse(401), { once: true }))
+
+    const { records } = await exportPlaylist(ghostpoetPlaylist)
+
+    expect(records).toEqual([oneTwos, usAgainstWhatever])
+    expect(tokenRequests).toHaveBeenCalledTimes(1)
+    expect(redirectTo).not.toHaveBeenCalled()
+  })
+
+  test("a search returns to login, without a message or report, once the session can't be renewed", async () => {
+    const reports = captureBugsnagReports()
+    const searchbox = await openTableAwaitingSearch()
+    server.use(http.get(playlistsUrl, errorResponse(401)))
+
+    await userEvent.type(searchbox, 'Ghost{enter}')
+
+    await waitFor(() => expect(redirectTo).toHaveBeenCalledWith('/exportify'))
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    expect(reports).toEqual([])
+    expect(localStorage.getItem("access_token")).toBeNull()
+  })
+
+  test("a search shows the message when Spotify refuses it", async () => {
+    const searchbox = await openTableAwaitingSearch()
+    server.use(http.get(playlistsUrl, errorResponse(403, "Spotify is unavailable in this country")))
+
+    await userEvent.type(searchbox, 'Ghost{enter}')
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Spotify refused the request (error 403).")
+    expect(redirectTo).not.toHaveBeenCalled()
+  })
+
+  test("Export All returns to login once Spotify refuses to renew the session", async () => {
+    const reports = captureBugsnagReports()
+    localStorage.setItem("refresh_token", "TEST_REFRESH_TOKEN")
+    refreshTokenWith(() => HttpResponse.json({ error: "invalid_grant", error_description: "Refresh token revoked" }, { status: 400 }))
+    renderTable()
+    const button = await screen.findByRole('button', { name: /Export All/ })
+    server.use(http.get(ghostpoetTracksUrl, errorResponse(401)))
+
+    await userEvent.click(button)
+
+    await waitFor(() => expect(redirectTo).toHaveBeenCalledWith('/exportify'))
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    expect(reports.map(report => report.groupingHash)).toEqual(["Token refresh: Spotify: invalid_grant (Refresh token revoked)"])
   })
 })

@@ -5,8 +5,8 @@ import { apiCall } from "helpers"
 class TracksBaseData extends TracksData {
   playlist: any
 
-  constructor(accessToken: string, playlist: any) {
-    super(accessToken)
+  constructor(playlist: any) {
+    super()
     this.playlist = playlist
   }
 
@@ -81,7 +81,7 @@ class TracksBaseData extends TracksData {
       requests.push(`${this.playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}`)
     }
 
-    const trackPromises = requests.map(request => { return apiCall(request, this.accessToken) })
+    const trackPromises = requests.map(request => { return apiCall(request) })
     const trackResponses = await Promise.all(trackPromises)
 
     this.playlistItems = trackResponses.flatMap(response => {

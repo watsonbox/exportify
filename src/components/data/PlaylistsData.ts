@@ -6,15 +6,13 @@ class PlaylistsData {
   PLACEHOLDER = {}
 
   userId: string
-  private accessToken: string
   private onPlaylistsLoadingStarted?: () => void
   private onPlaylistsLoadingDone?: () => void
   private data: any[]
   private likedTracksPlaylist: any
   private dataInitialized = false
 
-  constructor(accessToken: string, userId: string, onPlaylistsLoadingStarted?: () => void, onPlaylistsLoadingDone?: () => void) {
-    this.accessToken = accessToken
+  constructor(userId: string, onPlaylistsLoadingStarted?: () => void, onPlaylistsLoadingDone?: () => void) {
     this.userId = userId
     this.onPlaylistsLoadingStarted = onPlaylistsLoadingStarted
     this.onPlaylistsLoadingDone = onPlaylistsLoadingDone
@@ -101,7 +99,7 @@ class PlaylistsData {
     }
 
     const playlistsUrl = `https://api.spotify.com/v1/users/${this.userId}/playlists?offset=${start}&limit=${end - start}`
-    const playlistsResponse = await apiCall(playlistsUrl, this.accessToken)
+    const playlistsResponse = await apiCall(playlistsUrl)
     const playlistsData = playlistsResponse.data
 
     if (!this.dataInitialized) {
@@ -118,7 +116,7 @@ class PlaylistsData {
     }
 
     const likedTracksUrl = `https://api.spotify.com/v1/me/tracks`
-    const likedTracksResponse = await apiCall(likedTracksUrl, this.accessToken)
+    const likedTracksResponse = await apiCall(likedTracksUrl)
     const likedTracksData = likedTracksResponse.data
 
     this.likedTracksPlaylist = {

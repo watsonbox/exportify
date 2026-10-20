@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PlaylistExporter from "./PlaylistExporter"
 
 interface PlaylistRowProps extends WithTranslation {
-  accessToken: string,
   key: string,
   playlist: any,
   config: any
@@ -23,7 +22,6 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
       { exporting: true },
       () => {
         (new PlaylistExporter(
-          this.props.accessToken,
           this.props.playlist,
           this.props.config
         )).export().catch(this.props.onApiError).finally(() => {

@@ -16,11 +16,15 @@ const playlist = buildPlaylist({ id: 'p1', name: 'Mixtape', tracks: { total: 1 }
 const serveTracks = (...tracks: object[]) =>
   server.use(pagedGet(`${API}/playlists/p1/tracks`, tracks.map(track => buildPlaylistItem({ track, added_by: buildUser({ id: 'dj' }), added_at: '2024-01-02T03:04:05Z' }))))
 
+beforeEach(() => {
+  localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
+})
+
 describe("PlaylistExporter", () => {
   test("puts base track columns before the item columns", async () => {
     serveTracks(buildTrack())
 
-    const csv = await new PlaylistExporter('TEST_ACCESS_TOKEN', playlist, {}).csvData()
+    const csv = await new PlaylistExporter(playlist, {}).csvData()
 
     expect(csvHeaders(csv)).toEqual(baseHeaders)
   })
@@ -34,7 +38,7 @@ describe("PlaylistExporter", () => {
     )
     const config = { includeArtistsData: true, includeAudioFeaturesData: true, includeAlbumData: true }
 
-    const csv = await new PlaylistExporter('TEST_ACCESS_TOKEN', playlist, config).csvData()
+    const csv = await new PlaylistExporter(playlist, config).csvData()
 
     expect(csvHeaders(csv).slice(baseHeaders.length)).toEqual([
       "Artist Genres",
@@ -47,7 +51,7 @@ describe("PlaylistExporter", () => {
   test("quotes every field so commas, quotes and newlines survive", async () => {
     serveTracks(buildTrack({ id: 't1', name: 'Say "Hi",\nthen leave', artists: [buildArtist({ name: 'A, B' })] }))
 
-    const csv = await new PlaylistExporter('TEST_ACCESS_TOKEN', playlist, {}).csvData()
+    const csv = await new PlaylistExporter(playlist, {}).csvData()
 
     expect(csvRecords(csv)).toEqual([expect.objectContaining({
       "Track URI": "spotify:track:t1",
@@ -64,7 +68,7 @@ describe("PlaylistExporter", () => {
     ['tabs\tand "quotes"', 'tabs_and_quotes_'],
     ['Déjà Vu', 'déjà_vu'],
   ])("names the file for %j as %j", (name, fileName) => {
-    const exporter = new PlaylistExporter('TEST_ACCESS_TOKEN', { ...playlist, name }, {})
+    const exporter = new PlaylistExporter({ ...playlist, name }, {})
 
     expect(exporter.fileName(false)).toBe(fileName)
     expect(exporter.fileName()).toBe(`${fileName}.csv`)

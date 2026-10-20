@@ -16,6 +16,22 @@
     "note": "Expired, reused or mismatched authorization code; Spotify follows RFC 6749 error responses"
   },
   {
+    "file": "token-refresh.json",
+    "method": "POST",
+    "url": "https://accounts.spotify.com/api/token",
+    "status": 200,
+    "source": "https://developer.spotify.com/documentation/web-api/tutorials/refreshing-tokens",
+    "note": "Refresh token exchange; Spotify may return a new refresh token, which replaces the old one; tokens are placeholders"
+  },
+  {
+    "file": "token-refresh-revoked.json",
+    "method": "POST",
+    "url": "https://accounts.spotify.com/api/token",
+    "status": 400,
+    "source": "https://datatracker.ietf.org/doc/html/rfc6749#section-5.2",
+    "note": "Refresh token revoked or expired, e.g. after the user removes the app's access"
+  },
+  {
     "file": "error-401.json",
     "method": "GET",
     "url": "https://api.spotify.com/v1/me",

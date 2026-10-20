@@ -2,6 +2,7 @@
 // - https://developer.spotify.com/documentation/web-api/tutorials/migration-implicit-auth-code
 // - https://developer.spotify.com/documentation/web-api/tutorials/code-pkce-flow
 
+import Bugsnag from "@bugsnag/js"
 import axios from "axios"
 import { redirectTo } from "./navigation"
 
@@ -9,20 +10,88 @@ const SPOTIFY_CLIENT_ID = "9950ac751e34487dbbe027c4fd7f8e99"
 const SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 const SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 const SPOTIFY_SCOPES = "playlist-read-private playlist-read-collaborative user-library-read"
+const EXPIRY_MARGIN = 60 * 1000
+
+type TokenResponse = { access_token: string, expires_in: number, refresh_token?: string }
 
 // Access token management
 export function loadAccessToken(): string | null {
   return localStorage.getItem('access_token')
 }
 
-export function saveAccessToken(token: string): void {
-  localStorage.setItem('access_token', token)
+// Spotify may rotate the refresh token, so a response without one keeps the old
+function saveTokens({ access_token, expires_in, refresh_token }: TokenResponse): void {
+  localStorage.setItem('access_token', access_token)
+  localStorage.setItem('token_expires_at', String(Date.now() + expires_in * 1000))
+  if (refresh_token) { localStorage.setItem('refresh_token', refresh_token) }
 }
 
 export function clearAccessToken(): void {
   localStorage.removeItem('access_token')
+  localStorage.removeItem('refresh_token')
+  localStorage.removeItem('token_expires_at')
   localStorage.removeItem('code_verifier')
   localStorage.removeItem('client_id')
+}
+
+// Thrown when the session can't be renewed and the user has to log in again
+export class SessionExpiredError extends Error {
+  constructor() {
+    super('Spotify session expired')
+    this.name = 'SessionExpiredError'
+  }
+}
+
+let refreshing: Promise<string> | null = null
+
+// Overlapping callers share one refresh, since each would otherwise spend the same single-use refresh token
+export function refreshAccessToken(): Promise<string> {
+  refreshing ??= requestRefresh().finally(() => { refreshing = null })
+  return refreshing
+}
+
+async function requestRefresh(): Promise<string> {
+  const refreshToken = localStorage.getItem('refresh_token')
+  if (!refreshToken) { throw new SessionExpiredError() }
+
+  try {
+    const response = await axios.post(
+      SPOTIFY_TOKEN_URL,
+      new URLSearchParams({
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+        client_id: localStorage.getItem('client_id') || SPOTIFY_CLIENT_ID,
+      }),
+      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+    )
+    saveTokens(response.data)
+    return response.data.access_token
+  } catch (error: any) {
+    // With no response it's the connection, which the request's own retries can ride out
+    if (!error.response) { throw error }
+
+    reportRefreshFailure(error)
+    throw new SessionExpiredError()
+  }
+}
+
+// Sends Spotify's reason but never the request, whose body holds the refresh token
+function reportRefreshFailure(error: any) {
+  const { status, data } = error.response
+  const reason = data?.error_description ? `${data.error} (${data.error_description})` : data?.error ?? status
+
+  Bugsnag.notify(new Error(`Token refresh failed: ${reason}`), (event) => {
+    event.groupingHash = `Token refresh: Spotify: ${reason}`
+    event.addMetadata("oauth", { status, error: data?.error, error_description: data?.error_description })
+  })
+}
+
+// The stored access token, refreshed first if it's about to expire
+export async function currentAccessToken(): Promise<string | null> {
+  const expiresAt = Number(localStorage.getItem('token_expires_at'))
+  if (expiresAt && Date.now() >= expiresAt - EXPIRY_MARGIN) { return refreshAccessToken() }
+
+  return loadAccessToken()
 }
 
 // Generate code verifier for PKCE flow
@@ -120,13 +189,11 @@ export async function exchangeCodeForToken(code: string): Promise<string> {
     }
   )
 
-  const accessToken = response.data.access_token
-
   // The verifier is single-use, like the code it was paired with
-  saveAccessToken(accessToken)
+  saveTokens(response.data)
   localStorage.removeItem('code_verifier')
 
-  return accessToken
+  return response.data.access_token
 }
 
 // Logout and optionally redirect to change user

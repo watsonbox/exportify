@@ -1,0 +1,12 @@
+{
+  "method": "POST",
+  "url": "https://accounts.spotify.com/api/token",
+  "status": 400,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "error": "invalid_grant",
+    "error_description": "Refresh token revoked"
+  }
+}

@@ -6,6 +6,10 @@ import PlaylistsData from "./PlaylistsData"
 const requestedUrls = () => handlerCalled.mock.calls.map(([url]) => url)
 const range = (count: number) => Array.from({ length: count }, (_, i) => i)
 
+beforeEach(() => {
+  localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
+})
+
 const me = buildUser({ id: 'me' })
 const someoneElse = buildUser({ id: 'someone' })
 
@@ -22,7 +26,7 @@ describe("PlaylistsData", () => {
   test("puts the liked tracks playlist first in the first slice", async () => {
     servePlaylists([buildPlaylist({ id: 'p1', name: 'One', owner: me })])
 
-    const slice = await new PlaylistsData('TEST_ACCESS_TOKEN', 'me').slice(0, 20)
+    const slice = await new PlaylistsData('me').slice(0, 20)
 
     expect(slice[0]).toMatchObject({
       id: 'liked',
@@ -39,7 +43,7 @@ describe("PlaylistsData", () => {
     const onStarted = vi.fn()
     const onDone = vi.fn()
 
-    const all = await new PlaylistsData('TEST_ACCESS_TOKEN', 'me', onStarted, onDone).all()
+    const all = await new PlaylistsData('me', onStarted, onDone).all()
 
     expect(all).toHaveLength(121)
     expect(requestedUrls()).toEqual([
@@ -54,7 +58,7 @@ describe("PlaylistsData", () => {
 
   test("counts and serves loaded playlists from cache", async () => {
     servePlaylists([buildPlaylist({ id: 'p1', owner: me }), buildPlaylist({ id: 'p2', owner: me })])
-    const playlistsData = new PlaylistsData('TEST_ACCESS_TOKEN', 'me')
+    const playlistsData = new PlaylistsData('me')
 
     expect(await playlistsData.total()).toBe(2)
     await playlistsData.slice(0, 50)
@@ -71,7 +75,7 @@ describe("PlaylistsData", () => {
         buildPlaylist({ id: 'p2', name: 'Evening jazz', owner: someoneElse, public: false, collaborative: true }),
         buildPlaylist({ id: 'p3', name: 'Workout', owner: me, public: false, collaborative: false }),
       ])
-      playlistsData = new PlaylistsData('TEST_ACCESS_TOKEN', 'me')
+      playlistsData = new PlaylistsData('me')
     })
 
     test.each([

@@ -93,7 +93,7 @@ function App() {
   }, [])
 
   if (accessToken) {
-    view = <PlaylistTable accessToken={accessToken!} onSetSubtitle={onSetSubtitle} />
+    view = <PlaylistTable onSetSubtitle={onSetSubtitle} />
   } else {
     view = <>
       {loginError && (

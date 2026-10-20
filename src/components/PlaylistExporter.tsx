@@ -71,12 +71,10 @@ class TracksCsvFile {
 
 // Handles exporting a single playlist as a CSV file
 class PlaylistExporter {
-  accessToken: string
   playlist: any
   config: any
 
-  constructor(accessToken: string, playlist: any, config: any) {
-    this.accessToken = accessToken
+  constructor(playlist: any, config: any) {
     this.playlist = playlist
     this.config = config
   }
@@ -89,7 +87,7 @@ class PlaylistExporter {
   }
 
   async csvData() {
-    const tracksBaseData = new TracksBaseData(this.accessToken, this.playlist)
+    const tracksBaseData = new TracksBaseData(this.playlist)
     const items = await tracksBaseData.trackItems()
     const tracks = items.map(i => i.track)
     const tracksCsvFile = new TracksCsvFile(this.playlist, items)
@@ -98,15 +96,15 @@ class PlaylistExporter {
     await tracksCsvFile.addData(tracksBaseData, true)
 
     if (this.config.includeArtistsData) {
-      await tracksCsvFile.addData(new TracksArtistsData(this.accessToken, tracks))
+      await tracksCsvFile.addData(new TracksArtistsData(tracks))
     }
 
     if (this.config.includeAudioFeaturesData) {
-      await tracksCsvFile.addData(new TracksAudioFeaturesData(this.accessToken, tracks))
+      await tracksCsvFile.addData(new TracksAudioFeaturesData(tracks))
     }
 
     if (this.config.includeAlbumData) {
-      await tracksCsvFile.addData(new TracksAlbumData(this.accessToken, tracks))
+      await tracksCsvFile.addData(new TracksAlbumData(tracks))
     }
 
     return tracksCsvFile.content()

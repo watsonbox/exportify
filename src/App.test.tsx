@@ -151,12 +151,13 @@ describe("logging in", () => {
     expect(window.location.search).toBe("")
   })
 
-  test("renders the playlist table when an access token is already stored", () => {
+  test("renders the playlist table when an access token is already stored", async () => {
     localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
 
     render(<App />)
 
     expect(screen.getByTestId("playlistTableSpinner")).toBeInTheDocument()
+    expect(await screen.findByText(/Export All/)).toBeInTheDocument()
   })
 })
 

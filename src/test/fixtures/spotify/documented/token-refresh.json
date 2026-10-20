@@ -1,0 +1,15 @@
+{
+  "method": "POST",
+  "url": "https://accounts.spotify.com/api/token",
+  "status": 200,
+  "headers": {
+    "content-type": "application/json"
+  },
+  "body": {
+    "access_token": "REFRESHED_ACCESS_TOKEN",
+    "token_type": "Bearer",
+    "expires_in": 3600,
+    "refresh_token": "ROTATED_REFRESH_TOKEN",
+    "scope": "playlist-read-private playlist-read-collaborative user-library-read"
+  }
+}
