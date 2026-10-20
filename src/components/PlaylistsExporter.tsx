@@ -56,9 +56,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
       zip.file(fileName, playlistCsvExports[i])
     })
 
-    zip.generateAsync({ type: "blob" }).then(function (content) {
-      saveAs(content, "spotify_playlists.zip");
-    })
+    saveAs(await zip.generateAsync({ type: "blob" }), "spotify_playlists.zip")
   }
 
   exportPlaylists = () => {

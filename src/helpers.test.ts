@@ -1,6 +1,6 @@
 import { http, HttpResponse } from "msw"
 import { server } from "./mocks/server"
-import { apiCall, apiCallErrorHandler } from "./helpers"
+import { apiCall, apiCallErrorHandler, prepareReport } from "./helpers"
 import { redirectTo } from "./navigation"
 import { captureBugsnagReports } from "./test/bugsnag"
 import { errorResponse } from "./mocks/handlers"
@@ -345,5 +345,28 @@ describe("an expiring session", () => {
     expect(pages.every(page => page?.status === 200)).toBe(true)
     expect(tokenRequests).toHaveLength(1)
     expect(redirectTo).not.toHaveBeenCalled()
+  })
+})
+
+describe("preparing a Bugsnag report", () => {
+  const eventFor = (originalError: unknown) =>
+    ({ originalError, request: { url: "https://exportify.app/?access_token=SECRET" } }) as any
+
+  test("redacts the page URL and groups axios errors by message", () => {
+    const event = eventFor({ isAxiosError: true, message: "Network Error" })
+
+    prepareReport(event)
+
+    expect(event.request.url).toBe("[REDACTED]")
+    expect(event.groupingHash).toBe("Network Error")
+  })
+
+  test.each([null, undefined, "a string"])("handles a thrown %s", (originalError) => {
+    const event = eventFor(originalError)
+
+    prepareReport(event)
+
+    expect(event.request.url).toBe("[REDACTED]")
+    expect(event.groupingHash).toBeUndefined()
   })
 })

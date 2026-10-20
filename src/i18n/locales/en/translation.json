@@ -20,6 +20,7 @@
     "rate_limited": "Spotify is receiving too many requests right now. Please wait a few minutes and try again.",
     "unavailable": "Spotify isn't working properly right now (error {{status}}). Please try again later.",
     "refused": "Spotify refused the request (error {{status}}).",
+    "unexpected": "Something went wrong. Please try again.",
     "status_page": "Check the Spotify Web API status page for known problems"
   },
   "top_menu": {

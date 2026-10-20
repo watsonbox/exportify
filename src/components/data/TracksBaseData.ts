@@ -75,7 +75,7 @@ class TracksBaseData extends TracksData {
     }
 
     const requests = []
-    const limit = this.playlist.tracks.limit ? 50 : 100
+    const limit = this.playlist.id === "liked" ? 50 : 100 // The most /me/tracks and playlist items each allow
 
     for (let offset = 0; offset < this.playlist.tracks.total; offset = offset + limit) {
       requests.push(`${this.playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}`)

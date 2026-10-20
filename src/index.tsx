@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client'
 import "./index.scss"
 import App from "./App"
 import './i18n/config'
+import { prepareReport } from "./helpers"
 
 Bugsnag.start({
   apiKey: 'a65916528275f084a1754a59797a36b3',
@@ -12,13 +13,7 @@ Bugsnag.start({
   redactedKeys: ['Authorization'],
   releaseStage: import.meta.env.PROD ? 'production' : 'development',
   enabledReleaseStages: ['production', 'staging'],
-  onError: function (event) {
-    event.request.url = "[REDACTED]" // Don't send access tokens
-
-    if (event.originalError.isAxiosError) {
-      event.groupingHash = event.originalError.message
-    }
-  }
+  onError: prepareReport
 })
 
 const ErrorBoundary = Bugsnag.getPlugin('react')!.createErrorBoundary(React)

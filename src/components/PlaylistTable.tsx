@@ -68,7 +68,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     this.setState({
       searchQuery: query,
       playlists: playlists,
-      playlistCount: playlists!.length,
+      playlistCount: playlists.length,
       currentPage: 1,
       progressBar: {
         show: false
@@ -80,7 +80,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
       key += "_advanced"
     }
 
-    this.props.onSetSubtitle(<Translation>{(t) => t(key, { total: playlists!.length, query: query })}</Translation>)
+    this.props.onSetSubtitle(<Translation>{(t) => t(key, { total: playlists.length, query: query })}</Translation>)
   }
 
   handlePlaylistSearchCancel = () => {
@@ -105,7 +105,6 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
         ((this.state.currentPage - 1) * this.PAGE_SIZE) + this.PAGE_SIZE
       )
 
-      // FIXME: Handle unmounting
       this.setState(
         {
           initialized: true,

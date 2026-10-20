@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import PlaylistExporter from "./PlaylistExporter"
 
 interface PlaylistRowProps extends WithTranslation {
-  key: string,
   playlist: any,
   config: any
   onApiError: (error: unknown) => void
@@ -40,7 +39,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
   }
 
   renderIcon(playlist: any) {
-    if (playlist.name === 'Liked') {
+    if (playlist.id === 'liked') {
       return <FontAwesomeIcon icon={['far', 'heart']} style={{ color: 'red' }} />;
     } else {
       return <FontAwesomeIcon icon={['fas', 'music']} />;
@@ -52,7 +51,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
     const icon = ['fas', (this.state.exporting ? 'sync' : 'download')]
 
     if (playlist.uri == null) return (
-      <tr key={this.props.key}>
+      <tr>
         <td>{this.renderIcon(playlist)}</td>
         <td>{playlist.name}</td>
         <td className="d-none d-sm-table-cell" colSpan={2}>{this.props.i18n.t("playlist.not_supported")}</td>
@@ -63,7 +62,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
     );
 
     return (
-      <tr key={this.props.key}>
+      <tr>
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
         <td><a href={playlist.owner.uri}>{playlist.owner.display_name}</a></td>

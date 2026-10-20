@@ -1,4 +1,4 @@
-import Bugsnag from "@bugsnag/js"
+import Bugsnag, { Event } from "@bugsnag/js"
 import axios from "axios"
 import Bottleneck from "bottleneck"
 import { clearAccessToken, currentAccessToken, loadAccessToken, refreshAccessToken, SessionExpiredError } from "./auth"
@@ -90,7 +90,7 @@ export function apiCall(url: string) {
 }
 
 export type ApiError = {
-  kind: "network" | "rate_limited" | "unavailable" | "refused"
+  kind: "network" | "rate_limited" | "unavailable" | "refused" | "unexpected"
   status?: number
   detail?: string // Spotify's own reason, untranslated
 }
@@ -107,7 +107,10 @@ function describeApiError(error: any): ApiError {
 
 // Handles a request that has run out of retries, returning what to tell the user if anything
 export function apiCallErrorHandler(error: any): ApiError | undefined {
-  if (!error.isAxiosError && !(error instanceof SessionExpiredError)) { throw error }
+  if (!error?.isAxiosError && !(error instanceof SessionExpiredError)) {
+    Bugsnag.notify(error)
+    return { kind: "unexpected" }
+  }
   if (pageUnloading) { return }
 
   if (error instanceof SessionExpiredError || error.response?.status === 401) {
@@ -124,4 +127,12 @@ export function apiCallErrorHandler(error: any): ApiError | undefined {
   })
 
   return apiError
+}
+
+export function prepareReport(event: Event) {
+  event.request.url = "[REDACTED]" // Don't send access tokens
+
+  if (event.originalError?.isAxiosError) {
+    event.groupingHash = event.originalError.message
+  }
 }

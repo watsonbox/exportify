@@ -13,8 +13,8 @@ import { server } from "../mocks/server"
 import { redirectTo } from "../navigation"
 import { csvRecords } from "../test/csv"
 import { captureBugsnagReports } from "../test/bugsnag"
-import { API } from "../test/fixtures/spotify/builders"
-import { errorResponse, ghostpoetTracksUrl, handlerCalled, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
+import { API, buildPlaylist, buildUser } from "../test/fixtures/spotify/builders"
+import { errorResponse, ghostpoetTracksUrl, handlerCalled, pagedGet, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
 import grantedToken from "../test/fixtures/spotify/documented/token.json"
 
 vi.mock('@bugsnag/js')
@@ -173,6 +173,17 @@ test("redirecting when access token is invalid", async () => {
   await waitFor(() => {
     expect(redirectTo).toHaveBeenCalledWith("/exportify")
   })
+})
+
+test("only the Liked Songs row has the heart icon", async () => {
+  server.use(pagedGet(`${API}/me/playlists`, [buildPlaylist({ id: 'p1', name: 'Liked', owner: buildUser({ id: 'watsonbox' }) })]))
+  renderTable()
+
+  const rows = await screen.findAllByRole('row', { name: name => name.includes('Liked') })
+
+  const icons = rows.map(row => within(row).getAllByRole('img', { hidden: true })[0].getAttribute('data-icon'))
+
+  expect(icons).toEqual(['heart', 'music'])
 })
 
 describe("single playlist exporting", () => {
@@ -505,5 +516,51 @@ describe("when the session expires", () => {
     await waitFor(() => expect(redirectTo).toHaveBeenCalledWith('/exportify'))
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
     expect(reports.map(report => report.groupingHash)).toEqual(["Token refresh: Spotify: invalid_grant (Refresh token revoked)"])
+  })
+})
+
+describe("when an export fails unexpectedly", () => {
+  const generateAsync = () => vi.spyOn(JSZip.prototype, 'generateAsync')
+
+  test("Export All stays busy until the zip is saved", async () => {
+    let finishZip: (zip: Blob) => void = () => {}
+    generateAsync().mockReturnValue(new Promise(resolve => { finishZip = resolve }) as any)
+    renderTable()
+    const button = await screen.findByRole('button', { name: /Export All/ })
+
+    await userEvent.click(button)
+    await waitFor(() => expect(JSZip.prototype.generateAsync).toHaveBeenCalled())
+
+    expect(button).toBeDisabled()
+    finishZip(new Blob())
+    await waitFor(() => expect(button).toBeEnabled())
+    expect(FileSaver.saveAs).toHaveBeenCalledOnce()
+  })
+
+  test("a zip that can't be generated shows a message and is reported", async () => {
+    const reports = captureBugsnagReports()
+    generateAsync().mockRejectedValue(new Error("Zip failed"))
+    renderTable()
+    const button = await screen.findByRole('button', { name: /Export All/ })
+
+    await userEvent.click(button)
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Something went wrong. Please try again.")
+    expect(button).toBeEnabled()
+    expect(reports.map(report => report.error.message)).toEqual(["Zip failed"])
+  })
+
+  test("a row's export shows a message and is reported", async () => {
+    const reports = captureBugsnagReports()
+    vi.mocked(FileSaver.saveAs).mockImplementation(() => { throw new Error("Save failed") })
+    renderTable()
+    const row = await screen.findByRole('row', { name: name => name.includes(ghostpoetPlaylist) })
+    const button = within(row).getByRole('button', { name: 'Export' })
+
+    await userEvent.click(button)
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Something went wrong. Please try again.")
+    expect(button).toBeEnabled()
+    expect(reports.map(report => report.error.message)).toEqual(["Save failed"])
   })
 })

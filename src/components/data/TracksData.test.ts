@@ -34,7 +34,7 @@ describe("TracksBaseData", () => {
   })
 
   test("loads liked tracks 50 at a time", async () => {
-    const likedPlaylist = { tracks: { href: `${API}/me/tracks`, limit: 20, total: 60 } }
+    const likedPlaylist = { id: 'liked', tracks: { href: `${API}/me/tracks`, limit: 20, total: 60 } }
     server.use(pagedGet(`${API}/me/tracks`, range(60).map(i => buildSavedTrack({ track: buildTrack({ id: `t${i}` }) }))))
 
     const trackItems = await new TracksBaseData(likedPlaylist).trackItems()
