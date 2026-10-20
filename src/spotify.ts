@@ -121,7 +121,7 @@ export interface SimplifiedPlaylist {
   items: { href: string; total: number }
   name: string
   owner: PublicUser
-  public: boolean
+  public: boolean | null
   snapshot_id: string
   tracks: { href: string; total: number }
   type: string

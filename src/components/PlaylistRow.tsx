@@ -32,7 +32,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
     )
   }
 
-  renderTickCross(condition?: boolean) {
+  renderTickCross(condition?: boolean | null) {
     if (condition) {
       return <FontAwesomeIcon icon={['far', 'check-circle']} size="sm" />
     } else {
