@@ -306,6 +306,26 @@ describe("saved albums", () => {
     expect(files['saved_albums.csv'][0]).toEqual(twoStar)
   })
 
+  test("Export All's progress counts Liked Songs and Saved Albums", async () => {
+    serveSavedAlbums(liveSavedAlbums.body.items)
+    let releaseLastFile = () => {}
+    const lastFile = new Promise<void>(resolve => { releaseLastFile = resolve })
+    server.use(http.get(ghostpoetTracksUrl, async () => { await lastFile }))
+    renderTable()
+
+    await userEvent.click(await screen.findByRole('button', { name: /Export All/ }))
+
+    await waitFor(() => expect(screen.getByRole('progressbar')).toHaveTextContent(`Exporting ${ghostpoetPlaylist}...`))
+    expect(screen.getByRole('progressbar')).toHaveValue(2)
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '3')
+
+    releaseLastFile()
+
+    await waitFor(() => expect(screen.getByRole('progressbar')).toHaveTextContent('Done!'))
+    expect(screen.getByRole('progressbar')).toHaveValue(3)
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '3')
+  })
+
   test("a failed export shows a message and can be tried again", async () => {
     serveSavedAlbums(liveSavedAlbums.body.items)
     renderTable()

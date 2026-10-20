@@ -14,7 +14,7 @@ interface PlaylistsExporterProps extends WithTranslation {
   playlistsData: PlaylistsData
   searchQuery: string
   config: ExportConfig
-  onPlaylistExportStarted: (playlistName: string, doneCount: number) => void
+  onPlaylistExportStarted: (playlistName: string, doneCount: number, totalCount: number) => void
   onPlaylistsExportDone: () => void
   onApiError: (error: unknown) => void
 }
@@ -34,7 +34,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
     let doneCount = 0
 
     for (const playlist of playlists) {
-      this.props.onPlaylistExportStarted(playlist.name, doneCount)
+      this.props.onPlaylistExportStarted(playlist.name, doneCount, playlists.length)
 
       const exporter = "albums" in playlist ? new SavedAlbumsExporter(playlist) : new PlaylistExporter(playlist, config)
       const csvData = await exporter.csvData()
