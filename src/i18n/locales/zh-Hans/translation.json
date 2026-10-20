@@ -1,6 +1,7 @@
 {
   "tagline": "导出你的 Spotify 播放列表。",
   "get_started": "开始使用",
+  "logging_in": "正在登录…",
   "subtitle": "第 {{min}}-{{max}} 个，共 {{total}} 个播放列表（{{userId}}）",
   "subtitle_search": "{{total}} 个播放列表名称包含“{{query}}”的结果",
   "subtitle_search_advanced": "高级查询“{{query}}”的 {{total}} 个结果",
@@ -9,6 +10,11 @@
   "exporting_done": "完成！",
   "exporting_playlist": "正在导出 {{playlistName}}...",
   "export_search_results": "导出结果",
+  "login_error": {
+    "failed": "无法登录 Spotify，请重试。",
+    "cancelled": "Spotify 登录已取消。",
+    "same_browser": "请在同一浏览器中开始并完成登录。"
+  },
   "top_menu": {
     "help": "帮助",
     "toggle_dark_mode": "切换深色模式",
@@ -43,6 +49,13 @@
     "collaborative": "协作？",
     "not_supported": "不支持此播放列表",
     "export": "导出"
+  },
+  "saved_albums": {
+    "name": "已保存的专辑",
+    "album_other": "张专辑",
+    "album_type": "专辑类型",
+    "total_tracks": "曲目总数",
+    "upc": "UPC"
   },
   "track": {
     "track_uri": "曲目 URI",

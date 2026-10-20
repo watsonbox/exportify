@@ -1,6 +1,7 @@
 {
   "tagline": "匯出你嘅 Spotify 播放清單。",
   "get_started": "開始使用",
+  "logging_in": "登入緊…",
   "subtitle": "第 {{min}}-{{max}} 個，共 {{total}} 個播放清單（{{userId}}）",
   "subtitle_search": "{{total}} 個播放清單名稱包含「{{query}}」嘅結果",
   "subtitle_search_advanced": "進階查詢「{{query}}」嘅 {{total}} 個結果",
@@ -9,6 +10,11 @@
   "exporting_done": "搞掂！",
   "exporting_playlist": "匯出緊 {{playlistName}}...",
   "export_search_results": "匯出結果",
+  "login_error": {
+    "failed": "登入唔到 Spotify，請再試多次。",
+    "cancelled": "已經取消咗 Spotify 登入。",
+    "same_browser": "請喺同一個瀏覽器開始同完成登入。"
+  },
   "top_menu": {
     "help": "說明",
     "toggle_dark_mode": "轉深色Mode",
@@ -43,6 +49,13 @@
     "collaborative": "一齊編輯？",
     "not_supported": "唔支援呢個播放清單",
     "export": "匯出"
+  },
+  "saved_albums": {
+    "name": "儲咗嘅專輯",
+    "album_other": "張專輯",
+    "album_type": "專輯類型",
+    "total_tracks": "歌曲總數",
+    "upc": "UPC"
   },
   "track": {
     "track_uri": "歌 Link",

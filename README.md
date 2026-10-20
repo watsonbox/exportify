@@ -14,7 +14,7 @@ As many users have noted, there is no way to export/archive/backup playlists fro
 - 🔍 Playlist search with [advanced search syntax](#advanced-search-syntax) and results export
 - 💿 Saved albums export, one line per album
 - 🌓 Dark mode
-- 🗺 Available in 12 languages (English, French, Spanish, Italian, German, Portuguese, Swedish, Dutch, Greek, Turkish, Japanese and Arabic)
+- 🗺 Available in 15 languages (English, French, Spanish, Italian, German, Portuguese, Swedish, Dutch, Greek, Turkish, Japanese, Arabic, Simplified Chinese, Traditional Chinese and Cantonese)
 - 📱 Mobile friendly
 - ℹ Quick reference help
 - 🚀 [Advanced rate limiting handling](https://github.com/watsonbox/exportify/pull/75) for speedy exports
