@@ -24,7 +24,7 @@ const ghostpoetFileName = "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.
 
 const likedRequests = [
   'https://api.spotify.com/v1/me',
-  'https://api.spotify.com/v1/users/watsonbox/playlists?offset=0&limit=20',
+  'https://api.spotify.com/v1/me/playlists?offset=0&limit=20',
   'https://api.spotify.com/v1/me/tracks',
   'https://api.spotify.com/v1/me/tracks?offset=0&limit=50',
 ]
@@ -445,7 +445,7 @@ describe("when Spotify can't be reached or refuses a request", () => {
 })
 
 describe("when the session expires", () => {
-  const playlistsUrl = `${API}/users/watsonbox/playlists`
+  const playlistsUrl = `${API}/me/playlists`
   const tokenRequests = vi.fn()
   const refreshTokenWith = (respond: () => Response) =>
     server.use(http.post("https://accounts.spotify.com/api/token", () => { tokenRequests(); return respond() }))

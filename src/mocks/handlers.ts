@@ -70,7 +70,7 @@ const ghostpoetPlaylist = buildPlaylist({
   collaborative: false,
   tracks: { total: 10 },
 })
-const playlistsUrl = `${API}/users/watsonbox/playlists`
+const playlistsUrl = `${API}/me/playlists`
 export const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks`
 const addedByWatsonbox = (track: object | null, added_at = '2020-11-03T15:19:04Z') =>
   buildPlaylistItem({ track, added_at, added_by: watsonbox })

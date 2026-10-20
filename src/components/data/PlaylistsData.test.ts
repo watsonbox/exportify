@@ -15,7 +15,7 @@ const someoneElse = buildUser({ id: 'someone' })
 
 function servePlaylists(playlists: object[]) {
   server.use(
-    pagedGet(`${API}/users/me/playlists`, playlists),
+    pagedGet(`${API}/me/playlists`, playlists),
     pagedGet(`${API}/me/tracks`, range(3).map(() => buildSavedTrack())),
   )
 }
@@ -47,13 +47,21 @@ describe("PlaylistsData", () => {
 
     expect(all).toHaveLength(121)
     expect(requestedUrls()).toEqual([
-      `${API}/users/me/playlists?offset=0&limit=50`,
-      `${API}/users/me/playlists?offset=50&limit=50`,
-      `${API}/users/me/playlists?offset=100&limit=50`,
+      `${API}/me/playlists?offset=0&limit=50`,
+      `${API}/me/playlists?offset=50&limit=50`,
+      `${API}/me/playlists?offset=100&limit=50`,
       `${API}/me/tracks`,
     ])
     expect(onStarted).toHaveBeenCalledOnce()
     expect(onDone).toHaveBeenCalledOnce()
+  })
+
+  test("loads playlists for a user ID that isn't URL-safe", async () => {
+    servePlaylists([buildPlaylist({ id: 'p1', name: 'One', owner: buildUser({ id: 'dj#1' }) })])
+
+    const slice = await new PlaylistsData('dj#1').slice(0, 20)
+
+    expect(names(slice)).toEqual(['Liked', 'One'])
   })
 
   test("counts and serves loaded playlists from cache", async () => {
