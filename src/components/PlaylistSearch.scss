@@ -1,5 +1,13 @@
 #playlistsHeader {
   form.search {
+    // Shrink to fit narrow screens instead of wrapping or pushing the toolbar off screen
+    flex: 0 1 auto;
+    min-width: 0;
+
+    .input-group {
+      flex-wrap: nowrap;
+    }
+
     input {
       width: 64px;
       transition: width 250ms ease-in-out;
