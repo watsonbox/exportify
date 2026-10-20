@@ -2,10 +2,11 @@ import fs from 'fs'
 import path from 'path'
 import {
   API, apiError, buildAlbum, buildArtist, buildAudioFeatures, buildFullAlbum, buildFullArtist, buildLocalTrack, buildMe,
-  buildPage, buildPlaylist, buildPlaylistItem, buildSavedTrack, buildTrack, buildUser, pageAt, paginate,
+  buildPage, buildPlaylist, buildPlaylistItem, buildSavedAlbum, buildSavedTrack, buildTrack, buildUser, pageAt, paginate,
 } from './builders'
 import me from './live/me.json'
 import savedTracks from './live/me-tracks.json'
+import savedAlbums from './live/me-albums-limit-50.json'
 import playlists from './live/users-exportifytestuser-playlists-offset-0-limit-20.json'
 import playlistTracks from './live/playlists-fakeplaylist0000000001-tracks-offset-0-limit-100.json'
 import artists from './live/artists-1.json'
@@ -68,6 +69,15 @@ describe('entity builders', () => {
     expect(keys(buildSavedTrack())).toEqual(keys(liveItem))
     expect(buildSavedTrack({ track: buildTrack({ name: 'Song' }), added_at: '2020-01-01T00:00:00Z' }))
       .toMatchObject({ added_at: '2020-01-01T00:00:00Z', track: { name: 'Song' } })
+  })
+
+  it('build saved albums shaped like a live saved album', () => {
+    const liveItem = savedAlbums.body.items[0]
+
+    expect(keys(buildSavedAlbum())).toEqual(keys(liveItem))
+    expect(keys(buildSavedAlbum().album)).toEqual(keys(liveItem.album))
+    expect(buildSavedAlbum({ album: buildFullAlbum({ name: 'Record' }), added_at: '2020-01-01T00:00:00Z' }))
+      .toMatchObject({ added_at: '2020-01-01T00:00:00Z', album: { name: 'Record' } })
   })
 
   it('build playlist items shaped like a live playlist item', () => {

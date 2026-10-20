@@ -51,6 +51,7 @@ describe("PlaylistsData", () => {
       `${API}/me/playlists?offset=50&limit=50`,
       `${API}/me/playlists?offset=100&limit=50`,
       `${API}/me/tracks`,
+      `${API}/me/albums?limit=1`,
     ])
     expect(onStarted).toHaveBeenCalledOnce()
     expect(onDone).toHaveBeenCalledOnce()

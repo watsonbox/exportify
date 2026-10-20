@@ -49,4 +49,4 @@ The script rewrites `live/` and merges the new private value hashes into `privat
 
 ## Not covered
 
-No playlist is `collaborative: true`, the playlist list and Liked Songs each fit in a single page, and there are no local files. Build those with fixture builders.
+No playlist is `collaborative: true`, the playlist list, Liked Songs and saved albums each fit in a single page, and there are no local files. The saved albums are all `album_type: "album"` with a single artist and a UPC. Build those with fixture builders.

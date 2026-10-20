@@ -107,6 +107,8 @@ export const handlers = [
 
   pagedGet(`${API}/me/tracks`, [buildSavedTrack({ added_at: '2020-07-19T09:24:39Z', track: crying })]),
 
+  pagedGet(`${API}/me/albums`, []),
+
   // Ensure that a null playlist doesn't break anything
   spotifyGet(playlistsUrl, () => buildPage([ghostpoetPlaylist, null], { url: playlistsUrl, total: 1 })),
 

@@ -6,6 +6,7 @@ import { saveAs } from "file-saver"
 import JSZip from "jszip"
 
 import PlaylistExporter from "./PlaylistExporter"
+import SavedAlbumsExporter from "./SavedAlbumsExporter"
 import PlaylistsData from "./data/PlaylistsData"
 import { ExportConfig } from "./ConfigDropdown"
 
@@ -35,7 +36,7 @@ class PlaylistsExporter extends React.Component<PlaylistsExporterProps> {
     for (const playlist of playlists) {
       this.props.onPlaylistExportStarted(playlist.name, doneCount)
 
-      const exporter = new PlaylistExporter(playlist, config)
+      const exporter = "albums" in playlist ? new SavedAlbumsExporter(playlist) : new PlaylistExporter(playlist, config)
       const csvData = await exporter.csvData()
       let fileName = exporter.fileName(false)
 
