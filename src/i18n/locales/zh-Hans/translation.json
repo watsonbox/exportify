@@ -1,0 +1,91 @@
+{
+  "tagline": "导出你的 Spotify 播放列表。",
+  "get_started": "开始使用",
+  "subtitle": "第 {{min}}-{{max}} 个，共 {{total}} 个播放列表（{{userId}}）",
+  "subtitle_search": "{{total}} 个播放列表名称包含“{{query}}”的结果",
+  "subtitle_search_advanced": "高级查询“{{query}}”的 {{total}} 个结果",
+  "search": "搜索",
+  "export_all": "全部导出",
+  "exporting_done": "完成！",
+  "exporting_playlist": "正在导出 {{playlistName}}...",
+  "export_search_results": "导出结果",
+  "top_menu": {
+    "help": "帮助",
+    "toggle_dark_mode": "切换深色模式",
+    "change_language": "更改语言",
+    "change_user": "更换用户"
+  },
+  "config": {
+    "include_artists_data": "包含艺人数据",
+    "include_audio_features_data": "包含音频特征数据",
+    "include_album_data": "包含专辑数据"
+  },
+  "help": {
+    "title": "快速参考",
+    "search_syntax": {
+      "title": "高级搜索语法",
+      "query": "查询",
+      "behavior": "行为",
+      "public_true": "仅显示公开播放列表",
+      "public_false": "仅显示私密播放列表",
+      "collaborative_true": "仅显示协作播放列表",
+      "collaborative_false": "不显示协作播放列表",
+      "owner_me": "仅显示我拥有的播放列表",
+      "owner_owner": "仅显示 <code>[owner]</code> 拥有的播放列表",
+      "more_detail": "更多详情请参阅<a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>完整项目文档</a>。"
+    }
+  },
+  "playlist": {
+    "name": "名称",
+    "owner": "所有者",
+    "tracks": "曲目",
+    "public": "公开？",
+    "collaborative": "协作？",
+    "not_supported": "不支持此播放列表",
+    "export": "导出"
+  },
+  "track": {
+    "track_uri": "曲目 URI",
+    "track_name": "曲目名称",
+    "artist_uris": "艺人 URI",
+    "artist_names": "艺人名称",
+    "album_uri": "专辑 URI",
+    "album_name": "专辑名称",
+    "album_artist_uris": "专辑艺人 URI",
+    "album_artist_names": "专辑艺人名称",
+    "album_release_date": "专辑发行日期",
+    "album_image_url": "专辑封面 URL",
+    "disc_number": "光盘编号",
+    "track_number": "曲目编号",
+    "track_duration": "曲目时长（毫秒）",
+    "track_preview_url": "曲目试听 URL",
+    "explicit": "含露骨内容",
+    "popularity": "热度",
+    "isrc": "ISRC",
+    "is_playable": "可播放",
+    "added_by": "添加者",
+    "added_at": "添加时间",
+    "album": {
+      "album_genres": "专辑流派",
+      "label": "唱片公司",
+      "copyrights": "版权"
+    },
+    "artist": {
+      "artist_genres": "艺人流派"
+    },
+    "audio_features": {
+      "danceability": "舞蹈性",
+      "energy": "能量",
+      "key": "调性",
+      "loudness": "响度",
+      "mode": "调式",
+      "speechiness": "语音度",
+      "acousticness": "原声性",
+      "instrumentalness": "器乐度",
+      "liveness": "现场感",
+      "valence": "情绪效价",
+      "tempo": "速度",
+      "time_signature": "拍号"
+    }
+  }
+}

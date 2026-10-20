@@ -1,0 +1,91 @@
+{
+  "tagline": "匯出你嘅 Spotify 播放清單。",
+  "get_started": "開始使用",
+  "subtitle": "第 {{min}}-{{max}} 個，共 {{total}} 個播放清單（{{userId}}）",
+  "subtitle_search": "{{total}} 個播放清單名稱包含「{{query}}」嘅結果",
+  "subtitle_search_advanced": "進階查詢「{{query}}」嘅 {{total}} 個結果",
+  "search": "搜尋",
+  "export_all": "冚唪唥匯出",
+  "exporting_done": "搞掂！",
+  "exporting_playlist": "匯出緊 {{playlistName}}...",
+  "export_search_results": "匯出結果",
+  "top_menu": {
+    "help": "說明",
+    "toggle_dark_mode": "轉深色Mode",
+    "change_language": "轉語言",
+    "change_user": "轉用戶"
+  },
+  "config": {
+    "include_artists_data": "包含藝人資料",
+    "include_audio_features_data": "包含音訊特徵資料",
+    "include_album_data": "包含專輯資料"
+  },
+  "help": {
+    "title": "快速參考",
+    "search_syntax": {
+      "title": "進階搜尋語法",
+      "query": "查詢",
+      "behavior": "行為",
+      "public_true": "淨係顯示公開播放清單",
+      "public_false": "淨係顯示私人播放清單",
+      "collaborative_true": "淨係顯示一齊編輯嘅播放清單",
+      "collaborative_false": "唔顯示一齊編輯嘅播放清單",
+      "owner_me": "淨係顯示我擁有嘅播放清單",
+      "owner_owner": "淨係顯示 <code>[owner]</code> 擁有嘅播放清單",
+      "more_detail": "想睇更多詳情，請參閱<a href='https://github.com/watsonbox/exportify' target='_blank' rel='noreferrer'>完整項目文件</a>。"
+    }
+  },
+  "playlist": {
+    "name": "名",
+    "owner": "Owner",
+    "tracks": "歌",
+    "public": "公開？",
+    "collaborative": "一齊編輯？",
+    "not_supported": "唔支援呢個播放清單",
+    "export": "匯出"
+  },
+  "track": {
+    "track_uri": "歌 Link",
+    "track_name": "歌名",
+    "artist_uris": "Artist Link",
+    "artist_names": "Artist 名",
+    "album_uri": "專輯 Link",
+    "album_name": "專輯名",
+    "album_artist_uris": "專輯 Artist Link",
+    "album_artist_names": "專輯 Artist 名",
+    "album_release_date": "專輯發行日",
+    "album_image_url": "專輯封面條 Link",
+    "disc_number": "碟片冧把",
+    "track_number": "曲目冧把",
+    "track_duration": "曲目時長（毫秒）",
+    "track_preview_url": "曲目試聽 Link",
+    "explicit": "家長指引",
+    "popularity": "熱門度",
+    "isrc": "ISRC",
+    "is_playable": "播得到",
+    "added_by": "加入者",
+    "added_at": "加入時間",
+    "album": {
+      "album_genres": "專輯曲風",
+      "label": "唱片公司",
+      "copyrights": "版權"
+    },
+    "artist": {
+      "artist_genres": "藝人曲風"
+    },
+    "audio_features": {
+      "danceability": "舞蹈性",
+      "energy": "能量",
+      "key": "調性",
+      "loudness": "響度",
+      "mode": "調式",
+      "speechiness": "語音度",
+      "acousticness": "原音性",
+      "instrumentalness": "器樂度",
+      "liveness": "現場感",
+      "valence": "情緒效價",
+      "tempo": "速度",
+      "time_signature": "拍號"
+    }
+  }
+}
