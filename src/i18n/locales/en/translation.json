@@ -58,6 +58,14 @@
     "not_supported": "This playlist is not supported",
     "export": "Export"
   },
+  "saved_albums": {
+    "name": "Saved Albums",
+    "album_one": "album",
+    "album_other": "albums",
+    "album_type": "Album Type",
+    "total_tracks": "Total Tracks",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "Track URI",
     "track_name": "Track Name",

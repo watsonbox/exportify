@@ -1,5 +1,6 @@
 import me from './live/me.json'
 import savedTracks from './live/me-tracks.json'
+import savedAlbums from './live/me-albums-limit-50.json'
 import playlists from './live/users-exportifytestuser-playlists-offset-0-limit-20.json'
 import playlistTracks from './live/playlists-fakeplaylist0000000001-tracks-offset-0-limit-100.json'
 import artists from './live/artists-1.json'
@@ -9,7 +10,7 @@ import error401 from './documented/error-401.json'
 import error429 from './documented/error-429.json'
 import error503 from './documented/error-503.json'
 import {
-  Album, Artist, AudioFeatures, CurrentUser, Paging, PlaylistItem, PublicUser, SavedTrack, SimplifiedAlbum, SimplifiedArtist,
+  Album, Artist, AudioFeatures, CurrentUser, Paging, PlaylistItem, PublicUser, SavedAlbum, SavedTrack, SimplifiedAlbum, SimplifiedArtist,
   SimplifiedPlaylist, Track, UserReference,
 } from '../../../spotify'
 
@@ -18,6 +19,7 @@ export const API = 'https://api.spotify.com/v1'
 // Typing the templates checks the response types against the recorded fixtures
 const meTemplate: CurrentUser = me.body
 const savedTrackTemplate: SavedTrack = savedTracks.body.items[0]
+const savedAlbumTemplate: SavedAlbum = savedAlbums.body.items[0]
 const playlistTemplate: SimplifiedPlaylist = playlists.body.items.find(playlist => playlist.owner.id === me.body.id)!
 const playlistItemTemplate: PlaylistItem & { added_by: UserReference, track: Track } = playlistTracks.body.items[0]
 const fullArtistTemplate: Artist = artists.body.artists[0]
@@ -86,6 +88,9 @@ export function buildLocalTrack({ name, artist, album, duration_ms }: { name: st
 
 export const buildSavedTrack = (overrides: Partial<SavedTrack> = {}): SavedTrack =>
   ({ added_at: savedTrackTemplate.added_at, track: buildTrack(), ...overrides })
+
+export const buildSavedAlbum = (overrides: Partial<SavedAlbum> = {}): SavedAlbum =>
+  ({ added_at: savedAlbumTemplate.added_at, album: buildFullAlbum(), ...overrides })
 
 type PlaylistItemOverrides = Partial<Omit<PlaylistItem, 'added_by'>> & { added_by?: UserReference }
 

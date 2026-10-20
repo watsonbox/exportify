@@ -111,6 +111,11 @@ export interface SavedTrack {
   track: Track
 }
 
+export interface SavedAlbum {
+  added_at: string
+  album: Album
+}
+
 export interface SimplifiedPlaylist {
   collaborative: boolean
   description: string | null

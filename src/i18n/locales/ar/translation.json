@@ -50,6 +50,18 @@
     "not_supported": "هذه القائمة غير مدعومة",
     "export": "تصدير"
   },
+  "saved_albums": {
+    "name": "الألبومات المحفوظة",
+    "album_zero": "ألبوم",
+    "album_one": "ألبوم",
+    "album_two": "ألبومان",
+    "album_few": "ألبومات",
+    "album_many": "ألبومًا",
+    "album_other": "ألبوم",
+    "album_type": "نوع الألبوم",
+    "total_tracks": "إجمالي الأغاني",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "رابط الأغنية (URI)",
     "track_name": "اسم الأغنية",

@@ -50,6 +50,14 @@
     "not_supported": "Esta playlist no es compatible",
     "export": "Exportar"
   },
+  "saved_albums": {
+    "name": "Álbumes guardados",
+    "album_one": "álbum",
+    "album_other": "álbumes",
+    "album_type": "Tipo de álbum",
+    "total_tracks": "Total de canciones",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "URI de la canción",
     "track_name": "Nombre de la canción",

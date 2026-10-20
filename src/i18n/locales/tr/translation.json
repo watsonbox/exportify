@@ -50,6 +50,14 @@
     "not_supported": "Bu çalma listesi desteklenmiyor",
     "export": "Dışa Aktar"
   },
+  "saved_albums": {
+    "name": "Kaydedilen Albümler",
+    "album_one": "albüm",
+    "album_other": "albüm",
+    "album_type": "Albüm Türü",
+    "total_tracks": "Toplam Parça",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "Parça URI",
     "track_name": "Parça Adı",

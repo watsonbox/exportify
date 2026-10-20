@@ -40,7 +40,8 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
     progressBar: {
       show: false,
       label: "",
-      value: 0
+      value: 0,
+      max: 0
     },
     config: {
       includeArtistsData: false,
@@ -146,19 +147,21 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
       progressBar: {
         show: true,
         label: this.props.i18n.t("exporting_done"),
-        value: this.state.playlistCount
+        value: this.state.progressBar.max,
+        max: this.state.progressBar.max
       }
     })
   }
 
-  handlePlaylistExportStarted = (playlistName: string, doneCount: number) => {
+  handlePlaylistExportStarted = (playlistName: string, doneCount: number, totalCount: number) => {
     Bugsnag.leaveBreadcrumb(`Started exporting playlist ${playlistName}`)
 
     this.setState({
       progressBar: {
         show: true,
         label: this.props.i18n.t("exporting_playlist", { playlistName: playlistName }),
-        value: doneCount
+        value: doneCount,
+        max: totalCount
       }
     })
   }
@@ -221,7 +224,7 @@ class PlaylistTable extends React.Component<PlaylistTableProps> {
   }
 
   render() {
-    const progressBar = <ProgressBar striped variant="primary" animated={this.state.progressBar.value < this.state.playlistCount} now={this.state.progressBar.value} max={this.state.playlistCount} label={this.state.progressBar.label} />
+    const progressBar = <ProgressBar striped variant="primary" animated={this.state.progressBar.value < this.state.progressBar.max} now={this.state.progressBar.value} max={this.state.progressBar.max} label={this.state.progressBar.label} />
 
     if (this.state.initialized) {
       return (

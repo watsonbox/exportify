@@ -50,6 +50,14 @@
     "not_supported": "Deze afspeellijst wordt niet ondersteund",
     "export": "Exporteren"
   },
+  "saved_albums": {
+    "name": "Opgeslagen albums",
+    "album_one": "album",
+    "album_other": "albums",
+    "album_type": "Albumtype",
+    "total_tracks": "Totaal aantal nummers",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "Nummer URI",
     "track_name": "Nummernaam",

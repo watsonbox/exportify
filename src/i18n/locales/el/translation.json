@@ -50,6 +50,14 @@
     "not_supported": "Αυτή η λίστα δεν υποστηρίζεται",
     "export": "Εξαγωγή"
   },
+  "saved_albums": {
+    "name": "Αποθηκευμένα άλμπουμ",
+    "album_one": "άλμπουμ",
+    "album_other": "άλμπουμ",
+    "album_type": "Τύπος άλμπουμ",
+    "total_tracks": "Σύνολο κομματιών",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "URI κομματιού",
     "track_name": "Όνομα κομματιού",

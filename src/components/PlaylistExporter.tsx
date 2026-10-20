@@ -6,11 +6,11 @@ import TracksBaseData, { TrackItem } from "components/data/TracksBaseData"
 import TracksArtistsData from "components/data/TracksArtistsData"
 import TracksAudioFeaturesData from "components/data/TracksAudioFeaturesData"
 import TracksAlbumData from "components/data/TracksAlbumData"
-import { ExportablePlaylist } from "components/data/PlaylistsData"
+import { TracksPlaylist } from "components/data/PlaylistsData"
 import { ExportConfig } from "components/ConfigDropdown"
 
 class TracksCsvFile {
-  playlist: ExportablePlaylist
+  playlist: TracksPlaylist
   trackItems: TrackItem[]
   columnNames: string[]
   lineData: Map<string, CsvValue[]>
@@ -18,7 +18,7 @@ class TracksCsvFile {
   lineTrackUris: string[]
   lineTrackData: CsvValue[][]
 
-  constructor(playlist: ExportablePlaylist, trackItems: TrackItem[]) {
+  constructor(playlist: TracksPlaylist, trackItems: TrackItem[]) {
     this.playlist = playlist
     this.trackItems = trackItems
     this.columnNames = [
@@ -73,10 +73,10 @@ class TracksCsvFile {
 
 // Handles exporting a single playlist as a CSV file
 class PlaylistExporter {
-  playlist: ExportablePlaylist
+  playlist: TracksPlaylist
   config: ExportConfig
 
-  constructor(playlist: ExportablePlaylist, config: ExportConfig) {
+  constructor(playlist: TracksPlaylist, config: ExportConfig) {
     this.playlist = playlist
     this.config = config
   }

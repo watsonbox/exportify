@@ -2,7 +2,7 @@ import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
 import { Paging, PlaylistItem, SavedTrack, Track, UserReference } from "spotify"
-import { ExportablePlaylist } from "./PlaylistsData"
+import { TracksPlaylist } from "./PlaylistsData"
 
 // What playlist items and saved tracks have in common, once items whose track is gone are left out
 export interface TrackItem {
@@ -14,9 +14,9 @@ export interface TrackItem {
 const hasTrack = (item: PlaylistItem | SavedTrack): item is TrackItem => item.track != null
 
 class TracksBaseData extends TracksData {
-  playlist: ExportablePlaylist
+  playlist: TracksPlaylist
 
-  constructor(playlist: ExportablePlaylist) {
+  constructor(playlist: TracksPlaylist) {
     super()
     this.playlist = playlist
   }

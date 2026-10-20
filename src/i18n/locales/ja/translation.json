@@ -50,6 +50,13 @@
     "not_supported": "このプレイリストはサポートされていません",
     "export": "エクスポート"
   },
+  "saved_albums": {
+    "name": "保存したアルバム",
+    "album_other": "枚",
+    "album_type": "アルバムタイプ",
+    "total_tracks": "総トラック数",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "トラックURI",
     "track_name": "トラック名",

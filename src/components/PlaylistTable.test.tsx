@@ -14,9 +14,10 @@ import { server } from "../mocks/server"
 import { redirectTo } from "../navigation"
 import { csvRecords } from "../test/csv"
 import { captureBugsnagReports } from "../test/bugsnag"
-import { API, buildPlaylist, buildUser } from "../test/fixtures/spotify/builders"
+import { API, buildArtist, buildFullAlbum, buildPlaylist, buildSavedAlbum, buildUser } from "../test/fixtures/spotify/builders"
 import { errorResponse, ghostpoetTracksUrl, handlerCalled, pagedGet, nullAlbumHandlers, nullTrackHandlers, localTrackHandlers, duplicateTrackHandlers, missingPlaylistsHandlers } from "../mocks/handlers"
 import grantedToken from "../test/fixtures/spotify/documented/token.json"
+import liveSavedAlbums from "../test/fixtures/spotify/live/me-albums-limit-50.json"
 
 vi.mock('@bugsnag/js')
 
@@ -27,6 +28,7 @@ const likedRequests = [
   'https://api.spotify.com/v1/me',
   'https://api.spotify.com/v1/me/playlists?offset=0&limit=20',
   'https://api.spotify.com/v1/me/tracks',
+  'https://api.spotify.com/v1/me/albums?limit=1',
   'https://api.spotify.com/v1/me/tracks?offset=0&limit=50',
 ]
 
@@ -185,6 +187,158 @@ test("only the Liked Songs row has the heart icon", async () => {
   const icons = rows.map(row => within(row).getAllByRole('img', { hidden: true })[0].getAttribute('data-icon'))
 
   expect(icons).toEqual(['heart', 'music'])
+})
+
+describe("saved albums", () => {
+  const serveSavedAlbums = (items: object[]) => server.use(pagedGet(`${API}/me/albums`, items))
+
+  const twoStar = {
+    "Album URI": "spotify:album:62xd4emBJXINuYl0RzfvO8",
+    "Album Name": "Two Star & The Dream Police",
+    "Album Artist URI(s)": "spotify:artist:7tr9pbgNEKtG0GQTKe08Tz",
+    "Album Artist Name(s)": "Mk.gee",
+    "Album Type": "album",
+    "Album Release Date": "2024-02-09",
+    "Total Tracks": "12",
+    "Label": "R&R Digital",
+    "UPC": "193436368681",
+    "Popularity": "71",
+    "Album Image URL": "https://i.scdn.co/image/ab67616d0000b2738b048b6486231cca4766a076",
+    "Added At": "2026-10-17T14:37:28Z",
+  }
+
+  const liveAlbumNames = liveSavedAlbums.body.items.map(item => item.album.name)
+
+  test("a Saved Albums row under Liked Songs shows the album count", async () => {
+    serveSavedAlbums(liveSavedAlbums.body.items)
+    renderTable()
+
+    const row = await screen.findByRole('row', { name: name => name.includes('Saved Albums') })
+
+    expect(screen.getAllByRole('row')[2]).toBe(row)
+    expect(screen.getAllByRole('row')[1]).toHaveTextContent('Liked')
+    expect(row).toHaveTextContent('7 albums')
+    expect(within(row).getAllByRole('img', { hidden: true })[0]).toHaveAttribute('data-icon', 'record-vinyl')
+  })
+
+  test("there's no Saved Albums row without saved albums", async () => {
+    renderTable()
+
+    expect(await screen.findByText(ghostpoetPlaylist)).toBeInTheDocument()
+    expect(screen.queryByText('Saved Albums')).not.toBeInTheDocument()
+  })
+
+  test("Saved Albums isn't in search results", async () => {
+    serveSavedAlbums(liveSavedAlbums.body.items)
+    renderTable()
+
+    await userEvent.type(await screen.findByRole('searchbox'), 'Albums{enter}')
+
+    await waitFor(() => expect(screen.queryAllByRole('row')).toHaveLength(1))
+  })
+
+  test("the row exports one line per album in Spotify's order, ignoring the export settings", async () => {
+    serveSavedAlbums(liveSavedAlbums.body.items)
+
+    const { fileName, records } = await exportPlaylist("Saved Albums", { includeArtistsData: true, includeAudioFeaturesData: true, includeAlbumData: true })
+
+    expect(fileName).toBe('saved_albums.csv')
+    expect(records[0]).toEqual(twoStar)
+    expect(records.map(record => record["Album Name"])).toEqual(liveAlbumNames)
+    expect(requestedUrls()).toEqual([...likedRequests.slice(0, 4), `${API}/me/albums?offset=0&limit=50`])
+  })
+
+  test("artist names are escaped and missing values left blank", async () => {
+    serveSavedAlbums([buildSavedAlbum({
+      added_at: '2026-10-18T10:00:00Z',
+      album: buildFullAlbum({
+        id: 'compilation1',
+        name: 'Hits, Vol. 1',
+        album_type: 'compilation',
+        artists: [buildArtist({ id: 'artist1', name: 'Earth, Wind & Fire' }), buildArtist({ id: 'artist2', name: 'Chic' })],
+        release_date: '1999',
+        total_tracks: 20,
+        label: 'Some Label',
+        external_ids: {},
+        popularity: 10,
+        images: [],
+      }),
+    })])
+
+    const { records } = await exportPlaylist("Saved Albums")
+
+    expect(records).toEqual([{
+      "Album URI": "spotify:album:compilation1",
+      "Album Name": "Hits, Vol. 1",
+      "Album Artist URI(s)": "spotify:artist:artist1, spotify:artist:artist2",
+      "Album Artist Name(s)": "Earth\\, Wind & Fire, Chic",
+      "Album Type": "compilation",
+      "Album Release Date": "1999",
+      "Total Tracks": "20",
+      "Label": "Some Label",
+      "UPC": "",
+      "Popularity": "10",
+      "Album Image URL": "",
+      "Added At": "2026-10-18T10:00:00Z",
+    }])
+  })
+
+  test("the export pages through albums 50 at a time", async () => {
+    serveSavedAlbums(Array.from({ length: 60 }, (_, i) => buildSavedAlbum({ album: buildFullAlbum({ id: `album${i}` }) })))
+
+    const { records } = await exportPlaylist("Saved Albums")
+
+    expect(records).toHaveLength(60)
+    expect(requestedUrls().filter(url => url.includes('/me/albums'))).toEqual([
+      `${API}/me/albums?limit=1`,
+      `${API}/me/albums?offset=0&limit=50`,
+      `${API}/me/albums?offset=50&limit=50`,
+    ])
+  })
+
+  test("Export All includes saved_albums.csv", async () => {
+    serveSavedAlbums(liveSavedAlbums.body.items)
+    renderTable()
+
+    const files = await exportZip(/Export All/)
+
+    expect(Object.keys(files)).toEqual(['liked.csv', 'saved_albums.csv', ghostpoetFileName])
+    expect(files['saved_albums.csv'][0]).toEqual(twoStar)
+  })
+
+  test("Export All's progress counts Liked Songs and Saved Albums", async () => {
+    serveSavedAlbums(liveSavedAlbums.body.items)
+    let releaseLastFile = () => {}
+    const lastFile = new Promise<void>(resolve => { releaseLastFile = resolve })
+    server.use(http.get(ghostpoetTracksUrl, async () => { await lastFile }))
+    renderTable()
+
+    await userEvent.click(await screen.findByRole('button', { name: /Export All/ }))
+
+    await waitFor(() => expect(screen.getByRole('progressbar')).toHaveTextContent(`Exporting ${ghostpoetPlaylist}...`))
+    expect(screen.getByRole('progressbar')).toHaveValue(2)
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '3')
+
+    releaseLastFile()
+
+    await waitFor(() => expect(screen.getByRole('progressbar')).toHaveTextContent('Done!'))
+    expect(screen.getByRole('progressbar')).toHaveValue(3)
+    expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuemax', '3')
+  })
+
+  test("a failed export shows a message and can be tried again", async () => {
+    serveSavedAlbums(liveSavedAlbums.body.items)
+    renderTable()
+    const row = await screen.findByRole('row', { name: name => name.includes('Saved Albums') })
+    server.use(http.get(`${API}/me/albums`, errorResponse(403, "Spotify is unavailable in this country")))
+
+    const button = within(row).getByRole('button', { name: 'Export' })
+    await userEvent.click(button)
+
+    expect(await screen.findByRole('alert')).toHaveTextContent("Spotify refused the request (error 403).")
+    expect(button).toBeEnabled()
+    expect(FileSaver.saveAs).not.toHaveBeenCalled()
+  })
 })
 
 describe("single playlist exporting", () => {

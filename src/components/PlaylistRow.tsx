@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import PlaylistExporter from "./PlaylistExporter"
+import SavedAlbumsExporter from "./SavedAlbumsExporter"
 import { ExportablePlaylist, PlaylistPlaceholder } from "./data/PlaylistsData"
 import { ExportConfig } from "./ConfigDropdown"
 
@@ -22,7 +23,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
     this.setState(
       { exporting: true },
       () => {
-        (new PlaylistExporter(
+        ("albums" in playlist ? new SavedAlbumsExporter(playlist) : new PlaylistExporter(
           playlist,
           this.props.config
         )).export().catch(this.props.onApiError).finally(() => {
@@ -43,6 +44,8 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
   renderIcon(playlist: ExportablePlaylist | PlaylistPlaceholder) {
     if (playlist.id === 'liked') {
       return <FontAwesomeIcon icon={['far', 'heart']} style={{ color: 'red' }} />;
+    } else if ("albums" in playlist) {
+      return <FontAwesomeIcon icon={['fas', 'record-vinyl']} />;
     } else {
       return <FontAwesomeIcon icon={['fas', 'music']} />;
     }
@@ -67,7 +70,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
         <td><a href={playlist.owner.uri}>{playlist.owner.display_name}</a></td>
-        <td className="d-none d-sm-table-cell">{playlist.tracks.total}</td>
+        <td className="d-none d-sm-table-cell">{"albums" in playlist ? <>{playlist.albums.total} <span className="small opacity-75">{this.props.i18n.t("saved_albums.album", { count: playlist.albums.total })}</span></> : playlist.tracks.total}</td>
         <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-end">

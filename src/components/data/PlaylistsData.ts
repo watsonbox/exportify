@@ -1,5 +1,6 @@
+import i18n from "../../i18n/config"
 import { apiCall } from "helpers"
-import { Paging, SavedTrack, SimplifiedPlaylist } from "spotify"
+import { Paging, SavedAlbum, SavedTrack, SimplifiedPlaylist } from "spotify"
 
 // Liked Songs isn't a playlist on Spotify, so it's built from /me/tracks and exported alongside them
 export interface LikedSongsPlaylist {
@@ -12,7 +13,19 @@ export interface LikedSongsPlaylist {
   uri: string
 }
 
-export type ExportablePlaylist = SimplifiedPlaylist | LikedSongsPlaylist
+// Saved albums are listed and exported like a playlist, with albums in place of tracks
+export interface SavedAlbumsPlaylist {
+  id: "albums"
+  name: string
+  public: false
+  collaborative: false
+  owner: { id: string; display_name: string; uri: string }
+  albums: { href: string; total: number }
+  uri: string
+}
+
+export type TracksPlaylist = SimplifiedPlaylist | LikedSongsPlaylist
+export type ExportablePlaylist = TracksPlaylist | SavedAlbumsPlaylist
 
 // Stands in for a playlist that hasn't been loaded yet
 export type PlaylistPlaceholder = { [K in keyof SimplifiedPlaylist]?: undefined }
@@ -30,6 +43,7 @@ class PlaylistsData {
   private onPlaylistsLoadingDone?: () => void
   private data: (SimplifiedPlaylist | PlaylistPlaceholder | null)[]
   private likedTracksPlaylist: LikedSongsPlaylist | null
+  private savedAlbumsPlaylist?: SavedAlbumsPlaylist | null
   private dataInitialized = false
 
   constructor(userId: string, onPlaylistsLoadingStarted?: () => void, onPlaylistsLoadingDone?: () => void) {
@@ -50,12 +64,12 @@ class PlaylistsData {
 
   async slice(start: number, end: number): Promise<(ExportablePlaylist | PlaylistPlaceholder)[]> {
     await this.loadSlice(start, end)
-    const likedTracksPlaylist = await this.loadLikedTracksPlaylist()
+    const libraryPlaylists = await this.loadLibraryPlaylists()
     const playlists = this.data.slice(start, end).filter(p => p != null)
 
-    // It's a little ugly, but we slip in liked tracks with the first slice
+    // It's a little ugly, but we slip in liked tracks and saved albums with the first slice
     if (start === 0) {
-      return [likedTracksPlaylist, ...playlists]
+      return [...libraryPlaylists, ...playlists]
     } else {
       return playlists
     }
@@ -63,10 +77,10 @@ class PlaylistsData {
 
   async all(): Promise<ExportablePlaylist[]> {
     await this.loadAll()
-    const likedTracksPlaylist = await this.loadLikedTracksPlaylist()
+    const libraryPlaylists = await this.loadLibraryPlaylists()
 
     // Remove any uninitialized playlists when exporting
-    return [likedTracksPlaylist, ...this.data.filter(isLoaded)]
+    return [...libraryPlaylists, ...this.data.filter(isLoaded)]
   }
 
   async search(query: string): Promise<SimplifiedPlaylist[]> {
@@ -131,6 +145,13 @@ class PlaylistsData {
     this.data.splice(start, playlistsData.items.length, ...playlistsData.items)
   }
 
+  private async loadLibraryPlaylists(): Promise<ExportablePlaylist[]> {
+    const likedTracksPlaylist = await this.loadLikedTracksPlaylist()
+    const savedAlbumsPlaylist = await this.loadSavedAlbumsPlaylist()
+
+    return savedAlbumsPlaylist ? [likedTracksPlaylist, savedAlbumsPlaylist] : [likedTracksPlaylist]
+  }
+
   private async loadLikedTracksPlaylist(): Promise<LikedSongsPlaylist> {
     if (this.likedTracksPlaylist !== null) {
       return this.likedTracksPlaylist
@@ -159,6 +180,36 @@ class PlaylistsData {
     }
 
     return this.likedTracksPlaylist
+  }
+
+  // Null when there are no saved albums, so the row is left out
+  private async loadSavedAlbumsPlaylist(): Promise<SavedAlbumsPlaylist | null> {
+    if (this.savedAlbumsPlaylist !== undefined) {
+      return this.savedAlbumsPlaylist
+    }
+
+    const savedAlbumsUrl = "https://api.spotify.com/v1/me/albums"
+    const savedAlbumsResponse = await apiCall<Paging<SavedAlbum>>(`${savedAlbumsUrl}?limit=1`)
+    const total = savedAlbumsResponse.data.total
+
+    this.savedAlbumsPlaylist = total === 0 ? null : {
+      "id": "albums",
+      "name": i18n.t("saved_albums.name"),
+      "public": false,
+      "collaborative": false,
+      "owner": {
+        "id": this.userId,
+        "display_name": this.userId,
+        "uri": "spotify:user:" + this.userId
+      },
+      "albums": {
+        "href": savedAlbumsUrl,
+        "total": total
+      },
+      "uri": "spotify:user:" + this.userId + ":collection:albums"
+    }
+
+    return this.savedAlbumsPlaylist
   }
 }
 

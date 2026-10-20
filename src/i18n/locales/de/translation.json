@@ -50,6 +50,14 @@
     "not_supported": "Diese Playlist wird nicht unterstützt",
     "export": "Exportieren"
   },
+  "saved_albums": {
+    "name": "Gespeicherte Alben",
+    "album_one": "Album",
+    "album_other": "Alben",
+    "album_type": "Albumtyp",
+    "total_tracks": "Anzahl der Titel",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "Track-URI",
     "track_name": "Track-Name",

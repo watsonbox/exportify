@@ -15,6 +15,10 @@ const placeholders = (text: string) => (text.match(/{{\s*\w+\s*}}/g) ?? []).map(
 const englishOnly = ["api_error."]
 const translatable = (key: string) => !englishOnly.some(prefix => key.startsWith(prefix))
 
+// Languages need different plural forms, so keys are compared without their plural suffix
+const pluralBase = (key: string) => key.replace(/_(zero|one|two|few|many|other)$/, "")
+const baseKeys = (keys: string[]) => [...new Set(keys.filter(translatable).map(pluralBase))].sort()
+
 const en = flatten(locales.en)
 const others = Object.keys(locales).filter(locale => locale !== "en")
 
@@ -27,8 +31,7 @@ describe.each(others)("%s", locale => {
   const translations = flatten(locales[locale])
 
   test("has the same keys as en", () => {
-    expect(Object.keys(translations).filter(translatable).sort()).toEqual(Object.keys(en).filter(translatable).sort())
-    expect(Object.keys(translations).filter(key => !(key in en))).toEqual([])
+    expect(baseKeys(Object.keys(translations))).toEqual(baseKeys(Object.keys(en)))
   })
 
   test("uses the same placeholders as en", () => {
