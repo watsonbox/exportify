@@ -50,6 +50,14 @@
     "not_supported": "Denna spellista stöds inte",
     "export": "Exportera"
   },
+  "saved_albums": {
+    "name": "Sparade album",
+    "album_one": "album",
+    "album_other": "album",
+    "album_type": "Albumtyp",
+    "total_tracks": "Totalt antal låtar",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "Låtens URI",
     "track_name": "Låtens namn",

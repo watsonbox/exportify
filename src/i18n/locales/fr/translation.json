@@ -50,6 +50,14 @@
     "not_supported": "Cette playlist n'est pas prise en charge",
     "export": "Exporter"
   },
+  "saved_albums": {
+    "name": "Albums enregistrés",
+    "album_one": "album",
+    "album_other": "albums",
+    "album_type": "Type d'album",
+    "total_tracks": "Nombre de titres",
+    "upc": "UPC"
+  },
   "track": {
     "track_uri": "URI du titre",
     "track_name": "Nom du titre",
