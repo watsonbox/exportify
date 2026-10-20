@@ -3,6 +3,7 @@ import { withTranslation, WithTranslation, Trans } from "react-i18next"
 import { Button, Modal, Table, Dropdown, Form } from "react-bootstrap"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { logout } from "auth"
+import { languages } from "i18n/languages"
 
 interface TopMenuProps extends WithTranslation {
   loggedIn: boolean
@@ -54,7 +55,7 @@ class TopMenu extends React.Component<TopMenuProps> {
     const selected = this.props.i18n.resolvedLanguage === language
 
     return (
-      <Dropdown.Item onClick={() => this.handleLanguageSwitch(language)} aria-current={selected}>
+      <Dropdown.Item key={language} onClick={() => this.handleLanguageSwitch(language)} aria-current={selected}>
         <Form.Check type="radio" name="language">
           <FontAwesomeIcon icon={['fas', 'check']} className={selected ? 'me-1 selected' : 'me-1'} /> {label}
         </Form.Check>
@@ -131,21 +132,7 @@ class TopMenu extends React.Component<TopMenuProps> {
             <FontAwesomeIcon icon={['fas', 'globe']} />
           </Dropdown.Toggle>
           <Dropdown.Menu>
-            {this.renderLanguageDropdownItem("en", "English")}
-            {this.renderLanguageDropdownItem("de", "Deutsch")}
-            {this.renderLanguageDropdownItem("el", "Ελληνικά")}
-            {this.renderLanguageDropdownItem("es", "Español")}
-            {this.renderLanguageDropdownItem("fr", "Français")}
-            {this.renderLanguageDropdownItem("it", "Italiano")}
-            {this.renderLanguageDropdownItem("nl", "Nederlands")}
-            {this.renderLanguageDropdownItem("pt", "Português")}
-            {this.renderLanguageDropdownItem("sv", "Svenska")}
-            {this.renderLanguageDropdownItem("ar", "العربية")}
-            {this.renderLanguageDropdownItem("ja", "日本語")}
-            {this.renderLanguageDropdownItem("tr", "Türkçe")}
-            {this.renderLanguageDropdownItem("zh-Hans", "简体中文")}
-            {this.renderLanguageDropdownItem("zh-Hant", "正體中文")}
-            {this.renderLanguageDropdownItem("yue-Hant-HK", "粵語（香港）")}
+            {Object.entries(languages).map(([language, label]) => this.renderLanguageDropdownItem(language, label))}
           </Dropdown.Menu>
         </Dropdown>
         {logoutButton}

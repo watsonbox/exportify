@@ -1,3 +1,5 @@
+import { languages } from "./languages"
+
 type Translations = { [key: string]: string | Translations }
 
 const localeFiles = import.meta.glob<Translations>("./locales/*/translation.json", { eager: true, import: "default" })
@@ -21,6 +23,10 @@ const baseKeys = (keys: string[]) => [...new Set(keys.filter(translatable).map(p
 
 const en = flatten(locales.en)
 const others = Object.keys(locales).filter(locale => locale !== "en")
+
+test("the language menu lists exactly the locales that have translations", () => {
+  expect(Object.keys(languages).sort()).toEqual(Object.keys(locales).sort())
+})
 
 test("loads English and at least one other locale", () => {
   expect(Object.keys(en).length).toBeGreaterThan(0)
