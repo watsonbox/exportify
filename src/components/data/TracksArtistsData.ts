@@ -1,7 +1,7 @@
 import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
-import { ArtistsResponse, Track } from "spotify"
+import { Artist, Track } from "spotify"
 
 class TracksArtistsData extends TracksData {
   ARTIST_LIMIT = 50
@@ -30,14 +30,15 @@ class TracksArtistsData extends TracksData {
 
     const requests = []
 
-    for (let offset = 0; offset < artistIds.length; offset = offset + this.ARTIST_LIMIT) {
-      requests.push(`https://api.spotify.com/v1/artists?ids=${artistIds.slice(offset, offset + this.ARTIST_LIMIT)}`)
+    // Batch fetches are gone, so each artist is requested on its own
+    for (const artistId of artistIds) {
+      requests.push(`https://api.spotify.com/v1/artists/${artistId}`)
     }
 
-    const artistPromises = requests.map(request => { return apiCall<ArtistsResponse>(request) })
+    const artistPromises = requests.map(request => { return apiCall<Artist>(request) })
     const artistResponses = await Promise.all(artistPromises)
 
-    const artistsById = new Map(artistResponses.flatMap((response) => response.data.artists).map((artist) => [artist.id, artist]))
+    const artistsById = new Map(artistResponses.map((response) => response.data).map((artist) => [artist.id, artist]))
 
     return new Map<string, string[]>(this.tracks.map((track) => {
       return [

@@ -1,7 +1,7 @@
 import i18n from "../../i18n/config"
 import TracksData from "./TracksData"
 import { apiCall } from "helpers"
-import { Album, AlbumsResponse, Track } from "spotify"
+import { Album, Track } from "spotify"
 
 class TracksAlbumData extends TracksData {
   ALBUM_LIMIT = 20
@@ -26,24 +26,25 @@ class TracksAlbumData extends TracksData {
 
     const requests = []
 
-    for (let offset = 0; offset < albumIds.length; offset = offset + this.ALBUM_LIMIT) {
-      requests.push(`https://api.spotify.com/v1/albums?ids=${albumIds.slice(offset, offset + this.ALBUM_LIMIT)}`)
+    // Batch fetches are gone, so each album is requested on its own
+    for (const albumId of albumIds) {
+      requests.push(`https://api.spotify.com/v1/albums/${albumId}`)
     }
 
-    const albumPromises = requests.map((request) => apiCall<AlbumsResponse>(request))
+    const albumPromises = requests.map((request) => apiCall<Album | null>(request))
     const albumResponses = await Promise.all(albumPromises)
 
     const albumDataById = new Map<string, string[]>(
-      albumResponses.flatMap((response) => response.data.albums.filter((album): album is Album => album != null).map((album) => {
+      albumResponses.map((response) => response.data).filter((album): album is Album => album != null).map((album) => {
         return [
           album.id,
           [
             album.genres.join(", "),
-            album.label,
+            album.label ?? "",
             album.copyrights.map((c) => `${c.type} ${c.text}`).join(", ")
           ]
         ]
-      }))
+      })
     )
 
     return new Map<string, string[]>(

@@ -2,7 +2,7 @@ import "i18n/config"
 import { server } from "../mocks/server"
 import { pagedGet, spotifyGet } from "../mocks/handlers"
 import { csvHeaders, csvRecords } from "../test/csv"
-import { API, buildArtist, buildPlaylist, buildPlaylistItem, buildTrack, buildUser } from "../test/fixtures/spotify/builders"
+import { API, buildArtist, buildFullAlbum, buildFullArtist, buildPlaylist, buildPlaylistItem, buildTrack, buildUser } from "../test/fixtures/spotify/builders"
 import PlaylistExporter from "./PlaylistExporter"
 import { Track } from "../spotify"
 
@@ -17,7 +17,7 @@ const playlist = buildPlaylist({ id: 'p1', name: 'Mixtape', tracks: { total: 1 }
 const noExtraData = { includeArtistsData: false, includeAudioFeaturesData: false, includeAlbumData: false }
 
 const serveTracks = (...tracks: Track[]) =>
-  server.use(pagedGet(`${API}/playlists/p1/tracks`, tracks.map(track => buildPlaylistItem({ track, added_by: buildUser({ id: 'dj' }), added_at: '2024-01-02T03:04:05Z' }))))
+  server.use(pagedGet(`${API}/playlists/p1/items`, tracks.map(track => buildPlaylistItem({ track, added_by: buildUser({ id: 'dj' }), added_at: '2024-01-02T03:04:05Z' }))))
 
 beforeEach(() => {
   localStorage.setItem("access_token", "TEST_ACCESS_TOKEN")
@@ -35,9 +35,9 @@ describe("PlaylistExporter", () => {
   test("appends artist, audio feature and album columns in that order", async () => {
     serveTracks(buildTrack())
     server.use(
-      spotifyGet(`${API}/artists`, () => ({ artists: [] })),
+      spotifyGet(`${API}/artists/:id`, () => buildFullArtist()),
       spotifyGet(`${API}/audio-features`, () => ({ audio_features: [] })),
-      spotifyGet(`${API}/albums`, () => ({ albums: [] })),
+      spotifyGet(`${API}/albums/:id`, () => buildFullAlbum()),
     )
     const config = { includeArtistsData: true, includeAudioFeaturesData: true, includeAlbumData: true }
 

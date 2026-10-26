@@ -72,7 +72,7 @@ const ghostpoetPlaylist = buildPlaylist({
   tracks: { total: 10 },
 })
 const playlistsUrl = `${API}/me/playlists`
-export const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/tracks`
+export const ghostpoetTracksUrl = `${API}/playlists/4XOGDpHMrVoH33uJEwHWU5/items`
 const addedByWatsonbox = (track: Track | null, added_at = '2020-11-03T15:19:04Z') =>
   buildPlaylistItem({ track, added_at, added_by: watsonbox })
 
@@ -114,9 +114,8 @@ export const handlers = [
 
   tracksPage([addedByWatsonbox(oneTwos), addedByWatsonbox(usAgainstWhatever)]),
 
-  spotifyGet(`${API}/artists`, () => ({
-    artists: [buildFullArtist({ id: sixBySeven.id, name: sixBySeven.name, genres: ['nottingham indie'] })],
-  }), { ids: sixBySeven.id }),
+  spotifyGet(`${API}/artists/${sixBySeven.id}`, () =>
+    buildFullArtist({ id: sixBySeven.id, name: sixBySeven.name, genres: ['nottingham indie'] })),
 
   spotifyGet(`${API}/audio-features`, () => ({
     audio_features: [buildAudioFeatures({
@@ -137,18 +136,16 @@ export const handlers = [
     })],
   }), { ids: crying.id }),
 
-  spotifyGet(`${API}/albums`, () => ({
-    albums: [buildFullAlbum({
-      ...crying.album,
-      album_type: 'compilation',
-      genres: ['something', 'something else'],
-      label: 'Beggars Banquet',
-      copyrights: [
-        { text: '2016 Beggars Banquet Records Ltd.', type: 'C' },
-        { text: '2016 Beggars Banquet Records Ltd.', type: 'P' },
-      ],
-    })],
-  }), { ids: crying.album.id }),
+  spotifyGet(`${API}/albums/${crying.album.id}`, () => buildFullAlbum({
+    ...crying.album,
+    album_type: 'compilation',
+    genres: ['something', 'something else'],
+    label: 'Beggars Banquet',
+    copyrights: [
+      { text: '2016 Beggars Banquet Records Ltd.', type: 'C' },
+      { text: '2016 Beggars Banquet Records Ltd.', type: 'P' },
+    ],
+  })),
 ]
 
 export const missingPlaylistsHandlers = [
@@ -157,7 +154,7 @@ export const missingPlaylistsHandlers = [
 ]
 
 export const nullAlbumHandlers = [
-  spotifyGet(`${API}/albums`, () => ({ albums: [null] }), { ids: crying.album.id }),
+  spotifyGet(`${API}/albums/${crying.album.id}`, () => null as unknown as object),
 ]
 
 export const nullTrackHandlers = [

@@ -49,9 +49,9 @@ class SavedAlbumsExporter {
       album.album_type ?? '',
       album.release_date ?? '',
       album.total_tracks ?? '',
-      album.label,
+      album.label ?? '',
       album.external_ids.upc ?? '',
-      album.popularity,
+      album.popularity ?? '',
       album.images[0]?.url ?? '',
       added_at
     ])

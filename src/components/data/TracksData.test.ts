@@ -12,7 +12,8 @@ import TracksAudioFeaturesData from "./TracksAudioFeaturesData"
 import TracksAlbumData from "./TracksAlbumData"
 
 const requestedUrls = () => handlerCalled.mock.calls.map(([url]) => url)
-const requestedIds = (request: Request) => new URL(request.url).searchParams.get('ids')!.split(',')
+const lastPathSegment = (request: Request) => new URL(request.url).pathname.split('/').pop()!
+const requestedIds =(request: Request) => new URL(request.url).searchParams.get('ids')!.split(',')
 const range = (count: number) => Array.from({ length: count }, (_, i) => i)
 
 beforeEach(() => {
@@ -23,14 +24,14 @@ describe("TracksBaseData", () => {
   test("loads every page of a playlist 100 items at a time, skipping null tracks", async () => {
     const playlist = buildPlaylist({ id: 'p1', tracks: { total: 150 } })
     const items = range(150).map(i => buildPlaylistItem({ track: i === 7 ? null : buildTrack({ id: `t${i}` }) }))
-    server.use(pagedGet(`${API}/playlists/p1/tracks`, items))
+    server.use(pagedGet(`${API}/playlists/p1/items`, items))
 
     const trackItems = await new TracksBaseData(playlist).trackItems()
 
     expect(trackItems.map(item => item.track.id)).toEqual(range(150).filter(i => i !== 7).map(i => `t${i}`))
     expect(requestedUrls()).toEqual([
-      `${API}/playlists/p1/tracks?offset=0&limit=100`,
-      `${API}/playlists/p1/tracks?offset=100&limit=100`,
+      `${API}/playlists/p1/items?offset=0&limit=100`,
+      `${API}/playlists/p1/items?offset=100&limit=100`,
     ])
   })
 
@@ -50,7 +51,7 @@ describe("TracksBaseData", () => {
   })
 
   test("only requests the playlist once across trackItems and data", async () => {
-    server.use(pagedGet(`${API}/playlists/p1/tracks`, [buildPlaylistItem()]))
+    server.use(pagedGet(`${API}/playlists/p1/items`, [buildPlaylistItem()]))
     const tracksData = new TracksBaseData(buildPlaylist({ id: 'p1', tracks: { total: 1 } }))
 
     await tracksData.trackItems()
@@ -73,7 +74,7 @@ describe("TracksBaseData", () => {
       popularity: 70,
       external_ids: {},
     })
-    server.use(pagedGet(`${API}/playlists/p1/tracks`, [buildPlaylistItem({ track })]))
+    server.use(pagedGet(`${API}/playlists/p1/items`, [buildPlaylistItem({ track })]))
 
     const data = await new TracksBaseData(buildPlaylist({ id: 'p1', tracks: { total: 1 } })).data()
 
@@ -89,7 +90,7 @@ describe("TracksBaseData", () => {
     const episode = buildTrack({
       id: 'e1', type: 'episode', uri: 'spotify:episode:e1', artists: [show], album: buildAlbum({ id: 's1', type: 'show', artists: [show] }),
     })
-    server.use(pagedGet(`${API}/playlists/p1/tracks`, [buildPlaylistItem({ track: episode })]))
+    server.use(pagedGet(`${API}/playlists/p1/items`, [buildPlaylistItem({ track: episode })]))
 
     const data = await new TracksBaseData(buildPlaylist({ id: 'p1', tracks: { total: 1 } })).data()
 
@@ -100,24 +101,25 @@ describe("TracksBaseData", () => {
 
 describe("TracksArtistsData", () => {
   beforeEach(() => {
-    server.use(spotifyGet(`${API}/artists`, request => ({
-      artists: requestedIds(request).filter(id => id !== 'unknown').map(id => buildFullArtist({ id, genres: [`${id} rock`, `${id} pop`] })),
-    })))
+    server.use(spotifyGet(`${API}/artists/:id`, request => {
+      const id = lastPathSegment(request)
+      return buildFullArtist({ id, genres: [`${id} rock`, `${id} pop`] })
+    }))
   })
 
-  test("fetches each distinct artist once, 50 per request", async () => {
+  test("fetches each distinct artist once, on its own", async () => {
     const shared = buildArtist({ id: 'shared' })
     const tracks = range(60).map(i => buildTrack({ id: `t${i}`, artists: [shared, buildArtist({ id: `a${i}` })] }))
 
     await new TracksArtistsData(tracks).data()
 
-    expect(requestedUrls().map(url => new URL(url).searchParams.get('ids')!.split(',').length)).toEqual([50, 11])
-    expect(new Set(requestedUrls().flatMap(url => new URL(url).searchParams.get('ids')!.split(','))).size).toBe(61)
+    expect(requestedUrls()).toHaveLength(61)
+    expect(new Set(requestedUrls()).size).toBe(61)
   })
 
-  test("joins the genres of every artist on a track, skipping unknown and local artists", async () => {
+  test("joins the genres of every artist on a track, skipping local artists", async () => {
     const tracks = [
-      buildTrack({ id: 't1', artists: [buildArtist({ id: 'a1' }), buildArtist({ id: 'unknown' }), buildArtist({ id: 'a2' })] }),
+      buildTrack({ id: 't1', artists: [buildArtist({ id: 'a1' }), buildArtist({ id: 'a2' })] }),
       buildLocalTrack({ name: 'Demo', artist: 'Me', album: 'Tapes', duration_ms: 1000 }),
     ]
 
@@ -154,22 +156,24 @@ describe("TracksAudioFeaturesData", () => {
 
 describe("TracksAlbumData", () => {
   beforeEach(() => {
-    server.use(spotifyGet(`${API}/albums`, request => ({
-      albums: requestedIds(request).map(id => id === 'gone' ? null : buildFullAlbum({
+    server.use(spotifyGet(`${API}/albums/:id`, request => {
+      const id = lastPathSegment(request)
+      return id === 'gone' ? null as unknown as object : buildFullAlbum({
         id,
         genres: ['indie', 'rock'],
         label: `${id} Records`,
         copyrights: [{ text: '2020 Label', type: 'C' }, { text: '2020 Label', type: 'P' }],
-      })),
-    })))
+      })
+    }))
   })
 
-  test("fetches each distinct album once, 20 per request", async () => {
+  test("fetches each distinct album once, on its own", async () => {
     const tracks = range(25).flatMap(i => [buildTrack({ id: `t${i}`, album: buildAlbum({ id: `al${i}` }) }), buildTrack({ id: `u${i}`, album: buildAlbum({ id: `al${i}` }) })])
 
     await new TracksAlbumData(tracks).data()
 
-    expect(requestedUrls().map(url => new URL(url).searchParams.get('ids')!.split(',').length)).toEqual([20, 5])
+    expect(requestedUrls()).toHaveLength(25)
+    expect(new Set(requestedUrls()).size).toBe(25)
   })
 
   test("formats genres, label and copyrights, blanking missing and local albums", async () => {

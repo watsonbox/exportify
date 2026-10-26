@@ -11,7 +11,14 @@ export interface TrackItem {
   track: Track
 }
 
-const hasTrack = (item: PlaylistItem | SavedTrack): item is TrackItem => item.track != null
+// Playlist items carry their track as item, saved tracks as track
+const trackOf = (item: PlaylistItem | SavedTrack) => 'item' in item ? item.item : item.track
+
+const toTrackItems = (items: (PlaylistItem | SavedTrack)[]): TrackItem[] =>
+  items.flatMap(item => {
+    const track = trackOf(item)
+    return track == null ? [] : [{ ...item, track }]
+  })
 
 class TracksBaseData extends TracksData {
   playlist: TracksPlaylist
@@ -71,7 +78,7 @@ class TracksBaseData extends TracksData {
           item.track.duration_ms,
           item.track.preview_url == null ? '' : item.track.preview_url,
           item.track.explicit,
-          item.track.popularity,
+          item.track.popularity ?? '',
           item.track.external_ids.isrc == null ? '' : item.track.external_ids.isrc
         ]
       ]
@@ -88,15 +95,17 @@ class TracksBaseData extends TracksData {
     const requests = []
     const limit = this.playlist.id === "liked" ? 50 : 100 // The most /me/tracks and playlist items each allow
 
-    for (let offset = 0; offset < this.playlist.tracks.total; offset = offset + limit) {
-      requests.push(`${this.playlist.tracks.href.split('?')[0]}?offset=${offset}&limit=${limit}`)
+    const contents = 'items' in this.playlist ? this.playlist.items : this.playlist.tracks
+
+    for (let offset = 0; offset < contents.total; offset = offset + limit) {
+      requests.push(`${contents.href.split('?')[0]}?offset=${offset}&limit=${limit}`)
     }
 
     const trackPromises = requests.map(request => { return apiCall<Paging<PlaylistItem | SavedTrack>>(request) })
     const trackResponses = await Promise.all(trackPromises)
 
     this.playlistItems = trackResponses.flatMap(response => {
-      return response.data.items.filter(hasTrack) // Exclude null track attributes
+      return toTrackItems(response.data.items) // Exclude null tracks
     })
   }
 }

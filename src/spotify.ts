@@ -25,7 +25,7 @@ export interface UserReference {
 export interface PublicUser extends UserReference { display_name: string | null }
 
 export interface CurrentUser extends PublicUser {
-  followers: { href: string | null; total: number }
+  followers?: { href: string | null; total: number }
   images: Image[]
 }
 
@@ -43,10 +43,10 @@ export interface Artist extends SimplifiedArtist {
   id: string
   name: string
   uri: string
-  followers: { href: string | null; total: number }
+  followers?: { href: string | null; total: number }
   genres: string[]
   images: Image[]
-  popularity: number
+  popularity?: number
 }
 
 // Local tracks have no album id, uri, release date or images
@@ -72,8 +72,8 @@ export interface Album extends SimplifiedAlbum {
   copyrights: { text: string; type: string }[]
   external_ids: { upc?: string; ean?: string; isrc?: string }
   genres: string[]
-  label: string
-  popularity: number
+  label?: string
+  popularity?: number
 }
 
 export interface Track {
@@ -90,7 +90,7 @@ export interface Track {
   is_local: boolean
   is_playable?: boolean
   name: string
-  popularity: number
+  popularity?: number
   preview_url: string | null
   track_number: number
   type: string

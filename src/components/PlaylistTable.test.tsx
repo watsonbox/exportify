@@ -354,7 +354,7 @@ describe("single playlist exporting", () => {
     const { records } = await exportPlaylist("Liked", { includeArtistsData: true })
 
     expect(records).toEqual([{ ...crying, "Artist Genres": "nottingham indie" }])
-    expect(requestedUrls()).toEqual([...likedRequests, 'https://api.spotify.com/v1/artists?ids=4TXdHyuAOl3rAOFmZ6MeKz'])
+    expect(requestedUrls()).toEqual([...likedRequests, 'https://api.spotify.com/v1/artists/4TXdHyuAOl3rAOFmZ6MeKz'])
   })
 
   test("including additional audio features data", async () => {
@@ -387,7 +387,7 @@ describe("single playlist exporting", () => {
       "Label": "Beggars Banquet",
       "Copyrights": "C 2016 Beggars Banquet Records Ltd., P 2016 Beggars Banquet Records Ltd.",
     }])
-    expect(requestedUrls()).toEqual([...likedRequests, 'https://api.spotify.com/v1/albums?ids=4iwv7b8gDPKztLkKCbWyhi'])
+    expect(requestedUrls()).toEqual([...likedRequests, 'https://api.spotify.com/v1/albums/4iwv7b8gDPKztLkKCbWyhi'])
   })
 
   test("tracks without album data omit it", async () => {
