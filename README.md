@@ -12,6 +12,7 @@ As many users have noted, there is no way to export/archive/backup playlists fro
 
 - ⚙️ Optional inclusion of album, artist and audio features data in export files
 - 🔍 Playlist search with [advanced search syntax](#advanced-search-syntax) and results export
+- 🔗 Share playlist snapshots by link, viewable without a Spotify login
 - 💿 Saved albums export, one line per album
 - 🌓 Dark mode
 - 🗺 Available in 15 languages (English, French, Spanish, Italian, German, Portuguese, Swedish, Dutch, Greek, Turkish, Japanese, Arabic, Simplified Chinese, Traditional Chinese and Cantonese)
@@ -30,6 +31,16 @@ As many users have noted, there is no way to export/archive/backup playlists fro
 Click 'Export All' to save a zip file containing a CSV file for each playlist in your account. This may take a while when many playlists exist and/or they are large.
 
 Liked Songs and saved albums appear as the first rows of the table. 'Export All' includes them, with your saved albums as `saved_albums.csv`.
+
+### Sharing a Playlist Snapshot
+
+Click **Share** next to a playlist or Liked Songs, then **Create share link** and **Copy link**. Anyone with the complete link can view the track list and download a CSV without logging in to Spotify. This also shares the contents of private playlists, so only send the link to people you want to see them. Saved albums are still exported as CSV only.
+
+A snapshot includes the playlist name and each track's Spotify URI, name, artists and album, preserving order and duplicates. Unavailable (null) tracks are skipped, as in CSV exports; local tracks remain visible without a Spotify playback link. The snapshot does not update when the original playlist changes. It excludes account information, access tokens and optional extended export metadata.
+
+The entire snapshot is compressed into the URL fragment (`#playlist=…`), with no storage service or Spotify write permissions. Links use the current hosting path and work on static hosting such as GitHub Pages. Opening one makes no Spotify API requests. Playlists of 1,000 and 2,000 tracks are covered by automated round-trip tests.
+
+Links are long: their size depends on the metadata, not just the number of tracks. There is a 512,000-character link limit, a 2,000,000-character decoded snapshot limit and a 10,000-track format limit. Some messaging apps may truncate long URLs; share a CSV if the recipient cannot open the full link. A short link for large snapshots would require an external storage service.
 
 ### Re-importing Playlists
 
