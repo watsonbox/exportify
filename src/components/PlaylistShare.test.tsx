@@ -2,10 +2,11 @@ import React from "react"
 import { render, screen, waitFor, within } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
 import FileSaver from "file-saver"
+import JSZip from "jszip"
 import { http, HttpResponse } from "msw"
 import App from "../App"
 import PlaylistTable from "./PlaylistTable"
-import { decodePlaylistSnapshot, encodePlaylistSnapshot, PlaylistSnapshot } from "../playlistShare"
+import { decodePlaylistSnapshot, PlaylistSnapshot } from "../playlistShare"
 import { ghostpoetTracksUrl, handlerCalled } from "../mocks/handlers"
 import { server } from "../mocks/server"
 import i18n from "../i18n/config"
@@ -68,10 +69,16 @@ const snapshot: PlaylistSnapshot = {
   tracks: [['spotify:track:1GrLfs4TEvAZ86HVzXHchS', 'Crying "again"\nNow', 'Six by Seven', 'Best of Six By Seven']],
 }
 
-test.each([false, true])('opens and downloads a snapshot without Spotify requests (logged in: %s)', async loggedIn => {
+test.each([
+  { loggedIn: false, format: 'original' }, { loggedIn: true, format: 'original' },
+  { loggedIn: false, format: 'compact' }, { loggedIn: true, format: 'compact' },
+])('opens and downloads a $format snapshot without Spotify requests (logged in: $loggedIn)', async ({ loggedIn, format }) => {
   const user = userEvent.setup()
   if (!loggedIn) localStorage.clear()
-  const link = await encodePlaylistSnapshot(snapshot)
+  const [uri, name, artist, album] = snapshot.tracks[0]
+  const data = format === 'original' ? snapshot : [2, snapshot.name, [artist, album], ['t' + uri.split(':')[2]], [name], [0], [1]]
+  const encoded = await new JSZip().file('playlist.json', JSON.stringify(data)).generateAsync({ type: 'base64', compression: 'DEFLATE' })
+  const link = '#playlist=' + encoded.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
   window.history.replaceState(null, '', link)
   const save = vi.spyOn(FileSaver, 'saveAs').mockImplementation(() => {})
   render(<App />)

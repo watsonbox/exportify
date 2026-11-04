@@ -40,6 +40,8 @@ A snapshot includes the playlist name and each track's Spotify URI, name, artist
 
 The entire snapshot is compressed into the URL fragment (`#playlist=…`), with no storage service or Spotify write permissions. Links use the current hosting path and work on static hosting such as GitHub Pages. Opening one makes no Spotify API requests. Playlists of 1,000 and 2,000 tracks are covered by automated round-trip tests.
 
+Before DEFLATE compression, the compact version 2 format stores repeated artist and album names in a shared dictionary, groups track fields into columns and abbreviates Spotify track/episode URI prefixes. Order, duplicate tracks and local track metadata are restored exactly. The encoder compares the compressed compact and original formats and uses the shorter one. Existing version 1 links remain readable. Both the packed data and the restored snapshot have size limits.
+
 Links are long: their size depends on the metadata, not just the number of tracks. There is a 512,000-character link limit, a 2,000,000-character decoded snapshot limit and a 10,000-track format limit. Some messaging apps may truncate long URLs; share a CSV if the recipient cannot open the full link. A short link for large snapshots would require an external storage service.
 
 ### Re-importing Playlists
