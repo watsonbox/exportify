@@ -109,5 +109,27 @@
       "tempo": "Tempo",
       "time_signature": "Time Signature"
     }
+  },
+  "share": {
+    "action": "Share",
+    "description": "Create a snapshot anyone with the link can view, including private playlists and Liked Songs. No Spotify login is needed. The snapshot contains track names, artists, albums and Spotify track URIs.",
+    "create": "Create share link",
+    "creating": "Creating link…",
+    "link": "Playlist share link",
+    "copy": "Copy link",
+    "copied": "Link copied.",
+    "copy_failed": "Could not copy automatically. Select the link and copy it manually.",
+    "long_link": "This link contains the whole snapshot. Some messaging apps may truncate long links; if that happens, share a CSV instead.",
+    "too_large": "This playlist is too large for a share link. Please export it as a CSV instead.",
+    "failed": "Could not create the link. Please try again.",
+    "invalid": "This playlist link is invalid, incomplete or unsupported. Ask the sender to copy the full link again.",
+    "home": "Go to Exportify",
+    "loading": "Loading shared playlist…",
+    "tagline": "A shared playlist snapshot.",
+    "snapshot_one": "{{count}} track · Shared snapshot",
+    "snapshot_other": "{{count}} tracks · Shared snapshot",
+    "snapshot_description": "This is a snapshot, not a live playlist. Later changes in Spotify will not appear here. No Spotify login is needed to view or download it.",
+    "download": "Download CSV",
+    "empty": "This playlist snapshot has no tracks."
   }
 }

@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import PlaylistExporter from "./PlaylistExporter"
 import SavedAlbumsExporter from "./SavedAlbumsExporter"
+import PlaylistShare from "./PlaylistShare"
 import { ExportablePlaylist, PlaylistPlaceholder } from "./data/PlaylistsData"
 import { ExportConfig } from "./ConfigDropdown"
 
@@ -16,7 +17,8 @@ interface PlaylistRowProps extends WithTranslation {
 
 class PlaylistRow extends React.Component<PlaylistRowProps> {
   state = {
-    exporting: false
+    exporting: false,
+    sharing: false
   }
 
   exportPlaylist = (playlist: ExportablePlaylist) => {
@@ -65,7 +67,7 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
       </tr >
     );
 
-    return (
+    return (<>
       <tr>
         <td>{this.renderIcon(playlist)}</td>
         <td><a href={playlist.uri}>{playlist.name}</a></td>
@@ -74,12 +76,18 @@ class PlaylistRow extends React.Component<PlaylistRowProps> {
         <td className="d-none d-sm-table-cell">{this.renderTickCross(playlist.public)}</td>
         <td className="d-none d-md-table-cell">{this.renderTickCross(playlist.collaborative)}</td>
         <td className="text-end">
-          <Button type="submit" variant="primary" onClick={() => this.exportPlaylist(playlist)} disabled={this.state.exporting} className="text-nowrap btn-xs">
-            <FontAwesomeIcon icon={['fas', this.state.exporting ? 'sync' : 'download']} size="sm" spin={this.state.exporting} /> {this.props.i18n.t("playlist.export")}
-          </Button>
+          <div className="d-flex flex-wrap justify-content-end gap-1">
+            {!("albums" in playlist) && <Button type="button" variant="outline-secondary" className="text-nowrap btn-xs playlist-share-action" aria-expanded={this.state.sharing} aria-controls={`share-${playlist.id}`} onClick={() => this.setState({ sharing: !this.state.sharing })}>
+              <FontAwesomeIcon icon={['fas', 'link']} size="sm" /> {this.props.i18n.t("share.action")}
+            </Button>}
+            <Button type="submit" variant="primary" onClick={() => this.exportPlaylist(playlist)} disabled={this.state.exporting} className="text-nowrap btn-xs">
+              <FontAwesomeIcon icon={['fas', this.state.exporting ? 'sync' : 'download']} size="sm" spin={this.state.exporting} /> {this.props.i18n.t("playlist.export")}
+            </Button>
+          </div>
         </td>
       </tr>
-    );
+      {this.state.sharing && !("albums" in playlist) && <tr><td colSpan={7}><PlaylistShare playlist={playlist} onApiError={this.props.onApiError} /></td></tr>}
+    </>);
   }
 }
 

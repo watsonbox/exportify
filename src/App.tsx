@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Login from 'components/Login'
 import PlaylistTable from "components/PlaylistTable"
 import TopMenu from "components/TopMenu"
+import SharedPlaylist from "components/SharedPlaylist"
+import { isPlaylistShare } from "./playlistShare"
 import { loadAccessToken, exchangeCodeForToken, MissingCodeVerifierError, OAuthErrorResponse } from "auth"
 
 const baseUrl = import.meta.env.BASE_URL
@@ -63,7 +65,7 @@ function removeCallbackParams() {
   window.history.replaceState({}, document.title, window.location.pathname + window.location.hash)
 }
 
-function App() {
+function ExportifyApp() {
   const { t } = useTranslation()
   const [subtitle, setSubtitle] = useState(<Translation>{(t) => t("tagline")}</Translation>)
   const searchParams = new URLSearchParams(window.location.search)
@@ -127,6 +129,29 @@ function App() {
       {view}
     </div>
   );
+}
+
+function App() {
+  const { t } = useTranslation()
+  const [hash, setHash] = useState(window.location.hash)
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash)
+    window.addEventListener("hashchange", onHashChange)
+    return () => window.removeEventListener("hashchange", onHashChange)
+  }, [])
+
+  if (!isPlaylistShare(hash)) return <ExportifyApp />
+
+  // A snapshot never initializes Spotify login or the account's playlist table.
+  return <div className="App container">
+    <header className="App-header">
+      <div className="d-sm-none d-block mb-5" />
+      <TopMenu loggedIn={false} />
+      <h1><FontAwesomeIcon icon={['fab', 'spotify']} color="#84BD00" size="sm" /> <a href={baseUrl}>Exportify</a></h1>
+      <p className="lead text-body-secondary">{t("share.tagline")}</p>
+    </header>
+    <SharedPlaylist key={hash} hash={hash} />
+  </div>
 }
 
 export default App;

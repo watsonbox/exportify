@@ -14,7 +14,7 @@ function flatten(translations: Translations, prefix = ""): Record<string, string
 const placeholders = (text: string) => (text.match(/{{\s*\w+\s*}}/g) ?? []).map(placeholder => placeholder.replace(/[{}\s]/g, "")).sort()
 
 // Keys under these prefixes fall back to English until someone translates them
-const englishOnly = ["api_error."]
+const englishOnly = ["api_error.", "share."]
 const translatable = (key: string) => !englishOnly.some(prefix => key.startsWith(prefix))
 
 // Languages need different plural forms, so keys are compared without their plural suffix
