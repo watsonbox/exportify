@@ -26,3 +26,7 @@ The build is Vite (`vite.config.ts`, with `index.html` at the root) and the test
 - Tests are React Testing Library plus MSW (`src/mocks/handlers.ts`). Prefer behaviour-level tests over implementation details.
 - Spotify fixtures come from real responses recorded from the test account, scrubbed of tokens and account identifiers. Never commit raw captures, HAR files (they carry bearer tokens) or anything from a personal account.
 - There's no Playwright or screenshot suite on purpose. UI-affecting changes (dependency upgrades, styling) get a before/after agent-browser screenshot check against `mise s` with the test account instead.
+
+## Liked-songs playlist sorter (`sorter/`)
+
+Separate from the app: Python scripts that sort the maintainer's exported Liked Songs into their 25 playlists. When the maintainer hands over a Liked Songs CSV and asks to sort new songs, follow `sorter/README.md`. Their playlist data is gitignored (this repo is public). Restore it from the published "Liked Songs, Sorted" page with `tools/from_page.py`, and republish to the same link afterwards. Never commit CSVs or `sorter/data/playlists.json`.

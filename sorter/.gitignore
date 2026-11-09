@@ -1,0 +1,9 @@
+# Personal listening data stays out of this public repo. The published "Liked Songs, Sorted" page holds it;
+# tools/from_page.py restores these files from that page.
+data/playlists.json
+data/state.json
+site/index.html
+*.csv
+covers/
+fonts/
+__pycache__/
