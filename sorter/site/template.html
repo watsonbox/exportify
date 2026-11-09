@@ -1,0 +1,80 @@
+<title>Liked Songs, Sorted</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,750&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: a crate of record sleeves — intro strip, then a grid of playlist cards that open into track lists */
+:root{--bg:#eef1f6;--card:#ffffff;--fg:#1b2133;--muted:#5d6680;--line:#d6dbe7;--accent:#e2572b;--accent-ink:#fff;--chip:#e4e8f1;
+--display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;--body:"Instrument Sans",ui-sans-serif,system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121624;--card:#1b2032;--fg:#e8ebf4;--muted:#99a1b9;--line:#2c3350;--accent:#ff7a4d;--accent-ink:#1a0e08;--chip:#262c44;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121624;--card:#1b2032;--fg:#e8ebf4;--muted:#99a1b9;--line:#2c3350;--accent:#ff7a4d;--accent-ink:#1a0e08;--chip:#262c44;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:15px/1.5 var(--body)}
+.wrap{max-width:1100px;margin:0 auto;padding-block:32px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+h1{font:750 clamp(30px,5vw,48px)/1.05 var(--display);margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font:750 13px var(--body);text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0}
+.lede{color:var(--muted);max-width:62ch;margin:8px 0 0}
+.stats{display:flex;flex-wrap:wrap;gap:8px 24px;font:500 13px var(--mono);color:var(--muted)}
+.stats b{color:var(--fg);font-weight:500}
+.how{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 20px;display:grid;gap:6px;max-width:72ch}
+.how ol{margin:0;padding-left:20px;display:grid;gap:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:14px}
+.pl{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.name{font:750 22px/1.15 var(--display);margin:0}
+.count{font:500 13px var(--mono);color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.desc{color:var(--muted);font-size:14px;margin:0}
+.chip{align-self:flex-start;font:600 11px var(--body);text-transform:uppercase;letter-spacing:.07em;padding:3px 8px;border-radius:99px;background:var(--chip);color:var(--muted)}
+.chip.new{background:var(--accent);color:var(--accent-ink)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto}
+button{font:600 14px var(--body);border-radius:7px;padding:8px 14px;cursor:pointer;border:1px solid var(--line);background:transparent;color:var(--fg)}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+ul.tracks{list-style:none;margin:0;padding:0;max-height:300px;overflow:auto;border-top:1px solid var(--line)}
+ul.tracks li{padding:6px 2px;border-bottom:1px solid var(--line);font-size:14px;display:flex;gap:8px;min-width:0}
+ul.tracks li a{color:var(--fg);text-decoration:none;flex:1;min-width:0;overflow-wrap:anywhere}
+ul.tracks li a:hover{color:var(--accent)}
+ul.tracks .ar{color:var(--muted)}
+.n{font:500 12px var(--mono);color:var(--muted);min-width:2.4em;text-align:right;padding-top:2px}
+textarea{width:100%;box-sizing:border-box;height:90px;font:12px var(--mono);background:var(--bg);color:var(--fg);border:1px solid var(--line);border-radius:6px}
+.newtag{font:600 11px var(--body);text-transform:uppercase;letter-spacing:.06em;color:var(--accent);white-space:nowrap}
+.recs{display:grid;gap:4px;font-size:14px}
+.recs h4{margin:0;font:600 12px var(--body);text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+.recs ul{margin:0;padding:0;list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.recs a{display:inline-block;padding:3px 9px;border-radius:99px;background:var(--chip);color:var(--fg);text-decoration:none;font-size:13px}
+.recs a:hover{color:var(--accent)}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:8px;font-weight:600}
+</style>
+<div class="wrap">
+<header><h1>Liked Songs, Sorted</h1>
+<p class="lede">Built from your liked songs only. Your old playlists weren't used at all. Every song is placed by its main artist's sound, so genres that were mixed together before are now split apart. Duplicate versions of the same song are removed. Songs marked <span class="newtag">New for you</span> are picks you don't have yet, and each card also lists more suggestions to look up on Spotify.</p></header>
+<div class="stats" id="stats"></div>
+<section class="how"><h2>Adding a playlist in Spotify</h2>
+<ol><li>In the Spotify <b>desktop app</b>, create a playlist with the name shown. These names don't match your old playlists, so you can keep or delete those separately.</li>
+<li>Click <b>Copy song links</b> on that card below.</li>
+<li>Click inside the empty playlist and paste (Ctrl+V / ⌘V). All the songs get added at once.</li></ol></section>
+<h2 id="plcount">Your playlists</h2><div class="grid" id="new"></div>
+</div>
+<div class="toast" id="toast" hidden></div>
+<script>
+const DATA=__DATA__;
+const STATE=__STATE__;
+const toast=m=>{const t=document.getElementById('toast');t.textContent=m;t.hidden=false;clearTimeout(t._h);t._h=setTimeout(()=>t.hidden=true,2200)};
+let tot=0;
+DATA.forEach((p,i)=>{tot+=p.tracks.length;
+ const c=document.createElement('article');c.className='pl';
+ const nn=p.tracks.filter(t=>t.new).length;
+ c.innerHTML=`<div class="top"><h3 class="name"></h3><span class="count">${p.tracks.length} songs${nn?` · ${nn} new`:''}</span></div>
+ <p class="desc"></p><div class="row"><button class="primary" id="c${i}">Copy song links</button><button id="d${i}">Copy description</button>${p.tracks.some(t=>t.fresh)?`<button class="primary" id="f${i}">Copy ${p.tracks.filter(t=>t.fresh).length} new songs</button>`:''}<button id="s${i}" aria-expanded="false">Show songs</button></div>
+ <ul class="tracks" hidden></ul><div class="recs" hidden><h4>More to try on Spotify</h4><ul></ul></div><textarea hidden readonly></textarea>`;
+ c.querySelector('.name').textContent=p.name;
+ const fb=c.querySelector('#f'+i); if(fb) fb.onclick=()=>{const L=p.tracks.filter(t=>t.fresh).map(t=>t.u).join('\n');navigator.clipboard.writeText(L).then(()=>toast(`Copied new songs for “${p.name}”`)).catch(()=>{ta.value=L;ta.hidden=false;ta.select();toast('Press Ctrl+C / ⌘C to copy the selected links')})};
+ c.querySelector('#d'+i).onclick=()=>{navigator.clipboard.writeText(p.sd).then(()=>toast(`Copied description for “${p.name}”`)).catch(()=>{ta.value=p.sd;ta.hidden=false;ta.select();toast('Press Ctrl+C / ⌘C to copy the selected text')})};c.querySelector('.desc').textContent=p.sd;
+ const ul=c.querySelector('ul.tracks'),ta=c.querySelector('textarea');
+ const links=p.tracks.map(t=>t.u).join('\n');
+ c.querySelector('#s'+i).onclick=e=>{if(!ul.childElementCount){p.tracks.forEach((t,j)=>{const li=document.createElement('li');li.innerHTML=`<span class="n">${j+1}</span><a target="_blank" rel="noopener"></a>`;const a=li.querySelector('a');a.href=t.u;a.textContent=t.n+' ';const s=document.createElement('span');s.className='ar';s.textContent='· '+t.a;a.append(s);if(t.new){const g=document.createElement('span');g.className='newtag';g.textContent=' New for you';a.append(g)}if(t.fresh){const g=document.createElement('span');g.className='newtag';g.textContent=' Just liked';a.append(g)}ul.append(li)})}
+  ul.hidden=!ul.hidden;e.target.textContent=ul.hidden?'Show songs':'Hide songs';e.target.setAttribute('aria-expanded',!ul.hidden)};
+ c.querySelector('#c'+i).onclick=()=>{navigator.clipboard.writeText(links).then(()=>toast(`Copied ${p.tracks.length} links for “${p.name}”`)).catch(()=>{ta.value=links;ta.hidden=false;ta.select();toast('Press Ctrl+C / ⌘C to copy the selected links')})};
+ if(p.recs.length){const r=c.querySelector('.recs');r.hidden=false;p.recs.forEach(x=>{const li=document.createElement('li');const a=document.createElement('a');a.href=x.u;a.target='_blank';a.rel='noopener';a.textContent=x.n+' · '+x.a;li.append(a);r.querySelector('ul').append(li)})}
+ document.getElementById('new').append(c)});
+document.getElementById('stats').innerHTML=`<span><b>${tot.toLocaleString()}</b> songs</span><span><b>${DATA.length}</b> playlists</span><span><b>${DATA.reduce((s,p)=>s+p.tracks.filter(t=>t.new).length,0)}</b> new picks added</span><span><b>${DATA.reduce((s,p)=>s+p.recs.length,0)}</b> more to try</span><span><b>${DATA.reduce((s,p)=>s+p.tracks.filter(t=>t.fresh).length,0)}</b> just liked</span>${STATE.last_update?`<span>updated <b>${STATE.last_update.slice(0,10)}</b></span>`:''}`;
+document.getElementById('plcount').textContent=`Your ${DATA.length} playlists`;
+</script>
