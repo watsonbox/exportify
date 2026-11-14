@@ -9,7 +9,7 @@ import { Track } from "../spotify"
 const baseHeaders = [
   "Track URI", "Track Name", "Artist URI(s)", "Artist Name(s)", "Album URI", "Album Name", "Album Artist URI(s)",
   "Album Artist Name(s)", "Album Release Date", "Album Image URL", "Disc Number", "Track Number", "Track Duration (ms)",
-  "Track Preview URL", "Explicit", "Popularity", "ISRC", "Added By", "Added At",
+  "Track Preview URL", "Explicit", "Popularity", "ISRC", "Added By", "Added At", "Playlist URI",
 ]
 
 const playlist = buildPlaylist({ id: 'p1', name: 'Mixtape', tracks: { total: 1 } })
@@ -43,12 +43,21 @@ describe("PlaylistExporter", () => {
 
     const csv = await new PlaylistExporter(playlist, config).csvData()
 
-    expect(csvHeaders(csv).slice(baseHeaders.length)).toEqual([
+    expect(csvHeaders(csv).slice(baseHeaders.length - 1)).toEqual([
       "Artist Genres",
       "Danceability", "Energy", "Key", "Loudness", "Mode", "Speechiness", "Acousticness", "Instrumentalness", "Liveness",
       "Valence", "Tempo", "Time Signature",
       "Album Genres", "Label", "Copyrights",
+      "Playlist URI",
     ])
+  })
+
+  test("fills the playlist URI on every line", async () => {
+    serveTracks(buildTrack({ id: 't1' }), buildTrack({ id: 't2' }))
+
+    const csv = await new PlaylistExporter(playlist, noExtraData).csvData()
+
+    expect(csvRecords(csv).map(record => record["Playlist URI"])).toEqual([playlist.uri, playlist.uri])
   })
 
   test("quotes every field so commas, quotes and newlines survive", async () => {

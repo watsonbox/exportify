@@ -79,6 +79,7 @@
     "is_playable": "Αναπαράγεται",
     "added_by": "Προστέθηκε από",
     "added_at": "Προστέθηκε στις",
+    "playlist_uri": "URI λίστας αναπαραγωγής",
     "album": {
       "album_genres": "Είδη άλμπουμ",
       "label": "Εταιρεία",

@@ -78,6 +78,7 @@
     "is_playable": "再生可能",
     "added_by": "追加者",
     "added_at": "追加日時",
+    "playlist_uri": "プレイリストURI",
     "album": {
       "album_genres": "アルバムジャンル",
       "label": "レーベル",

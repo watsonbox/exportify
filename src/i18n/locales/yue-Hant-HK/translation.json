@@ -78,6 +78,7 @@
     "is_playable": "播得到",
     "added_by": "加入者",
     "added_at": "加入時間",
+    "playlist_uri": "播放清單 Link",
     "album": {
       "album_genres": "專輯曲風",
       "label": "唱片公司",

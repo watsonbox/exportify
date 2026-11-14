@@ -79,6 +79,7 @@
     "is_playable": "Speelbaar",
     "added_by": "Toegevoegd door",
     "added_at": "Toegevoegd op",
+    "playlist_uri": "Afspeellijst-URI",
     "album": {
       "album_genres": "Genres van het album",
       "label": "Label",

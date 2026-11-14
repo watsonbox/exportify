@@ -79,6 +79,7 @@
     "is_playable": "É reproduzível",
     "added_by": "Adicionado por",
     "added_at": "Adicionado em",
+    "playlist_uri": "URI da playlist",
     "album": {
       "album_genres": "Gêneros do álbum",
       "label": "Gravadora",
