@@ -79,6 +79,7 @@
     "is_playable": "Çalınabilir mi?",
     "added_by": "Ekleyen",
     "added_at": "Eklenme Tarihi",
+    "playlist_uri": "Çalma Listesi URI",
     "album": {
       "album_genres": "Albüm Türleri",
       "label": "Plak Şirketi",

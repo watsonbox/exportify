@@ -22,6 +22,7 @@ import liveSavedAlbums from "../test/fixtures/spotify/live/me-albums-limit-50.js
 vi.mock('@bugsnag/js')
 
 const ghostpoetPlaylist = "Ghostpoet – Peanut Butter Blues and Melancholy Jam"
+const ghostpoetPlaylistUri = "spotify:playlist:4XOGDpHMrVoH33uJEwHWU5"
 const ghostpoetFileName = "ghostpoet_–_peanut_butter_blues_and_melancholy_jam.csv"
 
 const likedRequests = [
@@ -52,6 +53,7 @@ const crying = {
   "ISRC": "UK4UP1300002",
   "Added By": "",
   "Added At": "2020-07-19T09:24:39Z",
+  "Playlist URI": "spotify:user:watsonbox:saved",
 }
 
 const ghostpoetTrack = {
@@ -67,6 +69,7 @@ const ghostpoetTrack = {
   "Explicit": "false",
   "Added By": "spotify:user:watsonbox",
   "Added At": "2020-11-03T15:19:04Z",
+  "Playlist URI": ghostpoetPlaylistUri,
 }
 
 const oneTwos = {
@@ -111,6 +114,7 @@ const localTrack = (name: string, artist: string, durationMs: number) => ({
   "ISRC": "",
   "Added By": "spotify:user:u8ins5esg43wtxk4h66o5d1nb",
   "Added At": "2021-02-24T06:12:40Z",
+  "Playlist URI": ghostpoetPlaylistUri,
 })
 
 const requestedUrls = () => handlerCalled.mock.calls.map(([url]) => url)

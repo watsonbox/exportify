@@ -54,6 +54,12 @@ class TracksCsvFile {
     })
   }
 
+  // Adds a column with the same value on every line
+  addColumn(columnName: string, value: CsvValue) {
+    this.columnNames.push(columnName)
+    this.lineTrackData.forEach((lineTrackData) => lineTrackData.push(value))
+  }
+
   content(): string {
     let csvContent = ''
 
@@ -108,6 +114,9 @@ class PlaylistExporter {
     if (this.config.includeAlbumData) {
       await tracksCsvFile.addData(new TracksAlbumData(tracks))
     }
+
+    // Playlist URI goes last so earlier columns keep their positions in existing exports
+    tracksCsvFile.addColumn(i18n.t("track.playlist_uri"), this.playlist.uri)
 
     return tracksCsvFile.content()
   }

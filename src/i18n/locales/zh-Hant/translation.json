@@ -78,6 +78,7 @@
     "is_playable": "可播放",
     "added_by": "新增者",
     "added_at": "新增時間",
+    "playlist_uri": "播放清單 URI",
     "album": {
       "album_genres": "專輯曲風",
       "label": "唱片公司",

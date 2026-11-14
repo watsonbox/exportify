@@ -83,6 +83,7 @@
     "is_playable": "قابل للتشغيل",
     "added_by": "أضيف بواسطة",
     "added_at": "أضيف في",
+    "playlist_uri": "رابط قائمة التشغيل (URI)",
     "album": {
       "album_genres": "أنواع الألبوم",
       "label": "العلامة التجارية",

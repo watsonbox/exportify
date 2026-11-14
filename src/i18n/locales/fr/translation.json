@@ -79,6 +79,7 @@
     "is_playable": "Est jouable",
     "added_by": "Ajouté par",
     "added_at": "Ajouté le",
+    "playlist_uri": "URI de la playlist",
     "album": {
       "album_genres": "Genres de l'album",
       "label": "Label",

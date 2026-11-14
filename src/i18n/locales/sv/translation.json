@@ -79,6 +79,7 @@
     "is_playable": "Är spelbar",
     "added_by": "Tillagd av",
     "added_at": "Tillagd vid",
+    "playlist_uri": "Spellistans URI",
     "album": {
       "album_genres": "Albumets genrer",
       "label": "Skivbolag",

@@ -88,6 +88,8 @@ Additionally, by selecting "Include album data", the following fields will be ad
 - Label
 - Copyrights
 
+The last column is always the Playlist URI, the same on every line, after any of the additional fields above.
+
 Note that the more data being exported, the longer the export will take.
 
 #### Saved Albums

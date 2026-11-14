@@ -79,6 +79,7 @@
     "is_playable": "Es reproducible",
     "added_by": "Añadido por",
     "added_at": "Añadido en",
+    "playlist_uri": "URI de la playlist",
     "album": {
       "album_genres": "Géneros del álbum",
       "label": "Sello",
